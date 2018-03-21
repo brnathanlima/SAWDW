@@ -1,12 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
-  <display-name>SAEDW</display-name>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>saedw</display-name>
   <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
+    <welcome-file>login.jsp</welcome-file>
   </welcome-file-list>
+  <context-param>
+    <param-name>dbUser</param-name>
+    <param-value>nathan</param-value>
+  </context-param>
+  <context-param>
+    <param-name>dbPassword</param-name>
+    <param-value>nathan123</param-value>
+  </context-param>
+  <context-param>
+    <param-name>dbURL</param-name>
+    <param-value>jdbc:mysql://localhost:3306/db_saedw</param-value>
+  </context-param>
+  
+  <filter>
+    <filter-name>FiltroDeAutenticacao</filter-name>
+    <filter-class>com.nathanaellima.controller.filter.FiltroDeAutenticacao</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>FiltroDeAutenticacao</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
 </web-app>

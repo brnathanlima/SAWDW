@@ -12,7 +12,7 @@
 
     	<div class="sidebar-wrapper">
             <div class="logo">
-                <a href="http://localhost:8080/PTCC/painel-super-administrador.jsp" class="simple-text">
+                <a href="http://localhost:8080/SAEDW/painel-super-administrador.jsp" class="simple-text">
                     SAEDW
                 </a>
             </div>
@@ -25,7 +25,7 @@
                     </a>
                 </li>
                 <li class="active">
-                    <a href="listarSuperAdministradores">
+                    <a href="SuperAdministradorController">
                         <i class="pe-7s-user"></i>
                         <p>Super Administradores</p>
                     </a>
@@ -75,7 +75,7 @@
                             <div class="content">
                             	<c:choose>
 									<c:when test="${empty superAdministrador.id}">
-										<form action="cadastrarSuperAdministrador">
+										<form action="SuperAdministradorController">
 		                                    <div class="row">
 		                                        <div class="col-md-6">
 		                                            <div class="form-group">
@@ -121,7 +121,7 @@
 		                                        </div>
 		                                    </div>
 		                                    
-		                                    <input type="hidden" name="tipoDeUsuario" value="superAdministrador" />
+		                                    <input type="hidden" name="acao" value="cadastrar" />
 		                                    <button type="submit" class="btn btn-success btn-fill pull-left">CADASTRAR</button>
 		                                    
 		                                    <div class="clearfix"></div>
@@ -129,7 +129,7 @@
 									</c:when>
 									
 									<c:when test="${not empty superAdministrador.id}">
-										<form action="editarCadastroDeSuperAdministrador">
+										<form action="SuperAdministradorController">
 		                                    <div class="row">
 		                                        <div class="col-md-6">
 		                                            <div class="form-group">
@@ -176,6 +176,8 @@
 		                                    </div>
 		                                    
 		                                    <input type="hidden" name="id" value="${superAdministrador.id}" />
+		                                    <input type="hidden" name="acao" value="editar" />
+		                                    
 		                                    <button type="submit" class="btn btn-success btn-fill pull-left">EDITAR CADASTRO</button>
 		                                    
 		                                    <div class="clearfix"></div>

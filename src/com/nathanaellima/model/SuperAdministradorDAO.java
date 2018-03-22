@@ -91,8 +91,38 @@ public class SuperAdministradorDAO extends GenericoDAO {
 
 	@Override
 	public Object buscarPorId(long id) {
-
-		return null;
+		
+		try {
+			
+			SuperAdministrador superAdministrador = new SuperAdministrador();
+			
+			PreparedStatement pstmt = this.connection.prepareStatement("SELECT * FROM super_administradores WHERE id=?");
+			pstmt.setLong(1, id);
+			ResultSet rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				superAdministrador.setId(rs.getLong("id"));
+				superAdministrador.setNome(rs.getString("nome"));
+				superAdministrador.setSobrenome(rs.getString("sobrenome"));
+				superAdministrador.setEmail(rs.getString("email"));
+				superAdministrador.setTelefone(rs.getString("telefone"));
+				superAdministrador.setNomeDeUsuario(rs.getString("nome_de_usuario"));
+				superAdministrador.setSenha(rs.getString("senha"));
+				superAdministrador.setDataDeRegistro(rs.getDate("data_de_registro"));
+				superAdministrador.setDataDeModificacao(rs.getDate("data_de_modificacao"));
+			}
+			
+			rs.close();
+			pstmt.close();
+			
+			return superAdministrador;
+			
+		} catch(SQLException e) {
+			
+			throw new RuntimeException(e);
+			
+		}
 		
 	}
 

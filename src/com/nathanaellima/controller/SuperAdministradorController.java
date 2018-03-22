@@ -1,0 +1,156 @@
+package com.nathanaellima.controller;
+
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.Date;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.nathanaellima.factory.UsuarioFactory;
+import com.nathanaellima.model.SuperAdministradorDAO;
+import com.nathanaellima.modelo.SuperAdministrador;
+
+@WebServlet("/SuperAdministradorController")
+public class SuperAdministradorController extends HttpServlet {
+
+	private static final long serialVersionUID = 1L;
+
+	protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		
+		Connection conexao = (Connection) getServletContext().getAttribute("ConexaoComBD");
+		
+		SuperAdministradorDAO superAdministradorDAO = null;
+		SuperAdministrador superAdministrador = null;
+		List<Object> superAdministradores = null;
+		
+		String id = null;
+		String nome = null;
+		String sobrenome = null;
+		String email = null;
+		String telefone = null;
+		String nomeDeUsuario = null;
+		String senha = null;
+		Date dataDeRegistro = null;
+		Date dataDeModificacao = null;
+		
+		String acao = req.getParameter("acao");
+		
+		try {
+			
+			switch(acao) {
+			
+			case "cadastrar":
+				
+				nome = req.getParameter("nome");
+				sobrenome = req.getParameter("sobrenome");
+				email = req.getParameter("email");
+				telefone = req.getParameter("telefone");
+				nomeDeUsuario = req.getParameter("nomeDeUsuario");
+				senha = req.getParameter("senha");
+				dataDeRegistro = new Date();
+				
+				superAdministrador = (SuperAdministrador) UsuarioFactory.getUsuario("superAdministrador");
+				
+				superAdministrador.setNome(nome);
+				superAdministrador.setSobrenome(sobrenome);
+				superAdministrador.setEmail(email);
+				superAdministrador.setTelefone(telefone);
+				superAdministrador.setNomeDeUsuario(nomeDeUsuario);
+				superAdministrador.setSenha(senha);
+				superAdministrador.setDataDeRegistro(dataDeRegistro);
+				
+				superAdministradorDAO = new SuperAdministradorDAO(conexao);
+				
+				superAdministradorDAO.adicionar(superAdministrador);
+				superAdministradores = superAdministradorDAO.listar();
+				
+				req.setAttribute("superAdministradores", superAdministradores);
+				req.getRequestDispatcher("lista-de-super-administradores.jsp").forward(req, res);
+				
+				break;
+				
+			case "visualizar":
+				
+				long idSuperAdministrador = Long.parseLong(req.getParameter("id"));
+				
+				superAdministradorDAO = new SuperAdministradorDAO(conexao);
+				
+				superAdministrador = (SuperAdministrador) superAdministradorDAO.buscarPorId(idSuperAdministrador);
+				
+				req.setAttribute("superAdministrador", superAdministrador);
+				req.getRequestDispatcher("cadastro-super-administrador.jsp").forward(req, res);
+				
+				break;
+				
+			case "editar":
+				
+				id = req.getParameter("id");
+				nome = req.getParameter("nome");
+				sobrenome = req.getParameter("sobrenome");
+				email = req.getParameter("email");
+				telefone = req.getParameter("telefone");
+				nomeDeUsuario = req.getParameter("nomeDeUsuario");
+				senha = req.getParameter("senha");
+				dataDeRegistro = new Date();
+				
+				superAdministrador = (SuperAdministrador) UsuarioFactory.getUsuario("superAdministrador");
+				
+				superAdministrador.setId(Long.parseLong(id));
+				superAdministrador.setNome(nome);
+				superAdministrador.setSobrenome(sobrenome);
+				superAdministrador.setEmail(email);
+				superAdministrador.setTelefone(telefone);
+				superAdministrador.setNomeDeUsuario(nomeDeUsuario);
+				superAdministrador.setSenha(senha);
+				superAdministrador.setDataDeModificacao(dataDeModificacao);
+				
+				superAdministradorDAO = new SuperAdministradorDAO(conexao);
+
+				superAdministradorDAO.editar(superAdministrador);
+				
+				req.setAttribute("superAdministrador", superAdministrador);
+				req.getRequestDispatcher("cadastro-super-administrador.jsp").forward(req, res);
+				
+				break;
+			
+			case "excluir":
+				
+				id = req.getParameter("id");
+				
+				superAdministradorDAO = new SuperAdministradorDAO(conexao);
+
+				superAdministradorDAO.excluir(Long.parseLong(id));
+				superAdministradores = superAdministradorDAO.listar();
+				
+				req.setAttribute("superAdministradores", superAdministradores);
+				req.getRequestDispatcher("lista-de-super-administradores.jsp").forward(req, res);
+				
+				break;
+				
+			}
+			
+			
+		} catch (NullPointerException e){
+			
+			superAdministradorDAO = new SuperAdministradorDAO(conexao);
+			
+			superAdministradores = superAdministradorDAO.listar();
+			
+			req.setAttribute("superAdministradores", superAdministradores);
+			req.getRequestDispatcher("lista-de-super-administradores.jsp").forward(req, res);
+			
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+			
+		}
+		
+	}
+	
+}

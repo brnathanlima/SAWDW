@@ -25,7 +25,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="listarSuperAdministradores">
+                    <a href="SuperAdministradorController">
                         <i class="pe-7s-user"></i>
                         <p>Super Administradores</p>
                     </a>

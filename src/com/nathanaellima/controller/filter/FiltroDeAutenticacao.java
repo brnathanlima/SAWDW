@@ -34,7 +34,7 @@ public class FiltroDeAutenticacao implements Filter {
 		
 		if (session == null && !(uri.endsWith("jsp") || uri.endsWith("LoginController"))) {
 			
-			res.sendRedirect("/login.jsp");
+			res.sendRedirect("login.jsp");
 			
 		} else {
 			

@@ -19,7 +19,7 @@
 
             <ul class="nav">
                 <li>
-                    <a href="listarInstituicoes">
+                    <a href="InstituicaoController">
                         <i class="pe-7s-culture"></i>
                         <p>Instituições</p>
                     </a>

@@ -127,7 +127,6 @@ public class SuperAdministradorDAO extends GenericoDAO {
 	}
 
 	@SuppressWarnings("finally")
-	@Override
 	public Object autenticarUsuario(String nomeDeUsuario, String senha) {
 		
 		Usuario superAdministrador = null;

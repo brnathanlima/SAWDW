@@ -3,7 +3,7 @@
 <!doctype html>
 <html lang="pt-br">
 <head>
-	<title>SAEDW - Cadastro de Super Administrador</title>
+	<title>SAEDW - Cadastro de Instituição</title>
 	<c:import url="/common/cabecalho.jsp" />
 </head>
 <body>
@@ -18,13 +18,13 @@
             </div>
 
             <ul class="nav">
-                <li>
+                <li class="active">
                     <a href="InstituicaoController">
                         <i class="pe-7s-culture"></i>
                         <p>Instituições</p>
                     </a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="SuperAdministradorController">
                         <i class="pe-7s-user"></i>
                         <p>Super Administradores</p>
@@ -63,30 +63,57 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                            	<c:choose>
-									<c:when test="${empty superAdministrador.id}">
-                                		<h4 class="title">CADASTRAR SUPER ADMINISTRADOR</h4>
+                                <c:choose>
+									<c:when test="${empty instituicao.id}">
+                                		<h4 class="title">CADASTRAR INSTITUIÇÃO</h4>
                                 	</c:when>
                                 	<c:otherwise>
-                                		<h4 class="title">EDITAR CADASTRO DE SUPER ADMINISTRADOR</h4>
+                                		<h4 class="title">EDITAR CADASTRO DE INSTITUIÇÃO</h4>
                                 	</c:otherwise>
                                 </c:choose>
                             </div>
                             <div class="content">
                             	<c:choose>
-									<c:when test="${empty superAdministrador.id}">
-										<form action="SuperAdministradorController">
+									<c:when test="${empty instituicao.id}">
+										<form action="InstituicaoController">
 		                                    <div class="row">
 		                                        <div class="col-md-6">
 		                                            <div class="form-group">
-		                                                <label>Nome</label>
-		                                                <input type="text" name="nome" class="form-control">
+		                                                <label>Nome Fantasia</label>
+		                                                <input type="text" name="nomeFantasia" class="form-control">
 		                                            </div>
 		                                        </div>
 		                                        <div class="col-md-6">
 		                                            <div class="form-group">
-		                                                <label>Sobrnome</label>
-		                                                <input type="text" name="sobrenome" class="form-control">
+		                                                <label>Nome Empresarial</label>
+		                                                <input type="text" name="nomeEmpresarial" class="form-control">
+		                                            </div>
+		                                        </div>
+		                                    </div>
+		                                    
+		                                    <div class="row">
+		                                        <div class="col-md-12">
+		                                            <div class="form-group">
+		                                                <label>CNPJ</label>
+		                                                <input type="text" name="cnpj" class="form-control">
+		                                            </div>
+		                                        </div>
+		                                    </div>
+		
+		                                    <div class="row">
+		                                        <div class="col-md-12">
+		                                            <div class="form-group">
+		                                                <label>Setor de Atuação</label>
+		                                                <input type="text" name="setorDeAtuacao" class="form-control">
+		                                            </div>
+		                                        </div>
+		                                    </div>
+		                                    
+		                                    <div class="row">
+		                                        <div class="col-md-12">
+		                                            <div class="form-group">
+		                                                <label>Endereço</label>
+		                                                <input type="text" name="endereco" class="form-control">
 		                                            </div>
 		                                        </div>
 		                                    </div>
@@ -94,11 +121,19 @@
 		                                    <div class="row">
 		                                        <div class="col-md-6">
 		                                            <div class="form-group">
-		                                                <label>E-mail</label>
-		                                                <input type="text" name="email" class="form-control">
+		                                                <label>Cidade</label>
+		                                                <input type="text" name="cidade" class="form-control">
 		                                            </div>
 		                                        </div>
 		                                        <div class="col-md-6">
+		                                            <div class="form-group">
+		                                                <label>Estado</label>
+		                                                <input type="text" name="estado" class="form-control">
+		                                            </div>
+		                                        </div>
+		                                    </div>
+		                                    <div class="row">
+		                                        <div class="col-md-12">
 		                                            <div class="form-group">
 		                                                <label>Telefone</label>
 		                                                <input type="text" name="telefone" class="form-control">
@@ -106,76 +141,81 @@
 		                                        </div>
 		                                    </div>
 		                                    
-		                                    <div class="row">
-		                                        <div class="col-md-6">
-		                                            <div class="form-group">
-		                                                <label>Nome de Usuário</label>
-		                                                <input type="text" name="nomeDeUsuario" class="form-control">
-		                                            </div>
-		                                        </div>
-		                                        <div class="col-md-6">
-		                                            <div class="form-group">
-		                                                <label>Senha</label>
-		                                                <input type="password" name="senha" class="form-control">
-		                                            </div>
-		                                        </div>
-		                                    </div>
-		                                    
 		                                    <input type="hidden" name="acao" value="cadastrar" />
+		                                    
 		                                    <button type="submit" class="btn btn-success btn-fill pull-left">CADASTRAR</button>
 		                                    
 		                                    <div class="clearfix"></div>
 		                                </form>
 									</c:when>
 									
-									<c:when test="${not empty superAdministrador.id}">
-										<form action="SuperAdministradorController">
+									<c:when test="${not empty instituicao.id}">
+										<form action="InstituicaoController">
 		                                    <div class="row">
 		                                        <div class="col-md-6">
 		                                            <div class="form-group">
-		                                                <label>Nome</label>
-		                                                <input type="text" name="nome" value="${superAdministrador.nome}" class="form-control">
+		                                                <label>Nome Fantasia</label>
+		                                                <input type="text" class="form-control" name="nomeFantasia" value="${instituicao.nomeFantasia}">
 		                                            </div>
 		                                        </div>
 		                                        <div class="col-md-6">
 		                                            <div class="form-group">
-		                                                <label>Sobrnome</label>
-		                                                <input type="text" name="sobrenome" value="${superAdministrador.sobrenome}" class="form-control">
+		                                                <label>Nome Empresarial</label>
+		                                                <input type="text" class="form-control" name="nomeEmpresarial" value="${instituicao.nomeEmpresarial}">
 		                                            </div>
 		                                        </div>
 		                                    </div>
 		                                    
 		                                    <div class="row">
+		                                        <div class="col-md-12">
+		                                            <div class="form-group">
+		                                                <label>CNPJ</label>
+		                                                <input type="text" class="form-control" name="cnpj" value="${instituicao.cnpj}">
+		                                            </div>
+		                                        </div>
+		                                    </div>
+		
+		                                    <div class="row">
+		                                        <div class="col-md-12">
+		                                            <div class="form-group">
+		                                                <label>Setor de Atuação</label>
+		                                                <input type="text" class="form-control" name="setorDeAtuacao" value="${instituicao.setorDeAtuacao}">
+		                                            </div>
+		                                        </div>
+		                                    </div>
+		                                    
+		                                    <div class="row">
+		                                        <div class="col-md-12">
+		                                            <div class="form-group">
+		                                                <label>Endereço</label>
+		                                                <input type="text" class="form-control" name="endereco" value="${instituicao.endereco}">
+		                                            </div>
+		                                        </div>
+		                                    </div>
+		                                    <div class="row">
 		                                        <div class="col-md-6">
 		                                            <div class="form-group">
-		                                                <label>E-mail</label>
-		                                                <input type="text" name="email" value="${superAdministrador.email}" class="form-control">
+		                                                <label>Cidade</label>
+		                                                <input type="text" class="form-control" name="cidade" value="${instituicao.cidade}">
 		                                            </div>
 		                                        </div>
 		                                        <div class="col-md-6">
+		                                            <div class="form-group">
+		                                                <label>Estado</label>
+		                                                <input type="text" class="form-control" name="estado" value="${instituicao.estado}">
+		                                            </div>
+		                                        </div>
+		                                    </div>
+		                                    <div class="row">
+		                                        <div class="col-md-12">
 		                                            <div class="form-group">
 		                                                <label>Telefone</label>
-		                                                <input type="text" name="telefone" value="${superAdministrador.telefone}" class="form-control">
+		                                                <input type="text" class="form-control" name="telefone" value="${instituicao.telefone}">
 		                                            </div>
 		                                        </div>
 		                                    </div>
 		                                    
-		                                    <div class="row">
-		                                        <div class="col-md-6">
-		                                            <div class="form-group">
-		                                                <label>Nome de Usuário</label>
-		                                                <input type="text" name="nomeDeUsuario" value="${superAdministrador.nomeDeUsuario}" class="form-control">
-		                                            </div>
-		                                        </div>
-		                                        <div class="col-md-6">
-		                                            <div class="form-group">
-		                                                <label>Senha</label>
-		                                                <input type="password" name="senha" value="${superAdministrador.senha}"class="form-control">
-		                                            </div>
-		                                        </div>
-		                                    </div>
-		                                    
-		                                    <input type="hidden" name="id" value="${superAdministrador.id}" />
+		                                    <input type="hidden" name="id" value="${instituicao.id}" />
 		                                    <input type="hidden" name="acao" value="editar" />
 		                                    
 		                                    <button type="submit" class="btn btn-success btn-fill pull-left">EDITAR CADASTRO</button>

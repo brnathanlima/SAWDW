@@ -3,7 +3,7 @@
 <!doctype html>
 <html lang="pt-br">
 <head>
-	<title>SAEDW - Super Administradores</title>
+	<title>SAEDW - Instituições</title>
 	<c:import url="/common/cabecalho.jsp" />
 </head>
 <body>
@@ -18,13 +18,13 @@
             </div>
 
             <ul class="nav">
-                <li>
+                <li class="active">
                     <a href="InstituicaoController">
                         <i class="pe-7s-culture"></i>
                         <p>Instituições</p>
                     </a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="SuperAdministradorController">
                         <i class="pe-7s-user"></i>
                         <p>Super Administradores</p>
@@ -63,35 +63,34 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">SUPER ADMINISTRADORES
-                                <a href="cadastro-super-administrador.jsp" class="btn btn-success pull-right" role="button">NOVO SUPER ADMINISTRADOR</a>
-                            	</h4>
+                                <h4 class="title">INSTITUIÇÕES
+                                <a href="cadastro-instituicao.jsp" class="btn btn-success pull-right" role="button">NOVA INSTITUIÇÃO</a>
+                                </h4>
                             </div>
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover table-striped">
                                     <thead>
                                     	<tr>
-	                                        <th>Nome</th>
-	                                    	<th>Sobrenome</th>
-	                                    	<th>E-mail</th>
+	                                        <th>Nome Fantasia</th>
+	                                    	<th>CNPJ</th>
+	                                    	<th>Telefone</th>
 	                                    	<th>Ações</th>
                                     	</tr>
                                     </thead>
                                     <tbody>
-                                        <c:forEach var="superAdministrador" items="${superAdministradores}">
+                                        <c:forEach var="instituicao" items="${instituicoes}">
 											<tr>
-												
-												<td>${superAdministrador.nome}</td>
-												<td>${superAdministrador.sobrenome}</td>
-												<td>${superAdministrador.email}</td>
+												<td>${instituicao.nomeFantasia}</td>
+												<td>${instituicao.cnpj}</td>
+												<td>${instituicao.telefone}</td>
 												
 												<td class="td-actions">
-													<a href="SuperAdministradorController?acao=visualizar&id=${superAdministrador.id}">
+													<a href="InstituicaoController?acao=visualizar&id=${instituicao.id}">
                                                     <button type="button" rel="tooltip" title="Editar" class="btn btn-info btn-simple btn-sm">
                                                         <i class="fa fa-edit"></i>
                                                     </button>
                                                     </a>
-                                                    <a href="SuperAdministradorController?acao=excluir&id=${superAdministrador.id}">
+                                                    <a href="InstituicaoController?acao=excluir&id=${instituicao.id}">
                                                     <button type="button" rel="tooltip" title="Excluir" class="btn btn-danger btn-simple btn-sm">
                                                         <i class="fa fa-times"></i>
                                                     </button>
@@ -121,3 +120,5 @@
     </div>
 </div>
 </body>
+
+<c:import url="/common/rodape.jsp" />

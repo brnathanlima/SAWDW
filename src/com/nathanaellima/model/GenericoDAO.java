@@ -59,7 +59,5 @@ public abstract class GenericoDAO {
 	protected abstract List<Object> listar();
 	
 	protected abstract Object buscarPorId(long id);
-	
-	protected abstract Object autenticarUsuario(String nomeDeUsuario, String senha);
 
 }

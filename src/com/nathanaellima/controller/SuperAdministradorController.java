@@ -97,7 +97,7 @@ public class SuperAdministradorController extends HttpServlet {
 				telefone = req.getParameter("telefone");
 				nomeDeUsuario = req.getParameter("nomeDeUsuario");
 				senha = req.getParameter("senha");
-				dataDeRegistro = new Date();
+				dataDeModificacao = new Date();
 				
 				superAdministrador = (SuperAdministrador) UsuarioFactory.getUsuario("superAdministrador");
 				

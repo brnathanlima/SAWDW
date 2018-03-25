@@ -3,7 +3,7 @@
 <!doctype html>
 <html lang="pt-br">
 <head>
-	<title>SAEDW - Super Administradores</title>
+	<title>SAEDW - Administradores de Instituição</title>
 	<c:import url="/common/cabecalho.jsp" />
 </head>
 <body>
@@ -24,13 +24,13 @@
                         <p>Instituições</p>
                     </a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="SuperAdministradorController">
                         <i class="pe-7s-user"></i>
                         <p>Super Administradores</p>
                     </a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="AdministradorDeInstituicaoController">
                         <i class="pe-7s-users"></i>
                         <p>Administradores de Instituições</p>
@@ -63,35 +63,35 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">SUPER ADMINISTRADORES
-                                <a href="cadastro-super-administrador.jsp" class="btn btn-success pull-right" role="button">NOVO SUPER ADMINISTRADOR</a>
+                                <h4 class="title">ADMINISTRADORES DE INSTITUIÇÃO
+                                <a href="AdministradorDeInstituicaoController?acao=novoCadastro" class="btn btn-success pull-right" role="button">NOVO ADMINISTRADOR DE INSTITUIÇÃO</a>
                             	</h4>
                             </div>
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover table-striped">
                                     <thead>
                                     	<tr>
-	                                        <th>Nome</th>
-	                                    	<th>Sobrenome</th>
+                                    		<th>Nome</th>
+	                                    	<th>Instituição</th>
 	                                    	<th>E-mail</th>
 	                                    	<th>Ações</th>
                                     	</tr>
                                     </thead>
                                     <tbody>
-                                        <c:forEach var="superAdministrador" items="${superAdministradores}">
+                                        <c:forEach var="administradorDeInstituicao" items="${administradoresDeInstituicao}">
 											<tr>
 												
-												<td>${superAdministrador.nome}</td>
-												<td>${superAdministrador.sobrenome}</td>
-												<td>${superAdministrador.email}</td>
+												<td>${administradorDeInstituicao.nome} ${administradorDeInstituicao.sobrenome}</td>
+												<td>${administradorDeInstituicao.instituicao.nomeFantasia}</td>
+												<td>${administradorDeInstituicao.email}</td>
 												
 												<td class="td-actions">
-													<a href="SuperAdministradorController?acao=visualizar&id=${superAdministrador.id}">
+													<a href="AdministradorDeInstituicaoController?acao=visualizar&id=${administradorDeInstituicao.id}">
                                                     <button type="button" rel="tooltip" title="Editar" class="btn btn-info btn-simple btn-sm">
                                                         <i class="fa fa-edit"></i>
                                                     </button>
                                                     </a>
-                                                    <a href="SuperAdministradorController?acao=excluir&id=${superAdministrador.id}">
+                                                    <a href="AdministradorDeInstituicaoController?acao=excluir&id=${administradorDeInstituicao.id}">
                                                     <button type="button" rel="tooltip" title="Excluir" class="btn btn-danger btn-simple btn-sm">
                                                         <i class="fa fa-times"></i>
                                                     </button>

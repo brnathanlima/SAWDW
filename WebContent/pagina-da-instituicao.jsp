@@ -3,37 +3,43 @@
 <!doctype html>
 <html lang="pt-br">
 <head>
-	<title>SAEDW - Painel</title>
+	<title>SAEDW - Cadastro de Instituição</title>
 	<c:import url="/common/cabecalho.jsp" />
 </head>
 <body>
 <div class="wrapper">
-    <div class="sidebar" data-color="green" data-image="assets/img/sidebar-5.jpg">
-    
+    <div class="sidebar" data-color="blue" data-image="assets/img/sidebar-5.jpg">
+
     	<div class="sidebar-wrapper">
             <div class="logo">
-                <a href="#" class="simple-text">
+                <a href="http://localhost:8080/SAEDW/painel-administrador-de-instituicao.jsp" class="simple-text">
                     SAEDW
                 </a>
             </div>
 
             <ul class="nav">
                 <li>
-                    <a href="InstituicaoController">
+                    <a href="pagina-da-instituicao.jsp">
                         <i class="pe-7s-culture"></i>
-                        <p>Instituições</p>
+                        <p>${usuario.instituicao.nomeFantasia}</p>
                     </a>
                 </li>
                 <li>
-                    <a href="SuperAdministradorController">
-                        <i class="pe-7s-user"></i>
-                        <p>Super Administradores</p>
+                    <a href="listarUsuariosComum">
+                   		<i class="pe-7s-user"></i>
+                        <p>Usuários Comum</p>
                     </a>
                 </li>
                 <li>
-                    <a href="AdministradorDeInstituicaoController">
-                        <i class="pe-7s-users"></i>
-                        <p>Administradores de Instituições</p>
+                    <a href="listarWebDesigners">
+                    	<i class="pe-7s-users"></i>
+                        <p>Web-Designers</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="listarGerentes">
+                    	<i class="pe-7s-portfolio"></i>
+                        <p>Gerentes</p>
                     </a>
                 </li>
             </ul>
@@ -63,21 +69,30 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">INFORMAÇÕES DA CONTA</h4>
+                                <h4>INFORMAÇÕES DA INSTITUIÇÃO</h4>
                             </div>
                             <div class="content">
-                                <form>
+                            	<form action="">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Nome</label>
-                                                <input type="text" class="form-control" disabled value="${Usuario.nome}">
+                                                <label>Nome Fantasia</label>
+                                                <input type="text" class="form-control" name="nomeFantasia" value="${usuario.instituicao.nomeFantasia}" readonly>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Sobrenome</label>
-                                                <input type="text" class="form-control" disabled value="${Usuario.sobrenome}">
+                                                <label>Nome Empresarial</label>
+                                                <input type="text" class="form-control" name="nomeEmpresarial" value="${usuario.instituicao.nomeEmpresarial}" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>CNPJ</label>
+                                                <input type="text" class="form-control" name="cnpj" value="${usuario.instituicao.cnpj}" readonly>
                                             </div>
                                         </div>
                                     </div>
@@ -85,47 +100,39 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>E-mail</label>
-                                                <input type="text" class="form-control" disabled value="${Usuario.email}">
+                                                <label>Setor de Atuação</label>
+                                                <input type="text" class="form-control" name="setorDeAtuacao" value="${usuario.instituicao.setorDeAtuacao}" readonly>
                                             </div>
                                         </div>
                                     </div>
                                     
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Endereço</label>
+                                                <input type="text" class="form-control" name="endereco" value="${usuario.instituicao.endereco}" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Cidade</label>
+                                                <input type="text" class="form-control" name="cidade" value="${usuario.instituicao.cidade}" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Estado</label>
+                                                <input type="text" class="form-control" name="estado" value="${usuario.instituicao.estado}" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Telefone</label>
-                                                <input type="text" class="form-control" disabled value="${Usuario.telefone}">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Nome de Usuário</label>
-                                                <input type="text" class="form-control" disabled value="${Usuario.nomeDeUsuario}">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Senha</label>
-                                                <input type="password" class="form-control" disabled value="${Usuario.senha}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Data de Registro</label>
-                                                <input type="date" class="form-control" disabled value="${Usuario.dataDeRegistro}">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Data de Atualização de Cadastro</label>
-                                                <input type="date" class="form-control" disabled value="${Usuario.dataDeModificacao}">
+                                                <input type="text" class="form-control" name="telefone" value="${usuario.instituicao.telefone}" readonly>
                                             </div>
                                         </div>
                                     </div>
@@ -149,5 +156,3 @@
     </div>
 </div>
 </body>
-
-<c:import url="/common/rodape.jsp" />

@@ -8,7 +8,7 @@ import com.nathanaellima.modelo.WebDesigner;
 
 public class FuncionarioFactory extends UsuarioFactory {
 	
-public static Funcionario getFuncionario(String tipoDeFuncionario) {
+	public static Funcionario getFuncionario(String tipoDeFuncionario) {
 		
 		Funcionario funcionario = null;
 		

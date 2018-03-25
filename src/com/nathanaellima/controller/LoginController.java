@@ -1,9 +1,8 @@
 package com.nathanaellima.controller;
 
 import java.io.IOException;
+
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,7 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.nathanaellima.model.AdministradorDeInstituicaoDAO;
 import com.nathanaellima.model.SuperAdministradorDAO;
+import com.nathanaellima.modelo.AdministradorDeInstituicao;
 import com.nathanaellima.modelo.SuperAdministrador;
 
 
@@ -55,10 +56,9 @@ public class LoginController extends HttpServlet {
 			case "superAdministrador":
 				
 				SuperAdministradorDAO superAdministradorDAO = new SuperAdministradorDAO(conexao);
-				
 				SuperAdministrador superAdministrador = (SuperAdministrador) superAdministradorDAO.autenticarUsuario(nomeDeUsuario, senha);
 				
-				if(superAdministrador != null) {
+				if (superAdministrador != null) {
 					
 					HttpSession session = request.getSession();
 					session.setAttribute("Usuario", superAdministrador);
@@ -72,6 +72,25 @@ public class LoginController extends HttpServlet {
 				}
 				
 				break;
+			
+			case "administradorDeInstituicao":
+				
+				AdministradorDeInstituicaoDAO administradorDeInstituicaoDAO = new AdministradorDeInstituicaoDAO(conexao);
+				AdministradorDeInstituicao administradorDeInstituicao = (AdministradorDeInstituicao) 
+						administradorDeInstituicaoDAO.autenticarUsuario(nomeDeUsuario, senha);
+				
+				if (administradorDeInstituicao != null) {
+					
+					HttpSession session = request.getSession();
+					session.setAttribute("usuario", administradorDeInstituicao);
+					response.sendRedirect("painel-administrador-de-instituicao.jsp");
+					
+				} else {
+					
+					RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.jsp");
+					rd.include(request, response);
+					
+				}
 			
 			}
 			

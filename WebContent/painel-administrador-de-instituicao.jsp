@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="wrapper">
-    <div class="sidebar" data-color="green" data-image="assets/img/sidebar-5.jpg">
+    <div class="sidebar" data-color="blue" data-image="assets/img/sidebar-5.jpg">
     
     	<div class="sidebar-wrapper">
             <div class="logo">
@@ -18,22 +18,28 @@
             </div>
 
             <ul class="nav">
-                <li>
-                    <a href="InstituicaoController">
+            	<li>
+                    <a href="pagina-da-instituicao.jsp">
                         <i class="pe-7s-culture"></i>
-                        <p>Instituições</p>
+                        <p>${usuario.instituicao.nomeFantasia}</p>
                     </a>
                 </li>
                 <li>
-                    <a href="SuperAdministradorController">
-                        <i class="pe-7s-user"></i>
-                        <p>Super Administradores</p>
+                    <a href="listarUsuariosComum">
+                   		<i class="pe-7s-user"></i>
+                        <p>Usuários Comum</p>
                     </a>
                 </li>
                 <li>
-                    <a href="AdministradorDeInstituicaoController">
-                        <i class="pe-7s-users"></i>
-                        <p>Administradores de Instituições</p>
+                    <a href="listarWebDesigners">
+                    	<i class="pe-7s-users"></i>
+                        <p>Web-Designers</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="listarGerentes">
+                    	<i class="pe-7s-portfolio"></i>
+                        <p>Gerentes</p>
                     </a>
                 </li>
             </ul>
@@ -67,17 +73,25 @@
                             </div>
                             <div class="content">
                                 <form>
+                                	<div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Matrícula</label>
+                                                <input type="text" class="form-control" disabled value="${usuario.matricula}">
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Nome</label>
-                                                <input type="text" class="form-control" disabled value="${Usuario.nome}">
+                                                <input type="text" class="form-control" disabled value="${usuario.nome}">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Sobrenome</label>
-                                                <input type="text" class="form-control" disabled value="${Usuario.sobrenome}">
+                                                <input type="text" class="form-control" disabled value="${usuario.sobrenome}">
                                             </div>
                                         </div>
                                     </div>
@@ -86,7 +100,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>E-mail</label>
-                                                <input type="text" class="form-control" disabled value="${Usuario.email}">
+                                                <input type="text" class="form-control" disabled value="${usuario.email}">
                                             </div>
                                         </div>
                                     </div>
@@ -95,7 +109,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Telefone</label>
-                                                <input type="text" class="form-control" disabled value="${Usuario.telefone}">
+                                                <input type="text" class="form-control" disabled value="${usuario.telefone}">
                                             </div>
                                         </div>
                                     </div>
@@ -104,13 +118,13 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Nome de Usuário</label>
-                                                <input type="text" class="form-control" disabled value="${Usuario.nomeDeUsuario}">
+                                                <input type="text" class="form-control" disabled value="${usuario.nomeDeUsuario}">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Senha</label>
-                                                <input type="password" class="form-control" disabled value="${Usuario.senha}">
+                                                <input type="password" class="form-control" disabled value="${usuario.senha}">
                                             </div>
                                         </div>
                                     </div>
@@ -119,13 +133,13 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Data de Registro</label>
-                                                <input type="date" class="form-control" disabled value="${Usuario.dataDeRegistro}">
+                                                <input type="date" class="form-control" disabled value="${usuario.dataDeRegistro}">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Data de Atualização de Cadastro</label>
-                                                <input type="date" class="form-control" disabled value="${Usuario.dataDeModificacao}">
+                                                <input type="date" class="form-control" disabled value="${usuario.dataDeModificacao}">
                                             </div>
                                         </div>
                                     </div>

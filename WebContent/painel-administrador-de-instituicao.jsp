@@ -25,9 +25,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="listarUsuariosComum">
+                    <a href="ColaboradorController">
                    		<i class="pe-7s-user"></i>
-                        <p>Usuários Comum</p>
+                        <p>Colaboradores</p>
                     </a>
                 </li>
                 <li>

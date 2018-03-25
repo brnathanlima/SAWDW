@@ -18,16 +18,16 @@
             </div>
 
             <ul class="nav">
-                <li>
+                <li class="active">
                     <a href="pagina-da-instituicao.jsp">
                         <i class="pe-7s-culture"></i>
                         <p>${usuario.instituicao.nomeFantasia}</p>
                     </a>
                 </li>
                 <li>
-                    <a href="listarUsuariosComum">
+                    <a href="ColaboradorController">
                    		<i class="pe-7s-user"></i>
-                        <p>Usuários Comum</p>
+                        <p>Colaboradores</p>
                     </a>
                 </li>
                 <li>

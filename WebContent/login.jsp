@@ -9,6 +9,8 @@
 	
 	<link href="assets/css/login.css" rel="stylesheet"/>
 	
+	<title>SAEDW - Login</title>
+	
 	<c:import url="/common/cabecalho.jsp" />
 </head>
 <body>
@@ -37,7 +39,7 @@
 									<select name="tipoDeUsuario" class="form-control">
 										<option value="superAdministrador">Super Administrador</option>
 										<option value="administradorDeInstituicao">Administrador de Instituição</option>
-										<option value="usuarioComum">Usuário Comum</option>
+										<option value="colaborador">Colaborador</option>
 										<option value="webDesigner">Web Designer</option>
 										<option value="gerente">Gerente</option>
 									</select>

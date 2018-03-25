@@ -13,8 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.nathanaellima.model.AdministradorDeInstituicaoDAO;
+import com.nathanaellima.model.ColaboradorDAO;
 import com.nathanaellima.model.SuperAdministradorDAO;
 import com.nathanaellima.modelo.AdministradorDeInstituicao;
+import com.nathanaellima.modelo.Colaborador;
 import com.nathanaellima.modelo.SuperAdministrador;
 
 
@@ -91,6 +93,28 @@ public class LoginController extends HttpServlet {
 					rd.include(request, response);
 					
 				}
+				
+				break;
+				
+			case "colaborador":
+				
+				ColaboradorDAO colaboradorDAO = new ColaboradorDAO(conexao);
+				Colaborador colaborador = (Colaborador) colaboradorDAO.autenticarUsuario(nomeDeUsuario, senha);
+				
+				if (colaborador != null) {
+					
+					HttpSession session = request.getSession();
+					session.setAttribute("usuario", colaborador);
+					response.sendRedirect("painel-colaborador.jsp");
+					
+				} else {
+					
+					RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.jsp");
+					rd.include(request, response);
+					
+				}
+				
+				break;
 			
 			}
 			

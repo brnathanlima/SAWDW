@@ -37,7 +37,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="listarGerentes">
+                    <a href="GerenteController">
                     	<i class="pe-7s-portfolio"></i>
                         <p>Gerentes</p>
                     </a>

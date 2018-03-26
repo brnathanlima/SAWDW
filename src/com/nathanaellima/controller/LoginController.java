@@ -15,9 +15,11 @@ import javax.servlet.http.HttpSession;
 import com.nathanaellima.model.AdministradorDeInstituicaoDAO;
 import com.nathanaellima.model.ColaboradorDAO;
 import com.nathanaellima.model.SuperAdministradorDAO;
+import com.nathanaellima.model.WebDesignerDAO;
 import com.nathanaellima.modelo.AdministradorDeInstituicao;
 import com.nathanaellima.modelo.Colaborador;
 import com.nathanaellima.modelo.SuperAdministrador;
+import com.nathanaellima.modelo.WebDesigner;
 
 
 @WebServlet("/LoginController")
@@ -106,6 +108,26 @@ public class LoginController extends HttpServlet {
 					HttpSession session = request.getSession();
 					session.setAttribute("usuario", colaborador);
 					response.sendRedirect("painel-colaborador.jsp");
+					
+				} else {
+					
+					RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.jsp");
+					rd.include(request, response);
+					
+				}
+				
+				break;
+			
+			case "webDesigner":
+				
+				WebDesignerDAO webDesignerDAO = new WebDesignerDAO(conexao);
+				WebDesigner webDesigner = (WebDesigner) webDesignerDAO.autenticarUsuario(nomeDeUsuario, senha);
+				
+				if (webDesigner != null) {
+					
+					HttpSession session = request.getSession();
+					session.setAttribute("usuario", webDesigner);
+					response.sendRedirect("painel-web-designer.jsp");
 					
 				} else {
 					

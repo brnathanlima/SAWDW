@@ -171,11 +171,12 @@ public class AdministradorDeInstituicaoDAO extends GenericoDAO {
 		
 		try {
 			
-			administradorDeInstituicao = new AdministradorDeInstituicao();
+			administradorDeInstituicao = (AdministradorDeInstituicao) FuncionarioFactory.getFuncionario("administradorDeInstituicao");
 			
-			ps = connection.prepareStatement("SELECT * FROM clientes WHERE nome_de_usuario=? AND senha=? AND tipo_de_usuario='administradorDeInstituicao' LIMIT 1");
+			ps = connection.prepareStatement("SELECT * FROM clientes WHERE nome_de_usuario=? AND senha=? AND tipo_de_usuario=? LIMIT 1");
 			ps.setString(1, nomeDeUsuario);
 			ps.setString(2, senha);
+			ps.setString(3, "administradorDeInstituicao");
 			
 			rs = ps.executeQuery();
 			

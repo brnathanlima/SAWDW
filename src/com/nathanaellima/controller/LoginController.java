@@ -31,6 +31,12 @@ public class LoginController extends HttpServlet {
 	
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		SuperAdministrador superAdministrador = null;
+		AdministradorDeInstituicao administradorDeInstituicao = null;
+		WebDesigner webDesigner = null;
+		Colaborador colaborador = null;
+		Gerente gerente = null;
+		
 		String tipoDeUsuario = request.getParameter("tipoDeUsuario");
 		String nomeDeUsuario = request.getParameter("nomeDeUsuario");
 		String senha = request.getParameter("senha");
@@ -62,7 +68,7 @@ public class LoginController extends HttpServlet {
 			case "superAdministrador":
 				
 				SuperAdministradorDAO superAdministradorDAO = new SuperAdministradorDAO(conexao);
-				SuperAdministrador superAdministrador = (SuperAdministrador) superAdministradorDAO.autenticarUsuario(nomeDeUsuario, senha);
+				superAdministrador = (SuperAdministrador) superAdministradorDAO.autenticarUsuario(nomeDeUsuario, senha);
 				
 				if (superAdministrador != null) {
 					
@@ -82,7 +88,7 @@ public class LoginController extends HttpServlet {
 			case "administradorDeInstituicao":
 				
 				AdministradorDeInstituicaoDAO administradorDeInstituicaoDAO = new AdministradorDeInstituicaoDAO(conexao);
-				AdministradorDeInstituicao administradorDeInstituicao = (AdministradorDeInstituicao) 
+				administradorDeInstituicao = (AdministradorDeInstituicao) 
 						administradorDeInstituicaoDAO.autenticarUsuario(nomeDeUsuario, senha);
 				
 				if (administradorDeInstituicao != null) {
@@ -103,7 +109,7 @@ public class LoginController extends HttpServlet {
 			case "colaborador":
 				
 				ColaboradorDAO colaboradorDAO = new ColaboradorDAO(conexao);
-				Colaborador colaborador = (Colaborador) colaboradorDAO.autenticarUsuario(nomeDeUsuario, senha);
+				colaborador = (Colaborador) colaboradorDAO.autenticarUsuario(nomeDeUsuario, senha);
 				
 				if (colaborador != null) {
 					
@@ -123,7 +129,7 @@ public class LoginController extends HttpServlet {
 			case "webDesigner":
 				
 				WebDesignerDAO webDesignerDAO = new WebDesignerDAO(conexao);
-				WebDesigner webDesigner = (WebDesigner) webDesignerDAO.autenticarUsuario(nomeDeUsuario, senha);
+				webDesigner = (WebDesigner) webDesignerDAO.autenticarUsuario(nomeDeUsuario, senha);
 				
 				if (webDesigner != null) {
 					
@@ -143,7 +149,7 @@ public class LoginController extends HttpServlet {
 			case "gerente":
 				
 				GerenteDAO gerenteDAO = new GerenteDAO(conexao);
-				Gerente gerente = (Gerente) gerenteDAO.autenticarUsuario(nomeDeUsuario, senha);
+				gerente = (Gerente) gerenteDAO.autenticarUsuario(nomeDeUsuario, senha);
 				
 				if (gerente != null) {
 					

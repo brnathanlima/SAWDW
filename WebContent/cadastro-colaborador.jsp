@@ -82,6 +82,15 @@
                             	<c:choose>
 									<c:when test="${empty colaborador.id}">
 										<form action="ColaboradorController">
+											<div class="row">
+		                                        <div class="col-md-12">
+		                                            <div class="form-group">
+		                                                <label>Matrícula</label>
+		                                                <input type="text" name="matricula" class="form-control">
+		                                            </div>
+		                                        </div>
+		                                    </div>
+		                                    
 		                                    <div class="row">
 		                                        <div class="col-md-6">
 		                                            <div class="form-group">
@@ -93,15 +102,6 @@
 		                                            <div class="form-group">
 		                                                <label>Sobrnome</label>
 		                                                <input type="text" name="sobrenome" class="form-control">
-		                                            </div>
-		                                        </div>
-		                                    </div>
-		                                    
-		                                    <div class="row">
-		                                        <div class="col-md-12">
-		                                            <div class="form-group">
-		                                                <label>Matrícula</label>
-		                                                <input type="text" name="matricula" class="form-control">
 		                                            </div>
 		                                        </div>
 		                                    </div>
@@ -164,6 +164,15 @@
 									<c:when test="${not empty colaborador.id}">
 										
 										<form action="ColaboradorController">
+											<div class="row">
+		                                        <div class="col-md-12">
+		                                            <div class="form-group">
+		                                                <label>Matrícula</label>
+		                                                <input type="text" name="matricula" value="${colaborador.matricula}" class="form-control">
+		                                            </div>
+		                                        </div>
+		                                    </div>
+		                                    
 		                                    <div class="row">
 		                                        <div class="col-md-6">
 		                                            <div class="form-group">
@@ -175,15 +184,6 @@
 		                                            <div class="form-group">
 		                                                <label>Sobrnome</label>
 		                                                <input type="text" name="sobrenome" value="${colaborador.sobrenome}" class="form-control">
-		                                            </div>
-		                                        </div>
-		                                    </div>
-		                                    
-		                                    <div class="row">
-		                                        <div class="col-md-12">
-		                                            <div class="form-group">
-		                                                <label>Matrícula</label>
-		                                                <input type="text" name="matricula" value="${colaborador.matricula}" class="form-control">
 		                                            </div>
 		                                        </div>
 		                                    </div>

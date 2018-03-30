@@ -82,6 +82,21 @@
                             	<c:choose>
 									<c:when test="${empty gerente.id}">
 										<form action="GerenteController">
+											<div class="row">
+		                                        <div class="col-md-6">
+		                                            <div class="form-group">
+		                                                <label>Matrícula</label>
+		                                                <input type="text" name="matricula" class="form-control">
+		                                            </div>
+		                                        </div>
+		                                        <div class="col-md-6">
+		                                            <div class="form-group">
+		                                                <label>Departamento</label>
+		                                                <input type="text" name="departamento" class="form-control">
+		                                            </div>
+		                                        </div>
+		                                    </div>
+		                                    
 		                                    <div class="row">
 		                                        <div class="col-md-6">
 		                                            <div class="form-group">
@@ -93,21 +108,6 @@
 		                                            <div class="form-group">
 		                                                <label>Sobrnome</label>
 		                                                <input type="text" name="sobrenome" class="form-control">
-		                                            </div>
-		                                        </div>
-		                                    </div>
-		                                    
-		                                    <div class="row">
-		                                        <div class="col-md-6">
-		                                            <div class="form-group">
-		                                                <label>Matrícula</label>
-		                                                <input type="text" name="matricula" class="form-control">
-		                                            </div>
-		                                        </div>
-		                                        <div class="col-md-6">
-		                                            <div class="form-group">
-		                                                <label>Departamento</label>
-		                                                <input type="text" name="departamento" class="form-control">
 		                                            </div>
 		                                        </div>
 		                                    </div>
@@ -155,6 +155,21 @@
 									<c:when test="${not empty gerente.id}">
 										
 										<form action="GerenteController">
+											<div class="row">
+		                                        <div class="col-md-6">
+		                                            <div class="form-group">
+		                                                <label>Matrícula</label>
+		                                                <input type="text" name="matricula" value="${gerente.matricula}" class="form-control">
+		                                            </div>
+		                                        </div>
+		                                        <div class="col-md-6">
+		                                            <div class="form-group">
+		                                                <label>Departamento</label>
+		                                                <input type="text" name="departamento" value="${gerente.departamento}" class="form-control">
+		                                            </div>
+		                                        </div>
+		                                    </div>
+		                                    
 		                                    <div class="row">
 		                                        <div class="col-md-6">
 		                                            <div class="form-group">
@@ -166,21 +181,6 @@
 		                                            <div class="form-group">
 		                                                <label>Sobrnome</label>
 		                                                <input type="text" name="sobrenome" value="${gerente.sobrenome}" class="form-control">
-		                                            </div>
-		                                        </div>
-		                                    </div>
-		                                    
-		                                    <div class="row">
-		                                        <div class="col-md-6">
-		                                            <div class="form-group">
-		                                                <label>Matrícula</label>
-		                                                <input type="text" name="matricula" value="${gerente.matricula}" class="form-control">
-		                                            </div>
-		                                        </div>
-		                                        <div class="col-md-6">
-		                                            <div class="form-group">
-		                                                <label>Departamento</label>
-		                                                <input type="text" name="departamento" value="${gerente.departamento}" class="form-control">
 		                                            </div>
 		                                        </div>
 		                                    </div>

@@ -3,7 +3,6 @@ package com.nathanaellima.model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.List;
 
 public abstract class GenericoDAO {
 	
@@ -55,8 +54,6 @@ public abstract class GenericoDAO {
 		pstmt.close();
 		
 	}
-	
-	protected abstract List<Object> listar();
 	
 	protected abstract Object buscarPorId(long id);
 

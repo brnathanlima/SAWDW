@@ -44,13 +44,6 @@ public class CategoriaDAO extends GenericoDAO {
 		super.deletar(deleteSQL, id);
 		
 	}
-
-	@Override
-	public List<Object> listar() {
-		
-		return null;
-		
-	}
 	
 	@Override
 	public Object buscarPorId(long id) {

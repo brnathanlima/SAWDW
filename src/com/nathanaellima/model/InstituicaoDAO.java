@@ -50,7 +50,6 @@ public class InstituicaoDAO extends GenericoDAO {
 		
 	}
 	
-	@Override
 	public List<Object> listar() {
 		
 		try {

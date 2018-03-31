@@ -55,13 +55,6 @@ public class GerenteDAO extends GenericoDAO {
 		super.deletar(deleteSQL, id);
 		
 	}
-
-	@Override
-	public List<Object> listar() {
-
-		return null;
-
-	}
 	
 	public List<Object> listarGerentesDaInstituicao(long idInstituicao) {
 		

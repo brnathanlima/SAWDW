@@ -9,7 +9,6 @@ import java.util.List;
 
 import com.nathanaellima.factory.FuncionarioFactory;
 import com.nathanaellima.modelo.AdministradorDeInstituicao;
-import com.nathanaellima.modelo.Funcionario;
 import com.nathanaellima.modelo.Instituicao;
 
 public class AdministradorDeInstituicaoDAO extends GenericoDAO {
@@ -62,8 +61,7 @@ public class AdministradorDeInstituicaoDAO extends GenericoDAO {
 		super.deletar(deleteSQL, id);
 		
 	}
-
-	@Override
+	
 	public List<Object> listar() {
 
 		try {

@@ -55,13 +55,6 @@ Connection connection;
 		super.deletar(deleteSQL, id);
 		
 	}
-
-	@Override
-	public List<Object> listar() {
-
-		return null;
-
-	}
 	
 	public List<Object> listarWebDesignersDaInstituicao(long idInstituicao) {
 		

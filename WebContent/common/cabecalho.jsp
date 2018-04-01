@@ -1,4 +1,4 @@
-	<meta charset="utf-8" />
+	<meta charset="ISO-8859-1" />
 	
 	<!-- Favicon -->
 	<link rel="icon" type="image/png" href="assets/img/favicon.ico">

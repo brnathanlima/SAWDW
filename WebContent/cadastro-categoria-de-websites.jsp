@@ -1,10 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!doctype html>
 <html lang="pt-br">
 <head>
-	<title>SAEDW - Cadastrar Categoria de Website</title>
 	<c:import url="/common/cabecalho.jsp" />
+	<title>SAEDW - Cadastrar Categoria de Website</title>
 </head>
 <body>
 <div class="wrapper">
@@ -75,7 +76,7 @@
                             <div class="content">
                             	<c:choose>
 									<c:when test="${empty categoria.id}">
-										<form action="CategoriaDeWebsitesController">
+										<form action="CategoriaDeWebsitesController" method="post">
 		                                    <div class="row">
 		                                        <div class="col-md-12">
 		                                            <div class="form-group">
@@ -102,7 +103,7 @@
 		                                </form>
 									</c:when>
 									<c:when test="${not empty categoria.id}">
-										<form action="CategoriaDeWebsitesController">
+										<form action="CategoriaDeWebsitesController" method="post">
 		                                    <div class="row">
 		                                        <div class="col-md-12">
 		                                            <div class="form-group">

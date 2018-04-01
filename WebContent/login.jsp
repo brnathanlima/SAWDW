@@ -1,9 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!doctype html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-	<meta charset="utf-8" />
+	<meta charset="ISO-8859-1" />
 	<link rel="icon" type="image/png" href="assets/img/favicon.ico">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	
@@ -31,7 +32,7 @@
 							<div class="col-lg-12">
 								<form action="LoginController" method="post" role="form" style="display: block;">
 									<div class="form-group">
-										<input type="text" name="nomeDeUsuario" tabindex="1" class="form-control" placeholder="Nome de Usuário" value="">
+										<input type="text" name="nomeDeUsuario" tabindex="1" class="form-control" placeholder="Nome de Usuário" value="" autofocus>
 									</div>
 									<div class="form-group">
 										<input type="password" name="senha" tabindex="2" class="form-control" placeholder="Senha">

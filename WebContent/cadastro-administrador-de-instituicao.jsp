@@ -166,6 +166,13 @@
 									</c:when>
 									
 									<c:when test="${not empty administradorDeInstituicao.id}">
+										<c:choose>
+											<c:when test="${not empty successMessage}">
+												<div class="alert alert-success" role="alert">
+													<span> <b>Sucesso - </b>${successMessage} </span>
+												</div>											
+											</c:when>
+										</c:choose>
 										<form action="AdministradorDeInstituicaoController" method="post">
 											<div class="row">
 		                                        <div class="col-md-12">

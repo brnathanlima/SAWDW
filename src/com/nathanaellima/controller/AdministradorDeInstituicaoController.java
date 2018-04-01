@@ -102,6 +102,7 @@ public class AdministradorDeInstituicaoController extends HttpServlet {
 				administradoresDeInstituicao = administradorDeInstituicaoDAO.listar();
 				
 				req.setAttribute("administradoresDeInstituicao", administradoresDeInstituicao);
+				req.setAttribute("successMessage", "Administrador de Instituição cadastrado com sucesso.");
 				req.getRequestDispatcher("lista-de-administradores-de-instituicao.jsp").forward(req, res);
 			
 				break;
@@ -163,6 +164,7 @@ public class AdministradorDeInstituicaoController extends HttpServlet {
 				
 				req.setAttribute("instituicoes", instituicoes);
 				req.setAttribute("administradorDeInstituicao", administradorDeInstituicao);
+				req.setAttribute("successMessage", "Cadastro atualizado.");
 				req.getRequestDispatcher("cadastro-administrador-de-instituicao.jsp").forward(req, res);
 				
 				break;
@@ -176,6 +178,7 @@ public class AdministradorDeInstituicaoController extends HttpServlet {
 				administradoresDeInstituicao = administradorDeInstituicaoDAO.listar();
 				
 				req.setAttribute("administradoresDeInstituicao", administradoresDeInstituicao);
+				req.setAttribute("successMessage", "Administrador de Instituição excluído com sucesso.");
 				req.getRequestDispatcher("lista-de-administradores-de-instituicao.jsp").forward(req, res);
 			
 			}

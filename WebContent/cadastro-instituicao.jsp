@@ -149,8 +149,14 @@
 		                                    <div class="clearfix"></div>
 		                                </form>
 									</c:when>
-									
 									<c:when test="${not empty instituicao.id}">
+										<c:choose>
+											<c:when test="${not empty successMessage}">
+												<div class="alert alert-success" role="alert">
+													<span><b>Sucesso - </b>${successMessage}</span>
+												</div>											
+											</c:when>
+										</c:choose>
 										<form action="InstituicaoController" method="post">
 		                                    <div class="row">
 		                                        <div class="col-md-6">

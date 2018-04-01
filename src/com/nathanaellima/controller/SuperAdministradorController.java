@@ -71,6 +71,7 @@ public class SuperAdministradorController extends HttpServlet {
 				superAdministradores = superAdministradorDAO.listar();
 				
 				req.setAttribute("superAdministradores", superAdministradores);
+				req.setAttribute("successMessage", "Super Administrador cadastrado com sucesso.");
 				req.getRequestDispatcher("lista-de-super-administradores.jsp").forward(req, res);
 				
 				break;
@@ -115,6 +116,7 @@ public class SuperAdministradorController extends HttpServlet {
 				superAdministradorDAO.editar(superAdministrador);
 				
 				req.setAttribute("superAdministrador", superAdministrador);
+				req.setAttribute("successMessage", "Cadastro atualizado.");
 				req.getRequestDispatcher("cadastro-super-administrador.jsp").forward(req, res);
 				
 				break;
@@ -129,6 +131,7 @@ public class SuperAdministradorController extends HttpServlet {
 				superAdministradores = superAdministradorDAO.listar();
 				
 				req.setAttribute("superAdministradores", superAdministradores);
+				req.setAttribute("successMessage", "Super Administrador excluído com sucesso.");
 				req.getRequestDispatcher("lista-de-super-administradores.jsp").forward(req, res);
 				
 				break;

@@ -79,6 +79,7 @@ public class CategoriaDeWebsitesController extends HttpServlet {
 				categorias = categoriaDAO.listarCategoriasDaInstituicao(webDesigner.getInstituicao().getId());
 				
 				req.setAttribute("categorias", categorias);
+				req.setAttribute("successMessage", "Categoria de Websites cadastrada com sucesso.");
 				req.getRequestDispatcher("lista-de-categorias-de-websites.jsp").forward(req, res);
 				
 				break;
@@ -112,6 +113,7 @@ public class CategoriaDeWebsitesController extends HttpServlet {
 				categoriaDAO.editar(categoria);
 				
 				req.setAttribute("categoria", categoria);
+				req.setAttribute("successMessage", "Cadastro atualizado.");
 				req.getRequestDispatcher("cadastro-categoria-de-websites.jsp").forward(req, res);
 				
 				break;
@@ -125,6 +127,7 @@ public class CategoriaDeWebsitesController extends HttpServlet {
 				categorias = categoriaDAO.listarCategoriasDaInstituicao(webDesigner.getInstituicao().getId());
 				
 				req.setAttribute("categorias", categorias);
+				req.setAttribute("successMessage", "Categoria de Websites excluída com sucesso.");
 				req.getRequestDispatcher("lista-de-categorias-de-websites.jsp").forward(req, res);
 				
 				break;

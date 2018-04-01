@@ -40,24 +40,31 @@ public class LoginController extends HttpServlet {
 		String tipoDeUsuario = request.getParameter("tipoDeUsuario");
 		String nomeDeUsuario = request.getParameter("nomeDeUsuario");
 		String senha = request.getParameter("senha");
-		String erroMsg = null;
+		String errorMessage = null;
 		
-		if (nomeDeUsuario == null) {
+		HttpSession session = null;
+	
+		if (nomeDeUsuario == "") {
 			
-			erroMsg = "O Nome de Usu√°rio n√£o pode ser Nulo";
+			errorMessage = "Por favor, digite seu nome de usu·rio";
 			
-		} 
-		
-		if (senha == null) {
+			if (senha == "") {
+				
+				errorMessage = "Por favor, digite seu nome de usu·rio e senha";
+				
+			}
 			
-			erroMsg = "A senha n√£o pode estar vazia";
+		} else if (senha == "") {
+			
+			errorMessage = "Por favor, digite sua senha";
 			
 		}
 		
-		if (erroMsg != null) {
+		if (errorMessage != null) {
 			
-			RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.jsp");
-			rd.include(request, response);
+			session = request.getSession();
+			session.setAttribute("errorMessage", errorMessage);
+			response.sendRedirect("login.jsp");
 			
 		} else {
 			
@@ -72,14 +79,15 @@ public class LoginController extends HttpServlet {
 				
 				if (superAdministrador != null) {
 					
-					HttpSession session = request.getSession();
+					session = request.getSession();
 					session.setAttribute("Usuario", superAdministrador);
 					response.sendRedirect("painel-super-administrador.jsp");
 					
 				} else {
 					
-					RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.jsp");
-					rd.include(request, response);
+					session = request.getSession();
+					session.setAttribute("errorMessage", "Nome de usu·rio ou senha inv·lidos");
+					response.sendRedirect("login.jsp");
 					
 				}
 				
@@ -93,14 +101,15 @@ public class LoginController extends HttpServlet {
 				
 				if (administradorDeInstituicao != null) {
 					
-					HttpSession session = request.getSession();
+					session = request.getSession();
 					session.setAttribute("usuario", administradorDeInstituicao);
 					response.sendRedirect("painel-administrador-de-instituicao.jsp");
 					
 				} else {
 					
-					RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.jsp");
-					rd.include(request, response);
+					session = request.getSession();
+					session.setAttribute("errorMessage", "Nome de usu·rio ou senha inv·lidos");
+					response.sendRedirect("login.jsp");
 					
 				}
 				
@@ -113,14 +122,15 @@ public class LoginController extends HttpServlet {
 				
 				if (colaborador != null) {
 					
-					HttpSession session = request.getSession();
+					session = request.getSession();
 					session.setAttribute("usuario", colaborador);
 					response.sendRedirect("painel-colaborador.jsp");
 					
 				} else {
 					
-					RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.jsp");
-					rd.include(request, response);
+					session = request.getSession();
+					session.setAttribute("errorMessage", "Nome de usu·rio ou senha inv·lidos");
+					response.sendRedirect("login.jsp");
 					
 				}
 				
@@ -133,14 +143,15 @@ public class LoginController extends HttpServlet {
 				
 				if (webDesigner != null) {
 					
-					HttpSession session = request.getSession();
+					session = request.getSession();
 					session.setAttribute("usuario", webDesigner);
 					response.sendRedirect("painel-web-designer.jsp");
 					
 				} else {
 					
-					RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.jsp");
-					rd.include(request, response);
+					session = request.getSession();
+					session.setAttribute("errorMessage", "Nome de usu·rio ou senha inv·lidos");
+					response.sendRedirect("login.jsp");
 					
 				}
 				
@@ -153,14 +164,15 @@ public class LoginController extends HttpServlet {
 				
 				if (gerente != null) {
 					
-					HttpSession session = request.getSession();
+					session = request.getSession();
 					session.setAttribute("usuario", gerente);
 					response.sendRedirect("painel-gerente.jsp");
 					
 				} else {
 					
-					RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.jsp");
-					rd.include(request, response);
+					session = request.getSession();
+					session.setAttribute("errorMessage", "Nome de usu·rio ou senha inv·lidos");
+					response.sendRedirect("login.jsp");
 					
 				}
 				

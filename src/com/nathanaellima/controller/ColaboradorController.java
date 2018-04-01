@@ -97,6 +97,7 @@ public class ColaboradorController extends HttpServlet {
 				colaboradores = colaboradorDAO.listarColaboradoresDaInstituicao(administradorDeInstituicao.getInstituicao().getId());
 				
 				req.setAttribute("colaboradores", colaboradores);
+				req.setAttribute("successMessage", "Colaborador cadastrado com sucesso.");
 				req.getRequestDispatcher("lista-de-colaboradores.jsp").forward(req, res);
 			
 				break;
@@ -150,6 +151,7 @@ public class ColaboradorController extends HttpServlet {
 				colaboradorDAO.editar(colaborador);
 				
 				req.setAttribute("colaborador", colaborador);
+				req.setAttribute("successMessage", "Cadastro atualizado.");
 				req.getRequestDispatcher("cadastro-colaborador.jsp").forward(req, res);
 				
 				break;
@@ -165,6 +167,7 @@ public class ColaboradorController extends HttpServlet {
 				colaboradores = colaboradorDAO.listarColaboradoresDaInstituicao(administradorDeInstituicao.getInstituicao().getId());
 				
 				req.setAttribute("colaboradores", colaboradores);
+				req.setAttribute("successMessage", "Colaborador excluído com sucesso.");
 				req.getRequestDispatcher("lista-de-colaboradores.jsp").forward(req, res);
 			
 			}

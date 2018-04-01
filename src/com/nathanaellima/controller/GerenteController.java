@@ -94,6 +94,7 @@ public class GerenteController extends HttpServlet {
 				gerentes = gerenteDAO.listarGerentesDaInstituicao(administradorDeInstituicao.getInstituicao().getId());
 				
 				req.setAttribute("gerentes", gerentes);
+				req.setAttribute("successMessage", "Gerente cadastrado com sucesso.");
 				req.getRequestDispatcher("lista-de-gerentes.jsp").forward(req, res);
 			
 				break;
@@ -145,6 +146,7 @@ public class GerenteController extends HttpServlet {
 				gerenteDAO.editar(gerente);
 				
 				req.setAttribute("gerente", gerente);
+				req.setAttribute("successMessage", "Cadastro atualizado.");
 				req.getRequestDispatcher("cadastro-gerente.jsp").forward(req, res);
 				
 				break;
@@ -160,6 +162,7 @@ public class GerenteController extends HttpServlet {
 				gerentes = gerenteDAO.listarGerentesDaInstituicao(administradorDeInstituicao.getInstituicao().getId());
 				
 				req.setAttribute("gerentes", gerentes);
+				req.setAttribute("successMessage", "Gerente excluído com sucesso.");
 				req.getRequestDispatcher("lista-de-gerentes.jsp").forward(req, res);
 			
 			}

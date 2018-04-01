@@ -158,7 +158,13 @@
 									</c:when>
 									
 									<c:when test="${not empty webDesigner.id}">
-										
+										<c:choose>
+											<c:when test="${not empty successMessage}">
+												<div class="alert alert-success" role="alert">
+													<span> <b>Sucesso - </b>${successMessage} </span>
+												</div>											
+											</c:when>
+										</c:choose>
 										<form action="WebDesignerController" method="post">
 										
 											<div class="row">

@@ -76,6 +76,7 @@ public class InstituicaoController extends HttpServlet {
 				instituicoes = instituicaoDAO.listar();
 				
 				req.setAttribute("instituicoes", instituicoes);
+				req.setAttribute("successMessage", "Instituição cadastrada com sucesso.");
 				req.getRequestDispatcher("lista-de-instituicoes.jsp").forward(req, res);
 				
 				break;
@@ -124,6 +125,7 @@ public class InstituicaoController extends HttpServlet {
 				instituicaoDAO.editar(instituicao);
 				
 				req.setAttribute("instituicao", instituicao);
+				req.setAttribute("successMessage", "Cadastro atualizado.");
 				req.getRequestDispatcher("cadastro-instituicao.jsp").forward(req, res);
 				
 				break;
@@ -138,6 +140,7 @@ public class InstituicaoController extends HttpServlet {
 				instituicoes = instituicaoDAO.listar();
 				
 				req.setAttribute("instituicoes", instituicoes);
+				req.setAttribute("successMessage", "Instituição excluída com sucesso.");
 				req.getRequestDispatcher("lista-de-instituicoes.jsp").forward(req, res);
 				
 				break;

@@ -94,6 +94,7 @@ public class WebDesignerController extends HttpServlet {
 				webDesigners = webDesignerDAO.listarWebDesignersDaInstituicao(administradorDeInstituicao.getInstituicao().getId());
 				
 				req.setAttribute("webDesigners", webDesigners);
+				req.setAttribute("successMessage", "Web Designer cadastrado com sucesso.");
 				req.getRequestDispatcher("lista-de-web-designers.jsp").forward(req, res);
 			
 				break;
@@ -145,6 +146,7 @@ public class WebDesignerController extends HttpServlet {
 				webDesignerDAO.editar(webDesigner);
 				
 				req.setAttribute("webDesigner", webDesigner);
+				req.setAttribute("successMessage", "Cadastro atualizado.");
 				req.getRequestDispatcher("cadastro-web-designer.jsp").forward(req, res);
 				
 				break;
@@ -160,6 +162,7 @@ public class WebDesignerController extends HttpServlet {
 				webDesigners = webDesignerDAO.listarWebDesignersDaInstituicao(administradorDeInstituicao.getInstituicao().getId());
 				
 				req.setAttribute("webDesigners", webDesigners);
+				req.setAttribute("successMessage", "Web Designer excluído com sucesso.");
 				req.getRequestDispatcher("lista-de-web-designers.jsp").forward(req, res);
 			
 			}

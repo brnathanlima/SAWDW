@@ -69,6 +69,17 @@
                             	</h4>
                             </div>
                             <div class="content table-responsive table-full-width">
+                            	<c:choose>
+									<c:when test="${not empty successMessage}">
+										<div class="row">
+											<div class="col-md-12">
+												<div class="alert alert-success" role="alert">
+													<span> <b>Sucesso - </b>${successMessage} </span>
+												</div>
+											</div>
+										</div>									
+									</c:when>
+								</c:choose>
                                 <table class="table table-hover table-striped">
                                     <thead>
                                     	<tr>

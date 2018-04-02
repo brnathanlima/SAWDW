@@ -70,6 +70,9 @@ public class LoginController extends HttpServlet {
 			
 			Connection conexao = (Connection) getServletContext().getAttribute("ConexaoComBD");
 			
+			session = request.getSession();
+			session.setAttribute("tipoDeUsuario", tipoDeUsuario);
+			
 			switch(tipoDeUsuario) {
 			
 			case "superAdministrador":
@@ -79,13 +82,11 @@ public class LoginController extends HttpServlet {
 				
 				if (superAdministrador != null) {
 					
-					session = request.getSession();
 					session.setAttribute("Usuario", superAdministrador);
 					response.sendRedirect("painel-super-administrador.jsp");
 					
 				} else {
 					
-					session = request.getSession();
 					session.setAttribute("errorMessage", "Nome de usuário ou senha inválidos");
 					response.sendRedirect("login.jsp");
 					
@@ -101,13 +102,11 @@ public class LoginController extends HttpServlet {
 				
 				if (administradorDeInstituicao != null) {
 					
-					session = request.getSession();
 					session.setAttribute("usuario", administradorDeInstituicao);
 					response.sendRedirect("painel-administrador-de-instituicao.jsp");
 					
 				} else {
 					
-					session = request.getSession();
 					session.setAttribute("errorMessage", "Nome de usuário ou senha inválidos");
 					response.sendRedirect("login.jsp");
 					
@@ -122,13 +121,11 @@ public class LoginController extends HttpServlet {
 				
 				if (colaborador != null) {
 					
-					session = request.getSession();
 					session.setAttribute("usuario", colaborador);
 					response.sendRedirect("painel-colaborador.jsp");
 					
 				} else {
 					
-					session = request.getSession();
 					session.setAttribute("errorMessage", "Nome de usuário ou senha inválidos");
 					response.sendRedirect("login.jsp");
 					
@@ -143,13 +140,11 @@ public class LoginController extends HttpServlet {
 				
 				if (webDesigner != null) {
 					
-					session = request.getSession();
 					session.setAttribute("usuario", webDesigner);
 					response.sendRedirect("painel-web-designer.jsp");
 					
 				} else {
 					
-					session = request.getSession();
 					session.setAttribute("errorMessage", "Nome de usuário ou senha inválidos");
 					response.sendRedirect("login.jsp");
 					
@@ -164,13 +159,11 @@ public class LoginController extends HttpServlet {
 				
 				if (gerente != null) {
 					
-					session = request.getSession();
 					session.setAttribute("usuario", gerente);
 					response.sendRedirect("painel-gerente.jsp");
 					
 				} else {
 					
-					session = request.getSession();
 					session.setAttribute("errorMessage", "Nome de usuário ou senha inválidos");
 					response.sendRedirect("login.jsp");
 					

@@ -36,8 +36,8 @@ public class EstruturaDeWebsiteController extends HttpServlet {
 		Categoria categoria = null;
 		CategoriaDAO categoriaDAO = null;
 		
-		List<Object> estruturasDeWebsites = null;
-		List<Object> categorias = null;
+		List<EstruturaDeWebsite> estruturasDeWebsites = null;
+		List<Categoria> categorias = null;
 		
 		String id = null;
 		String idCategoria = null;
@@ -148,6 +148,18 @@ public class EstruturaDeWebsiteController extends HttpServlet {
 				
 				req.setAttribute("estruturasDeWebsites", estruturasDeWebsites);
 				req.setAttribute("successMessage", "Estrutura de website excluída com sucesso.");
+				req.getRequestDispatcher("lista-de-estruturas-de-websites.jsp").forward(req, res);
+				
+				break;
+				
+			case "listarEstruturasDeWebsitesDaCategoria":
+				
+				idCategoria = req.getParameter("id");
+				
+				estruturaDeWebsiteDAO = new EstruturaDeWebsiteDAO(conexao);
+				estruturasDeWebsites = estruturaDeWebsiteDAO.listarEstruturasDeWebsitesDaCategoria(Long.parseLong(idCategoria));
+				
+				req.setAttribute("estruturasDeWebsites", estruturasDeWebsites);
 				req.getRequestDispatcher("lista-de-estruturas-de-websites.jsp").forward(req, res);
 				
 				break;

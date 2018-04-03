@@ -37,7 +37,7 @@ public class WebDesignerController extends HttpServlet {
 		WebDesigner webDesigner = null;
 		WebDesignerDAO webDesignerDAO = null;
 		
-		List<Object> webDesigners = null;
+		List<WebDesigner> webDesigners = null;
 		
 		String id = null;
 		String idInstituicao = null;

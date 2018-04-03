@@ -50,11 +50,11 @@ public class InstituicaoDAO extends GenericoDAO {
 		
 	}
 	
-	public List<Object> listar() {
+	public List<Instituicao> listar() {
 		
 		try {
 			
-			List<Object> instituicoes = new ArrayList<Object>();
+			List<Instituicao> instituicoes = new ArrayList<Instituicao>();
 			PreparedStatement stmt = this.connection.prepareStatement("SELECT * FROM instituicoes");
 			ResultSet rs = stmt.executeQuery();
 			

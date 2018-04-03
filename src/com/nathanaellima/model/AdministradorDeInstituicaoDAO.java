@@ -20,7 +20,7 @@ public class AdministradorDeInstituicaoDAO extends GenericoDAO {
 	
 	InstituicaoDAO instituicaoDAO = null;
 	
-	List<Object> administradoresDeInstituicao = null;
+	List<AdministradorDeInstituicao> administradoresDeInstituicao = null;
 
 	public AdministradorDeInstituicaoDAO(Connection connection) {
 		
@@ -62,11 +62,11 @@ public class AdministradorDeInstituicaoDAO extends GenericoDAO {
 		
 	}
 	
-	public List<Object> listar() {
+	public List<AdministradorDeInstituicao> listar() {
 
 		try {
 			
-			administradoresDeInstituicao = new ArrayList<Object>();
+			administradoresDeInstituicao = new ArrayList<AdministradorDeInstituicao>();
 			
 			String busca = "SELECT * FROM clientes WHERE tipo_de_usuario=?";
 			

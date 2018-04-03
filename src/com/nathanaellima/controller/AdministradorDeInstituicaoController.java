@@ -32,8 +32,8 @@ public class AdministradorDeInstituicaoController extends HttpServlet {
 		AdministradorDeInstituicao administradorDeInstituicao = null;
 		AdministradorDeInstituicaoDAO administradorDeInstituicaoDAO = null;
 		
-		List<Object> administradoresDeInstituicao = null;
-		List<Object> instituicoes = null;
+		List<AdministradorDeInstituicao> administradoresDeInstituicao = null;
+		List<Instituicao> instituicoes = null;
 		
 		String id = null;
 		String idInstituicao = null;

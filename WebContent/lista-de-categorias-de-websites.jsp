@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!doctype html>
 <html lang="pt-br">
 <head>
@@ -80,14 +81,27 @@
                                     <thead>
                                     	<tr>
 	                                        <th>Nome</th>
-	                                    	<th>Ações</th>
+	                                        <th style="text-align: center;">Estruturas de Websites</th>
+	                                    	<th style="text-align: center;">Ações</th>
                                     	</tr>
                                     </thead>
                                     <tbody>
                                     	<c:forEach var="categoria" items="${categorias}" varStatus="id">
 											<tr>
 												<td>${categoria.nome}</td>
-												<td class="td-actions">
+												<td style="text-align: center;">
+												<c:choose>
+													<c:when test="${not empty categoria.estruturasDeWebsitesDaCategoria}">
+														<a href="EstruturaDeWebsiteController?acao=listarEstruturasDeWebsitesDaCategoria&id=${categoria.id}">
+															<span class="label label-success">${fn:length(categoria.estruturasDeWebsitesDaCategoria)}</span>
+														</a>
+													</c:when>
+													<c:otherwise>
+														<span class="label label-default">${fn:length(categoria.estruturasDeWebsitesDaCategoria)}</span>
+													</c:otherwise>
+												</c:choose>
+												</td>
+												<td style="text-align: center;" class="td-actions">
 													<a href="CategoriaDeWebsitesController?acao=visualizar&id=${categoria.id}">
                                                     <button type="button" rel="tooltip" title="Editar" class="btn btn-info btn-simple btn-sm">
                                                         <i class="fa fa-edit"></i>

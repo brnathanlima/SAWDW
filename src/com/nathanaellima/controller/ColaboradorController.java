@@ -37,7 +37,7 @@ public class ColaboradorController extends HttpServlet {
 		Colaborador colaborador = null;
 		ColaboradorDAO colaboradorDAO = null;
 		
-		List<Object> colaboradores = null;
+		List<Colaborador> colaboradores = null;
 		
 		String id = null;
 		String idInstituicao = null;

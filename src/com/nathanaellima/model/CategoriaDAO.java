@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.nathanaellima.modelo.Categoria;
+import com.nathanaellima.modelo.EstruturaDeWebsite;
 
 public class CategoriaDAO extends GenericoDAO {
 	
@@ -82,11 +83,11 @@ public class CategoriaDAO extends GenericoDAO {
 		
 	}
 	
-	public List<Object> listarCategoriasDaInstituicao(long idInstituicao) {
+	public List<Categoria> listarCategoriasDaInstituicao(long idInstituicao) {
 		
 		try {
 			
-			List<Object> categoriasDeWebsites = new ArrayList<Object>();
+			List<Categoria> categoriasDeWebsites = new ArrayList<Categoria>();
 			
 			PreparedStatement stmt = this.connection.prepareStatement("SELECT * FROM categorias_de_websites WHERE id_instituicao=?");
 			stmt.setLong(1, idInstituicao);
@@ -101,6 +102,12 @@ public class CategoriaDAO extends GenericoDAO {
 				categoria.setDescricao(rs.getString("descricao"));
 				categoria.setDataDeCriacao(rs.getDate("data_de_criacao"));
 				categoria.setDataDeModificacao(rs.getDate("data_de_modificacao"));
+				
+				EstruturaDeWebsiteDAO estruturaDeWebsiteDAO = new EstruturaDeWebsiteDAO(connection);
+				List<EstruturaDeWebsite> estruturasDeWebsitesDaCategoria = 
+						estruturaDeWebsiteDAO.listarEstruturasDeWebsitesDaCategoria(rs.getLong("id"));
+				
+				categoria.setEstruturasDeWebsitesDaCategoria(estruturasDeWebsitesDaCategoria);
 				
 				categoriasDeWebsites.add(categoria);
 				

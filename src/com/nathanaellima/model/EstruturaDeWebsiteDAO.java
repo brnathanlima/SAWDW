@@ -15,7 +15,7 @@ public class EstruturaDeWebsiteDAO extends GenericoDAO {
 	Connection connection;
 	
 	EstruturaDeWebsite estruturaDeWebsite = null;
-	List<Object> estruturasDeWebsites = null;
+	List<EstruturaDeWebsite> estruturasDeWebsites = null;
 	
 	Categoria categoria = null;
 	CategoriaDAO categoriaDAO = null;
@@ -52,11 +52,11 @@ public class EstruturaDeWebsiteDAO extends GenericoDAO {
 		
 	}
 	
-	public List<Object> listarEstruturasDeWebsitesDaInstituicao(long idInstituicao) {
+	public List<EstruturaDeWebsite> listarEstruturasDeWebsitesDaInstituicao(long idInstituicao) {
 		
 		try {
 			
-			estruturasDeWebsites = new ArrayList<Object>();
+			estruturasDeWebsites = new ArrayList<EstruturaDeWebsite>();
 			
 			String busca = "SELECT * FROM estruturas_de_websites AS e INNER JOIN  categorias_de_websites as c ON e.id_categoria = c.id WHERE "
 					+ "c.id_instituicao=?";
@@ -100,13 +100,13 @@ public class EstruturaDeWebsiteDAO extends GenericoDAO {
 		
 	}
 	
-	public List<Object> listarEstruturasDeWebsitesDaCategoria(long idCategoria) {
+	public List<EstruturaDeWebsite> listarEstruturasDeWebsitesDaCategoria(long idCategoria) {
 		
 		try {
 			
-			estruturasDeWebsites = new ArrayList<Object>();
+			estruturasDeWebsites = new ArrayList<EstruturaDeWebsite>();
 			
-			String busca = "SELECT e.* FROM estruturas_de_websites AS e INNER JOIN categorias_de_websites AS c sON e.id_categoria = c.id WHERE c.id=?";
+			String busca = "SELECT e.* FROM estruturas_de_websites AS e INNER JOIN categorias_de_websites AS c ON e.id_categoria = c.id WHERE c.id=?";
 			
 			PreparedStatement stmt = this.connection.prepareStatement(busca);
 			stmt.setLong(1, idCategoria);

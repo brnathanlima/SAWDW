@@ -37,7 +37,7 @@ public class GerenteController extends HttpServlet {
 		Gerente gerente = null;
 		GerenteDAO gerenteDAO = null;
 		
-		List<Object> gerentes = null;
+		List<Gerente> gerentes = null;
 		
 		String id = null;
 		String idInstituicao = null;

@@ -18,7 +18,7 @@ Connection connection;
 	WebDesigner webDesigner = null;
 	Instituicao instituicao = null;
 	InstituicaoDAO instituicaoDAO = null;
-	List<Object> webDesigners = null;
+	List<WebDesigner> webDesigners = null;
 
 	public WebDesignerDAO(Connection connection) {
 		
@@ -56,11 +56,11 @@ Connection connection;
 		
 	}
 	
-	public List<Object> listarWebDesignersDaInstituicao(long idInstituicao) {
+	public List<WebDesigner> listarWebDesignersDaInstituicao(long idInstituicao) {
 		
 		try {
 			
-			webDesigners = new ArrayList<Object>();
+			webDesigners = new ArrayList<WebDesigner>();
 			
 			String busca = "SELECT * FROM clientes WHERE id_instituicao=? AND tipo_de_usuario=?";
 			

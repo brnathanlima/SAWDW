@@ -33,11 +33,10 @@ public class CategoriaDeWebsitesController extends HttpServlet {
 		CategoriaDAO categoriaDAO = new CategoriaDAO(conexao);
 		InstituicaoDAO instituicaoDAO = null;
 		Instituicao instituicao = null;
-		List<Object> categorias = null;
+		List<Categoria> categorias = null;
 		WebDesigner webDesigner = (WebDesigner) session.getAttribute("usuario");
 		
 		String id = null;
-		String idCategoriaMae = null;
 		String nome = null;
 		String descricao = null;
 		Date dataDeCriacao = null;
@@ -60,7 +59,6 @@ public class CategoriaDeWebsitesController extends HttpServlet {
 				
 			case "cadastrar":
 				
-				idCategoriaMae = req.getParameter("idCategoriaMae");
 				nome = req.getParameter("nome");
 				descricao = req.getParameter("descricao");
 				dataDeCriacao = new Date();
@@ -98,7 +96,6 @@ public class CategoriaDeWebsitesController extends HttpServlet {
 			case "editar":
 				
 				id = req.getParameter("id");
-				idCategoriaMae = req.getParameter("idCategoriaMae");
 				nome = req.getParameter("nome");
 				descricao = req.getParameter("descricao");
 				dataDeModificacao = new Date();

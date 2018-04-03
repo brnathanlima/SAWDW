@@ -26,7 +26,7 @@ public class InstituicaoController extends HttpServlet {
 		
 		InstituicaoDAO instituicaoDAO = null;
 		Instituicao instituicao = null;
-		List<Object> instituicoes = null;
+		List<Instituicao> instituicoes = null;
 		
 		Long id = null;
 		String nomeFantasia = null;

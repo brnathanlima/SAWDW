@@ -51,11 +51,11 @@ public class SuperAdministradorDAO extends GenericoDAO {
 		
 	}
 	
-	public List<Object> listar() {
+	public List<SuperAdministrador> listar() {
 		
 		try {
 			
-			List<Object> superAdministradores = new ArrayList<Object>();
+			List<SuperAdministrador> superAdministradores = new ArrayList<SuperAdministrador>();
 			PreparedStatement stmt = this.connection.prepareStatement("SELECT * FROM super_administradores");
 			ResultSet rs = stmt.executeQuery();
 			

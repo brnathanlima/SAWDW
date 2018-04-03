@@ -27,7 +27,7 @@ public class SuperAdministradorController extends HttpServlet {
 		
 		SuperAdministradorDAO superAdministradorDAO = null;
 		SuperAdministrador superAdministrador = null;
-		List<Object> superAdministradores = null;
+		List<SuperAdministrador> superAdministradores = null;
 		
 		String id = null;
 		String nome = null;

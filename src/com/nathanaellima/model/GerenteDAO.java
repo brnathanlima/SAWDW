@@ -18,7 +18,7 @@ public class GerenteDAO extends GenericoDAO {
 	Gerente gerente = null;
 	Instituicao instituicao = null;
 	InstituicaoDAO instituicaoDAO = null;
-	List<Object> gerentes = null;
+	List<Gerente> gerentes = null;
 
 	public GerenteDAO(Connection connection) {
 		
@@ -56,11 +56,11 @@ public class GerenteDAO extends GenericoDAO {
 		
 	}
 	
-	public List<Object> listarGerentesDaInstituicao(long idInstituicao) {
+	public List<Gerente> listarGerentesDaInstituicao(long idInstituicao) {
 		
 		try {
 			
-			gerentes = new ArrayList<Object>();
+			gerentes = new ArrayList<Gerente>();
 			
 			String busca = "SELECT * FROM clientes WHERE id_instituicao=? AND tipo_de_usuario=?";
 			

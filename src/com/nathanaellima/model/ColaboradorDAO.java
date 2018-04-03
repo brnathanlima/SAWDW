@@ -20,7 +20,7 @@ public class ColaboradorDAO extends GenericoDAO {
 	
 	InstituicaoDAO instituicaoDAO = null;
 	
-	List<Object> colaboradores = null;
+	List<Colaborador> colaboradores = null;
 
 	public ColaboradorDAO(Connection connection) {
 		
@@ -58,11 +58,11 @@ public class ColaboradorDAO extends GenericoDAO {
 		
 	}
 	
-	public List<Object> listarColaboradoresDaInstituicao(long idInstituicao) {
+	public List<Colaborador> listarColaboradoresDaInstituicao(long idInstituicao) {
 		
 		try {
 			
-			colaboradores = new ArrayList<Object>();
+			colaboradores = new ArrayList<Colaborador>();
 			
 			String busca = "SELECT * FROM clientes WHERE id_instituicao=? AND tipo_de_usuario=?";
 			

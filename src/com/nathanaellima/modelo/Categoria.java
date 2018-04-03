@@ -1,6 +1,7 @@
 package com.nathanaellima.modelo;
 
 import java.util.Date;
+import java.util.List;
 
 public class Categoria {
 	
@@ -11,7 +12,8 @@ public class Categoria {
 	private Date dataDeModificacao;
 	private Categoria categoriaMae;
 	private Instituicao instituicao;
-	
+	private List<EstruturaDeWebsite> estruturasDeWebsitesDaCategoria;
+
 	public long getId() {
 		
 		return id;
@@ -91,6 +93,17 @@ public class Categoria {
 	public void setInstituicao(Instituicao instituicao) {
 		
 		this.instituicao = instituicao;
+		
+	}
+	public List<EstruturaDeWebsite> getEstruturasDeWebsitesDaCategoria() {
+		
+		return estruturasDeWebsitesDaCategoria;
+		
+	}
+
+	public void setEstruturasDeWebsitesDaCategoria(List<EstruturaDeWebsite> estruturasDeWebsitesDaCategoria) {
+		
+		this.estruturasDeWebsitesDaCategoria = estruturasDeWebsitesDaCategoria;
 		
 	}
 	

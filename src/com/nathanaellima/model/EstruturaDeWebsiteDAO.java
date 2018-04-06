@@ -148,7 +148,7 @@ public class EstruturaDeWebsiteDAO extends GenericoDAO {
 	}
 	
 	@Override
-	public Object buscarPorId(long id) {
+	public EstruturaDeWebsite buscarPorId(long id) {
 		
 		try {
 			
@@ -169,6 +169,9 @@ public class EstruturaDeWebsiteDAO extends GenericoDAO {
 				estruturaDeWebsite.setDescricao(rs.getString("descricao"));
 				estruturaDeWebsite.setDataDeCriacao(rs.getDate("data_de_criacao"));
 				estruturaDeWebsite.setDataDeModificacao(rs.getDate("data_de_modificacao"));
+				
+				EstruturaDePaginaDAO estruturaDePaginaDAO = new EstruturaDePaginaDAO(connection);
+				estruturaDeWebsite.setEstruturasDePaginasDoWebsite(estruturaDePaginaDAO.listarEstruturasDePaginasDoWebsite(rs.getLong("id")));
 				
 			}
 			

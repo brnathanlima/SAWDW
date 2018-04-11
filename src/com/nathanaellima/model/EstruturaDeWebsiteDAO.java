@@ -58,7 +58,7 @@ public class EstruturaDeWebsiteDAO extends GenericoDAO {
 			
 			estruturasDeWebsites = new ArrayList<EstruturaDeWebsite>();
 			
-			String busca = "SELECT * FROM estruturas_de_websites AS e INNER JOIN  categorias_de_websites as c ON e.id_categoria = c.id WHERE "
+			String busca = "SELECT e.* FROM estruturas_de_websites AS e INNER JOIN  categorias_de_websites as c ON e.id_categoria = c.id WHERE "
 					+ "c.id_instituicao=?";
 			
 			PreparedStatement stmt = this.connection.prepareStatement(busca);
@@ -136,6 +136,43 @@ public class EstruturaDeWebsiteDAO extends GenericoDAO {
 			
 			rs.close();
 			stmt.close();
+			
+			return estruturasDeWebsites;
+			
+		} catch(SQLException e) {
+			
+			throw new RuntimeException(e);
+			
+		}
+		
+	}
+	
+	public List<EstruturaDeWebsite> listarEstruturasDeWebsitesDaSolicitacao(long id) {
+		
+		try {
+			
+			estruturasDeWebsites = new ArrayList<EstruturaDeWebsite>();
+			
+			String buscaEstruturas = "SELECT e.* FROM estruturas_de_websites AS e "
+					+ "INNER JOIN estruturas_de_websites_das_solicitacoes AS es ON e.id = es.id_estrutura_de_website "
+					+ "INNER JOIN solicitacoes_de_desenvolvimento AS s ON s.id = es.id_solicitacao_de_desenvolvimento "
+					+ "WHERE s.id=?";
+			
+			PreparedStatement pstmt = connection.prepareStatement(buscaEstruturas);
+			pstmt.setLong(1, id);
+			ResultSet rs = pstmt.executeQuery();
+			
+			if (rs != null) {
+				
+				while(rs.next()) {
+					
+					estruturaDeWebsite = buscarPorId(rs.getLong("id"));
+					
+					estruturasDeWebsites.add(estruturaDeWebsite);
+					
+				}
+				
+			}
 			
 			return estruturasDeWebsites;
 			

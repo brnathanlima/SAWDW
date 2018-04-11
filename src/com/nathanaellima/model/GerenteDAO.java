@@ -111,7 +111,7 @@ public class GerenteDAO extends GenericoDAO {
 	}
 
 	@Override
-	public Object buscarPorId(long id) {
+	public Gerente buscarPorId(long id) {
 		
 
 		try {

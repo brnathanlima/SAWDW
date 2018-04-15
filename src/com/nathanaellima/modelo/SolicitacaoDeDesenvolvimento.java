@@ -13,6 +13,7 @@ public class SolicitacaoDeDesenvolvimento {
 	private Date dataDeModificacao;
 	private Gerente solicitante;
 	private List<EstruturaDeWebsite> estruturasDeWebsitesSolicitadas;
+	private Parecer parecer;
 	
 	public long getId() {
 		
@@ -35,6 +36,12 @@ public class SolicitacaoDeDesenvolvimento {
 	public String getJustificativa() {
 		
 		return justificativa;
+		
+	}
+	
+	public void setStatus(String status) {
+		
+		this.status = status;
 		
 	}
 
@@ -68,6 +75,12 @@ public class SolicitacaoDeDesenvolvimento {
 		
 	}
 	
+	public Parecer getParecer() {
+		
+		return parecer;
+		
+	}
+	
 	public static class Builder {
 		
 		private long id;
@@ -78,6 +91,7 @@ public class SolicitacaoDeDesenvolvimento {
 		private Date dataDeModificacao;
 		private Gerente solicitante;
 		private List<EstruturaDeWebsite> estruturasDeWebsitesSolicitadas;
+		private Parecer parecer;
 		
 		public Builder id(long id) {
 			
@@ -129,7 +143,15 @@ public class SolicitacaoDeDesenvolvimento {
 		}
 		
 		public Builder estruturasDeWebsites(List<EstruturaDeWebsite> estruturasDeWebsitesSolicitadas) {
+			
 			this.estruturasDeWebsitesSolicitadas = estruturasDeWebsitesSolicitadas;
+			return this;
+			
+		}
+		
+		public Builder parecer(Parecer parecer) {
+			
+			this.parecer = parecer;
 			return this;
 			
 		}
@@ -143,6 +165,7 @@ public class SolicitacaoDeDesenvolvimento {
 	}
 	
 	private SolicitacaoDeDesenvolvimento(Builder builder) {
+		
 		setId(builder.id);
 		titulo = builder.titulo;
 		justificativa = builder.justificativa;
@@ -151,6 +174,7 @@ public class SolicitacaoDeDesenvolvimento {
 		dataDeModificacao = builder.dataDeModificacao;
 		solicitante = builder.solicitante;
 		estruturasDeWebsitesSolicitadas = builder.estruturasDeWebsitesSolicitadas;
+		parecer = builder.parecer;
 		
 	}
 	

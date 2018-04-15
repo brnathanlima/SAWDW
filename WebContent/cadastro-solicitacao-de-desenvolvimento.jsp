@@ -279,6 +279,17 @@
 													<h4>VISUALIZAR SOLICITAÇÃO DE DESENVOLVIMENTO</h4>
 												</div>				
 												<div class="content">
+													<c:choose>
+														<c:when test="${ not empty successMessage }">
+															<div class="row">
+																<div class="col-md-12">
+																	<div class="alert alert-success" role="alert">
+																		<span><b>Sucesso - </b> ${successMessage} </span>
+																	</div>
+																</div>
+															</div>								
+														</c:when>
+													</c:choose>
 													<table class="table table-bordered table-hover">
 														<thead>
 															<tr>
@@ -369,7 +380,7 @@
 							<c:choose>
 								
 								<%-- Testa se há parecer emitido para a solicitação --%>
-								<c:when test="${empty parecer.id}">
+								<c:when test="${empty solicitacaoDeDesenvolvimento.parecer.id}">
 									
 									<%-- Exibir o Formulário para emissão do Parecer pelo Web-designer ou uma mensagem informando que não 
 									há Parecer Técnico emitido para o Gerente de TI --%>
@@ -377,7 +388,7 @@
 									
 										<%-- Testa se o usuário é Web-designer --%>
 										<c:when test="${tipoDeUsuario == 'webDesigner'}">
-											<form action="ParecerController">
+											<form action="ParecerController" method="post">
 												<div class="card ">
 													<div class="header">
 														<h4 class="title">PARECER TÉCNICO</h4>
@@ -386,7 +397,8 @@
 														<div class="row">
 															<div class="col-md-12">
 																<div class="form-group">
-																	<label>Recomendação</label> <input type="text" name="recomendacao" class="form-control">
+																	<label>Recomendação</label> 
+																	<input type="text" name="recomendacao" class="form-control">
 																</div>
 															</div>
 														</div>
@@ -398,6 +410,7 @@
 																</div>
 															</div>
 														</div>
+														
 														<input type="hidden" name="idSolicitacaoDeDesenvolvimento" value="${solicitacaoDeDesenvolvimento.id}" /> 
 														<input type="hidden" name="acao" value="emitir" />
 														
@@ -410,13 +423,20 @@
 										<%-- Fim do teste de o usuário ser Web-Designer --%>
 										
 										<%-- Testa se o usuário é Gerente da área de TI --%>
-										<c:when test="${tipoDeUsuario == 'gerente' && setor == 'TI'}">
+										<c:when test="${tipoDeUsuario == 'gerente' && usuario.departamento == 'TI'}">
 											<div class="card">
 												<div class="header">
 													<h4 class="title">PARECER TÉCNICO</h4>
 												</div>
 												<div class="content">
-													<p>Não há parecer técnico emitido para esta solicitação</p>
+													<div class="row">
+														<div class="col-md-12">
+															<div class="alert alert-warning">
+																<span>Até o momento não foi emitido parecer técnico por algum webdesigner para esta solicitação.</span>
+															</div>
+														</div>
+													</div>
+													<p></p>
 												</div>
 											</div>
 										</c:when>
@@ -429,7 +449,7 @@
 								<%-- Fim do teste de haver Parecer para a Solicitação --%>
 								
 								<%-- Testa não haver Parecer para a solicitação --%>
-								<c:when test="${not empty parecer.id}">
+								<c:when test="${not empty solicitacaoDeDesenvolvimento.parecer.id}">
 									
 									<%-- Exibe o formulário para edição de Parecer para o webdesigner ou
 									exibe o parecer para o Gerente da área de TI --%>
@@ -438,18 +458,18 @@
 										<%-- Testa se o usuário é Web-designer --%>
 										<c:when test="${tipoDeUsuario == 'webDesigner'}">
 											<c:choose>
-												<c:when test="${solicitacaoDeDesenvolvimento.status == 'Aguardando Aprovacao'}">
+												<c:when test="${solicitacaoDeDesenvolvimento.status == 'Aguardando Avaliação'}">
 													<div class="card">
 														<div class="header">
 															<h4 class="title">PARECER TÉCNICO</h4>
 														</div>
 														<div class="content">
-															<form action="ParecerController">
+															<form action="ParecerController" method="post">
 																<div class="row">
 																	<div class="col-md-12">
 																		<div class="form-group">
 																			<label>Recomendação</label> 
-																			<input type="text" name="recomendacao" value="${parecer.recomendacao}" class="form-control">
+																			<input type="text" name="recomendacao" value="${solicitacaoDeDesenvolvimento.parecer.recomendacao}" class="form-control">
 																		</div>
 																	</div>
 																</div>
@@ -457,19 +477,22 @@
 																	<div class="col-md-12">
 																		<div class="form-group">
 																			<label>Justificativa</label>
-																			<textarea rows="5" name="justificativa" class="form-control">${parecer.justificativa}</textarea>
+																			<textarea rows="5" name="justificativa" class="form-control">${solicitacaoDeDesenvolvimento.parecer.justificativa}</textarea>
 																		</div>
+																	</div>
 																</div>
-																</div>
+																
 																<input type="hidden" name="idSolicitacaoDeDesenvolvimento" value="${solicitacaoDeDesenvolvimento.id}" /> 
-																<input type="hidden" name="idParecer" value="${parecer.id}" />
+																<input type="hidden" name="id" value="${solicitacaoDeDesenvolvimento.parecer.id}" />
 																<input type="hidden" name="acao" value="editar" /> 
+																
 																<button type="submit" class="btn btn-success btn-fill pull-left">EDITAR</button>
 															</form>
 															<form action="ParecerController">
 																<input type="hidden" name="acao" value="excluir" /> 
-																<input type="hidden" name="idParecer" value="${parecer.id}" />
+																<input type="hidden" name="id" value="${solicitacaoDeDesenvolvimento.parecer.id}" />
 																<input type="hidden" name="idSolicitacaoDeDesenvolvimento" value="${solicitacaoDeDesenvolvimento.id}" />
+																
 																<button type="submit" class="btn btn-danger btn-fill pull-right">EXCLUIR PARECER</button>
 																<div class="clearfix"></div>
 															</form>
@@ -482,24 +505,28 @@
 															<h4 class="title">PARECER TÉCNICO</h4>
 														</div>
 														<div class="content">
-															<form>
-																<div class="row">
-																	<div class="col-md-12">
-																		<div class="form-group">
-																			<label>Recomendação</label> 
-																			<input type="text" name="recomendacao" value="${parecer.recomendacao}" class="form-control" readonly>
-																		</div>
-																	</div>
-																</div>
-																<div class="row">
-																	<div class="col-md-12">
-																		<div class="form-group">
-																			<label>Justificativa</label>
-																			<textarea rows="5" name="justificativa" class="form-control" readonly>${parecer.justificativa}</textarea>
-																		</div>
-																	</div>
-																</div>
-															</form>
+															<table class="table table-bordered table-hover">
+																<thead>
+																	<tr>
+																		<th>Recomendação</th>
+																	</tr>
+																</thead>
+																<tbody>
+																	<tr>
+																		<td>${solicitacaoDeDesenvolvimento.parecer.recomendacao}</td>
+																	</tr>
+																</tbody>
+																<thead>
+																	<tr>
+																		<th>Justificativa</th>
+																	</tr>
+																</thead>
+																<tbody>
+																	<tr>
+																		<td>${solicitacaoDeDesenvolvimento.parecer.justificativa}</td>
+																	</tr>
+																</tbody>
+															</table>
 														</div>
 													</div>
 												</c:otherwise>
@@ -508,30 +535,34 @@
 										<%-- Fim do teste de o usuário ser Web-designer --%>
 										
 										<%-- Testa se o usuário é gerente da área de TI --%>
-										<c:when test="${tipoDeUsuario == 'gerente' && setor == 'TI'}">
+										<c:when test="${tipoDeUsuario == 'gerente' && usuario.departamento == 'TI'}">
 											<div class="card ">
 												<div class="header">
 													<h4 class="title">PARECER TÉCNICO</h4>
 												</div>
 												<div class="content">
-													<form>
-														<div class="row">
-															<div class="col-md-12">
-																<div class="form-group">
-																	<label>Recomendação</label> 
-																	<input type="text" name="recomendacao" value="${parecer.recomendacao}" class="form-control" readonly>
-																</div>
-															</div>
-														</div>
-														<div class="row">
-															<div class="col-md-12">
-																<div class="form-group">
-																<label>Justificativa</label>
-																<textarea rows="5" name="justificativa" class="form-control" readonly>${parecer.justificativa}</textarea>
-																</div>
-															</div>
-														</div>
-													</form>
+													<table class="table table-bordered table-hover">
+														<thead>
+															<tr>
+																<th>Recomendação</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td>${solicitacaoDeDesenvolvimento.parecer.recomendacao}</td>
+															</tr>
+														</tbody>
+														<thead>
+															<tr>
+																<th>Justificativa</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td>${solicitacaoDeDesenvolvimento.parecer.justificativa}</td>
+															</tr>
+														</tbody>
+													</table>
 												</div>
 											</div>
 										</c:when>

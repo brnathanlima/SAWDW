@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.nathanaellima.modelo.EstruturaDeWebsite;
 import com.nathanaellima.modelo.Gerente;
+import com.nathanaellima.modelo.Parecer;
 import com.nathanaellima.modelo.SolicitacaoDeDesenvolvimento;
 
 public class SolicitacaoDeDesenvolvimentoDAO extends GenericoDAO {
@@ -18,11 +19,14 @@ public class SolicitacaoDeDesenvolvimentoDAO extends GenericoDAO {
 	
 	SolicitacaoDeDesenvolvimento solicitacaoDeDesenvolvimento;
 	Gerente solicitante;
+	Parecer parecer;
+	
 	List<SolicitacaoDeDesenvolvimento> solicitacoesDeDesenvolvimento;
 	List<EstruturaDeWebsite> estruturasDeWebsitesDaSolicitacao;
 	
 	GerenteDAO gerenteDAO;
 	EstruturaDeWebsiteDAO estruturaDeWebsiteDAO;
+	ParecerDAO parecerDAO;
 	
 	public SolicitacaoDeDesenvolvimentoDAO(Connection connection) {
 		
@@ -125,6 +129,20 @@ public class SolicitacaoDeDesenvolvimentoDAO extends GenericoDAO {
 		
 	}
 	
+	public void mudarStatus(String status, long id) throws SQLException {
+		
+		String updateStaus = "UPDATE solicitacoes_de_desenvolvimento SET status=? WHERE id=?";
+		
+		PreparedStatement stmt = connection.prepareStatement(updateStaus);
+
+		stmt.setString(1, status);
+		stmt.setLong(2, id);
+		
+		stmt.execute();
+		stmt.close();
+		
+	}
+	
 	public void excluir(long id) throws SQLException {
 		
 		String deleteSQL =  "DELETE FROM solicitacoes_de_desenvolvimento WHERE id=?";
@@ -223,7 +241,7 @@ public class SolicitacaoDeDesenvolvimentoDAO extends GenericoDAO {
 		try {
 			
 			String busca = "SELECT s.* FROM solicitacoes_de_desenvolvimento AS s INNER JOIN estruturas_de_websites_das_solicitacoes AS es "
-					+ "ON s.id = es.id_solicitacao_de_desenvolvimento WHERE es.id_estrutura_de_website=? AND s.status IN('Nova', 'Aguardando Aprovação')";
+					+ "ON s.id = es.id_solicitacao_de_desenvolvimento WHERE es.id_estrutura_de_website=? AND s.status IN('Nova')";
 			
 			solicitacoesDeDesenvolvimento = new ArrayList<SolicitacaoDeDesenvolvimento>();
 						
@@ -269,7 +287,12 @@ public class SolicitacaoDeDesenvolvimentoDAO extends GenericoDAO {
 		
 		try {
 			
-			String buscaSolicitacao = "SELECT * FROM solicitacoes_de_desenvolvimento WHERE id=?";
+			String buscaSolicitacao = "SELECT s.id AS id_da_solicitacao, s.id_solicitante AS id_solicitante, s.titulo AS titulo_da_solicitacao, "
+					+ "s.justificativa AS justificativa_da_solicitacao, status AS status_da_solicitacao, s.data_de_realizacao "
+					+ "AS data_de_realizacao_da_solicitacao, s.data_de_modificacao AS data_de_modificacao_da_solicitacao, p.id "
+					+ "AS id_parecer, p.recomendacao AS recomendacao_do_parecer, p.justificativa AS justificativa_da_solicitacao, p.data_de_emissao "
+					+ "AS data_de_emissao_do_parecer, p.data_de_modificacao AS data_de_modificacao_do_parecer FROM solicitacoes_de_desenvolvimento "
+					+ "AS s LEFT JOIN pareceres AS p ON s.id = p.id_solicitacao WHERE s.id=?";
 			
 			PreparedStatement pstmt = connection.prepareStatement(buscaSolicitacao);
 			
@@ -280,18 +303,23 @@ public class SolicitacaoDeDesenvolvimentoDAO extends GenericoDAO {
 				
 				gerenteDAO = new GerenteDAO(connection);
 				solicitante = gerenteDAO.buscarPorId(rs.getLong("id_solicitante"));
+				
 				estruturaDeWebsiteDAO = new EstruturaDeWebsiteDAO(connection);
-				estruturasDeWebsitesDaSolicitacao = estruturaDeWebsiteDAO.listarEstruturasDeWebsitesDaSolicitacao(rs.getLong("id"));
+				estruturasDeWebsitesDaSolicitacao = estruturaDeWebsiteDAO.listarEstruturasDeWebsitesDaSolicitacao(rs.getLong("id_da_solicitacao"));
+				
+				parecerDAO = new ParecerDAO(connection);
+				parecer = (Parecer) parecerDAO.buscarPorId(rs.getLong("id_parecer"));
 				
 				solicitacaoDeDesenvolvimento = new SolicitacaoDeDesenvolvimento.Builder()
-																  .id(rs.getLong("id"))
-																  .titulo(rs.getString("titulo"))
-																  .justificativa(rs.getString("justificativa"))
-																  .status(rs.getString("status"))
+																  .id(rs.getLong("id_da_solicitacao"))
+																  .titulo(rs.getString("titulo_da_solicitacao"))
+																  .justificativa(rs.getString("justificativa_da_solicitacao"))
+																  .status(rs.getString("status_da_solicitacao"))
 																  .estruturasDeWebsites(estruturasDeWebsitesDaSolicitacao)
-																  .dataDeRealizacao(rs.getDate("data_de_realizacao"))
-																  .dataDeModificacao(rs.getDate("data_de_modificacao"))
+																  .dataDeRealizacao(rs.getDate("data_de_realizacao_da_solicitacao"))
+																  .dataDeModificacao(rs.getDate("data_de_modificacao_da_solicitacao"))
 																  .solicitante(solicitante)
+																  .parecer(parecer)
 																  .solicitar();
 				
 			}

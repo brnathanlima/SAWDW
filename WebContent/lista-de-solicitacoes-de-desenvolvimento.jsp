@@ -136,7 +136,7 @@
 												</c:choose>
 												<td><fmt:formatDate value="${solicitacaoDeDesenvolvimento.dataDeRealizacao}" pattern="dd/MM/yyyy"/></td>
 												<c:choose>
-													<c:when test="${tipoDeUsuario == 'gerente' && usuario.departamento != 'TI'}">
+													<c:when test="${tipoDeUsuario == 'gerente' && usuario.departamento != 'TI' && solicitacaoDeDesenvolvimento.status == 'Nova'}">
 														<td class="td-actions">
 															<a href="SolicitacaoDeDesenvolvimentoController?acao=visualizar&id=${solicitacaoDeDesenvolvimento.id}">
 			                                                   <button type="button" rel="tooltip" title="Editar" class="btn btn-info btn-simple btn-sm">

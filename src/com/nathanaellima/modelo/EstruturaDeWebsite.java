@@ -12,6 +12,7 @@ public class EstruturaDeWebsite {
 	private Date dataDeModificacao;
 	private Categoria categoria;
 	private List<EstruturaDePagina> estruturasDePaginasDoWebsite;
+	private List<SolicitacaoDeDesenvolvimento> solicitacoesDeDesenvolvimentoDaEstrutura;
 	
 	public long getId() {
 		
@@ -94,6 +95,18 @@ public class EstruturaDeWebsite {
 	public void setEstruturasDePaginasDoWebsite(List<EstruturaDePagina> estruturasDePaginasDoWebsite) {
 		
 		this.estruturasDePaginasDoWebsite = estruturasDePaginasDoWebsite;
+		
+	}
+
+	public List<SolicitacaoDeDesenvolvimento> getSolicitacoesDeDesenvolvimentoDaEstrutura() {
+		
+		return solicitacoesDeDesenvolvimentoDaEstrutura;
+	}
+
+	public void setSolicitacoesDeDesenvolvimentoDaEstrutura(
+			List<SolicitacaoDeDesenvolvimento> solicitacoesDeDesenvolvimentoDaEstrutura) {
+		
+		this.solicitacoesDeDesenvolvimentoDaEstrutura = solicitacoesDeDesenvolvimentoDaEstrutura;
 		
 	}
 	

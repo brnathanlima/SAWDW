@@ -217,6 +217,52 @@ public class SolicitacaoDeDesenvolvimentoDAO extends GenericoDAO {
 		}
 		
 	}
+	
+	public List<SolicitacaoDeDesenvolvimento> listarSolicitacoesDeDesenvolvimentoDaEstruturaDeWebsite(long idEstruturaDeWebsite) {
+		
+		try {
+			
+			String busca = "SELECT s.* FROM solicitacoes_de_desenvolvimento AS s INNER JOIN estruturas_de_websites_das_solicitacoes AS es "
+					+ "ON s.id = es.id_solicitacao_de_desenvolvimento WHERE es.id_estrutura_de_website=? AND s.status IN('Nova', 'Aguardando Aprovação')";
+			
+			solicitacoesDeDesenvolvimento = new ArrayList<SolicitacaoDeDesenvolvimento>();
+						
+			PreparedStatement pstmt = this.connection.prepareStatement(busca);
+			pstmt.setLong(1, idEstruturaDeWebsite);
+			ResultSet rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				gerenteDAO = new GerenteDAO(connection);
+				solicitante = gerenteDAO.buscarPorId(rs.getLong("id_solicitante"));
+				
+				SolicitacaoDeDesenvolvimento solicitacaoDeDesenvolvimento = 
+						new SolicitacaoDeDesenvolvimento.Builder()
+																  .id(rs.getLong("id"))
+																  .titulo(rs.getString("titulo"))
+																  .justificativa(rs.getString("justificativa"))
+																  .status(rs.getString("status"))
+																  .dataDeRealizacao(rs.getDate("data_de_realizacao"))
+																  .dataDeModificacao(rs.getDate("data_de_modificacao"))
+																  .solicitante(solicitante)
+																  .solicitar();
+				
+				solicitacoesDeDesenvolvimento.add(solicitacaoDeDesenvolvimento);
+				
+			}
+			
+			rs.close();
+			pstmt.close();
+			
+			return solicitacoesDeDesenvolvimento;
+			
+		} catch(SQLException e) {
+			
+			throw new RuntimeException(e);
+			
+		}
+		
+	}
 
 	@Override
 	public Object buscarPorId(long id) {

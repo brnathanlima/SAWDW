@@ -193,6 +193,20 @@ public class SolicitacaoDeDesenvolvimentoController extends HttpServlet {
 				req.getRequestDispatcher("lista-de-solicitacoes-de-desenvolvimento.jsp").forward(req, res);
 				
 				break;
+				
+			case "listarSolicitacoesDeDesenvolvimentoPendentesDaEstrutura":
+				
+				String idEstruturaDeWebsite = req.getParameter("id");
+				
+				solicitacaoDeDesenvolvimentoDAO = new SolicitacaoDeDesenvolvimentoDAO(conexao);
+				solicitacoesDeDesenvolvimento = solicitacaoDeDesenvolvimentoDAO
+						.listarSolicitacoesDeDesenvolvimentoDaEstruturaDeWebsite(Long.parseLong(idEstruturaDeWebsite));
+
+				req.setAttribute("solicitacoesDeDesenvolvimento", solicitacoesDeDesenvolvimento);
+				req.getRequestDispatcher("lista-de-solicitacoes-de-desenvolvimento.jsp").forward(req, res);
+				
+				break;
+				
 			}
 			
 		} catch (NullPointerException e) {

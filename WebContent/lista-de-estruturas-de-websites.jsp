@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!doctype html>
 <html lang="pt-br">
 <head>
@@ -108,18 +109,29 @@
                                 <table class="table table-hover table-striped">
                                     <thead>
                                     	<tr>
-                                    		<th>Nome</th>
-											<th>Descrição</th>
-											<th>Categoria</th>
-											<th>Ações</th>
+                                    		<th style="text-align: center;">Nome</th>
+											<th style="text-align: center;">Categoria</th>
+											<th style="text-align: center;">Solicitações Pendentes</th>
+											<th style="text-align: center;">Ações</th>
                                     	</tr>
                                     </thead>
                                     <tbody>
                                     	<c:forEach var="estruturaDeWebsite" items="${estruturasDeWebsites}" varStatus="id">
-											<tr>
+											<tr style="text-align: center;">
 												<td>${estruturaDeWebsite.nome}</td>
-												<td>${estruturaDeWebsite.descricao}</td>
 												<td>${estruturaDeWebsite.categoria.nome}</td>
+												<td>
+												<c:choose>
+													<c:when test="${not empty estruturaDeWebsite.solicitacoesDeDesenvolvimentoDaEstrutura}">
+														<a href="SolicitacaoDeDesenvolvimentoController?acao=listarSolicitacoesDeDesenvolvimentoPendentesDaEstrutura&id=${estruturaDeWebsite.id}">
+															<span class="label label-success">${fn:length(estruturaDeWebsite.solicitacoesDeDesenvolvimentoDaEstrutura)}</span>
+														</a>
+													</c:when>
+													<c:otherwise>
+														<span class="label label-default">${fn:length(estruturaDeWebsite.solicitacoesDeDesenvolvimentoDaEstrutura)}</span>
+													</c:otherwise>
+												</c:choose>
+												</td>
 												<td class="td-actions">
 													<c:choose>
                                 						<c:when test="${tipoDeUsuario == 'webDesigner'}">

@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.nathanaellima.modelo.AvaliacaoDeSolicitacaoDeDesenvolvimento;
 import com.nathanaellima.modelo.EstruturaDeWebsite;
 import com.nathanaellima.modelo.Gerente;
 import com.nathanaellima.modelo.Parecer;
@@ -20,6 +21,7 @@ public class SolicitacaoDeDesenvolvimentoDAO extends GenericoDAO {
 	SolicitacaoDeDesenvolvimento solicitacaoDeDesenvolvimento;
 	Gerente solicitante;
 	Parecer parecer;
+	AvaliacaoDeSolicitacaoDeDesenvolvimento avaliacaoDaSolicitacao;
 	
 	List<SolicitacaoDeDesenvolvimento> solicitacoesDeDesenvolvimento;
 	List<EstruturaDeWebsite> estruturasDeWebsitesDaSolicitacao;
@@ -27,6 +29,7 @@ public class SolicitacaoDeDesenvolvimentoDAO extends GenericoDAO {
 	GerenteDAO gerenteDAO;
 	EstruturaDeWebsiteDAO estruturaDeWebsiteDAO;
 	ParecerDAO parecerDAO;
+	AvaliacaoDeSolicitacaoDeDesenvolvimentoDAO avaliacaoDeSolicitacaoDeDesenvolvimentoDAO;
 	
 	public SolicitacaoDeDesenvolvimentoDAO(Connection connection) {
 		
@@ -287,12 +290,8 @@ public class SolicitacaoDeDesenvolvimentoDAO extends GenericoDAO {
 		
 		try {
 			
-			String buscaSolicitacao = "SELECT s.id AS id_da_solicitacao, s.id_solicitante AS id_solicitante, s.titulo AS titulo_da_solicitacao, "
-					+ "s.justificativa AS justificativa_da_solicitacao, status AS status_da_solicitacao, s.data_de_realizacao "
-					+ "AS data_de_realizacao_da_solicitacao, s.data_de_modificacao AS data_de_modificacao_da_solicitacao, p.id "
-					+ "AS id_parecer, p.recomendacao AS recomendacao_do_parecer, p.justificativa AS justificativa_da_solicitacao, p.data_de_emissao "
-					+ "AS data_de_emissao_do_parecer, p.data_de_modificacao AS data_de_modificacao_do_parecer FROM solicitacoes_de_desenvolvimento "
-					+ "AS s LEFT JOIN pareceres AS p ON s.id = p.id_solicitacao WHERE s.id=?";
+			String buscaSolicitacao = "SELECT * FROM solicitacoes_de_desenvolvimento AS s LEFT JOIN pareceres AS p ON s.id = p.id_solicitacao "
+					+ "LEFT JOIN avaliacoes_de_solicitacoes_de_desenvolvimento AS a ON s.id = a.id_solicitacao WHERE s.id=?;";
 			
 			PreparedStatement pstmt = connection.prepareStatement(buscaSolicitacao);
 			
@@ -302,24 +301,29 @@ public class SolicitacaoDeDesenvolvimentoDAO extends GenericoDAO {
 			if(rs != null && rs.next()) {
 				
 				gerenteDAO = new GerenteDAO(connection);
-				solicitante = gerenteDAO.buscarPorId(rs.getLong("id_solicitante"));
+				solicitante = gerenteDAO.buscarPorId(rs.getLong("s.id"));
 				
 				estruturaDeWebsiteDAO = new EstruturaDeWebsiteDAO(connection);
-				estruturasDeWebsitesDaSolicitacao = estruturaDeWebsiteDAO.listarEstruturasDeWebsitesDaSolicitacao(rs.getLong("id_da_solicitacao"));
+				estruturasDeWebsitesDaSolicitacao = estruturaDeWebsiteDAO.listarEstruturasDeWebsitesDaSolicitacao(rs.getLong("s.id"));
 				
 				parecerDAO = new ParecerDAO(connection);
-				parecer = (Parecer) parecerDAO.buscarPorId(rs.getLong("id_parecer"));
+				parecer = (Parecer) parecerDAO.buscarPorId(rs.getLong("p.id"));
+				
+				avaliacaoDeSolicitacaoDeDesenvolvimentoDAO = new AvaliacaoDeSolicitacaoDeDesenvolvimentoDAO(connection);
+				avaliacaoDaSolicitacao = 
+						(AvaliacaoDeSolicitacaoDeDesenvolvimento) avaliacaoDeSolicitacaoDeDesenvolvimentoDAO.buscarPorId(rs.getLong("a.id"));
 				
 				solicitacaoDeDesenvolvimento = new SolicitacaoDeDesenvolvimento.Builder()
-																  .id(rs.getLong("id_da_solicitacao"))
-																  .titulo(rs.getString("titulo_da_solicitacao"))
-																  .justificativa(rs.getString("justificativa_da_solicitacao"))
-																  .status(rs.getString("status_da_solicitacao"))
+																  .id(rs.getLong("s.id"))
+																  .titulo(rs.getString("s.titulo"))
+																  .justificativa(rs.getString("s.justificativa"))
+																  .status(rs.getString("s.status"))
 																  .estruturasDeWebsites(estruturasDeWebsitesDaSolicitacao)
-																  .dataDeRealizacao(rs.getDate("data_de_realizacao_da_solicitacao"))
-																  .dataDeModificacao(rs.getDate("data_de_modificacao_da_solicitacao"))
+																  .dataDeRealizacao(rs.getDate("s.data_de_realizacao"))
+																  .dataDeModificacao(rs.getDate("s.data_de_modificacao"))
 																  .solicitante(solicitante)
 																  .parecer(parecer)
+																  .avaliacaoDaSolicitacao(avaliacaoDaSolicitacao)
 																  .solicitar();
 				
 			}

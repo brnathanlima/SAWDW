@@ -14,6 +14,7 @@ public class SolicitacaoDeDesenvolvimento {
 	private Gerente solicitante;
 	private List<EstruturaDeWebsite> estruturasDeWebsitesSolicitadas;
 	private Parecer parecer;
+	private AvaliacaoDeSolicitacaoDeDesenvolvimento avaliacaoDaSolicitacao;
 	
 	public long getId() {
 		
@@ -81,6 +82,12 @@ public class SolicitacaoDeDesenvolvimento {
 		
 	}
 	
+	public AvaliacaoDeSolicitacaoDeDesenvolvimento getAvaliacaoDaSolicitacao() {
+		
+		return avaliacaoDaSolicitacao;
+		
+	}
+	
 	public static class Builder {
 		
 		private long id;
@@ -92,6 +99,7 @@ public class SolicitacaoDeDesenvolvimento {
 		private Gerente solicitante;
 		private List<EstruturaDeWebsite> estruturasDeWebsitesSolicitadas;
 		private Parecer parecer;
+		private AvaliacaoDeSolicitacaoDeDesenvolvimento avaliacaoDaSolicitacao;
 		
 		public Builder id(long id) {
 			
@@ -156,6 +164,13 @@ public class SolicitacaoDeDesenvolvimento {
 			
 		}
 		
+		public Builder avaliacaoDaSolicitacao(AvaliacaoDeSolicitacaoDeDesenvolvimento avaliacaoDaSolicitacao) {
+			
+			this.avaliacaoDaSolicitacao = avaliacaoDaSolicitacao;
+			return this;
+			
+		}
+		
 		public SolicitacaoDeDesenvolvimento solicitar() {
 			
 			return new SolicitacaoDeDesenvolvimento(this);
@@ -175,6 +190,7 @@ public class SolicitacaoDeDesenvolvimento {
 		solicitante = builder.solicitante;
 		estruturasDeWebsitesSolicitadas = builder.estruturasDeWebsitesSolicitadas;
 		parecer = builder.parecer;
+		avaliacaoDaSolicitacao = builder.avaliacaoDaSolicitacao;
 		
 	}
 	

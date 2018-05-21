@@ -12,6 +12,7 @@ import com.nathanaellima.modelo.AvaliacaoDeSolicitacaoDeDesenvolvimento;
 import com.nathanaellima.modelo.EstruturaDeWebsite;
 import com.nathanaellima.modelo.Gerente;
 import com.nathanaellima.modelo.Parecer;
+import com.nathanaellima.modelo.Projeto;
 import com.nathanaellima.modelo.SolicitacaoDeDesenvolvimento;
 
 public class SolicitacaoDeDesenvolvimentoDAO extends GenericoDAO {
@@ -22,6 +23,7 @@ public class SolicitacaoDeDesenvolvimentoDAO extends GenericoDAO {
 	Gerente solicitante;
 	Parecer parecer;
 	AvaliacaoDeSolicitacaoDeDesenvolvimento avaliacaoDaSolicitacao;
+	Projeto projeto;
 	
 	List<SolicitacaoDeDesenvolvimento> solicitacoesDeDesenvolvimento;
 	List<EstruturaDeWebsite> estruturasDeWebsitesDaSolicitacao;
@@ -30,6 +32,7 @@ public class SolicitacaoDeDesenvolvimentoDAO extends GenericoDAO {
 	EstruturaDeWebsiteDAO estruturaDeWebsiteDAO;
 	ParecerDAO parecerDAO;
 	AvaliacaoDeSolicitacaoDeDesenvolvimentoDAO avaliacaoDeSolicitacaoDeDesenvolvimentoDAO;
+	ProjetoDAO projetoDAO;
 	
 	public SolicitacaoDeDesenvolvimentoDAO(Connection connection) {
 		
@@ -284,14 +287,119 @@ public class SolicitacaoDeDesenvolvimentoDAO extends GenericoDAO {
 		}
 		
 	}
+	
+	public List<SolicitacaoDeDesenvolvimento> listarSolicitacoesDeDesenvolvimentoAprovadasDaInstituicao(long idInstituicao) {
+		
+		try {
+			
+			solicitacoesDeDesenvolvimento = new ArrayList<SolicitacaoDeDesenvolvimento>();
+			
+			PreparedStatement pstmt = this.connection.prepareStatement("SELECT s.id, s.id_solicitante, s.titulo, s.justificativa, s.status, "
+					+ "s.data_de_realizacao, s.data_de_modificacao FROM solicitacoes_de_desenvolvimento as s INNER JOIN clientes as c "
+					+ "ON s.id_solicitante = c.id WHERE s.status='Aceita' AND c.id_instituicao=?");
+			
+			pstmt.setLong(1, idInstituicao);
+			ResultSet rs = pstmt.executeQuery();
+			
+			if (rs != null) {
+				
+				while(rs.next()) {
+					
+					gerenteDAO = new GerenteDAO(connection);
+					solicitante = gerenteDAO.buscarPorId(rs.getLong("id_solicitante"));
+					
+					SolicitacaoDeDesenvolvimento solicitacaoDeDesenvolvimento = 
+							new SolicitacaoDeDesenvolvimento.Builder()
+																	  .id(rs.getLong("id"))
+																	  .titulo(rs.getString("titulo"))
+																	  .justificativa(rs.getString("justificativa"))
+																	  .status(rs.getString("status"))
+																	  .dataDeRealizacao(rs.getDate("data_de_realizacao"))
+																	  .dataDeModificacao(rs.getDate("data_de_modificacao"))
+																	  .solicitante(solicitante)
+																	  .solicitar();
+					
+					solicitacoesDeDesenvolvimento.add(solicitacaoDeDesenvolvimento);
+					
+				}
+				
+			}
+			
+			
+			rs.close();
+			pstmt.close();
+			
+			return solicitacoesDeDesenvolvimento;
+			
+		} catch(SQLException e) {
+			
+			throw new RuntimeException(e);
+			
+		}
+		
+	}
+	
+	public List<SolicitacaoDeDesenvolvimento> listarSolicitacoesDeDesenvolvimentoDoProjeto(long idProjeto) {
+		
+		try {
+			
+			solicitacoesDeDesenvolvimento = new ArrayList<SolicitacaoDeDesenvolvimento>();
+			
+			PreparedStatement pstmt = 
+					this.connection.prepareStatement("SELECT * FROM solicitacoes_de_desenvolvimento AS s "
+							+ "INNER JOIN solicitacoes_de_desenvolvimento_do_projeto AS sp ON s.id = sp.id_solicitacao_de_desenvolvimento "
+							+ "INNER JOIN projetos AS p ON p.id = sp.id_projeto WHERE p.id=?");
+			
+			pstmt.setLong(1, idProjeto);
+			ResultSet rs = pstmt.executeQuery();
+			
+			if (rs != null) {
+				
+				while(rs.next()) {
+					
+					gerenteDAO = new GerenteDAO(connection);
+					solicitante = gerenteDAO.buscarPorId(rs.getLong("id_solicitante"));
+					
+					SolicitacaoDeDesenvolvimento solicitacaoDeDesenvolvimento = 
+							new SolicitacaoDeDesenvolvimento.Builder()
+																	  .id(rs.getLong("id"))
+																	  .titulo(rs.getString("titulo"))
+																	  .justificativa(rs.getString("justificativa"))
+																	  .status(rs.getString("status"))
+																	  .dataDeRealizacao(rs.getDate("data_de_realizacao"))
+																	  .dataDeModificacao(rs.getDate("data_de_modificacao"))
+																	  .solicitante(solicitante)
+																	  .solicitar();
+					
+					solicitacoesDeDesenvolvimento.add(solicitacaoDeDesenvolvimento);
+					
+				}
+				
+			}
+			
+			
+			rs.close();
+			pstmt.close();
+			
+			return solicitacoesDeDesenvolvimento;
+			
+		} catch(SQLException e) {
+			
+			throw new RuntimeException(e);
+			
+		}
+		
+	}
 
 	@Override
 	public Object buscarPorId(long id) {
 		
 		try {
 			
-			String buscaSolicitacao = "SELECT * FROM solicitacoes_de_desenvolvimento AS s LEFT JOIN pareceres AS p ON s.id = p.id_solicitacao "
-					+ "LEFT JOIN avaliacoes_de_solicitacoes_de_desenvolvimento AS a ON s.id = a.id_solicitacao WHERE s.id=?;";
+			String buscaSolicitacao = "SELECT * FROM solicitacoes_de_desenvolvimento AS s LEFT JOIN pareceres AS pc "
+					+ "ON s.id = pc.id_solicitacao LEFT JOIN avaliacoes_de_solicitacoes_de_desenvolvimento AS a "
+					+ "ON s.id = a.id_solicitacao LEFT JOIN solicitacoes_de_desenvolvimento_do_projeto AS sp "
+					+ "ON s.id = sp.id_solicitacao_de_desenvolvimento LEFT JOIN projetos AS pj ON sp.id_projeto = pj.id WHERE s.id=?;";
 			
 			PreparedStatement pstmt = connection.prepareStatement(buscaSolicitacao);
 			
@@ -301,17 +409,20 @@ public class SolicitacaoDeDesenvolvimentoDAO extends GenericoDAO {
 			if(rs != null && rs.next()) {
 				
 				gerenteDAO = new GerenteDAO(connection);
-				solicitante = gerenteDAO.buscarPorId(rs.getLong("s.id"));
+				solicitante = gerenteDAO.buscarPorId(rs.getLong("s.id_solicitante"));
 				
 				estruturaDeWebsiteDAO = new EstruturaDeWebsiteDAO(connection);
 				estruturasDeWebsitesDaSolicitacao = estruturaDeWebsiteDAO.listarEstruturasDeWebsitesDaSolicitacao(rs.getLong("s.id"));
 				
 				parecerDAO = new ParecerDAO(connection);
-				parecer = (Parecer) parecerDAO.buscarPorId(rs.getLong("p.id"));
+				parecer = (Parecer) parecerDAO.buscarPorId(rs.getLong("pc.id"));
 				
 				avaliacaoDeSolicitacaoDeDesenvolvimentoDAO = new AvaliacaoDeSolicitacaoDeDesenvolvimentoDAO(connection);
 				avaliacaoDaSolicitacao = 
 						(AvaliacaoDeSolicitacaoDeDesenvolvimento) avaliacaoDeSolicitacaoDeDesenvolvimentoDAO.buscarPorId(rs.getLong("a.id"));
+				
+				projetoDAO = new ProjetoDAO(connection);
+				projeto = (Projeto) projetoDAO.buscarPorId(rs.getLong("pj.id"));
 				
 				solicitacaoDeDesenvolvimento = new SolicitacaoDeDesenvolvimento.Builder()
 																  .id(rs.getLong("s.id"))
@@ -324,6 +435,7 @@ public class SolicitacaoDeDesenvolvimentoDAO extends GenericoDAO {
 																  .solicitante(solicitante)
 																  .parecer(parecer)
 																  .avaliacaoDaSolicitacao(avaliacaoDaSolicitacao)
+																  .projetoDaSolicitacao(projeto)
 																  .solicitar();
 				
 			}

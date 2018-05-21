@@ -20,14 +20,14 @@
 		            </div>
 		
 		            <ul class="nav">
-		                <li>
+		                <li class="active">
 		                    <a href="SolicitacaoDeDesenvolvimentoController">
 		                   		<i class="pe-7s-folder"></i>
 		                        <p>Solicitações de Desenvolvimento</p>
 		                    </a>
 		                </li>
 		                <li>
-		                    <a href="ProjetoController?acao=listarProjetos">
+		                    <a href="ProjetoController">
 		                    	<i class="pe-7s-browser"></i>
 		                        <p>Projetos</p>
 		                    </a>

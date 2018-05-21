@@ -48,7 +48,7 @@
 									class="pe-7s-bell"></i>
 									<p>Solicitações de Desenvolvimento</p>
 							</a></li>
-							<li><a href="ProjetoController?acao=listarProjetos"> <i
+							<li><a href="ProjetoController"> <i
 									class="pe-7s-browser"></i>
 									<p>Projetos</p>
 							</a></li>
@@ -578,17 +578,14 @@
 							</c:choose>
 							<%-- Fim do Cartão do Parecer Técnico --%>
 							
-							<%-- Cartão de Avaliação da Solicitação --%>
 							<c:choose>
-							
-								<%-- Testa se o usuário é o Gerente da Área de TI --%>
-								<c:when test="${tipoDeUsuario == 'gerente' && usuario.departamento == 'TI' && solicitacaoDeDesenvolvimento.status != 'Nova'}">
-									
-									<%-- Exibe o formulário de emissão/edição de Avaliação da solicitação --%>
+								
+								<c:when test="${tipoDeUsuario == 'gerente' && usuario.departamento == 'TI'}">
+								
 									<c:choose>
+									
+										<c:when test="${solicitacaoDeDesenvolvimento.status == 'Aguardando Avaliação'}">
 										
-										<%-- Testa se não há avaliação emitida para esta solicitação --%>
-										<c:when test="${empty solicitacaoDeDesenvolvimento.avaliacaoDaSolicitacao}">
 											<div class="card">
 												<div class="header">
 													<h4 class="title">AVALIAÇÃO DA SOLICITAÇÃO</h4>
@@ -620,169 +617,84 @@
 													</form>
 												</div>
 											</div>
-										</c:when>
-										<%-- Fim do teste de não haver avaliação emitida para esta solicitação --%>
 										
-										<%-- Testa se não há avaliação para esta solicitação --%>
-										<c:when test="${not empty solicitacaoDeDesenvolvimento.avaliacaoDaSolicitacao}">
+										</c:when>
+										<c:when test="${solicitacaoDeDesenvolvimento.status == 'Aceita' || solicitacaoDeDesenvolvimento.status == 'Rejeitada'}">
+										
 											<div class="card">
 												<div class="header">
 													<h4 class="title">AVALIAÇÃO DA SOLICITAÇÃO</h4>
 												</div>
 												<div class="content">
-													
-													<%-- Habilita ou desabilita a edição desta avaliação de desenvolvimento
-													<c:choose>
-														
-														<%-- Testa se esta solicitação foi incluída em um projeto
-														<c:when test="${not empty solicitacaoDeDesenvolvimento.projetos}">
-																	
-															<c:choose>
-																<c:when test="${avaliacaoDeSolicitacao.resposta == 'Aceita'}">
-																	<div class="form-check form-check-radio disabled">
-																		<div class="form-check form-check-radio">
-																			<label class="form-check-label">
-																				<input type="radio" class="form-check-input" name="avaliacao" value="Aceitar" checked disabled="disabled" /> 
-																				<span class="form-check-sign"></span>
-																				Aceitar
-																			</label>
-																		</div>
-																		<div class="form-check form-check-radio">
-																			<label class="form-check-label">
-																				<input type="radio" class="form-check-input" name="avaliacao" value="Rejeitar" disabled="disabled" />
-																				<span class="form-check-sign"></span>
-																				Rejeitar
-																			</label>
-																		</div>
-																	</div>
-																</c:when>
-																<c:otherwise>
-																	<div class="form-check form-check-radio disabled">
-																		<label class="form-check-label">
-																			<input type="radio" class="form-check-input" name="avaliacao" value="Aceitar" disabled="disabled" />
-																			<span class="form-check-sign"></span>
-																			Aceitar
-																		</label>
-																	</div>
-																	<div class="form-check form-check-radio">
-																		<label class="form-check-label">
-																			<input type="radio" class="form-check-input" name="avaliacao" value="Rejeitar" checked disabled="disabled"/>
-																			<span class="form-check-sign"></span>
-																			Rejeitar
-																		</label>
-																	</div>
-																</c:otherwise>
-															</c:choose>
-															<div class="form-group">
-																<div class="row">
-																	<div class="col-md-12">
-																		<div class="form-group">
-																			<label>Justificativa</label>
-																			<textarea rows="5" name="justificativa" class="form-control" readonly>${avaliacaoDeSolicitacao.justificativa}</textarea>
-																		</div>
-																	</div>
+													<form action="AvaliacaoDeSolicitacaoDeDesenvolvimentoController" method="post">
+														<c:choose>
+															<c:when test="${solicitacaoDeDesenvolvimento.avaliacaoDaSolicitacao.avaliacao == 'Aceita'}">
+																<div class="form-check form-check-radio">
+																	<label class="form-check-label">
+																		<input type="radio" class="form-check-input" name="avaliacao" value="Aceita" checked /> 
+																		<span class="form-check-sign"></span>
+																		Aceita
+																	</label>
 																</div>
-															</div>	
-															
-														</c:when>
-														<%-- FIm do teste desta solicitação estar incluída em um projeto
-														
-														<%-- Testa se esta solicitação não foi incluída em um projeto 
-														<c:when test="${empty solicitacaoDeDesenvolvimento.projetos}">--%>
-															<form action="AvaliacaoDeSolicitacaoDeDesenvolvimentoController" method="post">
-																<label>Avaliação</label>
-																
-																<%-- Habilita ou desabilita os radio buttons --%>
-																<c:choose>
-																	<c:when test="${solicitacaoDeDesenvolvimento.avaliacaoDaSolicitacao.avaliacao == 'Aceita'}">
-																		<div class="form-check form-check-radio">
-																			<label class="form-check-label">
-																				<input type="radio" class="form-check-input" name="avaliacao" value="Aceita" checked /> 
-																				<span class="form-check-sign"></span>
-																				Aceita
-																			</label>
-																		</div>
-																		<div class="form-check form-check-radio">
-																			<label class="form-check-label">
-																				<input type="radio" class="form-check-input" name="avaliacao" value="Rejeitada" />
-																				<span class="form-check-sign"></span>
-																				Rejeitada
-																			</label>
-																		</div>
-																	</c:when>
-																	<c:otherwise>
-																		<div class="form-check form-check-radio disabled">
-																			<label class="form-check-label">
-																				<input type="radio" class="form-check-input" name="avaliacao" value="Aceita" />
-																				<span class="form-check-sign"></span>
-																				Aceita
-																			</label>
-																		</div>
-																		<div class="form-check form-check-radio disabled">
-																			<label class="form-check-label">
-																				<input type="radio" class="form-check-input" name="avaliacao" value="Rejeitada" checked />
-																				<span class="form-check-sign"></span>
-																				Rejeitada
-																			</label>
-																		</div>
-																	</c:otherwise>
-																</c:choose>
-																<%-- Fim da habilitação ou desabilitação os radio buttons --%>
-																
-																<div class="row">
-																	<div class="col-md-12">
-																		<div class="form-group">
-																			<div class="row">
-																			<div class="col-md-12">
-																				<div class="form-group">
-																					<label>Justificativa</label>
-																						<textarea rows="5" name="justificativa" class="form-control">${solicitacaoDeDesenvolvimento.avaliacaoDaSolicitacao.justificativa}</textarea>
-																					</div>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
+																<div class="form-check form-check-radio">
+																	<label class="form-check-label">
+																		<input type="radio" class="form-check-input" name="avaliacao" value="Rejeitada" />
+																		<span class="form-check-sign"></span>
+																		Rejeitada
+																	</label>
 																</div>
-																
-																<input type="hidden" name="acao" value="editar" />
-																<input type="hidden" name="id" value="${solicitacaoDeDesenvolvimento.avaliacaoDaSolicitacao.id}" />
-																<input type="hidden" name="idSolicitacaoDeDesenvolvimento" value="${solicitacaoDeDesenvolvimento.id}" />
-																<button type="submit" class="btn btn-success btn-fill pull-left">EDITAR</button>
-															</form>
-															<form action="AvaliacaoDeSolicitacaoDeDesenvolvimentoController">
-																<input type="hidden" name="acao" value="excluir" />
-																<input type="hidden" name="id" value="${solicitacaoDeDesenvolvimento.avaliacaoDaSolicitacao.id}" />
-																<input type="hidden" name="idSolicitacaoDeDesenvolvimento" value="${solicitacaoDeDesenvolvimento.id}" />
-																<button type="submit" class="btn btn-danger btn-fill pull-right">EXCLUIR</button>
-																<div class="clearfix"></div>
-															</form>
-														<%-- </c:when>
-														FIm do teste desta solicitação não estar incluída em um projeto 
+															</c:when>
+															<c:otherwise>
+																<div class="form-check form-check-radio disabled">
+																	<label class="form-check-label">
+																		<input type="radio" class="form-check-input" name="avaliacao" value="Aceita" />
+																		<span class="form-check-sign"></span>
+																		Aceita
+																	</label>
+																</div>
+																<div class="form-check form-check-radio disabled">
+																	<label class="form-check-label">
+																		<input type="radio" class="form-check-input" name="avaliacao" value="Rejeitada" checked />
+																		<span class="form-check-sign"></span>
+																		Rejeitada
+																	</label>
+																</div>
+															</c:otherwise>
+														</c:choose>
+														<div class="row">
+															<div class="col-md-12">
+																<div class="form-group">
+																	<label>Justificativa</label>
+																	<textarea rows="5" name="justificativa"
+																		class="form-control">${solicitacaoDeDesenvolvimento.avaliacaoDaSolicitacao.justificativa}</textarea>
+																</div>
+															</div>
+														</div>
 														
-													</c:choose>
-													<%-- Fim da habilitação ou desabilitação da edição desta avaliação de desenvolvimento --%>
-													
+														<input type="hidden" name="acao" value="editar" />
+														<input type="hidden" name="id" value="${solicitacaoDeDesenvolvimento.avaliacaoDaSolicitacao.id}" />
+														<input type="hidden" name="idSolicitacaoDeDesenvolvimento" value="${solicitacaoDeDesenvolvimento.id}" />
+														<button type="submit" class="btn btn-success btn-fill pull-left">EDITAR</button>
+													</form>
+													<form action="AvaliacaoDeSolicitacaoDeDesenvolvimentoController">
+														<input type="hidden" name="acao" value="excluir" />
+														<input type="hidden" name="id" value="${solicitacaoDeDesenvolvimento.avaliacaoDaSolicitacao.id}" />
+														<input type="hidden" name="idSolicitacaoDeDesenvolvimento" value="${solicitacaoDeDesenvolvimento.id}" />
+														<button type="submit" class="btn btn-danger btn-fill pull-right">EXCLUIR</button>
+														<div class="clearfix"></div>
+													</form>	
 												</div>
 											</div>
-										</c:when>
-										<%-- Fim do teste de haver avaliação emitida para esta solicitação --%>
 										
-									</c:choose>
-									<%-- Fim da Exibição do formulário de emissão/edição de Avaliação da solicitação --%>
-									
-								</c:when>
-								<%-- Fim do Teste de o usuário ser o Gerente da Área de TI --%>	
-								
-								<c:otherwise>
-								
-									<c:choose>
-										<c:when test="${solicitacaoDeDesenvolvimento.status == 'Aceita' || solicitacaoDeDesenvolvimento.status == 'Rejeitada'}">
+										</c:when>
+										<c:when test="${solicitacaoDeDesenvolvimento.status == 'Incluída em Projeto'}">
 											
 											<div class="card">
 												<div class="header">
 													<h4 class="title">AVALIAÇÃO DA SOLICITAÇÃO</h4>
 												</div>
 												<div class="content">
+													
 													<table class="table table-bordered table-hover">
 														<thead>
 															<tr>
@@ -801,20 +713,61 @@
 														</thead>
 														<tbody>
 															<tr>
-																<td>${solicitacaoDeDesenvolvimento.parecer.justificativa}</td>
+																<td>${solicitacaoDeDesenvolvimento.avaliacaoDaSolicitacao.justificativa}</td>
 															</tr>
 														</tbody>
 													</table>
+													
+												</div>
+											</div>
+											
+										</c:when>
+									
+									</c:choose>
+								
+								</c:when>
+								
+								<c:otherwise>
+									<c:choose>
+										<c:when test="${solicitacaoDeDesenvolvimento.status != 'Nova' && solicitacaoDeDesenvolvimento.status != 'Aguardando Avaliação'}">
+											
+											<div class="card">
+												<div class="header">
+													<h4 class="title">AVALIAÇÃO DA SOLICITAÇÃO</h4>
+												</div>
+												<div class="content">
+													
+													<table class="table table-bordered table-hover">
+														<thead>
+															<tr>
+																<th>Avaliação</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td>${solicitacaoDeDesenvolvimento.avaliacaoDaSolicitacao.avaliacao}</td>
+															</tr>
+														</tbody>
+														<thead>
+															<tr>
+																<th>Justificativa</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td>${solicitacaoDeDesenvolvimento.avaliacaoDaSolicitacao.justificativa}</td>
+															</tr>
+														</tbody>
+													</table>
+													
 												</div>
 											</div>
 											
 										</c:when>
 									</c:choose>
-									
 								</c:otherwise>
-								
+							
 							</c:choose>
-							<%-- Fim do cartão de Avaliação da Solicitação --%>
 								
 						</c:when>
 						<%-- Fim da exibição da solicitação de desenvolvimento --%>

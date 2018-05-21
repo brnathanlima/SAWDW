@@ -15,6 +15,7 @@ public class SolicitacaoDeDesenvolvimento {
 	private List<EstruturaDeWebsite> estruturasDeWebsitesSolicitadas;
 	private Parecer parecer;
 	private AvaliacaoDeSolicitacaoDeDesenvolvimento avaliacaoDaSolicitacao;
+	private Projeto projetoDaSolicitacao;
 	
 	public long getId() {
 		
@@ -88,6 +89,12 @@ public class SolicitacaoDeDesenvolvimento {
 		
 	}
 	
+	public Projeto getProjeto() {
+		
+		return projetoDaSolicitacao;
+		
+	}
+	
 	public static class Builder {
 		
 		private long id;
@@ -100,6 +107,7 @@ public class SolicitacaoDeDesenvolvimento {
 		private List<EstruturaDeWebsite> estruturasDeWebsitesSolicitadas;
 		private Parecer parecer;
 		private AvaliacaoDeSolicitacaoDeDesenvolvimento avaliacaoDaSolicitacao;
+		private Projeto projetoDaSolicitacao;
 		
 		public Builder id(long id) {
 			
@@ -171,6 +179,13 @@ public class SolicitacaoDeDesenvolvimento {
 			
 		}
 		
+		public Builder projetoDaSolicitacao(Projeto projetoDaSolicitacao) {
+			
+			this.projetoDaSolicitacao = projetoDaSolicitacao;
+			return this;
+			
+		}
+		
 		public SolicitacaoDeDesenvolvimento solicitar() {
 			
 			return new SolicitacaoDeDesenvolvimento(this);
@@ -191,6 +206,7 @@ public class SolicitacaoDeDesenvolvimento {
 		estruturasDeWebsitesSolicitadas = builder.estruturasDeWebsitesSolicitadas;
 		parecer = builder.parecer;
 		avaliacaoDaSolicitacao = builder.avaliacaoDaSolicitacao;
+		projetoDaSolicitacao = builder.projetoDaSolicitacao;
 		
 	}
 	

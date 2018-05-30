@@ -15,6 +15,7 @@ public class Projeto {
 	private Date dataDeModificacao;
 	private Date dataDeConclusao;
 	private List<SolicitacaoDeDesenvolvimento> solicitacoesDeDesenvolvimentoDoProjeto;
+	private AvaliacaoDeProjeto avaliacaoDoProjeto;
 	
 	public long getId() {
 		
@@ -134,6 +135,18 @@ public class Projeto {
 			List<SolicitacaoDeDesenvolvimento> solicitacoesDeDesenvolvimentoDoProjeto) {
 		
 		this.solicitacoesDeDesenvolvimentoDoProjeto = solicitacoesDeDesenvolvimentoDoProjeto;
+		
+	}
+
+	public AvaliacaoDeProjeto getAvaliacaoDoProjeto() {
+		
+		return avaliacaoDoProjeto;
+		
+	}
+
+	public void setAvaliacaoDoProjeto(AvaliacaoDeProjeto avaliacaoDoProjeto) {
+		
+		this.avaliacaoDoProjeto = avaliacaoDoProjeto;
 		
 	}
 	

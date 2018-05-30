@@ -6,11 +6,11 @@
   </welcome-file-list>
   <context-param>
     <param-name>dbUser</param-name>
-    <param-value>nathan</param-value>
+    <param-value>root</param-value>
   </context-param>
   <context-param>
     <param-name>dbPassword</param-name>
-    <param-value>nathan123</param-value>
+    <param-value></param-value>
   </context-param>
   <context-param>
     <param-name>dbURL</param-name>

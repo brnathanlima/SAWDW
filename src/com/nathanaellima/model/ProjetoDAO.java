@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.mysql.cj.api.jdbc.Statement;
+import com.nathanaellima.modelo.AvaliacaoDeProjeto;
 import com.nathanaellima.modelo.Gerente;
 import com.nathanaellima.modelo.Projeto;
 import com.nathanaellima.modelo.SolicitacaoDeDesenvolvimento;
@@ -18,9 +19,11 @@ public class ProjetoDAO extends GenericoDAO {
 	
 	Projeto projeto;
 	Gerente gerenteDoProjeto;
+	AvaliacaoDeProjeto avaliacaoDoProjeto;
 	
 	GerenteDAO gerenteDAO;
 	SolicitacaoDeDesenvolvimentoDAO solicitacaoDeDesenvolvimentoDAO;
+	AvaliacaoDeProjetoDAO avaliacaoDeProjetoDAO;
 	
 	List<Projeto> projetos;
 	List<SolicitacaoDeDesenvolvimento> solicitacoesDeDesenvolvimentoDoProjeto;
@@ -270,7 +273,7 @@ public class ProjetoDAO extends GenericoDAO {
 		
 		try {
 			
-			String buscarProjeto = "SELECT * FROM projetos WHERE id=?";
+			String buscarProjeto = "SELECT * FROM projetos p LEFT JOIN avaliacoes_de_projetos ap ON p.id = ap.id_projeto WHERE p.id=?";
 			
 			PreparedStatement stmt = connection.prepareStatement(buscarProjeto);
 			
@@ -283,6 +286,10 @@ public class ProjetoDAO extends GenericoDAO {
 				gerenteDAO = new GerenteDAO(connection);
 				gerenteDoProjeto = gerenteDAO.buscarPorId(rs.getLong("id_gerente_do_projeto"));
 				
+				avaliacaoDeProjetoDAO = new AvaliacaoDeProjetoDAO(connection);
+				avaliacaoDoProjeto = 
+						(AvaliacaoDeProjeto) avaliacaoDeProjetoDAO.buscarPorId(rs.getLong("ap.id"));
+				
 				projeto = new Projeto();
 				
 				projeto.setId(rs.getLong("id"));
@@ -291,6 +298,7 @@ public class ProjetoDAO extends GenericoDAO {
 				projeto.setStatus(rs.getString("status"));
 				projeto.setResumo(rs.getString("resumo"));
 				projeto.setGerenteDoProjeto(gerenteDoProjeto);
+				projeto.setAvaliacaoDoProjeto(avaliacaoDoProjeto);
 				projeto.setDataDeCriacao(rs.getDate("data_de_criacao"));
 				projeto.setDataDeModificacao(rs.getDate("data_de_modificacao"));
 				projeto.setDataDeConclusao(rs.getDate("data_de_conclusao"));

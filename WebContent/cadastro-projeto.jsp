@@ -408,7 +408,7 @@
 									
 								</c:when>
 								
-								<c:otherwise>
+								<c:when test="${projeto.status != 'Novo'}">
 									<div class="card ">
 										<div class="header">
 											<h4 class="title">PROJETO DE DESENVOLVIMENTO</h4>
@@ -496,12 +496,12 @@
 										</div>
 									</div>
 									<c:choose>
-										<c:when test="${tipoDeUsuario == 'gerente' && usuario.departamento == 'TI'}">
+										<c:when test="${projeto.status == 'Finalizado' && tipoDeUsuario == 'gerente' && usuario.departamento == 'TI'}">
 											<div class="row">
 												<div class="col-md-12">
 													<div class="card ">
 														<div class="header">
-															<h4 class="title">FINALIZAR PROJETO</h4>
+															<h4 class="title">EDITAR RESULTADOS DO PROJETO</h4>
 														</div>
 														<div class="content">
 															<form action="ProjetoController" method="post">
@@ -528,7 +528,7 @@
 										<c:otherwise>
 											<div class="card ">
 												<div class="header">
-													<h4 class="title">INSUMOS DO PROJETO</h4>
+													<h4 class="title">RESULTADOS DO PROJETO</h4>
 												</div>
 												<div class="content">
 													<table class="table table-bordered table-hover">
@@ -547,7 +547,149 @@
 											</div>									
 										</c:otherwise>
 									</c:choose>
-								</c:otherwise>
+									
+									<c:choose>
+										<c:when test="${empty projeto.avaliacaoDoProjeto && tipoDeUsuario == 'gerente' && usuario.departamento != 'TI'}">
+											<div class="row">
+												<div class="col-md-12">
+													<div class="card ">
+														<div class="header">
+															<h4 class="title">AVALIAR PROJETO</h4>
+														</div>
+														<div class="content">
+															<form action="AvaliacaoDeProjetoController" method="post">
+																<div class="row">
+																	<div class="col-md-12">
+																		<div class="form-group">
+																			<label>Título da Avaliação</label>
+																			<input type="text" name="titulo" class="form-control" />
+																		</div>
+																	</div>
+																</div>
+																<div class="row">
+																	<div class="col-md-12">
+																		<div class="form-group">
+																			<label>Que nota você dá ao Projeto?</label>
+																			<input type="number" min="0" max="10" name="nota" class="form-control" placeholder="0 - 10" />
+																		</div>
+																	</div>
+																</div>
+																<div class="row">
+																	<div class="col-md-12">
+																		<div class="form-group">
+																			<label>Deixe o seu Comentário</label>
+																			<textarea rows="5" name="comentario" class="form-control"></textarea>
+																		</div>
+																	</div>
+																</div>
+																
+																<input type="hidden" name="acao" value="emitir" /> 
+																<input type="hidden" name="id" value="${projeto.id}" />
+																
+																<button type="submit" class="btn btn-success btn-fill pull-left">AVALIAR</button>
+																<div class="clearfix"></div>
+															</form>
+														</div>
+													</div>
+												</div>
+											</div>								
+										</c:when>
+										<c:when test="${not empty projeto.avaliacaoDoProjeto && tipoDeUsuario == 'gerente' && usuario.departamento != 'TI'}">
+											<div class="row">
+												<div class="col-md-12">
+													<div class="card ">
+														<div class="header">
+															<h4 class="title">EDITAR AVALIAÇÃO DO PROJETO</h4>
+														</div>
+														<div class="content">
+															<form action="AvaliacaoDeProjetoController" method="post">
+																<div class="row">
+																	<div class="col-md-12">
+																		<div class="form-group">
+																			<label>Título da Avaliação</label>
+																			<input type="text" name="titulo" class="form-control" value="${projeto.avaliacaoDoProjeto.titulo}"/>
+																		</div>
+																	</div>
+																</div>
+																<div class="row">
+																	<div class="col-md-12">
+																		<div class="form-group">
+																			<label>Que nota você dá ao Projeto?</label>
+																			<input type="number" min="0" max="10" name="nota" class="form-control" value="${projeto.avaliacaoDoProjeto.nota}"/>
+																		</div>
+																	</div>
+																</div>
+																<div class="row">
+																	<div class="col-md-12">
+																		<div class="form-group">
+																			<label>Deixe o seu Comentário</label>
+																			<textarea rows="5" name="comentario" class="form-control">${projeto.avaliacaoDoProjeto.comentario}</textarea>
+																		</div>
+																	</div>
+																</div>
+																
+																<input type="hidden" name="acao" value="editar" />
+																<input type="hidden" name="idProjeto" value="${projeto.id}" />
+																<input type="hidden" name="id" value="${projeto.avaliacaoDoProjeto.id}" />
+																
+																<button type="submit" class="btn btn-success btn-fill pull-left">EDITAR</button>
+															</form>
+															<form action="AvaliacaoDeProjetoController" method="post">
+																<input type="hidden" name="acao" value="excluir" />
+																<input type="hidden" name="idProjeto" value="${projeto.id}" />
+																<input type="hidden" name="id" value="${projeto.avaliacaoDoProjeto.id}" />
+																
+																<button type="submit" class="btn btn-danger btn-fill pull-right">EXCLUIR</button>
+																<div class="clearfix"></div>
+															</form>
+														</div>
+													</div>
+												</div>
+											</div>						
+										</c:when>
+										<c:when test="${not empty projeto.avaliacaoDoProjeto && tipoDeUsuario == 'gerente' && usuario.departamento == 'TI'}">
+											<div class="card ">
+												<div class="header">
+													<h4 class="title">AVALIAÇÃO DO PROJETO</h4>
+												</div>
+												<div class="content">
+													<table class="table table-bordered table-hover">
+														<thead>
+															<tr>
+																<th>Título da Avaliação</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td>${projeto.avaliacaoDoProjeto.titulo}</td>
+															</tr>
+														</tbody>
+														<thead>
+															<tr>
+																<th>Nota</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td>${projeto.avaliacaoDoProjeto.nota}</td>
+															</tr>
+														</tbody>
+														<thead>
+															<tr>
+																<th>Comentário</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td>${projeto.avaliacaoDoProjeto.comentario}</td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</c:when>
+									</c:choose>
+								</c:when>
 								
 							</c:choose>
 							<%-- Fim da Habilitação ou desabilitação da edição do projeto de acordo com o status --%>

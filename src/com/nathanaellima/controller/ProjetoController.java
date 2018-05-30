@@ -299,6 +299,43 @@ public class ProjetoController extends HttpServlet {
 				
 				break;
 				
+			case "reabrirProjeto":
+				
+				id = req.getParameter("id");
+				resumo = req.getParameter("resumo");
+				
+				status = "Novo";
+				dataDeConclusao = new Date();
+				
+				projetoDAO = new ProjetoDAO(connection);
+				projetoDAO.mudarStatus(status, Long.parseLong(id));
+				
+				projeto = (Projeto) projetoDAO.buscarPorId(Long.parseLong(id));
+				projeto.setResumo(resumo);
+				projeto.setDataDeConclusao(dataDeConclusao);
+				projetoDAO.finalizar(projeto);
+				
+				solicitacaoDeDesenvolvimentoDAO = new SolicitacaoDeDesenvolvimentoDAO(connection);
+				
+				solicitacoesDeDesenvolvimento = new ArrayList<SolicitacaoDeDesenvolvimento>();
+				
+				for(int i = 0; i < projeto.getSolicitacoesDeDesenvolvimentoDoProjeto().size(); i++) {
+					
+					solicitacaoDeDesenvolvimento = (SolicitacaoDeDesenvolvimento)
+							solicitacaoDeDesenvolvimentoDAO.buscarPorId(projeto.getSolicitacoesDeDesenvolvimentoDoProjeto().get(i).getId());
+					
+					solicitacoesDeDesenvolvimento.add(solicitacaoDeDesenvolvimento);
+					
+					solicitacaoDeDesenvolvimentoDAO.mudarStatus("Incluída em Projeto", solicitacaoDeDesenvolvimento.getId());
+					
+				}
+				
+				req.setAttribute("projeto", projeto);
+				req.setAttribute("solicitacoesDeDesenvolvimento", solicitacoesDeDesenvolvimento);
+				req.setAttribute("successMessage", "projeto reaberto com sucesso.");
+				req.getRequestDispatcher("cadastro-projeto.jsp").forward(req, res);
+				
+				break;
 			}
 			
 		} catch (NullPointerException e) {

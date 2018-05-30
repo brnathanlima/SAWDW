@@ -518,6 +518,12 @@
 																<input type="hidden" name="id" value="${projeto.id}" />
 																
 																<button type="submit" class="btn btn-success btn-fill pull-left">EDITAR</button>
+															</form>
+															<form action="ProjetoController" method="post">
+																<input type="hidden" name="acao" value="reabrirProjeto" /> 
+																<input type="hidden" name="id" value="${projeto.id}" />
+																
+																<button type="submit" class="btn btn-warning btn-fill pull-right">REABRIR</button>
 																<div class="clearfix"></div>
 															</form>
 														</div>

@@ -9,43 +9,72 @@
 </head>
 <body>
 <div class="wrapper">
-    <div class="sidebar" data-color="blue" data-image="assets/img/sidebar-5.jpg">
-
-    	<div class="sidebar-wrapper">
-            <div class="logo">
-                <a href="http://localhost:8080/SAEDW/painel-administrador-de-instituicao.jsp" class="simple-text">
-                    SAEDW
-                </a>
-            </div>
-
-            <ul class="nav">
-                <li class="active">
-                    <a href="pagina-da-instituicao.jsp">
-                        <i class="pe-7s-culture"></i>
-                        <p>${usuario.instituicao.nomeFantasia}</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="ColaboradorController">
-                   		<i class="pe-7s-user"></i>
-                        <p>Colaboradores</p>
-                    </a>
-                </li>
-                <li>
-                    <a href=WebDesignerController>
-                    	<i class="pe-7s-users"></i>
-                        <p>Web-Designers</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="GerenteController">
-                    	<i class="pe-7s-portfolio"></i>
-                        <p>Gerentes</p>
-                    </a>
-                </li>
-            </ul>
-    	</div>
-    </div>
+	<c:choose>
+		<c:when test="${tipoDeUsuario == 'administradorDeInstituicao'}">
+			<div class="sidebar" data-color="blue" data-image="assets/img/sidebar-5.jpg">
+		    	<div class="sidebar-wrapper">
+		            <div class="logo">
+		                <a href="http://localhost:8080/SAEDW/painel-administrador-de-instituicao.jsp" class="simple-text">
+		                    SAEDW
+		                </a>
+		            </div>
+		
+		            <ul class="nav">
+		                <li class="active">
+		                    <a href="pagina-da-instituicao.jsp">
+		                        <i class="pe-7s-culture"></i>
+		                        <p>${usuario.instituicao.nomeFantasia}</p>
+		                    </a>
+		                </li>
+		                <li>
+		                    <a href="ColaboradorController">
+		                   		<i class="pe-7s-user"></i>
+		                        <p>Colaboradores</p>
+		                    </a>
+		                </li>
+		                <li>
+		                    <a href=WebDesignerController>
+		                    	<i class="pe-7s-users"></i>
+		                        <p>Web-Designers</p>
+		                    </a>
+		                </li>
+		                <li>
+		                    <a href="GerenteController">
+		                    	<i class="pe-7s-portfolio"></i>
+		                        <p>Gerentes</p>
+		                    </a>
+		                </li>
+		            </ul>
+		    	</div>
+		    </div>
+		</c:when>
+		<c:otherwise>
+			<div class="sidebar" data-color="azure" data-image="assets/img/sidebar-5.jpg">
+		    	<div class="sidebar-wrapper">
+		            <div class="logo">
+		                <a href="http://localhost:8080/SAEDW/painel-colaborador.jsp" class="simple-text">
+		                    SAEDW
+		                </a>
+		            </div>
+		
+		            <ul class="nav">
+		                <li class="active">
+		                    <a href="pagina-da-instituicao.jsp">
+		                        <i class="pe-7s-culture"></i>
+		                        <p>${usuario.instituicao.nomeFantasia}</p>
+		                    </a>
+		                </li>
+		            	<li>
+		                    <a href="EstruturaDeWebsiteController">
+		                        <i class="pe-7s-browser"></i>
+		                        <p>Estruturas de Websites</p>
+		                    </a>
+		                </li>
+		            </ul>
+		    	</div>
+		    </div>
+		</c:otherwise>
+	</c:choose>
 
     <div class="main-panel">
 		<nav class="navbar navbar-default navbar-fixed">

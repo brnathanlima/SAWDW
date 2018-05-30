@@ -16,7 +16,9 @@ import javax.servlet.http.HttpSession;
 import com.nathanaellima.model.CategoriaDAO;
 import com.nathanaellima.model.EstruturaDeWebsiteDAO;
 import com.nathanaellima.modelo.Categoria;
+import com.nathanaellima.modelo.Colaborador;
 import com.nathanaellima.modelo.EstruturaDeWebsite;
+import com.nathanaellima.modelo.Funcionario;
 import com.nathanaellima.modelo.WebDesigner;
 
 @WebServlet("/EstruturaDeWebsiteController")
@@ -29,7 +31,17 @@ public class EstruturaDeWebsiteController extends HttpServlet {
 		Connection conexao = (Connection) getServletContext().getAttribute("ConexaoComBD");
 		HttpSession session = req.getSession();
 		
-		WebDesigner webDesigner = (WebDesigner) session.getAttribute("usuario");;
+		Funcionario funcionario;
+		
+		if (session.getAttribute("tipoDeUsuario").equals("webDesigner")) {
+			
+			funcionario = (WebDesigner) session.getAttribute("usuario");
+			
+		} else {
+			
+			funcionario = (Colaborador) session.getAttribute("usuario");
+			
+		}
 		
 		EstruturaDeWebsite estruturaDeWebsite = null;
 		EstruturaDeWebsiteDAO estruturaDeWebsiteDAO = null;
@@ -55,7 +67,7 @@ public class EstruturaDeWebsiteController extends HttpServlet {
 			case "novoCadastro":
 				
 				categoriaDAO = new CategoriaDAO(conexao);
-				categorias = categoriaDAO.listarCategoriasDaInstituicao(webDesigner.getInstituicao().getId());
+				categorias = categoriaDAO.listarCategoriasDaInstituicao(funcionario.getInstituicao().getId());
 				
 				req.setAttribute("categorias", categorias);
 				req.getRequestDispatcher("cadastro-estrutura-de-website.jsp").forward(req, res);
@@ -82,7 +94,7 @@ public class EstruturaDeWebsiteController extends HttpServlet {
 				estruturaDeWebsiteDAO = new EstruturaDeWebsiteDAO(conexao);
 				estruturaDeWebsiteDAO.adicionar(estruturaDeWebsite);
 				
-				estruturasDeWebsites = estruturaDeWebsiteDAO.listarEstruturasDeWebsitesDaInstituicao(webDesigner.getInstituicao().getId());
+				estruturasDeWebsites = estruturaDeWebsiteDAO.listarEstruturasDeWebsitesDaInstituicao(funcionario.getInstituicao().getId());
 				
 				req.setAttribute("estruturasDeWebsites", estruturasDeWebsites);
 				req.setAttribute("successMessage", "Estrutura de Website cadastrada com sucesso.");
@@ -98,7 +110,7 @@ public class EstruturaDeWebsiteController extends HttpServlet {
 				estruturaDeWebsite = (EstruturaDeWebsite) estruturaDeWebsiteDAO.buscarPorId(Long.parseLong(id));
 				
 				categoriaDAO = new CategoriaDAO(conexao);
-				categorias = categoriaDAO.listarCategoriasDaInstituicao(webDesigner.getInstituicao().getId());
+				categorias = categoriaDAO.listarCategoriasDaInstituicao(funcionario.getInstituicao().getId());
 					
 				req.setAttribute("categorias", categorias);
 				req.setAttribute("estruturaDeWebsite", estruturaDeWebsite);
@@ -129,7 +141,7 @@ public class EstruturaDeWebsiteController extends HttpServlet {
 				estruturaDeWebsiteDAO.editar(estruturaDeWebsite);
 				
 				categoriaDAO = new CategoriaDAO(conexao);
-				categorias = categoriaDAO.listarCategoriasDaInstituicao(webDesigner.getInstituicao().getId());
+				categorias = categoriaDAO.listarCategoriasDaInstituicao(funcionario.getInstituicao().getId());
 								
 				req.setAttribute("estruturaDeWebsite", estruturaDeWebsite);
 				req.setAttribute("categorias", categorias);
@@ -144,7 +156,7 @@ public class EstruturaDeWebsiteController extends HttpServlet {
 				
 				estruturaDeWebsiteDAO = new EstruturaDeWebsiteDAO(conexao);
 				estruturaDeWebsiteDAO.excluir(Long.parseLong(id));
-				estruturasDeWebsites = estruturaDeWebsiteDAO.listarEstruturasDeWebsitesDaInstituicao(webDesigner.getInstituicao().getId());
+				estruturasDeWebsites = estruturaDeWebsiteDAO.listarEstruturasDeWebsitesDaInstituicao(funcionario.getInstituicao().getId());
 				
 				req.setAttribute("estruturasDeWebsites", estruturasDeWebsites);
 				req.setAttribute("successMessage", "Estrutura de website excluída com sucesso.");
@@ -169,7 +181,7 @@ public class EstruturaDeWebsiteController extends HttpServlet {
 		} catch (NullPointerException e) {
 			
 			estruturaDeWebsiteDAO = new EstruturaDeWebsiteDAO(conexao);
-			estruturasDeWebsites = estruturaDeWebsiteDAO.listarEstruturasDeWebsitesDaInstituicao(webDesigner.getInstituicao().getId());
+			estruturasDeWebsites = estruturaDeWebsiteDAO.listarEstruturasDeWebsitesDaInstituicao(funcionario.getInstituicao().getId());
 			
 			req.setAttribute("estruturasDeWebsites", estruturasDeWebsites);
 			req.getRequestDispatcher("lista-de-estruturas-de-websites.jsp").forward(req, res);

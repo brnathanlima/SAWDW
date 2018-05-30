@@ -8,7 +8,9 @@
 </head>
 <body>
 <div class="wrapper">
-		<div class="sidebar" data-color="red" data-image="assets/img/sidebar-5.jpg">
+	<c:choose>
+		<c:when test="${tipoDeUsuario == 'webDesigner'}">
+			<div class="sidebar" data-color="red" data-image="assets/img/sidebar-5.jpg">
     
 		    	<div class="sidebar-wrapper">
 		            <div class="logo">
@@ -39,6 +41,35 @@
 		            </ul>
 		    	</div>
 		    </div>
+		</c:when>
+		<c:otherwise>
+			<div class="sidebar" data-color="azure" data-image="assets/img/sidebar-5.jpg">
+    
+		    	<div class="sidebar-wrapper">
+		            <div class="logo">
+		                <a href="http://localhost:8080/SAEDW/painel-colaborador.jsp" class="simple-text">
+		                    SAEDW
+		                </a>
+		            </div>
+		
+		            <ul class="nav">
+		            	<li>
+		                    <a href="pagina-da-instituicao.jsp">
+		                        <i class="pe-7s-culture"></i>
+		                        <p>${usuario.instituicao.nomeFantasia}</p>
+		                    </a>
+		                </li>
+		            	<li class="active">
+		                    <a href="EstruturaDeWebsiteController">
+		                        <i class="pe-7s-browser"></i>
+		                        <p>Estruturas de Websites</p>
+		                    </a>
+		                </li>
+		            </ul>
+		    	</div>
+		    </div>
+		</c:otherwise>
+	</c:choose>    
 		
 		<div class="main-panel">
 		<nav class="navbar navbar-default navbar-fixed">
@@ -61,20 +92,13 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="card">
-                            <div class="header">
-                            	<c:choose>
-									<c:when test="${empty estruturaDePagina.id}">
-                                		<h4 class="title">CADASTRAR ESTRUTURA DE PÁGINA</h4>
-                                	</c:when>
-                                	<c:otherwise>
-                                		<h4 class="title">EDITAR ESTRUTURA DE PÁGINA</h4>
-                                	</c:otherwise>
-                                </c:choose>
-                            </div>
-                            <div class="content">
-                            	<c:choose>
-									<c:when test="${empty estruturaDePagina.id}">
+                    	<c:choose>
+							<c:when test="${empty estruturaDePagina.id}">
+		                        <div class="card">
+		                            <div class="header">
+		                            	<h4 class="title">CADASTRAR ESTRUTURA DE PÁGINA</h4>
+		                            </div>
+		                            <div class="content">
 										<form action="EstruturaDePaginaController">
 		                                    <div class="row">
 		                                        <div class="col-md-12">
@@ -101,39 +125,80 @@
 		                                    
 		                                    <div class="clearfix"></div>
 		                                </form>
-									</c:when>
-									<c:when test="${not empty estruturaDePagina.id}">
-										<form action="EstruturaDePaginaController">
-		                                    <div class="row">
-		                                        <div class="col-md-12">
-		                                            <div class="form-group">
-		                                                <label>Título</label>
-		                                                <input type="text" name="titulo" value="${estruturaDePagina.titulo}" class="form-control">
-		                                            </div>
-		                                        </div>
-		                                    </div>
-		                                    
-		                                    <div class="row">
-		                                        <div class="col-md-12">
-		                                            <div class="form-group">
-		                                                <label>Conteúdo</label>
-		                                                <textarea rows="10" name="conteudo" class="form-control">${estruturaDePagina.conteudo}</textarea>
-		                                            </div>
-		                                        </div>
-		                                    </div>
-		                                    
-		                                    <input type="hidden" name="id" value="${estruturaDePagina.id}" />
-											<input type="hidden" name="acao" value="editar" />
-											
-											<a href="EstruturaDeWebsiteController?acao=visualizar&id=${idEstruturaDeWebsite}" class="btn btn-danger btn-fill pull-left" role="button">Cancelar</a> 
-		                                    <button type="submit" class="btn btn-success btn-fill pull-right">EDITAR</button>
-		                                    
-		                                    <div class="clearfix"></div>
-		                                </form>
-									</c:when>
-								</c:choose>
-							</div>
-						</div>
+									</div>
+								</div>
+							</c:when>
+							<c:otherwise>
+								<div class="card">
+		                            <div class="header">
+		                            	<c:choose>
+		                            		<c:when test="${tipoDeUsuario == 'webDesigner'}">
+		                            			<h4 class="title">EDITAR ESTRUTURA DE PÁGINA</h4>
+		                            		</c:when>
+		                            		<c:otherwise>
+		                            			<h4 class="title">VISUALIZAR ESTRUTURA DE PÁGINA</h4>
+		                            		</c:otherwise>
+		                            	</c:choose>
+		                            </div>
+		                            <div class="content">
+		                            	<c:choose>
+		                            		<c:when test="${tipoDeUsuario == 'webDesigner'}">
+												<form action="EstruturaDePaginaController">
+				                                    <div class="row">
+				                                        <div class="col-md-12">
+				                                            <div class="form-group">
+				                                                <label>Título</label>
+				                                                <input type="text" name="titulo" value="${estruturaDePagina.titulo}" class="form-control">
+				                                            </div>
+				                                        </div>
+				                                    </div>
+				                                    
+				                                    <div class="row">
+				                                        <div class="col-md-12">
+				                                            <div class="form-group">
+				                                                <label>Conteúdo</label>
+				                                                <textarea rows="10" name="conteudo" class="form-control">${estruturaDePagina.conteudo}</textarea>
+				                                            </div>
+				                                        </div>
+				                                    </div>
+				                                    
+				                                    <input type="hidden" name="id" value="${estruturaDePagina.id}" />
+													<input type="hidden" name="acao" value="editar" />
+													
+				                                    <button type="submit" class="btn btn-success btn-fill pull-left">EDITAR</button>
+				                                    
+				                                    <div class="clearfix"></div>
+				                                </form>
+											</c:when>
+											<c:otherwise>
+												<table class="table table-bordered table-hover">
+													<thead>
+														<tr>
+															<th>Título da Página</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td>${estruturaDePagina.titulo}</td>
+														</tr>
+													</tbody>
+													<thead>
+														<tr>
+															<th>Conteúdo</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td>${estruturaDePagina.conteudo}</td>
+														</tr>
+													</tbody>
+												</table>
+											</c:otherwise>
+		                            	</c:choose>
+		                            </div>
+		                    	</div>
+							</c:otherwise>
+						</c:choose>
 					</div>
 				</div>
 			</div>

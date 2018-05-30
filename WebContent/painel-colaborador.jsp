@@ -5,7 +5,7 @@
 <html lang="pt-br">
 <head>
 	<c:import url="/common/cabecalho.jsp" />
-	<title>SAEDW - Painel</title>s
+	<title>SAEDW - Painel</title>
 </head>
 <body>
 <div class="wrapper">
@@ -21,6 +21,12 @@
             <ul class="nav">
             	<li>
                     <a href="pagina-da-instituicao.jsp">
+                        <i class="pe-7s-culture"></i>
+                        <p>${usuario.instituicao.nomeFantasia}</p>
+                    </a>
+                </li>
+            	<li>
+                    <a href="EstruturaDeWebsiteController">
                         <i class="pe-7s-browser"></i>
                         <p>Estruturas de Websites</p>
                     </a>

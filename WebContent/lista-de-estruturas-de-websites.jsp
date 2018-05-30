@@ -43,20 +43,26 @@
 		    	</div>
 		    </div>
 		</c:when>
-		<c:when test="${tipoDeUsuario == 'usuarioComum'}">
-			<div class="sidebar" data-color="blue" data-image="assets/img/sidebar-5.jpg">
+		<c:when test="${tipoDeUsuario == 'colaborador'}">
+			<div class="sidebar" data-color="azure" data-image="assets/img/sidebar-5.jpg">
     
 		    	<div class="sidebar-wrapper">
 		            <div class="logo">
-		                <a href="#" class="simple-text">
+		                <a href="http://localhost:8080/SAEDW/painel-colaborador.jsp" class="simple-text">
 		                    SAEDW
 		                </a>
 		            </div>
 		
 		            <ul class="nav">
-		                <li class="active">
+		            	<li>
+		                    <a href="pagina-da-instituicao.jsp">
+		                        <i class="pe-7s-culture"></i>
+		                        <p>${usuario.instituicao.nomeFantasia}</p>
+		                    </a>
+		                </li>
+		            	<li class="active">
 		                    <a href="EstruturaDeWebsiteController">
-		                    	<i class="pe-7s-browser"></i>
+		                        <i class="pe-7s-browser"></i>
 		                        <p>Estruturas de Websites</p>
 		                    </a>
 		                </li>
@@ -111,7 +117,11 @@
                                     	<tr>
                                     		<th style="text-align: center;">Nome</th>
 											<th style="text-align: center;">Categoria</th>
-											<th style="text-align: center;">Solicitações Pendentes</th>
+											<c:choose>
+												<c:when test="${tipoDeUsuario == 'webDesigner'}">
+													<th style="text-align: center;">Solicitações Pendentes</th>	
+												</c:when>
+											</c:choose>
 											<th style="text-align: center;">Ações</th>
                                     	</tr>
                                     </thead>
@@ -120,18 +130,22 @@
 											<tr style="text-align: center;">
 												<td>${estruturaDeWebsite.nome}</td>
 												<td>${estruturaDeWebsite.categoria.nome}</td>
-												<td>
 												<c:choose>
-													<c:when test="${not empty estruturaDeWebsite.solicitacoesDeDesenvolvimentoDaEstrutura}">
-														<a href="SolicitacaoDeDesenvolvimentoController?acao=listarSolicitacoesDeDesenvolvimentoPendentesDaEstrutura&id=${estruturaDeWebsite.id}">
-															<span class="label label-success">${fn:length(estruturaDeWebsite.solicitacoesDeDesenvolvimentoDaEstrutura)}</span>
-														</a>
+													<c:when test="${tipoDeUsuario == 'webDesigner'}">
+														<td>
+														<c:choose>
+															<c:when test="${not empty estruturaDeWebsite.solicitacoesDeDesenvolvimentoDaEstrutura}">
+																<a href="SolicitacaoDeDesenvolvimentoController?acao=listarSolicitacoesDeDesenvolvimentoPendentesDaEstrutura&id=${estruturaDeWebsite.id}">
+																	<span class="label label-success">${fn:length(estruturaDeWebsite.solicitacoesDeDesenvolvimentoDaEstrutura)}</span>
+																</a>
+															</c:when>
+															<c:otherwise>
+																<span class="label label-default">${fn:length(estruturaDeWebsite.solicitacoesDeDesenvolvimentoDaEstrutura)}</span>
+															</c:otherwise>
+														</c:choose>
+														</td>
 													</c:when>
-													<c:otherwise>
-														<span class="label label-default">${fn:length(estruturaDeWebsite.solicitacoesDeDesenvolvimentoDaEstrutura)}</span>
-													</c:otherwise>
 												</c:choose>
-												</td>
 												<td class="td-actions">
 													<c:choose>
                                 						<c:when test="${tipoDeUsuario == 'webDesigner'}">
@@ -147,7 +161,11 @@
 		                                                    </a>
                                 						</c:when>
                                 						<c:otherwise>
-                                							<a href="EstruturaDeWebsiteController?acao=visualizar&id=${estruturaDeWebsite.id}">Visualizar</a>
+                                							<a href="EstruturaDeWebsiteController?acao=visualizar&id=${estruturaDeWebsite.id}">
+			                                                   <button type="button" rel="tooltip" title="Visualizar" class="btn btn-info btn-simple btn-sm">
+			                                                       <i class="fa fa-eye"></i>
+			                                                   </button>
+			                                           		</a>
                                 						</c:otherwise>
                                 					</c:choose>
                                                 </td>

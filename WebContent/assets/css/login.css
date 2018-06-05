@@ -7,7 +7,7 @@ body, html {
 	background-position:center;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
-	background-image:url(../img/login-background.jpg);
+	background-color: #f7f7f8;
 	color:#fff
 }
 

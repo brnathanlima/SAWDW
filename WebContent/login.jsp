@@ -42,19 +42,20 @@
 								
 								<form action="LoginController" method="post" role="form" style="display: block;">
 									<div class="form-group">
-										<input type="text" name="nomeDeUsuario" tabindex="1" class="form-control" placeholder="Nome de Usuário" value="" autofocus>
+										<input type="text" name="nomeDeUsuario" tabindex="1" class="form-control" placeholder="Nome de Usuário" autofocus>
 									</div>
 									<div class="form-group">
 										<input type="password" name="senha" tabindex="2" class="form-control" placeholder="Senha">
 									</div>
-									<select name="tipoDeUsuario" class="form-control">
-										<option value="superAdministrador">Super Administrador</option>
-										<option value="administradorDeInstituicao">Administrador de Instituição</option>
-										<option value="colaborador">Colaborador</option>
-										<option value="webDesigner">Web Designer</option>
-										<option value="gerente">Gerente</option>
-									</select>
-									<br>
+									<div class="form-group">
+										<select name="tipoDeUsuario" class="form-control">
+											<option value="superAdministrador">Super Administrador</option>
+											<option value="administradorDeInstituicao">Administrador de Instituição</option>
+											<option value="colaborador">Colaborador</option>
+											<option value="webDesigner">Web Designer</option>
+											<option value="gerente">Gerente</option>
+										</select>
+									</div>
 									<div class="form-group">
 										<div class="row">
 											<div class="col-sm-6 col-sm-offset-3">

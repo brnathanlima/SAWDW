@@ -32,7 +32,7 @@
                     </a>
                 </li>
                 <li class="active">
-                    <a href="AdministradorDeInstituicaoController">
+                    <a href="administradorDeInstituicao?acao=listar">
                         <i class="pe-7s-users"></i>
                         <p>Administradores de Instituições</p>
                     </a>
@@ -65,7 +65,7 @@
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">ADMINISTRADORES DE INSTITUIÇÃO
-                                <a href="AdministradorDeInstituicaoController?acao=novoCadastro" class="btn btn-success pull-right" role="button">NOVO ADMINISTRADOR DE INSTITUIÇÃO</a>
+                                <a href="administradorDeInstituicao?acao=novoCadastro" class="btn btn-success pull-right" role="button">NOVO ADMINISTRADOR DE INSTITUIÇÃO</a>
                             	</h4>
                             </div>
                             <div class="content table-responsive table-full-width">
@@ -86,7 +86,7 @@
                                     		<th>Nome</th>
 	                                    	<th>Instituição</th>
 	                                    	<th>E-mail</th>
-	                                    	<th>Ações</th>
+	                                    	<th style="text-align: center;">Ações</th>
                                     	</tr>
                                     </thead>
                                     <tbody>
@@ -97,13 +97,13 @@
 												<td>${administradorDeInstituicao.instituicao.nomeFantasia}</td>
 												<td>${administradorDeInstituicao.email}</td>
 												
-												<td class="td-actions">
-													<a href="AdministradorDeInstituicaoController?acao=visualizar&id=${administradorDeInstituicao.id}">
+												<td style="text-align: center;" class="td-actions">
+													<a href="administradorDeInstituicao?acao=visualizar&id=${administradorDeInstituicao.id}">
                                                     <button type="button" rel="tooltip" title="Editar" class="btn btn-info btn-simple btn-sm">
                                                         <i class="fa fa-edit"></i>
                                                     </button>
                                                     </a>
-                                                    <a href="AdministradorDeInstituicaoController?acao=excluir&id=${administradorDeInstituicao.id}">
+                                                    <a href="administradorDeInstituicao?acao=excluir&id=${administradorDeInstituicao.id}">
                                                     <button type="button" rel="tooltip" title="Excluir" class="btn btn-danger btn-simple btn-sm">
                                                         <i class="fa fa-times"></i>
                                                     </button>

@@ -29,7 +29,7 @@ public class AdministradorDeInstituicaoDAO extends GenericoDAO {
 
 	}
 	
-	public void adicionar(AdministradorDeInstituicao administradorDeInstituicao) throws SQLException {
+	public void adicionar(AdministradorDeInstituicao administradorDeInstituicao) {
 		
 		String insertSQL = "INSERT INTO clientes(id_instituicao, nome,  sobrenome,  matricula, email, telefone, setor, cargo, tipo_de_usuario, nome_de_usuario, senha, data_de_registro) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -42,7 +42,7 @@ public class AdministradorDeInstituicaoDAO extends GenericoDAO {
 		
 	}
 	
-	public void editar(AdministradorDeInstituicao administradorDeInstituicao) throws SQLException {
+	public void editar(AdministradorDeInstituicao administradorDeInstituicao) {
 		
 		String updateSQL = "UPDATE clientes SET id_instituicao=?, nome=?,  sobrenome=?,  matricula=?, email=?, telefone=?, setor=?,"
 				+ "cargo=?, tipo_de_usuario=?, nome_de_usuario=?, senha=?, data_de_modificacao=? WHERE id=?";
@@ -55,7 +55,7 @@ public class AdministradorDeInstituicaoDAO extends GenericoDAO {
 		
 	}
 	
-	public void excluir(long id) throws SQLException {
+	public void excluir(long id) {
 		
 		String deleteSQL =  "DELETE FROM clientes WHERE id=?";
 		super.deletar(deleteSQL, id);

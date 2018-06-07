@@ -32,7 +32,7 @@
                     </a>
                 </li>
                 <li class="active">
-                    <a href="AdministradorDeInstituicaoController">
+                    <a href="administradorDeInstituicao?acao=listar">
                         <i class="pe-7s-users"></i>
                         <p>Administradores de Instituições</p>
                     </a>
@@ -64,19 +64,22 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
+                            	<h4 class="title">
                             	<c:choose>
 									<c:when test="${empty administradorDeInstituicao.id}">
-                                		<h4 class="title">CADASTRAR ADMINISTRADOR DE INSTITUIÇÃO</h4>
+                                		CADASTRAR ADMINISTRADOR DE INSTITUIÇÃO
                                 	</c:when>
                                 	<c:otherwise>
-                                		<h4 class="title">EDITAR CADASTRO DE ADMINISTRADOR DE INSTITUIÇÃO</h4>
+                                		EDITAR CADASTRO DE ADMINISTRADOR DE INSTITUIÇÃO
                                 	</c:otherwise>
                                 </c:choose>
+                                <a class="btn btn-default pull-right" href="administradorDeInstituicao?acao=listar" role="button">VOLTAR</a>
+                                </h4>
                             </div>
                             <div class="content">
                             	<c:choose>
 									<c:when test="${empty administradorDeInstituicao.id}">
-										<form action="AdministradorDeInstituicaoController" method="post">
+										<form action="administradorDeInstituicao" method="post">
 											<div class="row">
 		                                        <div class="col-md-12">
 		                                            <div class="form-group">
@@ -173,7 +176,7 @@
 												</div>											
 											</c:when>
 										</c:choose>
-										<form action="AdministradorDeInstituicaoController" method="post">
+										<form action="administradorDeInstituicao" method="post">
 											<div class="row">
 		                                        <div class="col-md-12">
 		                                            <div class="form-group">

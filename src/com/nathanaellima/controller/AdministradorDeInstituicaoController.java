@@ -2,7 +2,6 @@ package com.nathanaellima.controller;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
@@ -18,7 +17,7 @@ import com.nathanaellima.model.InstituicaoDAO;
 import com.nathanaellima.modelo.AdministradorDeInstituicao;
 import com.nathanaellima.modelo.Instituicao;
 
-@WebServlet("/AdministradorDeInstituicaoController")
+@WebServlet(name="AdministradorDeInstituicaoController", urlPatterns={"/administradorDeInstituicao"})
 public class AdministradorDeInstituicaoController extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
@@ -50,140 +49,138 @@ public class AdministradorDeInstituicaoController extends HttpServlet {
 		Date dataDeModificacao = null;
 		
 		String acao = req.getParameter("acao");
+			
+		switch(acao) {
 		
-		try {
+		case "novoCadastro":
 			
-			switch(acao) {
+			instituicaoDAO = new InstituicaoDAO(conexao);
+			instituicoes = instituicaoDAO.listar();
 			
-			case "novoCadastro":
-				
-				instituicaoDAO = new InstituicaoDAO(conexao);
-				instituicoes = instituicaoDAO.listar();
-				
-				req.setAttribute("instituicoes", instituicoes);
-				req.getRequestDispatcher("cadastro-administrador-de-instituicao.jsp").forward(req, res);
-				
-				break;
-				
-			case "cadastrar":
-				
-				idInstituicao = req.getParameter("idInstituicao");
-				nome = req.getParameter("nome");
-				sobrenome = req.getParameter("sobrenome");
-				matricula = req.getParameter("matricula");
-				email = req.getParameter("email");
-				telefone = req.getParameter("telefone");
-				setor = req.getParameter("setor");
-				cargo = req.getParameter("cargo");
-				nomeDeUsuario = req.getParameter("nomeDeUsuario");
-				senha = req.getParameter("senha");
-				dataDeRegistro = new Date();
-						
-				administradorDeInstituicao = (AdministradorDeInstituicao) FuncionarioFactory.getFuncionario("administradorDeInstituicao");
-				
-				instituicaoDAO = new InstituicaoDAO(conexao);
-				instituicao = (Instituicao) instituicaoDAO.buscarPorId(Long.parseLong(idInstituicao));
-				
-				administradorDeInstituicao.setInstituicao(instituicao);
-				administradorDeInstituicao.setNome(nome);
-				administradorDeInstituicao.setSobrenome(sobrenome);
-				administradorDeInstituicao.setMatricula(matricula);
-				administradorDeInstituicao.setEmail(email);
-				administradorDeInstituicao.setTelefone(telefone);
-				administradorDeInstituicao.setSetor(setor);
-				administradorDeInstituicao.setCargo(cargo);
-				administradorDeInstituicao.setNomeDeUsuario(nomeDeUsuario);
-				administradorDeInstituicao.setSenha(senha);
-				administradorDeInstituicao.setDataDeRegistro(dataDeRegistro);
-				
-				administradorDeInstituicaoDAO = new AdministradorDeInstituicaoDAO(conexao);
-				administradorDeInstituicaoDAO.adicionar(administradorDeInstituicao);
-				
-				administradoresDeInstituicao = administradorDeInstituicaoDAO.listar();
-				
-				req.setAttribute("administradoresDeInstituicao", administradoresDeInstituicao);
-				req.setAttribute("successMessage", "Administrador de Instituição cadastrado com sucesso.");
-				req.getRequestDispatcher("lista-de-administradores-de-instituicao.jsp").forward(req, res);
+			req.setAttribute("instituicoes", instituicoes);
+			req.getRequestDispatcher("cadastro-administrador-de-instituicao.jsp").forward(req, res);
 			
-				break;
-				
-			case "visualizar":
-				
-				long idAdministradorDeInstituicao = Long.parseLong(req.getParameter("id"));
-				
-				administradorDeInstituicaoDAO = new AdministradorDeInstituicaoDAO(conexao);
-				administradorDeInstituicao = (AdministradorDeInstituicao) administradorDeInstituicaoDAO.buscarPorId(idAdministradorDeInstituicao);
-				
-				instituicaoDAO = new InstituicaoDAO(conexao);
-				instituicoes = instituicaoDAO.listar();
-				
-				req.setAttribute("instituicoes", instituicoes);
-				req.setAttribute("administradorDeInstituicao", administradorDeInstituicao);
-				req.getRequestDispatcher("cadastro-administrador-de-instituicao.jsp").forward(req, res);
-				
-				break;
-				
-			case "editar":
-				
-				id = req.getParameter("id");
-				idInstituicao = req.getParameter("idInstituicao");
-				nome = req.getParameter("nome");
-				sobrenome = req.getParameter("sobrenome");
-				matricula = req.getParameter("matricula");
-				email = req.getParameter("email");
-				telefone = req.getParameter("telefone");
-				setor = req.getParameter("setor");
-				cargo = req.getParameter("cargo");
-				nomeDeUsuario = req.getParameter("nomeDeUsuario");
-				senha = req.getParameter("senha");
-				dataDeModificacao = new Date();
-						
-				administradorDeInstituicao = (AdministradorDeInstituicao) FuncionarioFactory.getFuncionario("administradorDeInstituicao");
-				
-				instituicaoDAO = new InstituicaoDAO(conexao);
-				instituicao = (Instituicao) instituicaoDAO.buscarPorId(Long.parseLong(idInstituicao));
-				
-				administradorDeInstituicao.setId(Long.parseLong(id));
-				administradorDeInstituicao.setInstituicao(instituicao);
-				administradorDeInstituicao.setNome(nome);
-				administradorDeInstituicao.setSobrenome(sobrenome);
-				administradorDeInstituicao.setMatricula(matricula);
-				administradorDeInstituicao.setEmail(email);
-				administradorDeInstituicao.setTelefone(telefone);
-				administradorDeInstituicao.setSetor(setor);
-				administradorDeInstituicao.setCargo(cargo);
-				administradorDeInstituicao.setNomeDeUsuario(nomeDeUsuario);
-				administradorDeInstituicao.setSenha(senha);
-				administradorDeInstituicao.setDataDeModificacao(dataDeModificacao);
-				
-				administradorDeInstituicaoDAO = new AdministradorDeInstituicaoDAO(conexao);
-				administradorDeInstituicaoDAO.editar(administradorDeInstituicao);
-				
-				instituicaoDAO = new InstituicaoDAO(conexao);
-				instituicoes = instituicaoDAO.listar();
-				
-				req.setAttribute("instituicoes", instituicoes);
-				req.setAttribute("administradorDeInstituicao", administradorDeInstituicao);
-				req.setAttribute("successMessage", "Cadastro atualizado.");
-				req.getRequestDispatcher("cadastro-administrador-de-instituicao.jsp").forward(req, res);
-				
-				break;
-				
-			case "excluir":
-				
-				id = req.getParameter("id");
-				
-				administradorDeInstituicaoDAO = new AdministradorDeInstituicaoDAO(conexao);
-				administradorDeInstituicaoDAO.excluir(Long.parseLong(id));
-				administradoresDeInstituicao = administradorDeInstituicaoDAO.listar();
-				
-				req.setAttribute("administradoresDeInstituicao", administradoresDeInstituicao);
-				req.setAttribute("successMessage", "Administrador de Instituição excluído com sucesso.");
-				req.getRequestDispatcher("lista-de-administradores-de-instituicao.jsp").forward(req, res);
+			break;
 			
-			}
+		case "cadastrar":
 			
-		} catch (NullPointerException e){
+			idInstituicao = req.getParameter("idInstituicao");
+			nome = req.getParameter("nome");
+			sobrenome = req.getParameter("sobrenome");
+			matricula = req.getParameter("matricula");
+			email = req.getParameter("email");
+			telefone = req.getParameter("telefone");
+			setor = req.getParameter("setor");
+			cargo = req.getParameter("cargo");
+			nomeDeUsuario = req.getParameter("nomeDeUsuario");
+			senha = req.getParameter("senha");
+			dataDeRegistro = new Date();
+					
+			administradorDeInstituicao = (AdministradorDeInstituicao) FuncionarioFactory.getFuncionario("administradorDeInstituicao");
+			
+			instituicaoDAO = new InstituicaoDAO(conexao);
+			instituicao = (Instituicao) instituicaoDAO.buscarPorId(Long.parseLong(idInstituicao));
+			
+			administradorDeInstituicao.setInstituicao(instituicao);
+			administradorDeInstituicao.setNome(nome);
+			administradorDeInstituicao.setSobrenome(sobrenome);
+			administradorDeInstituicao.setMatricula(matricula);
+			administradorDeInstituicao.setEmail(email);
+			administradorDeInstituicao.setTelefone(telefone);
+			administradorDeInstituicao.setSetor(setor);
+			administradorDeInstituicao.setCargo(cargo);
+			administradorDeInstituicao.setNomeDeUsuario(nomeDeUsuario);
+			administradorDeInstituicao.setSenha(senha);
+			administradorDeInstituicao.setDataDeRegistro(dataDeRegistro);
+			
+			administradorDeInstituicaoDAO = new AdministradorDeInstituicaoDAO(conexao);
+			administradorDeInstituicaoDAO.adicionar(administradorDeInstituicao);
+			
+			administradoresDeInstituicao = administradorDeInstituicaoDAO.listar();
+			
+			req.setAttribute("administradoresDeInstituicao", administradoresDeInstituicao);
+			req.setAttribute("successMessage", "Administrador de Instituição cadastrado com sucesso.");
+			req.getRequestDispatcher("lista-de-administradores-de-instituicao.jsp").forward(req, res);
+		
+			break;
+			
+		case "visualizar":
+			
+			long idAdministradorDeInstituicao = Long.parseLong(req.getParameter("id"));
+			
+			administradorDeInstituicaoDAO = new AdministradorDeInstituicaoDAO(conexao);
+			administradorDeInstituicao = (AdministradorDeInstituicao) administradorDeInstituicaoDAO.buscarPorId(idAdministradorDeInstituicao);
+			
+			instituicaoDAO = new InstituicaoDAO(conexao);
+			instituicoes = instituicaoDAO.listar();
+			
+			req.setAttribute("instituicoes", instituicoes);
+			req.setAttribute("administradorDeInstituicao", administradorDeInstituicao);
+			req.getRequestDispatcher("cadastro-administrador-de-instituicao.jsp").forward(req, res);
+			
+			break;
+			
+		case "editar":
+			
+			id = req.getParameter("id");
+			idInstituicao = req.getParameter("idInstituicao");
+			nome = req.getParameter("nome");
+			sobrenome = req.getParameter("sobrenome");
+			matricula = req.getParameter("matricula");
+			email = req.getParameter("email");
+			telefone = req.getParameter("telefone");
+			setor = req.getParameter("setor");
+			cargo = req.getParameter("cargo");
+			nomeDeUsuario = req.getParameter("nomeDeUsuario");
+			senha = req.getParameter("senha");
+			dataDeModificacao = new Date();
+					
+			administradorDeInstituicao = (AdministradorDeInstituicao) FuncionarioFactory.getFuncionario("administradorDeInstituicao");
+			
+			instituicaoDAO = new InstituicaoDAO(conexao);
+			instituicao = (Instituicao) instituicaoDAO.buscarPorId(Long.parseLong(idInstituicao));
+			
+			administradorDeInstituicao.setId(Long.parseLong(id));
+			administradorDeInstituicao.setInstituicao(instituicao);
+			administradorDeInstituicao.setNome(nome);
+			administradorDeInstituicao.setSobrenome(sobrenome);
+			administradorDeInstituicao.setMatricula(matricula);
+			administradorDeInstituicao.setEmail(email);
+			administradorDeInstituicao.setTelefone(telefone);
+			administradorDeInstituicao.setSetor(setor);
+			administradorDeInstituicao.setCargo(cargo);
+			administradorDeInstituicao.setNomeDeUsuario(nomeDeUsuario);
+			administradorDeInstituicao.setSenha(senha);
+			administradorDeInstituicao.setDataDeModificacao(dataDeModificacao);
+			
+			administradorDeInstituicaoDAO = new AdministradorDeInstituicaoDAO(conexao);
+			administradorDeInstituicaoDAO.editar(administradorDeInstituicao);
+			
+			instituicaoDAO = new InstituicaoDAO(conexao);
+			instituicoes = instituicaoDAO.listar();
+			
+			req.setAttribute("instituicoes", instituicoes);
+			req.setAttribute("administradorDeInstituicao", administradorDeInstituicao);
+			req.setAttribute("successMessage", "Cadastro atualizado.");
+			req.getRequestDispatcher("cadastro-administrador-de-instituicao.jsp").forward(req, res);
+			
+			break;
+			
+		case "excluir":
+			
+			id = req.getParameter("id");
+			
+			administradorDeInstituicaoDAO = new AdministradorDeInstituicaoDAO(conexao);
+			administradorDeInstituicaoDAO.excluir(Long.parseLong(id));
+			administradoresDeInstituicao = administradorDeInstituicaoDAO.listar();
+			
+			req.setAttribute("administradoresDeInstituicao", administradoresDeInstituicao);
+			req.setAttribute("successMessage", "Administrador de Instituição excluído com sucesso.");
+			req.getRequestDispatcher("lista-de-administradores-de-instituicao.jsp").forward(req, res);
+			
+			break;
+		
+		case "listar":
 			
 			administradorDeInstituicaoDAO = new AdministradorDeInstituicaoDAO(conexao);
 			administradoresDeInstituicao = administradorDeInstituicaoDAO.listar();
@@ -191,10 +188,8 @@ public class AdministradorDeInstituicaoController extends HttpServlet {
 			req.setAttribute("administradoresDeInstituicao", administradoresDeInstituicao);
 			req.getRequestDispatcher("lista-de-administradores-de-instituicao.jsp").forward(req, res);
 			
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-			
+			break;
+		
 		}
 		
 	}

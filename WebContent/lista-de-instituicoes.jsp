@@ -32,7 +32,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="AdministradorDeInstituicaoController">
+                    <a href="administradorDeInstituicao?acao=listar">
                         <i class="pe-7s-users"></i>
                         <p>Administradores de Instituições</p>
                     </a>

@@ -20,7 +20,7 @@
 
             <ul class="nav">
                 <li class="active">
-                    <a href="InstituicaoController">
+                    <a href="instituicao?acao=listar">
                         <i class="pe-7s-culture"></i>
                         <p>Instituições</p>
                     </a>
@@ -64,19 +64,22 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
+                            	<h4 class="title">
                                 <c:choose>
 									<c:when test="${empty instituicao.id}">
-                                		<h4 class="title">CADASTRAR INSTITUIÇÃO</h4>
+                                		CADASTRAR INSTITUIÇÃO
                                 	</c:when>
                                 	<c:otherwise>
-                                		<h4 class="title">EDITAR CADASTRO DE INSTITUIÇÃO</h4>
+                                		EDITAR CADASTRO DE INSTITUIÇÃO
                                 	</c:otherwise>
                                 </c:choose>
+                                <a class="btn btn-default pull-right" href="instituicao?acao=listar" role="button">VOLTAR</a>         
+                                </h4>
                             </div>
                             <div class="content">
                             	<c:choose>
 									<c:when test="${empty instituicao.id}">
-										<form action="InstituicaoController" method="post">
+										<form action="instituicao" method="post">
 		                                    <div class="row">
 		                                        <div class="col-md-6">
 		                                            <div class="form-group">
@@ -157,7 +160,7 @@
 												</div>											
 											</c:when>
 										</c:choose>
-										<form action="InstituicaoController" method="post">
+										<form action="instituicao" method="post">
 		                                    <div class="row">
 		                                        <div class="col-md-6">
 		                                            <div class="form-group">
@@ -218,6 +221,20 @@
 		                                            <div class="form-group">
 		                                                <label>Telefone</label>
 		                                                <input type="text" class="form-control" name="telefone" value="${instituicao.telefone}">
+		                                            </div>
+		                                        </div>
+		                                    </div>
+		                                    <div class="row">
+		                                        <div class="col-md-6">
+		                                            <div class="form-group">
+		                                                <label>Data de Registro</label>
+		                                                <input type="text" class="form-control" disabled value="<fmt:formatDate value='${instituicao.dataDeRegistro}' pattern='dd/MM/yyyy' />">
+		                                            </div>
+		                                        </div>
+		                                        <div class="col-md-6">
+		                                            <div class="form-group"> 
+		                                                <label>Data de Atualização de Cadastro</label>
+		                                                <input type="text" class="form-control" disabled value="<fmt:formatDate value='${instituicao.dataDeModificacao}' pattern='dd/MM/yyyy' />">
 		                                            </div>
 		                                        </div>
 		                                    </div>

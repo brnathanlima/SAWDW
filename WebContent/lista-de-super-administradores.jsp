@@ -20,7 +20,7 @@
 
             <ul class="nav">
                 <li>
-                    <a href="InstituicaoController">
+                    <a href="instituicao?acao=listar">
                         <i class="pe-7s-culture"></i>
                         <p>Instituições</p>
                     </a>

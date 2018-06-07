@@ -38,7 +38,7 @@
                     </a>
                 </li>
                 <li class="active">
-                    <a href="GerenteController">
+                    <a href="gerente?acao=listar">
                     	<i class="pe-7s-portfolio"></i>
                         <p>Gerentes</p>
                     </a>
@@ -71,7 +71,7 @@
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">GERENTES
-                                <a href="cadastro-gerente.jsp" class="btn btn-success pull-right" role="button">NOVO GERENTE</a>
+                                <a href="gerente?acao=novoCadastro" class="btn btn-success pull-right" role="button">NOVO GERENTE</a>
                             	</h4>
                             </div>
                             <div class="content table-responsive table-full-width">
@@ -86,27 +86,25 @@
                                     <thead>
                                     	<tr>
 	                                        <th>Nome</th>
-											<th>Sobrenome</th>
 											<th>E-mail</th>
 											<th>Departamento</th>
-											<th>Ações</th>
+											<th style="text-align: center;">Ações</th>
 										</tr>
                                     </thead>
                                     <tbody>
                                     	<c:forEach var="gerente" items="${gerentes}" varStatus="id">
 											<tr>
-												<td>${gerente.nome}</td>
-												<td>${gerente.sobrenome}</td>
+												<td>${gerente.nome} ${gerente.sobrenome}</td>
 												<td>${gerente.email}</td>
 												<td>${gerente.departamento}</td>
 												
-												<td class="td-actions">
-													<a href="GerenteController?acao=visualizar&id=${gerente.id}">
+												<td style="text-align: center;" class="td-actions">
+													<a href="gerente?acao=visualizar&id=${gerente.id}">
                                                     <button type="button" rel="tooltip" title="Editar" class="btn btn-info btn-simple btn-sm">
                                                         <i class="fa fa-edit"></i>
                                                     </button>
                                                     </a>
-                                                    <a href="GerenteController?acao=excluir&id=${gerente.id}">
+                                                    <a href="gerente?acao=excluir&id=${gerente.id}">
                                                     <button type="button" rel="tooltip" title="Excluir" class="btn btn-danger btn-simple btn-sm">
                                                         <i class="fa fa-times"></i>
                                                     </button>

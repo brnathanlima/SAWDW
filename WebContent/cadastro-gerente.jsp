@@ -38,7 +38,7 @@
                     </a>
                 </li>
                 <li class="active">
-                    <a href="GerenteController">
+                    <a href="gerente?acao=listar">
                     	<i class="pe-7s-portfolio"></i>
                         <p>Gerentes</p>
                     </a>
@@ -70,19 +70,22 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
+                            	<h4 class="title">
                             	<c:choose>
 									<c:when test="${empty gerente.id}">
-                                		<h4 class="title">CADASTRAR GERENTE</h4>
+                                		CADASTRAR GERENTE
                                 	</c:when>
                                 	<c:otherwise>
-                                		<h4 class="title">EDITAR CADASTRO DE GERENTE</h4>
+                                		EDITAR CADASTRO DE GERENTE
                                 	</c:otherwise>
                                 </c:choose>
+                                <a href="gerente?acao=listar" class="btn btn-default pull-right" role="button">VOLTAR</a>
+                                </h4>
                             </div>
                             <div class="content">
                             	<c:choose>
 									<c:when test="${empty gerente.id}">
-										<form action="GerenteController" method="post">
+										<form action="gerente" method="post">
 											<div class="row">
 		                                        <div class="col-md-6">
 		                                            <div class="form-group">
@@ -161,7 +164,7 @@
 												</div>											
 											</c:when>
 										</c:choose>
-										<form action="GerenteController" method="post">
+										<form action="gerente" method="post">
 											<div class="row">
 		                                        <div class="col-md-6">
 		                                            <div class="form-group">
@@ -218,6 +221,20 @@
 		                                            <div class="form-group">
 		                                                <label>Senha</label>
 		                                                <input type="password" name="senha" value="${gerente.senha}" class="form-control">
+		                                            </div>
+		                                        </div>
+		                                    </div>
+		                                    <div class="row">
+		                                        <div class="col-md-6">
+		                                            <div class="form-group">
+		                                                <label>Data de Registro</label>
+		                                                <input type="text" class="form-control" disabled value="<fmt:formatDate value='${gerente.dataDeRegistro}' pattern='dd/MM/yyyy' />">
+		                                            </div>
+		                                        </div>
+		                                        <div class="col-md-6">
+		                                            <div class="form-group"> 
+		                                                <label>Data de Atualização de Cadastro</label>
+		                                                <input type="text" class="form-control" disabled value="<fmt:formatDate value='${gerente.dataDeModificacao}' pattern='dd/MM/yyyy' />">
 		                                            </div>
 		                                        </div>
 		                                    </div>

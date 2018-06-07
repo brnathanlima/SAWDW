@@ -27,7 +27,7 @@ public class GerenteDAO extends GenericoDAO {
 
 	}
 	
-	public void adicionar(Gerente gerente) throws SQLException {
+	public void adicionar(Gerente gerente) {
 		
 		String insertSQL = "INSERT INTO clientes(id_instituicao, nome,  sobrenome,  matricula, email, telefone, departamento, "
 				+ "tipo_de_usuario, nome_de_usuario, senha, data_de_registro) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -38,7 +38,7 @@ public class GerenteDAO extends GenericoDAO {
 		
 	}
 	
-	public void editar(Gerente gerente) throws SQLException {
+	public void editar(Gerente gerente) {
 		
 		String updateSQL = "UPDATE clientes SET id_instituicao=?, nome=?, sobrenome=?, matricula=?, email=?, telefone=?, departamento=?, "
 				+ "tipo_de_usuario=?, nome_de_usuario=?, senha=?, data_de_modificacao=? WHERE id=?";
@@ -49,7 +49,7 @@ public class GerenteDAO extends GenericoDAO {
 		
 	}
 	
-	public void excluir(long id) throws SQLException {
+	public void excluir(long id) {
 		
 		String deleteSQL =  "DELETE FROM clientes WHERE id=?";
 		super.deletar(deleteSQL, id);

@@ -32,7 +32,7 @@
                     </a>
                 </li>
                 <li  class="active">
-                    <a href="WebDesignerController">
+                    <a href="webDesigner?acao=listar">
                     	<i class="pe-7s-users"></i>
                         <p>Web-Designers</p>
                     </a>
@@ -70,19 +70,22 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
+                            	<h4 class="title">
                             	<c:choose>
 									<c:when test="${empty webDesigner.id}">
-                                		<h4 class="title">CADASTRAR WEB-DESIGNER</h4>
+                                		CADASTRAR WEB-DESIGNER
                                 	</c:when>
                                 	<c:otherwise>
-                                		<h4 class="title">EDITAR CADASTRO DE WEB-DESIGNER</h4>
+                                		EDITAR CADASTRO DE WEB-DESIGNER
                                 	</c:otherwise>
                                 </c:choose>
+                                <a href="webDesigner?acao=listar" class="btn btn-default pull-right" role="button">VOLTAR</a>
+                                </h4>
                             </div>
                             <div class="content">
                             	<c:choose>
 									<c:when test="${empty webDesigner.id}">
-										<form action="WebDesignerController" method="post">
+										<form action="webDesigner" method="post">
 										
 											<div class="row">
 		                                        <div class="col-md-12">
@@ -165,7 +168,7 @@
 												</div>											
 											</c:when>
 										</c:choose>
-										<form action="WebDesignerController" method="post">
+										<form action="webDesigner" method="post">
 										
 											<div class="row">
 		                                        <div class="col-md-12">
@@ -226,6 +229,20 @@
 		                                            <div class="form-group">
 		                                                <label>Nível</label>
 		                                                <input type="text" name="nivel" value="${webDesigner.nivel}" class="form-control">
+		                                            </div>
+		                                        </div>
+		                                    </div>
+		                                    <div class="row">
+		                                        <div class="col-md-6">
+		                                            <div class="form-group">
+		                                                <label>Data de Registro</label>
+		                                                <input type="text" class="form-control" disabled value="<fmt:formatDate value='${webDesigner.dataDeRegistro}' pattern='dd/MM/yyyy' />">
+		                                            </div>
+		                                        </div>
+		                                        <div class="col-md-6">
+		                                            <div class="form-group"> 
+		                                                <label>Data de Atualização de Cadastro</label>
+		                                                <input type="text" class="form-control" disabled value="<fmt:formatDate value='${webDesigner.dataDeModificacao}' pattern='dd/MM/yyyy' />">
 		                                            </div>
 		                                        </div>
 		                                    </div>

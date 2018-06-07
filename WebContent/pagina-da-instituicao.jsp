@@ -33,7 +33,7 @@
 		                    </a>
 		                </li>
 		                <li>
-		                    <a href=WebDesignerController>
+		                    <a href=webDesigner?acao=listar>
 		                    	<i class="pe-7s-users"></i>
 		                        <p>Web-Designers</p>
 		                    </a>

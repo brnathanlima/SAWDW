@@ -32,7 +32,7 @@
                     </a>
                 </li>
                 <li class="active">
-                    <a href="WebDesignerController">
+                    <a href="webDesigner?acao=listar">
                     	<i class="pe-7s-users"></i>
                         <p>Web-Designers</p>
                     </a>
@@ -71,7 +71,7 @@
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">WEB-DESIGNERS
-                                <a href="cadastro-web-designer.jsp" class="btn btn-success pull-right" role="button">NOVO WEB-DESIGNER</a>
+                                <a href="webDesigner?acao=novoCadastro" class="btn btn-success pull-right" role="button">NOVO WEB-DESIGNER</a>
                             	</h4>
                             </div>
                             <div class="content table-responsive table-full-width">
@@ -88,8 +88,7 @@
 	                                        <th>Nome</th>
 											<th>Matrícula</th>
 											<th>E-mail</th>
-											<th>Nível</th>
-											<th>Ações</th>
+											<th style="text-align: center;">Ações</th>
 										</tr>
                                     </thead>
                                     <tbody>
@@ -98,15 +97,14 @@
 												<td>${webDesigner.nome} ${webDesigner.sobrenome}</td>
 												<td>${webDesigner.matricula}</td>
 												<td>${webDesigner.email}</td>
-												<td>${webDesigner.nivel}</td>
 												
-												<td class="td-actions">
-													<a href="WebDesignerController?acao=visualizar&id=${webDesigner.id}">
+												<td style="text-align: center;" class="td-actions">
+													<a href="webDesigner?acao=visualizar&id=${webDesigner.id}">
                                                     <button type="button" rel="tooltip" title="Editar" class="btn btn-info btn-simple btn-sm">
                                                         <i class="fa fa-edit"></i>
                                                     </button>
                                                     </a>
-                                                    <a href="WebDesignerController?acao=excluir&id=${webDesigner.id}">
+                                                    <a href="webDesigner?acao=excluir&id=${webDesigner.id}">
                                                     <button type="button" rel="tooltip" title="Excluir" class="btn btn-danger btn-simple btn-sm">
                                                         <i class="fa fa-times"></i>
                                                     </button>

@@ -29,7 +29,7 @@ public class ColaboradorDAO extends GenericoDAO {
 
 	}
 	
-	public void adicionar(Colaborador colaborador) throws SQLException {
+	public void adicionar(Colaborador colaborador) {
 		
 		String insertSQL = "INSERT INTO clientes(id_instituicao, nome,  sobrenome,  matricula, email, telefone, setor, cargo, tipo_de_usuario, nome_de_usuario, senha, data_de_registro) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -40,7 +40,7 @@ public class ColaboradorDAO extends GenericoDAO {
 		
 	}
 	
-	public void editar(Colaborador colaborador) throws SQLException {
+	public void editar(Colaborador colaborador) {
 		
 		String updateSQL = "UPDATE clientes SET id_instituicao=?, nome=?,  sobrenome=?,  matricula=?, email=?, telefone=?, setor=?,"
 				+ "cargo=?, tipo_de_usuario=?, nome_de_usuario=?, senha=?, data_de_modificacao=? WHERE id=?";
@@ -51,7 +51,7 @@ public class ColaboradorDAO extends GenericoDAO {
 		
 	}
 	
-	public void excluir(long id) throws SQLException {
+	public void excluir(long id) {
 		
 		String deleteSQL =  "DELETE FROM clientes WHERE id=?";
 		super.deletar(deleteSQL, id);

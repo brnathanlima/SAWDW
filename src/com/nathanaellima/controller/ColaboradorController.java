@@ -2,7 +2,6 @@ package com.nathanaellima.controller;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
@@ -20,7 +19,7 @@ import com.nathanaellima.modelo.AdministradorDeInstituicao;
 import com.nathanaellima.modelo.Colaborador;
 import com.nathanaellima.modelo.Instituicao;
 
-@WebServlet("/ColaboradorController")
+@WebServlet(name="ColaboradorController", urlPatterns= {"/colaborador"})
 public class ColaboradorController extends HttpServlet {
 
 	private static final long serialVersionUID = -4994835505155527306L;
@@ -54,125 +53,129 @@ public class ColaboradorController extends HttpServlet {
 		Date dataDeModificacao = null;
 		
 		String acao = req.getParameter("acao");
+			
+		switch(acao) {
 		
-		try {
+		case "novoCadastro":
 			
-			switch(acao) {
-				
-			case "cadastrar":
-				
-				idInstituicao = req.getParameter("idInstituicao");
-				nome = req.getParameter("nome");
-				sobrenome = req.getParameter("sobrenome");
-				matricula = req.getParameter("matricula");
-				email = req.getParameter("email");
-				telefone = req.getParameter("telefone");
-				setor = req.getParameter("setor");
-				cargo = req.getParameter("cargo");
-				nomeDeUsuario = req.getParameter("nomeDeUsuario");
-				senha = req.getParameter("senha");
-				dataDeRegistro = new Date();
-						
-				colaborador = (Colaborador) FuncionarioFactory.getFuncionario("colaborador");
-				
-				instituicaoDAO = new InstituicaoDAO(conexao);
-				instituicao = (Instituicao) instituicaoDAO.buscarPorId(Long.parseLong(idInstituicao));
-				
-				colaborador.setInstituicao(instituicao);
-				colaborador.setNome(nome);
-				colaborador.setSobrenome(sobrenome);
-				colaborador.setMatricula(matricula);
-				colaborador.setEmail(email);
-				colaborador.setTelefone(telefone);
-				colaborador.setSetor(setor);
-				colaborador.setCargo(cargo);
-				colaborador.setNomeDeUsuario(nomeDeUsuario);
-				colaborador.setSenha(senha);
-				colaborador.setDataDeRegistro(dataDeRegistro);
-				
-				colaboradorDAO = new ColaboradorDAO(conexao);
-				colaboradorDAO.adicionar(colaborador);
-				
-				administradorDeInstituicao = (AdministradorDeInstituicao) session.getAttribute("usuario");
-				colaboradores = colaboradorDAO.listarColaboradoresDaInstituicao(administradorDeInstituicao.getInstituicao().getId());
-				
-				req.setAttribute("colaboradores", colaboradores);
-				req.setAttribute("successMessage", "Colaborador cadastrado com sucesso.");
-				req.getRequestDispatcher("lista-de-colaboradores.jsp").forward(req, res);
+			req.getRequestDispatcher("cadastro-colaborador.jsp").forward(req, res);
 			
-				break;
-				
-			case "visualizar":
-				
-				long idColaborador = Long.parseLong(req.getParameter("id"));
-				
-				colaboradorDAO = new ColaboradorDAO(conexao);
-				colaborador = (Colaborador) colaboradorDAO.buscarPorId(idColaborador);
-				
-				req.setAttribute("colaborador", colaborador);
-				req.getRequestDispatcher("cadastro-colaborador.jsp").forward(req, res);
-				
-				break;
-				
-			case "editar":
-				
-				id = req.getParameter("id");
-				idInstituicao = req.getParameter("idInstituicao");
-				nome = req.getParameter("nome");
-				sobrenome = req.getParameter("sobrenome");
-				matricula = req.getParameter("matricula");
-				email = req.getParameter("email");
-				telefone = req.getParameter("telefone");
-				setor = req.getParameter("setor");
-				cargo = req.getParameter("cargo");
-				nomeDeUsuario = req.getParameter("nomeDeUsuario");
-				senha = req.getParameter("senha");
-				dataDeModificacao = new Date();
-						
-				colaborador = (Colaborador) FuncionarioFactory.getFuncionario("colaborador");
-				
-				instituicaoDAO = new InstituicaoDAO(conexao);
-				instituicao = (Instituicao) instituicaoDAO.buscarPorId(Long.parseLong(idInstituicao));
-				
-				colaborador.setId(Long.parseLong(id));
-				colaborador.setInstituicao(instituicao);
-				colaborador.setNome(nome);
-				colaborador.setSobrenome(sobrenome);
-				colaborador.setMatricula(matricula);
-				colaborador.setEmail(email);
-				colaborador.setTelefone(telefone);
-				colaborador.setSetor(setor);
-				colaborador.setCargo(cargo);
-				colaborador.setNomeDeUsuario(nomeDeUsuario);
-				colaborador.setSenha(senha);
-				colaborador.setDataDeModificacao(dataDeModificacao);
-				
-				colaboradorDAO = new ColaboradorDAO(conexao);
-				colaboradorDAO.editar(colaborador);
-				
-				req.setAttribute("colaborador", colaborador);
-				req.setAttribute("successMessage", "Cadastro atualizado.");
-				req.getRequestDispatcher("cadastro-colaborador.jsp").forward(req, res);
-				
-				break;
-				
-			case "excluir":
-				
-				id = req.getParameter("id");
-				
-				colaboradorDAO = new ColaboradorDAO(conexao);
-				colaboradorDAO.excluir(Long.parseLong(id));
-				
-				administradorDeInstituicao = (AdministradorDeInstituicao) session.getAttribute("usuario");
-				colaboradores = colaboradorDAO.listarColaboradoresDaInstituicao(administradorDeInstituicao.getInstituicao().getId());
-				
-				req.setAttribute("colaboradores", colaboradores);
-				req.setAttribute("successMessage", "Colaborador excluído com sucesso.");
-				req.getRequestDispatcher("lista-de-colaboradores.jsp").forward(req, res);
+			break;
 			
-			}
+		case "cadastrar":
 			
-		} catch (NullPointerException e){
+			idInstituicao = req.getParameter("idInstituicao");
+			nome = req.getParameter("nome");
+			sobrenome = req.getParameter("sobrenome");
+			matricula = req.getParameter("matricula");
+			email = req.getParameter("email");
+			telefone = req.getParameter("telefone");
+			setor = req.getParameter("setor");
+			cargo = req.getParameter("cargo");
+			nomeDeUsuario = req.getParameter("nomeDeUsuario");
+			senha = req.getParameter("senha");
+			dataDeRegistro = new Date();
+					
+			colaborador = (Colaborador) FuncionarioFactory.getFuncionario("colaborador");
+			
+			instituicaoDAO = new InstituicaoDAO(conexao);
+			instituicao = (Instituicao) instituicaoDAO.buscarPorId(Long.parseLong(idInstituicao));
+			
+			colaborador.setInstituicao(instituicao);
+			colaborador.setNome(nome);
+			colaborador.setSobrenome(sobrenome);
+			colaborador.setMatricula(matricula);
+			colaborador.setEmail(email);
+			colaborador.setTelefone(telefone);
+			colaborador.setSetor(setor);
+			colaborador.setCargo(cargo);
+			colaborador.setNomeDeUsuario(nomeDeUsuario);
+			colaborador.setSenha(senha);
+			colaborador.setDataDeRegistro(dataDeRegistro);
+			
+			colaboradorDAO = new ColaboradorDAO(conexao);
+			colaboradorDAO.adicionar(colaborador);
+			
+			administradorDeInstituicao = (AdministradorDeInstituicao) session.getAttribute("usuario");
+			colaboradores = colaboradorDAO.listarColaboradoresDaInstituicao(administradorDeInstituicao.getInstituicao().getId());
+			
+			req.setAttribute("colaboradores", colaboradores);
+			req.setAttribute("successMessage", "Colaborador cadastrado com sucesso.");
+			req.getRequestDispatcher("lista-de-colaboradores.jsp").forward(req, res);
+		
+			break;
+			
+		case "visualizar":
+			
+			long idColaborador = Long.parseLong(req.getParameter("id"));
+			
+			colaboradorDAO = new ColaboradorDAO(conexao);
+			colaborador = (Colaborador) colaboradorDAO.buscarPorId(idColaborador);
+			
+			req.setAttribute("colaborador", colaborador);
+			req.getRequestDispatcher("cadastro-colaborador.jsp").forward(req, res);
+			
+			break;
+			
+		case "editar":
+			
+			id = req.getParameter("id");
+			idInstituicao = req.getParameter("idInstituicao");
+			nome = req.getParameter("nome");
+			sobrenome = req.getParameter("sobrenome");
+			matricula = req.getParameter("matricula");
+			email = req.getParameter("email");
+			telefone = req.getParameter("telefone");
+			setor = req.getParameter("setor");
+			cargo = req.getParameter("cargo");
+			nomeDeUsuario = req.getParameter("nomeDeUsuario");
+			senha = req.getParameter("senha");
+			dataDeModificacao = new Date();
+					
+			colaborador = (Colaborador) FuncionarioFactory.getFuncionario("colaborador");
+			
+			instituicaoDAO = new InstituicaoDAO(conexao);
+			instituicao = (Instituicao) instituicaoDAO.buscarPorId(Long.parseLong(idInstituicao));
+			
+			colaborador.setId(Long.parseLong(id));
+			colaborador.setInstituicao(instituicao);
+			colaborador.setNome(nome);
+			colaborador.setSobrenome(sobrenome);
+			colaborador.setMatricula(matricula);
+			colaborador.setEmail(email);
+			colaborador.setTelefone(telefone);
+			colaborador.setSetor(setor);
+			colaborador.setCargo(cargo);
+			colaborador.setNomeDeUsuario(nomeDeUsuario);
+			colaborador.setSenha(senha);
+			colaborador.setDataDeModificacao(dataDeModificacao);
+			
+			colaboradorDAO = new ColaboradorDAO(conexao);
+			colaboradorDAO.editar(colaborador);
+			
+			req.setAttribute("colaborador", colaborador);
+			req.setAttribute("successMessage", "Cadastro atualizado.");
+			req.getRequestDispatcher("cadastro-colaborador.jsp").forward(req, res);
+			
+			break;
+			
+		case "excluir":
+			
+			id = req.getParameter("id");
+			
+			colaboradorDAO = new ColaboradorDAO(conexao);
+			colaboradorDAO.excluir(Long.parseLong(id));
+			
+			administradorDeInstituicao = (AdministradorDeInstituicao) session.getAttribute("usuario");
+			colaboradores = colaboradorDAO.listarColaboradoresDaInstituicao(administradorDeInstituicao.getInstituicao().getId());
+			
+			req.setAttribute("colaboradores", colaboradores);
+			req.setAttribute("successMessage", "Colaborador excluído com sucesso.");
+			req.getRequestDispatcher("lista-de-colaboradores.jsp").forward(req, res);
+			
+			break;
+			
+		case "listar":
 			
 			colaboradorDAO = new ColaboradorDAO(conexao);
 			
@@ -182,10 +185,8 @@ public class ColaboradorController extends HttpServlet {
 			req.setAttribute("colaboradores", colaboradores);
 			req.getRequestDispatcher("lista-de-colaboradores.jsp").forward(req, res);
 			
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-			
+			break;
+		
 		}
 		
 	}

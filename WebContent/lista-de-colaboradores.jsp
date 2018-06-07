@@ -5,7 +5,7 @@
 <html lang="pt-br">
 <head>
 	<c:import url="/common/cabecalho.jsp" />
-	<title>SAEDW - Usuários Comum</title>
+	<title>SAEDW - Colaboradores</title>
 </head>
 <body>
 <div class="wrapper">
@@ -26,7 +26,7 @@
                     </a>
                 </li>
                 <li class="active">
-                    <a href="ColaboradorController">
+                    <a href="colaborador?acao=listar">
                    		<i class="pe-7s-user"></i>
                         <p>Colaboradores</p>
                     </a>
@@ -71,7 +71,7 @@
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">COLABORADORES
-                                <a href="cadastro-colaborador.jsp" class="btn btn-success pull-right" role="button">NOVO COLABORADOR</a>
+                                <a href="colaborador?acao=novoCadastro" class="btn btn-success pull-right" role="button">NOVO COLABORADOR</a>
                             	</h4>
                             </div>
                             <div class="content table-responsive table-full-width">
@@ -89,7 +89,7 @@
 											<th>Matrícula</th>
 											<th>Setor</th>
 											<th>Cargo</th>
-	                                    	<th>Ações</th>
+	                                    	<th style="text-align: center;">Ações</th>
                                     	</tr>
                                     </thead>
                                     <tbody>
@@ -100,13 +100,13 @@
 												<td>${colaborador.setor}</td>
 												<td>${colaborador.cargo}</td>
 												
-												<td class="td-actions">
-													<a href="ColaboradorController?acao=visualizar&id=${colaborador.id}">
+												<td style="text-align: center;" class="td-actions">
+													<a href="colaborador?acao=visualizar&id=${colaborador.id}">
                                                     <button type="button" rel="tooltip" title="Editar" class="btn btn-info btn-simple btn-sm">
                                                         <i class="fa fa-edit"></i>
                                                     </button>
                                                     </a>
-                                                    <a href="ColaboradorController?acao=excluir&id=${colaborador.id}">
+                                                    <a href="colaborador?acao=excluir&id=${colaborador.id}">
                                                     <button type="button" rel="tooltip" title="Excluir" class="btn btn-danger btn-simple btn-sm">
                                                         <i class="fa fa-times"></i>
                                                     </button>

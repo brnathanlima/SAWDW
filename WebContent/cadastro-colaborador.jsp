@@ -26,7 +26,7 @@
                     </a>
                 </li>
                 <li class="active">
-                    <a href="ColaboradorController">
+                    <a href="colaborador?acao=listar">
                    		<i class="pe-7s-user"></i>
                         <p>Colaboradores</p>
                     </a>
@@ -70,19 +70,22 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
+                            	<h4 class="title">
                             	<c:choose>
 									<c:when test="${empty colaborador.id}">
-                                		<h4 class="title">CADASTRAR COLABORADOR</h4>
+                                		CADASTRAR COLABORADOR
                                 	</c:when>
                                 	<c:otherwise>
-                                		<h4 class="title">EDITAR CADASTRO DE COLABORADOR</h4>
+                                		EDITAR CADASTRO DE COLABORADOR
                                 	</c:otherwise>
                                 </c:choose>
+                                <a href="colaborador?acao=listar" class="btn btn-default pull-right" role="button">VOLTAR</a>
+                                </h4>
                             </div>
                             <div class="content">
                             	<c:choose>
 									<c:when test="${empty colaborador.id}">
-										<form action="ColaboradorController" method="post">
+										<form action="colaborador" method="post">
 											<div class="row">
 		                                        <div class="col-md-12">
 		                                            <div class="form-group">
@@ -152,6 +155,7 @@
 		                                        </div>
 		                                    </div>
 		                                    
+		                                    
 		                                    <input type="hidden" name="tipoDeUsuario" value="usuarioComum" />
 		                                    <input type="hidden" name="acao" value="cadastrar" />
 		                                    <input type="hidden" name="idInstituicao" value="${usuario.instituicao.id}" />
@@ -170,7 +174,7 @@
 												</div>											
 											</c:when>
 										</c:choose>
-										<form action="ColaboradorController" method="post">
+										<form action="colaborador" method="post">
 											<div class="row">
 		                                        <div class="col-md-12">
 		                                            <div class="form-group">
@@ -236,6 +240,20 @@
 		                                            <div class="form-group">
 		                                                <label>Cargo</label>
 		                                                <input type="text" name="cargo" value="${colaborador.cargo}" class="form-control">
+		                                            </div>
+		                                        </div>
+		                                    </div>
+		                                  	<div class="row">
+		                                        <div class="col-md-6">
+		                                            <div class="form-group">
+		                                                <label>Data de Registro</label>
+		                                                <input type="text" class="form-control" disabled value="<fmt:formatDate value='${colaborador.dataDeRegistro}' pattern='dd/MM/yyyy' />">
+		                                            </div>
+		                                        </div>
+		                                        <div class="col-md-6">
+		                                            <div class="form-group"> 
+		                                                <label>Data de Atualização de Cadastro</label>
+		                                                <input type="text" class="form-control" disabled value="<fmt:formatDate value='${colaborador.dataDeModificacao}' pattern='dd/MM/yyyy' />">
 		                                            </div>
 		                                        </div>
 		                                    </div>

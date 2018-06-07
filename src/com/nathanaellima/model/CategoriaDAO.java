@@ -21,7 +21,7 @@ public class CategoriaDAO extends GenericoDAO {
 		
 	}
 	
-	public void adicionar(Categoria categoria) throws SQLException {
+	public void adicionar(Categoria categoria) {
 		
 		String insertSQL = "INSERT INTO categorias_de_websites(id_instituicao, nome, descricao, data_de_criacao) "
 				+ "VALUES (?, ?, ?, ?)";
@@ -30,7 +30,7 @@ public class CategoriaDAO extends GenericoDAO {
 		
 	}
 	
-	public void editar(Categoria categoria) throws SQLException {
+	public void editar(Categoria categoria) {
 		
 		String updateSQL = "UPDATE categorias_de_websites SET nome=?, descricao=?, data_de_modificacao=? WHERE id=?";
 		
@@ -39,7 +39,7 @@ public class CategoriaDAO extends GenericoDAO {
 		
 	}
 	
-	public void excluir(long id) throws SQLException {
+	public void excluir(long id) {
 		
 		String deleteSQL =  "DELETE FROM categorias_de_websites WHERE id=?";
 		super.deletar(deleteSQL, id);

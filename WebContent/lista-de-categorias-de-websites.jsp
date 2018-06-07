@@ -21,7 +21,7 @@
 
             <ul class="nav">
                 <li class="active">
-                    <a href="CategoriaDeWebsitesController">
+                    <a href="categoriaDeWebsites?acao=listar">
                    		<i class="pe-7s-folder"></i>
                         <p>Categorias de Websites</p>
                     </a>
@@ -66,7 +66,7 @@
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">CATEGORIAS DE WEBSITES
-                                <a href="CategoriaDeWebsitesController?acao=novoCadastro" class="btn btn-success pull-right" role="button">NOVA CATEGORIA</a>
+                                <a href="categoriaDeWebsites?acao=novoCadastro" class="btn btn-success pull-right" role="button">NOVA CATEGORIA</a>
                            		</h4>
                             </div>
                             <div class="content table-responsive table-full-width">
@@ -102,12 +102,12 @@
 												</c:choose>
 												</td>
 												<td style="text-align: center;" class="td-actions">
-													<a href="CategoriaDeWebsitesController?acao=visualizar&id=${categoria.id}">
+													<a href="categoriaDeWebsites?acao=visualizar&id=${categoria.id}">
                                                     <button type="button" rel="tooltip" title="Editar" class="btn btn-info btn-simple btn-sm">
                                                         <i class="fa fa-edit"></i>
                                                     </button>
                                                     </a>
-                                                    <a href="CategoriaDeWebsitesController?acao=excluir&id=${categoria.id}">
+                                                    <a href="categoriaDeWebsites?acao=excluir&id=${categoria.id}">
                                                     <button type="button" rel="tooltip" title="Excluir" class="btn btn-danger btn-simple btn-sm">
                                                         <i class="fa fa-times"></i>
                                                     </button>

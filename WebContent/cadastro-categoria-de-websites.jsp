@@ -20,7 +20,7 @@
 
             <ul class="nav">
                 <li class="active">
-                    <a href="CategoriaDeWebsitesController">
+                    <a href="categoriaDeWebsites?acao=listar">
                    		<i class="pe-7s-folder"></i>
                         <p>Categorias de Websites</p>
                     </a>
@@ -64,19 +64,22 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
+                            	<h4 class="title">
                             	<c:choose>
 									<c:when test="${empty categoria.id}">
-                                		<h4 class="title">CADASTRAR CATEGORIA DE WEBSITES</h4>
+                                		CADASTRAR CATEGORIA DE WEBSITES
                                 	</c:when>
                                 	<c:otherwise>
-                                		<h4 class="title">EDITAR CATEGORIA DE WEBSITES</h4>
+                                		EDITAR CATEGORIA DE WEBSITES
                                 	</c:otherwise>
                                 </c:choose>
+                                <a href="categoriaDeWebsites?acao=listar" class="btn btn-default pull-right" role="button">VOLTAR</a>
+                                </h4>
                             </div>
                             <div class="content">
                             	<c:choose>
 									<c:when test="${empty categoria.id}">
-										<form action="CategoriaDeWebsitesController" method="post">
+										<form action="categoriaDeWebsites" method="post">
 		                                    <div class="row">
 		                                        <div class="col-md-12">
 		                                            <div class="form-group">
@@ -110,7 +113,7 @@
 												</div>											
 											</c:when>
 										</c:choose>
-										<form action="CategoriaDeWebsitesController" method="post">
+										<form action="categoriaDeWebsites" method="post">
 		                                    <div class="row">
 		                                        <div class="col-md-12">
 		                                            <div class="form-group">
@@ -119,7 +122,20 @@
 		                                            </div>
 		                                        </div>
 		                                    </div>
-		                                    
+		                                    <div class="row">
+		                                        <div class="col-md-6">
+		                                            <div class="form-group">
+		                                                <label>Data de Cadastro</label>
+		                                                <input type="text" class="form-control" disabled value="<fmt:formatDate value='${categoria.dataDeCriacao}' pattern='dd/MM/yyyy' />">
+		                                            </div>
+		                                        </div>
+		                                        <div class="col-md-6">
+		                                            <div class="form-group"> 
+		                                                <label>Data de Atualização de Cadastro</label>
+		                                                <input type="text" class="form-control" disabled value="<fmt:formatDate value='${categoria.dataDeModificacao}' pattern='dd/MM/yyyy' />">
+		                                            </div>
+		                                        </div>
+		                                    </div>
 		                                    <div class="row">
 		                                        <div class="col-md-12">
 		                                            <div class="form-group">

@@ -22,7 +22,7 @@
 		
 		            <ul class="nav">
 		                <li>
-		                    <a href="CategoriaDeWebsitesController">
+		                    <a href="categoriaDeWebsites?acao=listar">
 		                   		<i class="pe-7s-folder"></i>
 		                        <p>Categorias de Websites</p>
 		                    </a>

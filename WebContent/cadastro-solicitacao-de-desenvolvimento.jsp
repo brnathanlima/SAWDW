@@ -10,7 +10,7 @@
 	<div class="wrapper">
 		<c:choose>
 			<c:when test="${tipoDeUsuario == 'webDesigner'}">
-				<div class="sidebar" data-color="red">
+				<div class="sidebar" data-color="red"  data-image="assets/img/sidebar-5.jpg">
 
 					<div class="sidebar-wrapper">
 						<div class="logo">
@@ -18,7 +18,7 @@
 						</div>
 
 						<ul class="nav">
-							<li><a href="CategoriaDeWebsitesController"> <i
+							<li><a href="categoriaDeWebsites?acao=listar"> <i
 									class="pe-7s-folder"></i>
 									<p>Categorias de Websites</p>
 							</a></li>

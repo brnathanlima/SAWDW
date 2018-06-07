@@ -70,7 +70,7 @@
 				</div>
 			</div>
 		</div>
-	</div>	
+	</div>
+	
+<c:import url="/common/rodape.jsp" />	
 </body>
-
-<c:import url="/common/rodape.jsp" />

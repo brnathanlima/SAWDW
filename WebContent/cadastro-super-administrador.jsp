@@ -185,6 +185,21 @@
 		                                        </div>
 		                                    </div>
 		                                    
+		                                    <div class="row">
+		                                        <div class="col-md-6">
+		                                            <div class="form-group">
+		                                                <label>Data de Registro</label>
+		                                                <input type="text" class="form-control" disabled value="<fmt:formatDate value='${superAdministrador.dataDeRegistro}' pattern='dd/MM/yyyy' />">
+		                                            </div>
+		                                        </div>
+		                                        <div class="col-md-6">
+		                                            <div class="form-group"> 
+		                                                <label>Data de Atualização de Cadastro</label>
+		                                                <input type="text" class="form-control" disabled value="<fmt:formatDate value='${superAdministrador.dataDeModificacao}' pattern='dd/MM/yyyy' />">
+		                                            </div>
+		                                        </div>
+		                                    </div>
+		                                    
 		                                    <input type="hidden" name="id" value="${superAdministrador.id}" />
 		                                    <input type="hidden" name="acao" value="editar" />
 		                                    

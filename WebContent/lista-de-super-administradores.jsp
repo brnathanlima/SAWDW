@@ -79,17 +79,17 @@
                                 <table class="table table-hover table-striped">
                                     <thead>
                                     	<tr>
-	                                        <th style="text-align: center;">Nome</th>
-	                                    	<th style="text-align: center;">E-mail</th>
+	                                        <th>Nome</th>
+	                                    	<th>E-mail</th>
 	                                    	<th style="text-align: center;">Ações</th>
                                     	</tr>
                                     </thead>
-                                    <tbody style="text-align: center;">
+                                    <tbody>
                                         <c:forEach var="superAdministrador" items="${superAdministradores}">
 											<tr>
 												<td>${superAdministrador.nome} ${superAdministrador.sobrenome}</td>
 												<td>${superAdministrador.email}</td>
-												<td class="td-actions">
+												<td style="text-align: center;" class="td-actions">
 													<c:choose>
 														<c:when test="${superAdministrador.id == usuario.id}">
 															<a href="superAdministrador?acao=visualizar&id=${superAdministrador.id}">

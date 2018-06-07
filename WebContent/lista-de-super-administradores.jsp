@@ -26,7 +26,7 @@
                     </a>
                 </li>
                 <li class="active">
-                    <a href="SuperAdministradorController">
+                    <a href="superAdministrador?acao=listar">
                         <i class="pe-7s-user"></i>
                         <p>Super Administradores</p>
                     </a>
@@ -65,7 +65,7 @@
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">SUPER ADMINISTRADORES
-                                <a href="cadastro-super-administrador.jsp" class="btn btn-success pull-right" role="button">NOVO SUPER ADMINISTRADOR</a>
+                                <a href="superAdministrador?acao=novoCadastro" class="btn btn-success pull-right" role="button">NOVO SUPER ADMINISTRADOR</a>
                             	</h4>
                             </div>
                             <div class="content table-responsive table-full-width">
@@ -79,37 +79,43 @@
                                 <table class="table table-hover table-striped">
                                     <thead>
                                     	<tr>
-	                                        <th>Nome</th>
-	                                    	<th>Sobrenome</th>
-	                                    	<th>E-mail</th>
-	                                    	<th>Ações</th>
+	                                        <th style="text-align: center;">Nome</th>
+	                                    	<th style="text-align: center;">E-mail</th>
+	                                    	<th style="text-align: center;">Ações</th>
                                     	</tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody style="text-align: center;">
                                         <c:forEach var="superAdministrador" items="${superAdministradores}">
 											<tr>
-												
-												<td>${superAdministrador.nome}</td>
-												<td>${superAdministrador.sobrenome}</td>
+												<td>${superAdministrador.nome} ${superAdministrador.sobrenome}</td>
 												<td>${superAdministrador.email}</td>
-												
 												<td class="td-actions">
-													<a href="SuperAdministradorController?acao=visualizar&id=${superAdministrador.id}">
-                                                    <button type="button" rel="tooltip" title="Editar" class="btn btn-info btn-simple btn-sm">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                    </a>
-                                                    <a href="SuperAdministradorController?acao=excluir&id=${superAdministrador.id}">
-                                                    <button type="button" rel="tooltip" title="Excluir" class="btn btn-danger btn-simple btn-sm">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                    </a>
+													<c:choose>
+														<c:when test="${superAdministrador.id == usuario.id}">
+															<a href="superAdministrador?acao=visualizar&id=${superAdministrador.id}">
+		                                                    <button type="button" rel="tooltip" title="Visualizar" class="btn btn-info btn-simple btn-sm">
+		                                                        <i class="fa fa-eye"></i>
+		                                                    </button>
+		                                                    </a>
+														</c:when>
+														<c:otherwise>
+															<a href="superAdministrador?acao=visualizar&id=${superAdministrador.id}">
+		                                                    <button type="button" rel="tooltip" title="Editar" class="btn btn-info btn-simple btn-sm">
+		                                                        <i class="fa fa-edit"></i>
+		                                                    </button>
+		                                                    </a>
+		                                                    <a href="superAdministrador?acao=excluir&id=${superAdministrador.id}">
+		                                                    <button type="button" rel="tooltip" title="Excluir" class="btn btn-danger btn-simple btn-sm">
+		                                                        <i class="fa fa-times"></i>
+		                                                    </button>
+		                                                    </a>
+														</c:otherwise>
+													</c:choose>
                                                 </td>
 											</tr>
 										</c:forEach>
                                     </tbody>
                                 </table>
-
                             </div>
                         </div>
                     </div>

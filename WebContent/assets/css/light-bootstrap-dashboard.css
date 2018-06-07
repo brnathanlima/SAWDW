@@ -354,6 +354,15 @@ input:focus {
     margin-left: 45px;
 }
 
+.sidebar .nav a {
+    margin: 0;
+    line-height: 30px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-left: 45px;
+}
+
 .sidebar .nav i {
     font-size: 28px;
     float: left;

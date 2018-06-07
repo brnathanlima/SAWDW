@@ -26,7 +26,7 @@
                     </a>
                 </li>
                 <li class="active">
-                    <a href="SuperAdministradorController">
+                    <a href="superAdministrador?acao=listar">
                         <i class="pe-7s-user"></i>
                         <p>Super Administradores</p>
                     </a>
@@ -64,19 +64,21 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                            	<c:choose>
+                            	<h4 class="title">
+                            	<c:choose>                            		
 									<c:when test="${empty superAdministrador.id}">
-                                		<h4 class="title">CADASTRAR SUPER ADMINISTRADOR</h4>
+                                		CADASTRAR SUPER ADMINISTRADOR
                                 	</c:when>
-                                	<c:otherwise>
-                                		<h4 class="title">EDITAR CADASTRO DE SUPER ADMINISTRADOR</h4>
+                                	<c:otherwise>EDITAR CADASTRO DE SUPER ADMINISTRADOR
                                 	</c:otherwise>
                                 </c:choose>
+                                <a class="btn btn-default pull-right" href="superAdministrador?acao=listar" role="button">VOLTAR</a>         
+                                </h4>                       
                             </div>
                             <div class="content">
                             	<c:choose>
 									<c:when test="${empty superAdministrador.id}">
-										<form action="SuperAdministradorController" method="post">
+										<form action="superAdministrador" method="post">
 		                                    <div class="row">
 		                                        <div class="col-md-6">
 		                                            <div class="form-group">
@@ -137,7 +139,7 @@
 												</div>											
 											</c:when>
 										</c:choose>
-										<form action="SuperAdministradorController" method="post">
+										<form action="superAdministrador" method="post">
 		                                    <div class="row">
 		                                        <div class="col-md-6">
 		                                            <div class="form-group">
@@ -186,8 +188,7 @@
 		                                    <input type="hidden" name="id" value="${superAdministrador.id}" />
 		                                    <input type="hidden" name="acao" value="editar" />
 		                                    
-		                                    <button type="submit" class="btn btn-success btn-fill pull-left">EDITAR CADASTRO</button>
-		                                    
+		                                    <button type="submit" class="btn btn-success btn-fill pll-left">EDITAR CADASTRO</button>		                                   
 		                                    <div class="clearfix"></div>
 		                                </form>
 									</c:when>

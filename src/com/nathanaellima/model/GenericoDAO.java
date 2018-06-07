@@ -14,44 +14,68 @@ public abstract class GenericoDAO {
 		
 	}
 	
-	protected void salvar(String insertSQL, Object... parametros) throws SQLException {
+	protected void salvar(String insertSQL, Object... parametros) {
 		
-		PreparedStatement pstmt = connection.prepareStatement(insertSQL);
-		
-		for(int i=0; i<parametros.length; i++) {
+		try {
 			
-			pstmt.setObject(i+1, parametros[i]);
+			PreparedStatement pstmt = connection.prepareStatement(insertSQL);
 			
-		}
+			for(int i=0; i<parametros.length; i++) {
+				
+				pstmt.setObject(i+1, parametros[i]);
+				
+			}
+				
+			pstmt.execute();
+			pstmt.close();
 			
-		pstmt.execute();
-		pstmt.close();
-		
-	}
-	
-	protected void atualizar(String updateSQL, Object id, Object... parametros) throws SQLException {
-		
-		PreparedStatement pstmt = connection.prepareStatement(updateSQL);
-		
-		for(int i=0; i<parametros.length; i++) {
+		} catch(SQLException e) {
 			
-			pstmt.setObject(i+1, parametros[i]);
+			e.printStackTrace();
 			
 		}
 		
-		pstmt.setObject(parametros.length+1, id);
-		pstmt.execute();
-		pstmt.close();
+	}
+	
+	protected void atualizar(String updateSQL, Object id, Object... parametros) {
+		
+		try {
+			
+			PreparedStatement pstmt = connection.prepareStatement(updateSQL);
+			
+			for(int i=0; i<parametros.length; i++) {
+				
+				pstmt.setObject(i+1, parametros[i]);
+				
+			}
+			
+			pstmt.setObject(parametros.length+1, id);
+			pstmt.execute();
+			pstmt.close();
+			
+		} catch(SQLException e) {
+			
+			e.printStackTrace();
+			
+		} 
 		
 	}
 	
-	protected void deletar(String deleteSQL, long id) throws SQLException {
+	protected void deletar(String deleteSQL, long id) {
 		
-		PreparedStatement pstmt = connection.prepareStatement(deleteSQL);
-		
-		pstmt.setObject(1, id);
-		pstmt.execute();
-		pstmt.close();
+		try {
+			
+			PreparedStatement pstmt = connection.prepareStatement(deleteSQL);
+			
+			pstmt.setObject(1, id);
+			pstmt.execute();
+			pstmt.close();
+			
+		} catch(SQLException e) {
+			
+			e.printStackTrace();
+			
+		}		
 		
 	}
 	

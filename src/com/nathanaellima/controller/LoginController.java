@@ -81,7 +81,7 @@ public class LoginController extends HttpServlet {
 				
 				if (superAdministrador != null) {
 					
-					session.setAttribute("Usuario", superAdministrador);
+					session.setAttribute("usuario", superAdministrador);
 					response.sendRedirect("painel-super-administrador.jsp");
 					
 				} else {

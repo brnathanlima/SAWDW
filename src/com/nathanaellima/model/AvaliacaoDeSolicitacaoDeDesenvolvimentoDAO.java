@@ -20,7 +20,7 @@ public class AvaliacaoDeSolicitacaoDeDesenvolvimentoDAO extends GenericoDAO {
 		
 	}
 	
-	public void adicionar(AvaliacaoDeSolicitacaoDeDesenvolvimento avaliacaoDaSolicitacao) throws SQLException {
+	public void adicionar(AvaliacaoDeSolicitacaoDeDesenvolvimento avaliacaoDaSolicitacao) {
 		
 		String insertSQL = "INSERT INTO avaliacoes_de_solicitacoes_de_desenvolvimento (id_solicitacao, avaliacao, justificativa, data_de_emissao) "
 				+ "VALUES (?, ?, ?, ?)";
@@ -30,7 +30,7 @@ public class AvaliacaoDeSolicitacaoDeDesenvolvimentoDAO extends GenericoDAO {
 		
 	}
 	
-	public void editar(AvaliacaoDeSolicitacaoDeDesenvolvimento avaliacaoDaSolicitacao) throws SQLException {
+	public void editar(AvaliacaoDeSolicitacaoDeDesenvolvimento avaliacaoDaSolicitacao) {
 		
 		String updateSQL = "UPDATE avaliacoes_de_solicitacoes_de_desenvolvimento SET avaliacao=?, justificativa=?, data_de_modificacao=? WHERE id=?";
 		
@@ -39,7 +39,7 @@ public class AvaliacaoDeSolicitacaoDeDesenvolvimentoDAO extends GenericoDAO {
 		
 	}
 	
-	public void excluir(long id) throws SQLException {
+	public void excluir(long id) {
 		
 		String deleteSQL =  "DELETE FROM avaliacoes_de_solicitacoes_de_desenvolvimento WHERE id=?";
 		super.deletar(deleteSQL, id);

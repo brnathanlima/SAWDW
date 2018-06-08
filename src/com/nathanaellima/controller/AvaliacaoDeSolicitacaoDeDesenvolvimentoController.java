@@ -2,7 +2,6 @@ package com.nathanaellima.controller;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -16,7 +15,7 @@ import com.nathanaellima.model.SolicitacaoDeDesenvolvimentoDAO;
 import com.nathanaellima.modelo.AvaliacaoDeSolicitacaoDeDesenvolvimento;
 import com.nathanaellima.modelo.SolicitacaoDeDesenvolvimento;
 
-@WebServlet("/AvaliacaoDeSolicitacaoDeDesenvolvimentoController")
+@WebServlet(name="AvaliacaoDeSolicitacaoDeDesenvolvimentoController", urlPatterns= {"/avaliacaoDeSolicitacaoDeDesenvolvimento"})
 public class AvaliacaoDeSolicitacaoDeDesenvolvimentoController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -40,109 +39,101 @@ public class AvaliacaoDeSolicitacaoDeDesenvolvimentoController extends HttpServl
 		Date dataDeModificacao = null;
 		
 		String acao = req.getParameter("acao");
+			
+		switch(acao) {
 		
-		try {
+		case "emitir":
 			
-			switch(acao) {
+			idSolicitacaoDeDesenvolvimento = req.getParameter("idSolicitacaoDeDesenvolvimento");
+			avaliacao = req.getParameter("avaliacao");
+			justificativa = req.getParameter("justificativa");
+			dataDeEmissao = new Date();
 			
-			case "emitir":
-				
-				idSolicitacaoDeDesenvolvimento = req.getParameter("idSolicitacaoDeDesenvolvimento");
-				avaliacao = req.getParameter("avaliacao");
-				justificativa = req.getParameter("justificativa");
-				dataDeEmissao = new Date();
-				
-				statusDaSolicitacao = avaliacao;
-				
-				solicitacaoDeDesenvolvimentoDAO = new SolicitacaoDeDesenvolvimentoDAO(conexao);
-				solicitacaoDeDesenvolvimento = 
-						(SolicitacaoDeDesenvolvimento) solicitacaoDeDesenvolvimentoDAO.buscarPorId(Long.parseLong(idSolicitacaoDeDesenvolvimento));
-				
-				avaliacaoDaSolicitacao = new AvaliacaoDeSolicitacaoDeDesenvolvimento();
-				
-				avaliacaoDaSolicitacao.setAvaliacao(avaliacao);
-				avaliacaoDaSolicitacao.setJustificativa(justificativa);
-				avaliacaoDaSolicitacao.setSolicitacaoDeDesenvolvimento(solicitacaoDeDesenvolvimento);
-				avaliacaoDaSolicitacao.setDataDeEmissao(dataDeEmissao);
-				
-				avaliacaoDaSolicitacaoDAO = new AvaliacaoDeSolicitacaoDeDesenvolvimentoDAO(conexao);
-				avaliacaoDaSolicitacaoDAO.adicionar(avaliacaoDaSolicitacao);
-				
-				solicitacaoDeDesenvolvimentoDAO.mudarStatus(statusDaSolicitacao, solicitacaoDeDesenvolvimento.getId());
-				solicitacaoDeDesenvolvimento = 
-						(SolicitacaoDeDesenvolvimento) solicitacaoDeDesenvolvimentoDAO.buscarPorId(Long.parseLong(idSolicitacaoDeDesenvolvimento));
-				
-				req.setAttribute("successMessage", "Avaliação emitida com sucesso.");
-				req.setAttribute("solicitacaoDeDesenvolvimento", solicitacaoDeDesenvolvimento);
-				req.getRequestDispatcher("cadastro-solicitacao-de-desenvolvimento.jsp").forward(req, res);
-				
-				break;
-				
-			case "editar":
-				
-				id = req.getParameter("id");
-				idSolicitacaoDeDesenvolvimento = req.getParameter("idSolicitacaoDeDesenvolvimento");
-				avaliacao = req.getParameter("avaliacao");
-				justificativa = req.getParameter("justificativa");
-				dataDeModificacao = new Date();
-				
-				statusDaSolicitacao = avaliacao;
-				
-				avaliacaoDaSolicitacao = new AvaliacaoDeSolicitacaoDeDesenvolvimento();
-				
-				avaliacaoDaSolicitacao.setId(Long.parseLong(id));
-				avaliacaoDaSolicitacao.setAvaliacao(avaliacao);
-				avaliacaoDaSolicitacao.setJustificativa(justificativa);
-				avaliacaoDaSolicitacao.setDataDeModificacao(dataDeModificacao);
-				
-				avaliacaoDaSolicitacaoDAO = new AvaliacaoDeSolicitacaoDeDesenvolvimentoDAO(conexao);
-				avaliacaoDaSolicitacaoDAO.editar(avaliacaoDaSolicitacao);
-				
-				
-				
-				solicitacaoDeDesenvolvimentoDAO = new SolicitacaoDeDesenvolvimentoDAO(conexao);
-				
-				solicitacaoDeDesenvolvimento = 
-						(SolicitacaoDeDesenvolvimento) solicitacaoDeDesenvolvimentoDAO.buscarPorId(Long.parseLong(idSolicitacaoDeDesenvolvimento));
-				
-				solicitacaoDeDesenvolvimentoDAO.mudarStatus(statusDaSolicitacao, solicitacaoDeDesenvolvimento.getId());
-				
-				solicitacaoDeDesenvolvimento = 
-						(SolicitacaoDeDesenvolvimento) solicitacaoDeDesenvolvimentoDAO.buscarPorId(Long.parseLong(idSolicitacaoDeDesenvolvimento));
-				
-				req.setAttribute("successMessage", "Edição da avaliação realizada com sucesso.");
-				req.setAttribute("solicitacaoDeDesenvolvimento", solicitacaoDeDesenvolvimento);
-				req.getRequestDispatcher("cadastro-solicitacao-de-desenvolvimento.jsp").forward(req, res);
+			statusDaSolicitacao = avaliacao;
 			
-				break;
-				
-			case "excluir":
-				
-				id = req.getParameter("id");
-				idSolicitacaoDeDesenvolvimento = req.getParameter("idSolicitacaoDeDesenvolvimento");
-				
-				statusDaSolicitacao = "Aguardando Avaliação";
-				
-				avaliacaoDaSolicitacaoDAO = new AvaliacaoDeSolicitacaoDeDesenvolvimentoDAO(conexao);
-				avaliacaoDaSolicitacaoDAO.excluir(Long.parseLong(id));
-				
-				solicitacaoDeDesenvolvimentoDAO = new SolicitacaoDeDesenvolvimentoDAO(conexao);
-				solicitacaoDeDesenvolvimento = 
-						(SolicitacaoDeDesenvolvimento) solicitacaoDeDesenvolvimentoDAO.buscarPorId(Long.parseLong(idSolicitacaoDeDesenvolvimento));
-				solicitacaoDeDesenvolvimentoDAO.mudarStatus(statusDaSolicitacao, solicitacaoDeDesenvolvimento.getId());
-				solicitacaoDeDesenvolvimento.setStatus(statusDaSolicitacao);
-				
-				req.setAttribute("solicitacaoDeDesenvolvimento", solicitacaoDeDesenvolvimento);
-				req.setAttribute("successMessage", "Exclusão da avaliação realizada com sucesso.");
-				req.getRequestDispatcher("cadastro-solicitacao-de-desenvolvimento.jsp").forward(req, res);
-				
-				break;
-				
-			}
+			solicitacaoDeDesenvolvimentoDAO = new SolicitacaoDeDesenvolvimentoDAO(conexao);
+			solicitacaoDeDesenvolvimento = 
+					(SolicitacaoDeDesenvolvimento) solicitacaoDeDesenvolvimentoDAO.buscarPorId(Long.parseLong(idSolicitacaoDeDesenvolvimento));
 			
-		} catch (SQLException e) {
+			avaliacaoDaSolicitacao = new AvaliacaoDeSolicitacaoDeDesenvolvimento();
 			
-			e.printStackTrace();
+			avaliacaoDaSolicitacao.setAvaliacao(avaliacao);
+			avaliacaoDaSolicitacao.setJustificativa(justificativa);
+			avaliacaoDaSolicitacao.setSolicitacaoDeDesenvolvimento(solicitacaoDeDesenvolvimento);
+			avaliacaoDaSolicitacao.setDataDeEmissao(dataDeEmissao);
+			
+			avaliacaoDaSolicitacaoDAO = new AvaliacaoDeSolicitacaoDeDesenvolvimentoDAO(conexao);
+			avaliacaoDaSolicitacaoDAO.adicionar(avaliacaoDaSolicitacao);
+			
+			solicitacaoDeDesenvolvimentoDAO.mudarStatus(statusDaSolicitacao, solicitacaoDeDesenvolvimento.getId());
+			solicitacaoDeDesenvolvimento = 
+					(SolicitacaoDeDesenvolvimento) solicitacaoDeDesenvolvimentoDAO.buscarPorId(Long.parseLong(idSolicitacaoDeDesenvolvimento));
+			
+			req.setAttribute("successMessage", "Avaliação emitida com sucesso.");
+			req.setAttribute("solicitacaoDeDesenvolvimento", solicitacaoDeDesenvolvimento);
+			req.getRequestDispatcher("cadastro-solicitacao-de-desenvolvimento.jsp").forward(req, res);
+			
+			break;
+			
+		case "editar":
+			
+			id = req.getParameter("id");
+			idSolicitacaoDeDesenvolvimento = req.getParameter("idSolicitacaoDeDesenvolvimento");
+			avaliacao = req.getParameter("avaliacao");
+			justificativa = req.getParameter("justificativa");
+			dataDeModificacao = new Date();
+			
+			statusDaSolicitacao = avaliacao;
+			
+			avaliacaoDaSolicitacao = new AvaliacaoDeSolicitacaoDeDesenvolvimento();
+			
+			avaliacaoDaSolicitacao.setId(Long.parseLong(id));
+			avaliacaoDaSolicitacao.setAvaliacao(avaliacao);
+			avaliacaoDaSolicitacao.setJustificativa(justificativa);
+			avaliacaoDaSolicitacao.setDataDeModificacao(dataDeModificacao);
+			
+			avaliacaoDaSolicitacaoDAO = new AvaliacaoDeSolicitacaoDeDesenvolvimentoDAO(conexao);
+			avaliacaoDaSolicitacaoDAO.editar(avaliacaoDaSolicitacao);
+			
+			
+			
+			solicitacaoDeDesenvolvimentoDAO = new SolicitacaoDeDesenvolvimentoDAO(conexao);
+			
+			solicitacaoDeDesenvolvimento = 
+					(SolicitacaoDeDesenvolvimento) solicitacaoDeDesenvolvimentoDAO.buscarPorId(Long.parseLong(idSolicitacaoDeDesenvolvimento));
+			
+			solicitacaoDeDesenvolvimentoDAO.mudarStatus(statusDaSolicitacao, solicitacaoDeDesenvolvimento.getId());
+			
+			solicitacaoDeDesenvolvimento = 
+					(SolicitacaoDeDesenvolvimento) solicitacaoDeDesenvolvimentoDAO.buscarPorId(Long.parseLong(idSolicitacaoDeDesenvolvimento));
+			
+			req.setAttribute("successMessage", "Edição da avaliação realizada com sucesso.");
+			req.setAttribute("solicitacaoDeDesenvolvimento", solicitacaoDeDesenvolvimento);
+			req.getRequestDispatcher("cadastro-solicitacao-de-desenvolvimento.jsp").forward(req, res);
+		
+			break;
+			
+		case "excluir":
+			
+			id = req.getParameter("id");
+			idSolicitacaoDeDesenvolvimento = req.getParameter("idSolicitacaoDeDesenvolvimento");
+			
+			statusDaSolicitacao = "Aguardando Avaliação";
+			
+			avaliacaoDaSolicitacaoDAO = new AvaliacaoDeSolicitacaoDeDesenvolvimentoDAO(conexao);
+			avaliacaoDaSolicitacaoDAO.excluir(Long.parseLong(id));
+			
+			solicitacaoDeDesenvolvimentoDAO = new SolicitacaoDeDesenvolvimentoDAO(conexao);
+			solicitacaoDeDesenvolvimento = 
+					(SolicitacaoDeDesenvolvimento) solicitacaoDeDesenvolvimentoDAO.buscarPorId(Long.parseLong(idSolicitacaoDeDesenvolvimento));
+			solicitacaoDeDesenvolvimentoDAO.mudarStatus(statusDaSolicitacao, solicitacaoDeDesenvolvimento.getId());
+			solicitacaoDeDesenvolvimento.setStatus(statusDaSolicitacao);
+			
+			req.setAttribute("solicitacaoDeDesenvolvimento", solicitacaoDeDesenvolvimento);
+			req.setAttribute("successMessage", "Exclusão da avaliação realizada com sucesso.");
+			req.getRequestDispatcher("cadastro-solicitacao-de-desenvolvimento.jsp").forward(req, res);
+			
+			break;
 			
 		}
 		

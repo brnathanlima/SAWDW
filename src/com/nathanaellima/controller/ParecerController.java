@@ -2,7 +2,6 @@ package com.nathanaellima.controller;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -16,7 +15,7 @@ import com.nathanaellima.model.SolicitacaoDeDesenvolvimentoDAO;
 import com.nathanaellima.modelo.Parecer;
 import com.nathanaellima.modelo.SolicitacaoDeDesenvolvimento;
 
-@WebServlet("/ParecerController")
+@WebServlet(name="ParecerController", urlPatterns= {"/parecer"})
 public class ParecerController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -40,100 +39,91 @@ public class ParecerController extends HttpServlet {
 		Date dataDeModificacao = null;
 		
 		String acao = req.getParameter("acao");
+			
+		switch(acao) {
 		
-		try {
+		case "emitir":
 			
-			switch(acao) {
+			idSolicitacaoDeDesenvolvimento = req.getParameter("idSolicitacaoDeDesenvolvimento");
+			recomendacao = req.getParameter("recomendacao");
+			justificativa = req.getParameter("justificativa");
+			dataDeEmissao = new Date();
 			
-			case "emitir":
-				
-				idSolicitacaoDeDesenvolvimento = req.getParameter("idSolicitacaoDeDesenvolvimento");
-				recomendacao = req.getParameter("recomendacao");
-				justificativa = req.getParameter("justificativa");
-				dataDeEmissao = new Date();
-				
-				statusDaSolicitacao = "Aguardando Avaliação";
-				
-				solicitacaoDeDesenvolvimentoDAO = new SolicitacaoDeDesenvolvimentoDAO(conexao);
-				solicitacaoDeDesenvolvimento = 
-						(SolicitacaoDeDesenvolvimento) solicitacaoDeDesenvolvimentoDAO.buscarPorId(Long.parseLong(idSolicitacaoDeDesenvolvimento));
-				
-				parecer = new Parecer();
-				
-				parecer.setRecomendacao(recomendacao);
-				parecer.setJustificativa(justificativa);
-				parecer.setDataDeEmissao(dataDeEmissao);
-				parecer.setSolicitacaoDeDesenvolvimento(solicitacaoDeDesenvolvimento);
-				
-				parecerDAO = new ParecerDAO(conexao);
-				parecerDAO.adicionar(parecer);
-				
-				solicitacaoDeDesenvolvimentoDAO.mudarStatus(statusDaSolicitacao, solicitacaoDeDesenvolvimento.getId());
-				solicitacaoDeDesenvolvimento = 
-						(SolicitacaoDeDesenvolvimento) solicitacaoDeDesenvolvimentoDAO.buscarPorId(Long.parseLong(idSolicitacaoDeDesenvolvimento));
-				
-				req.setAttribute("successMessage", "Parecer emitido com sucesso.");
-				req.setAttribute("solicitacaoDeDesenvolvimento", solicitacaoDeDesenvolvimento);
-				req.getRequestDispatcher("cadastro-solicitacao-de-desenvolvimento.jsp").forward(req, res);
-				
-				break;
-				
-			case "editar":
-				
-				id = req.getParameter("id");
-				idSolicitacaoDeDesenvolvimento = req.getParameter("idSolicitacaoDeDesenvolvimento");
-				recomendacao = req.getParameter("recomendacao");
-				justificativa = req.getParameter("justificativa");
-				dataDeModificacao = new Date();
-				
-				parecer = new Parecer();
-				
-				parecer.setId(Long.parseLong(id));
-				parecer.setRecomendacao(recomendacao);
-				parecer.setJustificativa(justificativa);
-				parecer.setDataDeModificacao(dataDeModificacao);
-				
-				parecerDAO = new ParecerDAO(conexao);
-				parecerDAO.editar(parecer);
-				
-				solicitacaoDeDesenvolvimentoDAO = new SolicitacaoDeDesenvolvimentoDAO(conexao);
-				solicitacaoDeDesenvolvimento = 
-						(SolicitacaoDeDesenvolvimento) solicitacaoDeDesenvolvimentoDAO.buscarPorId(Long.parseLong(idSolicitacaoDeDesenvolvimento));
-				
-				req.setAttribute("solicitacaoDeDesenvolvimento", solicitacaoDeDesenvolvimento);
-				req.setAttribute("successMessage", "Edição do parecer realizada com sucesso.");
-				req.getRequestDispatcher("cadastro-solicitacao-de-desenvolvimento.jsp").forward(req, res);
-				
-				break;
-				
-			case "excluir":
-				
-				id = req.getParameter("id");
-				idSolicitacaoDeDesenvolvimento = req.getParameter("idSolicitacaoDeDesenvolvimento");
-				
-				statusDaSolicitacao = "Nova";
-				
-				parecerDAO = new ParecerDAO(conexao);
-				parecerDAO.excluir(Long.parseLong(id));
-				
-				solicitacaoDeDesenvolvimentoDAO = new SolicitacaoDeDesenvolvimentoDAO(conexao);
-				solicitacaoDeDesenvolvimento = 
-						(SolicitacaoDeDesenvolvimento) solicitacaoDeDesenvolvimentoDAO.buscarPorId(Long.parseLong(idSolicitacaoDeDesenvolvimento));
-				solicitacaoDeDesenvolvimentoDAO.mudarStatus(statusDaSolicitacao, solicitacaoDeDesenvolvimento.getId());
-				solicitacaoDeDesenvolvimento.setStatus(statusDaSolicitacao);
-				
-				req.setAttribute("solicitacaoDeDesenvolvimento", solicitacaoDeDesenvolvimento);
-				req.setAttribute("successMessage", "Exclusão do parecer realizada com sucesso.");
-				req.getRequestDispatcher("cadastro-solicitacao-de-desenvolvimento.jsp").forward(req, res);
-				
-				break;
-				
-			}
+			statusDaSolicitacao = "Aguardando Avaliação";
 			
+			solicitacaoDeDesenvolvimentoDAO = new SolicitacaoDeDesenvolvimentoDAO(conexao);
+			solicitacaoDeDesenvolvimento = 
+					(SolicitacaoDeDesenvolvimento) solicitacaoDeDesenvolvimentoDAO.buscarPorId(Long.parseLong(idSolicitacaoDeDesenvolvimento));
 			
-		} catch (SQLException e) {
+			parecer = new Parecer();
 			
-			e.printStackTrace();
+			parecer.setRecomendacao(recomendacao);
+			parecer.setJustificativa(justificativa);
+			parecer.setDataDeEmissao(dataDeEmissao);
+			parecer.setSolicitacaoDeDesenvolvimento(solicitacaoDeDesenvolvimento);
+			
+			parecerDAO = new ParecerDAO(conexao);
+			parecerDAO.adicionar(parecer);
+			
+			solicitacaoDeDesenvolvimentoDAO.mudarStatus(statusDaSolicitacao, solicitacaoDeDesenvolvimento.getId());
+			solicitacaoDeDesenvolvimento = 
+					(SolicitacaoDeDesenvolvimento) solicitacaoDeDesenvolvimentoDAO.buscarPorId(Long.parseLong(idSolicitacaoDeDesenvolvimento));
+			
+			req.setAttribute("successMessage", "Parecer emitido com sucesso.");
+			req.setAttribute("solicitacaoDeDesenvolvimento", solicitacaoDeDesenvolvimento);
+			req.getRequestDispatcher("cadastro-solicitacao-de-desenvolvimento.jsp").forward(req, res);
+			
+			break;
+			
+		case "editar":
+			
+			id = req.getParameter("id");
+			idSolicitacaoDeDesenvolvimento = req.getParameter("idSolicitacaoDeDesenvolvimento");
+			recomendacao = req.getParameter("recomendacao");
+			justificativa = req.getParameter("justificativa");
+			dataDeModificacao = new Date();
+			
+			parecer = new Parecer();
+			
+			parecer.setId(Long.parseLong(id));
+			parecer.setRecomendacao(recomendacao);
+			parecer.setJustificativa(justificativa);
+			parecer.setDataDeModificacao(dataDeModificacao);
+			
+			parecerDAO = new ParecerDAO(conexao);
+			parecerDAO.editar(parecer);
+			
+			solicitacaoDeDesenvolvimentoDAO = new SolicitacaoDeDesenvolvimentoDAO(conexao);
+			solicitacaoDeDesenvolvimento = 
+					(SolicitacaoDeDesenvolvimento) solicitacaoDeDesenvolvimentoDAO.buscarPorId(Long.parseLong(idSolicitacaoDeDesenvolvimento));
+			
+			req.setAttribute("solicitacaoDeDesenvolvimento", solicitacaoDeDesenvolvimento);
+			req.setAttribute("successMessage", "Edição do parecer realizada com sucesso.");
+			req.getRequestDispatcher("cadastro-solicitacao-de-desenvolvimento.jsp").forward(req, res);
+			
+			break;
+			
+		case "excluir":
+			
+			id = req.getParameter("id");
+			idSolicitacaoDeDesenvolvimento = req.getParameter("idSolicitacaoDeDesenvolvimento");
+			
+			statusDaSolicitacao = "Nova";
+			
+			parecerDAO = new ParecerDAO(conexao);
+			parecerDAO.excluir(Long.parseLong(id));
+			
+			solicitacaoDeDesenvolvimentoDAO = new SolicitacaoDeDesenvolvimentoDAO(conexao);
+			solicitacaoDeDesenvolvimento = 
+					(SolicitacaoDeDesenvolvimento) solicitacaoDeDesenvolvimentoDAO.buscarPorId(Long.parseLong(idSolicitacaoDeDesenvolvimento));
+			solicitacaoDeDesenvolvimentoDAO.mudarStatus(statusDaSolicitacao, solicitacaoDeDesenvolvimento.getId());
+			solicitacaoDeDesenvolvimento.setStatus(statusDaSolicitacao);
+			
+			req.setAttribute("solicitacaoDeDesenvolvimento", solicitacaoDeDesenvolvimento);
+			req.setAttribute("successMessage", "Exclusão do parecer realizada com sucesso.");
+			req.getRequestDispatcher("cadastro-solicitacao-de-desenvolvimento.jsp").forward(req, res);
+			
+			break;
 			
 		}
 		

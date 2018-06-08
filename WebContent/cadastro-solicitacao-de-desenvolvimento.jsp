@@ -410,7 +410,7 @@
 									
 										<%-- Testa se o usuário é Web-designer --%>
 										<c:when test="${tipoDeUsuario == 'webDesigner'}">
-											<form action="ParecerController" method="post">
+											<form action="parecer" method="post">
 												<div class="card ">
 													<div class="header">
 														<h4 class="title">PARECER TÉCNICO</h4>
@@ -486,7 +486,7 @@
 															<h4 class="title">PARECER TÉCNICO</h4>
 														</div>
 														<div class="content">
-															<form action="ParecerController" method="post">
+															<form action="parecer" method="post">
 																<div class="row">
 																	<div class="col-md-12">
 																		<div class="form-group">
@@ -495,6 +495,20 @@
 																		</div>
 																	</div>
 																</div>
+							                                    <div class="row">
+							                                        <div class="col-md-6">
+							                                            <div class="form-group">
+							                                                <label>Data de Emissão</label>
+							                                                <input type="text" class="form-control" disabled value="<fmt:formatDate value='${solicitacaoDeDesenvolvimento.parecer.dataDeEmissao}' pattern='dd/MM/yyyy' />">
+							                                            </div>
+							                                        </div>
+							                                        <div class="col-md-6">
+							                                            <div class="form-group"> 
+							                                                <label>Data de Atualização</label>
+							                                                <input type="text" class="form-control" disabled value="<fmt:formatDate value='${solicitacaoDeDesenvolvimento.parecer.dataDeModificacao}' pattern='dd/MM/yyyy' />">
+							                                            </div>
+							                                        </div>
+							                                    </div>
 																<div class="row">
 																	<div class="col-md-12">
 																		<div class="form-group">
@@ -510,7 +524,7 @@
 																
 																<button type="submit" class="btn btn-success btn-fill pull-left">EDITAR</button>
 															</form>
-															<form action="ParecerController">
+															<form action="parecer">
 																<input type="hidden" name="acao" value="excluir" /> 
 																<input type="hidden" name="id" value="${solicitacaoDeDesenvolvimento.parecer.id}" />
 																<input type="hidden" name="idSolicitacaoDeDesenvolvimento" value="${solicitacaoDeDesenvolvimento.id}" />
@@ -536,6 +550,35 @@
 																<tbody>
 																	<tr>
 																		<td>${solicitacaoDeDesenvolvimento.parecer.recomendacao}</td>
+																	</tr>
+																</tbody>
+																<thead>
+																	<tr>
+																		<th>Data de Emissão</th>
+																	</tr>
+																</thead>
+																<tbody>
+																	<tr>
+																		<td><fmt:formatDate value='${solicitacaoDeDesenvolvimento.parecer.dataDeEmissao}' pattern='dd/MM/yyyy' /></td>
+																	</tr>
+																</tbody>
+																<thead>
+																	<tr>
+																		<th>Data de Modificação</th>
+																	</tr>
+																</thead>
+																<tbody>
+																	<tr>
+																		<td>
+																		<c:choose>
+																			<c:when test=""> 
+																				<fmt:formatDate value='${solicitacaoDeDesenvolvimento.parecer.dataDeModificacao}' pattern='dd/MM/yyyy' />
+																			</c:when>
+																			<c:otherwise>
+																				Não houve modificação
+																			</c:otherwise>
+																		</c:choose>
+																		</td>
 																	</tr>
 																</tbody>
 																<thead>
@@ -572,6 +615,35 @@
 														<tbody>
 															<tr>
 																<td>${solicitacaoDeDesenvolvimento.parecer.recomendacao}</td>
+															</tr>
+														</tbody>
+														<thead>
+															<tr>
+																<th>Data de Emissão</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td><fmt:formatDate value='${solicitacaoDeDesenvolvimento.parecer.dataDeEmissao}' pattern='dd/MM/yyyy' /></td>
+															</tr>
+														</tbody>
+														<thead>
+															<tr>
+																<th>Data de Modificação</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td>
+																<c:choose>
+																	<c:when test=""> 
+																		<fmt:formatDate value='${solicitacaoDeDesenvolvimento.parecer.dataDeModificacao}' pattern='dd/MM/yyyy' />
+																	</c:when>
+																	<c:otherwise>
+																		Não houve modificação
+																	</c:otherwise>
+																</c:choose>
+																</td>
 															</tr>
 														</tbody>
 														<thead>

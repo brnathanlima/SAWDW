@@ -19,7 +19,7 @@ public class ParecerDAO extends GenericoDAO {
 		
 	}
 	
-	public void adicionar(Parecer parecer) throws SQLException {
+	public void adicionar(Parecer parecer) {
 		
 		String insertSQL = "INSERT INTO pareceres (id_solicitacao, recomendacao, justificativa, data_de_emissao) "
 				+ "VALUES (?, ?, ?, ?)";
@@ -29,7 +29,7 @@ public class ParecerDAO extends GenericoDAO {
 		
 	}
 	
-	public void editar(Parecer parecer) throws SQLException {
+	public void editar(Parecer parecer) {
 		
 		String insertSQL = "UPDATE pareceres SET recomendacao=?, justificativa=?, data_de_modificacao=? WHERE id=?";
 		
@@ -37,7 +37,7 @@ public class ParecerDAO extends GenericoDAO {
 		
 	}
 	
-	public void excluir(long id) throws SQLException {
+	public void excluir(long id) {
 		
 		String deleteSQL =  "DELETE FROM pareceres WHERE id=?";
 		super.deletar(deleteSQL, id);

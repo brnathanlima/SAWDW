@@ -218,6 +218,20 @@
 																</div>
 															</div>
 														</div>
+						                                    <div class="row">
+						                                        <div class="col-md-6">
+						                                            <div class="form-group">
+						                                                <label>Data de Registro</label>
+						                                                <input type="text" class="form-control" disabled value="<fmt:formatDate value='${solicitacaoDeDesenvolvimento.dataDeRealizacao}' pattern='dd/MM/yyyy' />">
+						                                            </div>
+						                                        </div>
+						                                        <div class="col-md-6">
+						                                            <div class="form-group"> 
+						                                                <label>Data de Atualização</label>
+						                                                <input type="text" class="form-control" disabled value="<fmt:formatDate value='${solicitacaoDeDesenvolvimento.dataDeModificacao}' pattern='dd/MM/yyyy' />">
+						                                            </div>
+						                                        </div>
+						                                    </div>
 														<div class="row">
 															<div class="col-md-12">
 																<div class="form-group">
@@ -318,6 +332,16 @@
 														<tbody>
 															<tr>
 																<td>${solicitacaoDeDesenvolvimento.status}</td>
+															</tr>
+														</tbody>
+														<thead>
+															<tr>
+																<th>Data de Realização</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td><fmt:formatDate value='${solicitacaoDeDesenvolvimento.dataDeRealizacao}' pattern='dd/MM/yyyy' /></td>
 															</tr>
 														</tbody>
 														<c:choose>

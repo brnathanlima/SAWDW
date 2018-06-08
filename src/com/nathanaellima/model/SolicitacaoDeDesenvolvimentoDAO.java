@@ -41,118 +41,142 @@ public class SolicitacaoDeDesenvolvimentoDAO extends GenericoDAO {
 		
 	}
 	
-	public void adicionar(SolicitacaoDeDesenvolvimento solicitacaoDeDesenvolvimento) throws SQLException {
+	public void adicionar(SolicitacaoDeDesenvolvimento solicitacaoDeDesenvolvimento) {
 		
 		String insertSolicitacao = "INSERT INTO solicitacoes_de_desenvolvimento(id_solicitante, titulo, justificativa,"
 				+ "status, data_de_realizacao) VALUES (?, ?, ?, ?, ?)";
 		String insertEstruturas = "INSERT INTO estruturas_de_websites_das_solicitacoes(id_solicitacao_de_desenvolvimento, id_estrutura_de_website) "
 				+ "VALUES(?, ?)";
 		
-		PreparedStatement stmt1 = connection.prepareStatement(insertSolicitacao, Statement.RETURN_GENERATED_KEYS);
-		
-		stmt1.setLong(1, solicitacaoDeDesenvolvimento.getSolicitante().getId());
-		stmt1.setString(2, solicitacaoDeDesenvolvimento.getTitulo());
-		stmt1.setString(3, solicitacaoDeDesenvolvimento.getJustificativa());
-		stmt1.setString(4, solicitacaoDeDesenvolvimento.getStatus());
-		stmt1.setDate(5, new java.sql.Date(solicitacaoDeDesenvolvimento.getDataDeRealizacao().getTime()));
-		
-		int linhasAfetadas = stmt1.executeUpdate();
-		
-		if(linhasAfetadas == 0) {
+		try {
 			
-			throw new SQLException("Falha ao adicionar solicitação.");
+			PreparedStatement stmt1 = connection.prepareStatement(insertSolicitacao, Statement.RETURN_GENERATED_KEYS);
 			
-		}
-		
-		try(ResultSet idGerado = stmt1.getGeneratedKeys()) {
+			stmt1.setLong(1, solicitacaoDeDesenvolvimento.getSolicitante().getId());
+			stmt1.setString(2, solicitacaoDeDesenvolvimento.getTitulo());
+			stmt1.setString(3, solicitacaoDeDesenvolvimento.getJustificativa());
+			stmt1.setString(4, solicitacaoDeDesenvolvimento.getStatus());
+			stmt1.setDate(5, new java.sql.Date(solicitacaoDeDesenvolvimento.getDataDeRealizacao().getTime()));
 			
-			if(idGerado.next()) {
-				
-				solicitacaoDeDesenvolvimento.setId(idGerado.getLong(1));
-				
-				PreparedStatement stmt2 = connection.prepareStatement(insertEstruturas);
-				
-				for(EstruturaDeWebsite estruturaDeWebsite : solicitacaoDeDesenvolvimento.getEstruturasDeWebsitesSolicitadas()) {
-					
-					stmt2.setLong(1, solicitacaoDeDesenvolvimento.getId());
-					stmt2.setLong(2, estruturaDeWebsite.getId());
-					
-					stmt2.execute();
-					
-				}
-				
-				stmt2.close();
-				
-			} else {
+			int linhasAfetadas = stmt1.executeUpdate();
+			
+			if(linhasAfetadas == 0) {
 				
 				throw new SQLException("Falha ao adicionar solicitação.");
 				
 			}
-		}
-		
-		stmt1.close();
-		
-	}
-	
-	public void editar(SolicitacaoDeDesenvolvimento solicitacaoDeDesenvolvimento) throws SQLException {	
-		
-		String updateSolicitacao = "UPDATE solicitacoes_de_desenvolvimento SET titulo=?, justificativa=?, data_de_modificacao=? WHERE id=?";
-		
-		PreparedStatement stmt1 = connection.prepareStatement(updateSolicitacao);
-
-		stmt1.setString(1, solicitacaoDeDesenvolvimento.getTitulo());
-		stmt1.setString(2, solicitacaoDeDesenvolvimento.getJustificativa());
-		stmt1.setDate(3, new java.sql.Date(solicitacaoDeDesenvolvimento.getDataDeModificacao().getTime()));
-		stmt1.setLong(4, solicitacaoDeDesenvolvimento.getId());
-		
-		stmt1.execute();
-		stmt1.close();
-
-		
-		String apagarEstruturasDaSolicitacao = "DELETE FROM estruturas_de_websites_das_solicitacoes WHERE id_solicitacao_de_desenvolvimento=?";
-		
-		PreparedStatement stmt2 = connection.prepareStatement(apagarEstruturasDaSolicitacao);
-		stmt2.setLong(1, solicitacaoDeDesenvolvimento.getId());
-
-		stmt2.execute();
-		stmt2.close();
-		
-		String inserirEstruturas = "INSERT INTO estruturas_de_websites_das_solicitacoes(id_solicitacao_de_desenvolvimento,"
-				+ "id_estrutura_de_website) VALUES(?, ?)";
-		
-		PreparedStatement stmt3 = connection.prepareStatement(inserirEstruturas);
-		
-		for(EstruturaDeWebsite estruturaDeWebsite : solicitacaoDeDesenvolvimento.getEstruturasDeWebsitesSolicitadas()) {
-
-			stmt3.setLong(1, solicitacaoDeDesenvolvimento.getId());
-			stmt3.setLong(2, estruturaDeWebsite.getId());
-
-			stmt3.execute();
+			
+			try(ResultSet idGerado = stmt1.getGeneratedKeys()) {
+				
+				if(idGerado.next()) {
+					
+					solicitacaoDeDesenvolvimento.setId(idGerado.getLong(1));
+					
+					PreparedStatement stmt2 = connection.prepareStatement(insertEstruturas);
+					
+					for(EstruturaDeWebsite estruturaDeWebsite : solicitacaoDeDesenvolvimento.getEstruturasDeWebsitesSolicitadas()) {
+						
+						stmt2.setLong(1, solicitacaoDeDesenvolvimento.getId());
+						stmt2.setLong(2, estruturaDeWebsite.getId());
+						
+						stmt2.execute();
+						
+					}
+					
+					stmt2.close();
+					
+				} else {
+					
+					throw new SQLException("Falha ao adicionar solicitação.");
+					
+				}
+			}
+			
+			stmt1.close();
+			
+		} catch(SQLException e) {
+			
+			e.printStackTrace();
 			
 		}
 		
-		stmt3.close();
-		
 	}
 	
-	public void mudarStatus(String status, long id) throws SQLException {
+	public void editar(SolicitacaoDeDesenvolvimento solicitacaoDeDesenvolvimento) {	
 		
-		String updateStaus = "UPDATE solicitacoes_de_desenvolvimento SET status=? WHERE id=?";
+		String updateSolicitacao = "UPDATE solicitacoes_de_desenvolvimento SET titulo=?, justificativa=?, data_de_modificacao=? WHERE id=?";
 		
-		PreparedStatement stmt = connection.prepareStatement(updateStaus);
+		try {
+			
+			PreparedStatement stmt1 = connection.prepareStatement(updateSolicitacao);
 
-		stmt.setString(1, status);
-		stmt.setLong(2, id);
-		
-		stmt.execute();
-		stmt.close();
+			stmt1.setString(1, solicitacaoDeDesenvolvimento.getTitulo());
+			stmt1.setString(2, solicitacaoDeDesenvolvimento.getJustificativa());
+			stmt1.setDate(3, new java.sql.Date(solicitacaoDeDesenvolvimento.getDataDeModificacao().getTime()));
+			stmt1.setLong(4, solicitacaoDeDesenvolvimento.getId());
+			
+			stmt1.execute();
+			stmt1.close();
+
+			
+			String apagarEstruturasDaSolicitacao = "DELETE FROM estruturas_de_websites_das_solicitacoes WHERE id_solicitacao_de_desenvolvimento=?";
+			
+			PreparedStatement stmt2 = connection.prepareStatement(apagarEstruturasDaSolicitacao);
+			stmt2.setLong(1, solicitacaoDeDesenvolvimento.getId());
+
+			stmt2.execute();
+			stmt2.close();
+			
+			String inserirEstruturas = "INSERT INTO estruturas_de_websites_das_solicitacoes(id_solicitacao_de_desenvolvimento,"
+					+ "id_estrutura_de_website) VALUES(?, ?)";
+			
+			PreparedStatement stmt3 = connection.prepareStatement(inserirEstruturas);
+			
+			for(EstruturaDeWebsite estruturaDeWebsite : solicitacaoDeDesenvolvimento.getEstruturasDeWebsitesSolicitadas()) {
+
+				stmt3.setLong(1, solicitacaoDeDesenvolvimento.getId());
+				stmt3.setLong(2, estruturaDeWebsite.getId());
+
+				stmt3.execute();
+				
+			}
+			
+			stmt3.close();
+			
+		} catch(SQLException e) {
+			
+			e.printStackTrace();
+			
+		}
 		
 	}
 	
-	public void excluir(long id) throws SQLException {
+	public void excluir(long id) {
 		
 		String deleteSQL =  "DELETE FROM solicitacoes_de_desenvolvimento WHERE id=?";
 		deletar(deleteSQL, id);
+		
+	}
+	
+	public void mudarStatus(String status, long id) {
+		
+		String updateStaus = "UPDATE solicitacoes_de_desenvolvimento SET status=? WHERE id=?";
+		
+		try {
+			
+			PreparedStatement stmt = connection.prepareStatement(updateStaus);
+
+			stmt.setString(1, status);
+			stmt.setLong(2, id);
+			
+			stmt.execute();
+			stmt.close();
+			
+		} catch(SQLException e) {
+		
+			e.printStackTrace();
+			
+		}
 		
 	}
 	
@@ -255,27 +279,8 @@ public class SolicitacaoDeDesenvolvimentoDAO extends GenericoDAO {
 			pstmt.setLong(1, idEstruturaDeWebsite);
 			ResultSet rs = pstmt.executeQuery();
 			
-			while(rs.next()) {
-				
-				gerenteDAO = new GerenteDAO(connection);
-				solicitante = gerenteDAO.buscarPorId(rs.getLong("id_solicitante"));
-				
-				SolicitacaoDeDesenvolvimento solicitacaoDeDesenvolvimento = 
-						new SolicitacaoDeDesenvolvimento.Builder()
-																  .id(rs.getLong("id"))
-																  .titulo(rs.getString("titulo"))
-																  .justificativa(rs.getString("justificativa"))
-																  .status(rs.getString("status"))
-																  .dataDeRealizacao(rs.getDate("data_de_realizacao"))
-																  .dataDeModificacao(rs.getDate("data_de_modificacao"))
-																  .solicitante(solicitante)
-																  .solicitar();
-				
-				solicitacoesDeDesenvolvimento.add(solicitacaoDeDesenvolvimento);
-				
-			}
+			obterEstruturasDaLista(rs);
 			
-			rs.close();
 			pstmt.close();
 			
 			return solicitacoesDeDesenvolvimento;
@@ -301,32 +306,8 @@ public class SolicitacaoDeDesenvolvimentoDAO extends GenericoDAO {
 			pstmt.setLong(1, idInstituicao);
 			ResultSet rs = pstmt.executeQuery();
 			
-			if (rs != null) {
-				
-				while(rs.next()) {
-					
-					gerenteDAO = new GerenteDAO(connection);
-					solicitante = gerenteDAO.buscarPorId(rs.getLong("id_solicitante"));
-					
-					SolicitacaoDeDesenvolvimento solicitacaoDeDesenvolvimento = 
-							new SolicitacaoDeDesenvolvimento.Builder()
-																	  .id(rs.getLong("id"))
-																	  .titulo(rs.getString("titulo"))
-																	  .justificativa(rs.getString("justificativa"))
-																	  .status(rs.getString("status"))
-																	  .dataDeRealizacao(rs.getDate("data_de_realizacao"))
-																	  .dataDeModificacao(rs.getDate("data_de_modificacao"))
-																	  .solicitante(solicitante)
-																	  .solicitar();
-					
-					solicitacoesDeDesenvolvimento.add(solicitacaoDeDesenvolvimento);
-					
-				}
-				
-			}
+			obterEstruturasDaLista(rs);
 			
-			
-			rs.close();
 			pstmt.close();
 			
 			return solicitacoesDeDesenvolvimento;
@@ -353,32 +334,8 @@ public class SolicitacaoDeDesenvolvimentoDAO extends GenericoDAO {
 			pstmt.setLong(1, idProjeto);
 			ResultSet rs = pstmt.executeQuery();
 			
-			if (rs != null) {
-				
-				while(rs.next()) {
-					
-					gerenteDAO = new GerenteDAO(connection);
-					solicitante = gerenteDAO.buscarPorId(rs.getLong("id_solicitante"));
-					
-					SolicitacaoDeDesenvolvimento solicitacaoDeDesenvolvimento = 
-							new SolicitacaoDeDesenvolvimento.Builder()
-																	  .id(rs.getLong("id"))
-																	  .titulo(rs.getString("titulo"))
-																	  .justificativa(rs.getString("justificativa"))
-																	  .status(rs.getString("status"))
-																	  .dataDeRealizacao(rs.getDate("data_de_realizacao"))
-																	  .dataDeModificacao(rs.getDate("data_de_modificacao"))
-																	  .solicitante(solicitante)
-																	  .solicitar();
-					
-					solicitacoesDeDesenvolvimento.add(solicitacaoDeDesenvolvimento);
-					
-				}
-				
-			}
+			obterEstruturasDaLista(rs);
 			
-			
-			rs.close();
 			pstmt.close();
 			
 			return solicitacoesDeDesenvolvimento;
@@ -388,6 +345,35 @@ public class SolicitacaoDeDesenvolvimentoDAO extends GenericoDAO {
 			throw new RuntimeException(e);
 			
 		}
+		
+	}
+	
+	private void obterEstruturasDaLista(ResultSet rs) throws SQLException {
+		
+		solicitacoesDeDesenvolvimento = new ArrayList<SolicitacaoDeDesenvolvimento>();
+		
+		if (rs != null) {
+			
+			while(rs.next()) {
+			
+				SolicitacaoDeDesenvolvimento solicitacaoDeDesenvolvimento = 
+						new SolicitacaoDeDesenvolvimento.Builder()
+																  .id(rs.getLong("id"))
+																  .titulo(rs.getString("titulo"))
+																  .justificativa(rs.getString("justificativa"))
+																  .status(rs.getString("status"))
+																  .dataDeRealizacao(rs.getDate("data_de_realizacao"))
+																  .dataDeModificacao(rs.getDate("data_de_modificacao"))
+																  .solicitante(solicitante)
+																  .solicitar();
+				
+				solicitacoesDeDesenvolvimento.add(solicitacaoDeDesenvolvimento);
+			
+			}
+			
+		}
+
+		rs.close();
 		
 	}
 

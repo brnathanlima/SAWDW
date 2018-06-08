@@ -21,8 +21,8 @@
 		
 		            <ul class="nav">
 		                <li class="active">
-		                    <a href="SolicitacaoDeDesenvolvimentoController">
-		                   		<i class="pe-7s-folder"></i>
+		                    <a href="solicitacaoDeDesenvolvimento?acao=listar">
+		                   		<i class="pe-7s-bell"></i>
 		                        <p>Solicitações de Desenvolvimento</p>
 		                    </a>
 		                </li>
@@ -60,7 +60,7 @@
 		                    </a>
 		                </li>
 		                <li class="active">
-		                    <a href="SolicitacaoDeDesenvolvimentoController">
+		                    <a href="solicitacaoDeDesenvolvimento?acao=listar">
 		                    	<i class="pe-7s-bell"></i>
 		                        <p>Solicitacoes de Desenvolvimento</p>
 		                    </a>
@@ -97,7 +97,7 @@
                                 <h4 class="title">SOLICITAÇÕES DE DESENVOLVIMENTO
                                 <c:choose>
 									<c:when test="${tipoDeUsuario == 'gerente' && usuario.departamento != 'TI'}">
-										<a href="SolicitacaoDeDesenvolvimentoController?acao=novoCadastro" class="btn btn-success pull-right" role="button">NOVA SOLICITAÇÃO DE DESENVOLVIMENTO</a>
+										<a href="solicitacaoDeDesenvolvimento?acao=novoCadastro" class="btn btn-success pull-right" role="button">NOVA SOLICITAÇÃO DE DESENVOLVIMENTO</a>
 									</c:when>
 								</c:choose>
 								</h4>
@@ -121,7 +121,7 @@
 												</c:when>
 											</c:choose>
 											<th>Data de Realização</th>
-											<th>Ações</th>
+											<th style="text-align: center;">Ações</th>
 										</tr>
                                     </thead>
                                     <tbody>
@@ -137,13 +137,13 @@
 												<td><fmt:formatDate value="${solicitacaoDeDesenvolvimento.dataDeRealizacao}" pattern="dd/MM/yyyy"/></td>
 												<c:choose>
 													<c:when test="${tipoDeUsuario == 'gerente' && usuario.departamento != 'TI' && solicitacaoDeDesenvolvimento.status == 'Nova'}">
-														<td class="td-actions">
-															<a href="SolicitacaoDeDesenvolvimentoController?acao=visualizar&id=${solicitacaoDeDesenvolvimento.id}">
+														<td style="text-align: center;" class="td-actions">
+															<a href="solicitacaoDeDesenvolvimento?acao=visualizar&id=${solicitacaoDeDesenvolvimento.id}">
 			                                                   <button type="button" rel="tooltip" title="Editar" class="btn btn-info btn-simple btn-sm">
 			                                                       <i class="fa fa-edit"></i>
 			                                                   </button>
 			                                                   </a>
-			                                                   <a href="SolicitacaoDeDesenvolvimentoController?acao=excluir&id=${solicitacaoDeDesenvolvimento.id}">
+			                                                   <a href="solicitacaoDeDesenvolvimento?acao=excluir&id=${solicitacaoDeDesenvolvimento.id}">
 			                                                   <button type="button" rel="tooltip" title="Excluir" class="btn btn-danger btn-simple btn-sm">
 			                                                       <i class="fa fa-times"></i>
 			                                                   </button>
@@ -151,13 +151,13 @@
 			                                               </td>
 													</c:when>
 													<c:otherwise>
-														<td class="td-actions">
-															<a href="SolicitacaoDeDesenvolvimentoController?acao=visualizar&id=${solicitacaoDeDesenvolvimento.id}">
+														<td style="text-align: center;" class="td-actions">
+															<a href="solicitacaoDeDesenvolvimento?acao=visualizar&id=${solicitacaoDeDesenvolvimento.id}">
 			                                                   <button type="button" rel="tooltip" title="Visualizar" class="btn btn-info btn-simple btn-sm">
 			                                                       <i class="fa fa-eye"></i>
 			                                                   </button>
-			                                                   </a>
-			                                               </td>
+			                                            	</a>
+			                                        	</td>
 													</c:otherwise>
 												</c:choose>
 											</tr>

@@ -21,8 +21,8 @@
 			
 			            <ul class="nav">
 			                <li>
-			                    <a href="SolicitacaoDeDesenvolvimentoController">
-			                   		<i class="pe-7s-folder"></i>
+			                    <a href="solicitacaoDeDesenvolvimento?acao=listar">
+			                   		<i class="pe-7s-bell"></i>
 			                        <p>Solicitações de Desenvolvimento</p>
 			                    </a>
 			                </li>

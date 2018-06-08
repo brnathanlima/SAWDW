@@ -18,15 +18,15 @@
 						</div>
 
 						<ul class="nav">
-							<li><a href="CategoriaDeWebsitesController"> <i
+							<li><a href="categoriaDeWebsites?acao=listar"> <i
 									class="pe-7s-folder"></i>
 									<p>Categorias de Websites</p>
 							</a></li>
-							<li><a href="EstruturaDeWebsiteController"> <i
+							<li><a href="estruturaDeWebsites?acao=listar"> <i
 									class="pe-7s-browser"></i>
 									<p>Estruturas de Websites</p>
 							</a></li>
-							<li><a href="SolicitacaoDeDesenvolvimentoController"> <i
+							<li><a href="solicitacaoDeDesenvolvimento?acao=listar"> <i
 									class="pe-7s-bell"></i>
 									<p>Solicitacoes de Desenvolvimento</p>
 							</a></li>
@@ -44,7 +44,7 @@
 
 						<ul class="nav">
 							<li><a
-								href="SolicitacaoDeDesenvolvimentoController"> <i
+								href="solicitacaoDeDesenvolvimento?acao=listar"> <i
 									class="pe-7s-bell"></i>
 									<p>Solicitações de Desenvolvimento</p>
 							</a></li>

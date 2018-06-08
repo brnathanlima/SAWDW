@@ -33,7 +33,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="SolicitacaoDeDesenvolvimentoController">
+                    <a href="solicitacaoDeDesenvolvimento?acao=listar">
                     	<i class="pe-7s-bell"></i>
                         <p>Solicitacoes de Desenvolvimento</p>
                     </a>

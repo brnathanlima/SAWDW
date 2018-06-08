@@ -26,7 +26,7 @@
 									class="pe-7s-browser"></i>
 									<p>Estruturas de Websites</p>
 							</a></li>
-							<li><a href="SolicitacaoDeDesenvolvimentoController"> <i
+							<li class="active"><a href="solicitacaoDeDesenvolvimento?acao=listar"> <i
 									class="pe-7s-bell"></i>
 									<p>Solicitacoes de Desenvolvimento</p>
 							</a></li>
@@ -35,7 +35,7 @@
 				</div>
 			</c:when>
 			<c:when test="${tipoDeUsuario == 'gerente'}">
-				<div class="sidebar" data-color="orange">
+				<div class="sidebar" data-color="orange"data-image="assets/img/sidebar-5.jpg">
 
 					<div class="sidebar-wrapper">
 						<div class="logo">
@@ -44,7 +44,7 @@
 
 						<ul class="nav">
 							<li class="active"><a
-								href="SolicitacaoDeDesenvolvimentoController"> <i
+								href="solicitacaoDeDesenvolvimento?acao=listar"> <i
 									class="pe-7s-bell"></i>
 									<p>Solicitações de Desenvolvimento</p>
 							</a></li>
@@ -93,10 +93,13 @@
 									<div class="col-md-12">
 										<div class="card">
 											<div class="header">
-												<h4>NOVA SOLICITAÇÃO DE DESENVOLVIMENTO DE WEBSITE</h4>
+												<h4>
+												NOVA SOLICITAÇÃO DE DESENVOLVIMENTO DE WEBSITE
+					                			<a href="solicitacaoDeDesenvolvimento?acao=listar" class="btn btn-default pull-right" role="button">VOLTAR</a>
+												</h4>
 											</div>				
 											<div class="content">
-												<form action="SolicitacaoDeDesenvolvimentoController" method="post">
+												<form action="solicitacaoDeDesenvolvimento" method="post">
 													<div class="row">
 														<div class="col-md-12">
 															<div class="form-group">
@@ -182,10 +185,13 @@
 											<c:when test="${(tipoDeUsuario == 'gerente' && usuario.departamento != 'TI') && 
 															(solicitacaoDeDesenvolvimento.status == 'Nova')}">
 												<div class="header">
-													<h4>EDITAR SOLICITAÇÃO DE DESENVOLVIMENTO</h4>
+													<h4>
+													EDITAR SOLICITAÇÃO DE DESENVOLVIMENTO
+					                				<a href="solicitacaoDeDesenvolvimento?acao=listar" class="btn btn-default pull-right" role="button">VOLTAR</a>
+													</h4>
 												</div>
 												<%-- Início do formulário de edição de Solicitação de desenvolvimento --%>
-												<form action="SolicitacaoDeDesenvolvimentoController" method="post">
+												<form action="solicitacaoDeDesenvolvimento" method="post">
 													<div class="content">
 														<c:choose>
 															<c:when test="${ not empty successMessage }">
@@ -276,7 +282,10 @@
 											<c:otherwise>
 											
 												<div class="header">
-													<h4>VISUALIZAR SOLICITAÇÃO DE DESENVOLVIMENTO</h4>
+													<h4>
+													VISUALIZAR SOLICITAÇÃO DE DESENVOLVIMENTO
+					                				<a href="solicitacaoDeDesenvolvimento?acao=listar" class="btn btn-default pull-right" role="button">VOLTAR</a>
+													</h4>
 												</div>				
 												<div class="content">
 													<c:choose>
@@ -345,18 +354,7 @@
 																<td>
 																	<ul>
 																	<c:forEach var="estruturaDeWebsiteSolicitada" items="${solicitacaoDeDesenvolvimento.estruturasDeWebsitesSolicitadas}">
-																		<c:choose>
-																			<c:when test="${tipoDeUsuario == 'webDesigner'}">
-																				<li><a href="EstruturaDeWebsiteController?acao=visualizar&id=${estruturaDeWebsiteSolicitada.id}" target="_blank">
-																					${estruturaDeWebsiteSolicitada.nome}
-																					</a>
-																				</li>
-																			</c:when>
-																			<c:otherwise>
-																				<li>${estruturaDeWebsiteSolicitada.nome}</li>
-																			</c:otherwise>
-																		</c:choose>
-																		
+																		<li>${estruturaDeWebsiteSolicitada.nome}</li>
 																	</c:forEach>
 																	</ul>
 																</td>
@@ -687,7 +685,7 @@
 											</div>
 										
 										</c:when>
-										<c:when test="${solicitacaoDeDesenvolvimento.status == 'Incluída em Projeto'}">
+										<c:when test="${solicitacaoDeDesenvolvimento.status == 'Incluída em Projeto' || solicitacaoDeDesenvolvimento.status == 'Atendida'}">
 											
 											<div class="card">
 												<div class="header">
@@ -812,7 +810,7 @@
 	            leftAll: '#excluirTodas'
 	        });
 	    });
-	    </script>
+	</script>
     
 </body>
 </html>

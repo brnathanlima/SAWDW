@@ -27,7 +27,7 @@
 		                    </a>
 		                </li>
 		                <li class="active">
-		                    <a href="EstruturaDeWebsiteController">
+		                    <a href="estruturaDeWebsites?acao=listar">
 		                    	<i class="pe-7s-browser"></i>
 		                        <p>Estruturas de Websites</p>
 		                    </a>
@@ -96,10 +96,13 @@
 		                    <div class="col-md-12">
 		                        <div class="card">
 		                            <div class="header">
-		                                <h4 class="title">CADASTRAR ESTRUTURA DE WEBSITE</h4>
+		                                <h4 class="title">
+		                                CADASTRAR ESTRUTURA DE WEBSITE
+                                		<a href="estruturaDeWebsites?acao=listar" class="btn btn-default pull-right" role="button">VOLTAR</a>
+		                                </h4>
 		                            </div>
 		                            <div class="content">
-										<form action="EstruturaDeWebsiteController">
+										<form action="estruturaDeWebsites">
 		                                    <div class="row">
 		                                        <div class="col-md-12">
 		                                            <div class="form-group">
@@ -145,14 +148,17 @@
 		                    <div class="col-md-12">
 		                        <div class="card">
 		                            <div class="header">
+		                            	<h4 class="title">
 		                            	<c:choose>
 		                            		<c:when test="${tipoDeUsuario == 'webDesigner'}">
-		                                		<h4 class="title">EDITAR ESTRUTURA DE WEBSITE</h4>
+		                                		EDITAR ESTRUTURA DE WEBSITE
 		                                	</c:when>
 		                                	<c:otherwise>
-		                                		<h4 class="title">VISUALIZAR ESTRUTURA DE WEBSITE</h4>
+		                                		VISUALIZAR ESTRUTURA DE WEBSITE
 		                                	</c:otherwise>
 		                                </c:choose>
+                                		<a href="estruturaDeWebsites?acao=listar" class="btn btn-default pull-right" role="button">VOLTAR</a>
+                                		</h4>
 		                            </div>
 		                            <div class="content">
 		                            	<c:choose>
@@ -164,7 +170,7 @@
 														</div>											
 													</c:when>
 												</c:choose>
-				                            	<form action="EstruturaDeWebsiteController">
+				                            	<form action="estruturaDeWebsites">
 				                                    <div class="row">
 				                                        <div class="col-md-12">
 				                                            <div class="form-group">
@@ -193,6 +199,20 @@
 															</div>
 														</div>
 													</div>
+													<div class="row">
+				                                        <div class="col-md-6">
+				                                            <div class="form-group">
+				                                                <label>Data de Cadastro</label>
+				                                                <input type="text" class="form-control" disabled value="<fmt:formatDate value='${estruturaDeWebsite.dataDeCriacao}' pattern='dd/MM/yyyy' />">
+				                                            </div>
+				                                        </div>
+				                                        <div class="col-md-6">
+				                                            <div class="form-group"> 
+				                                                <label>Data de Atualização de Cadastro</label>
+				                                                <input type="text" class="form-control" disabled value="<fmt:formatDate value='${estruturaDeWebsite.dataDeModificacao}' pattern='dd/MM/yyyy' />">
+				                                            </div>
+				                                        </div>
+				                                    </div>
 				                                    <div class="row">
 				                                        <div class="col-md-12">
 				                                            <div class="form-group">
@@ -230,6 +250,16 @@
 													<tbody>
 														<tr>
 															<td>${estruturaDeWebsite.categoria.nome}</td>
+														</tr>
+													</tbody>
+													<thead>
+														<tr>
+															<th>Descrição da Estrutura de Websites</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td>${estruturaDeWebsite.descricao}</td>
 														</tr>
 													</tbody>
 												</table>

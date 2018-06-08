@@ -65,7 +65,7 @@
 		                    </a>
 		                </li>
 		            	<li>
-		                    <a href="EstruturaDeWebsiteController">
+		                    <a href="estruturaDeWebsites?acao=listar">
 		                        <i class="pe-7s-browser"></i>
 		                        <p>Estruturas de Websites</p>
 		                    </a>

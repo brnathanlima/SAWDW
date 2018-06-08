@@ -2,7 +2,6 @@ package com.nathanaellima.controller;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
@@ -21,7 +20,7 @@ import com.nathanaellima.modelo.EstruturaDeWebsite;
 import com.nathanaellima.modelo.Funcionario;
 import com.nathanaellima.modelo.WebDesigner;
 
-@WebServlet("/EstruturaDeWebsiteController")
+@WebServlet(name="EstruturaDeWebsiteController", urlPatterns= {"/estruturaDeWebsites"})
 public class EstruturaDeWebsiteController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -59,136 +58,130 @@ public class EstruturaDeWebsiteController extends HttpServlet {
 		Date dataDeModificacao = null;
 		
 		String acao = req.getParameter("acao");
+			
+		switch (acao) {
 		
-		try {
+		case "novoCadastro":
 			
-			switch (acao) {
+			categoriaDAO = new CategoriaDAO(conexao);
+			categorias = categoriaDAO.listarCategoriasDaInstituicao(funcionario.getInstituicao().getId());
 			
-			case "novoCadastro":
-				
-				categoriaDAO = new CategoriaDAO(conexao);
-				categorias = categoriaDAO.listarCategoriasDaInstituicao(funcionario.getInstituicao().getId());
-				
-				req.setAttribute("categorias", categorias);
-				req.getRequestDispatcher("cadastro-estrutura-de-website.jsp").forward(req, res);
-				
-				break;
-				
-			case "cadastrar":
-				
-				idCategoria = req.getParameter("idCategoria");
-				nome = req.getParameter("nome");
-				descricao = req.getParameter("descricao");
-				dataDeCriacao = new Date();
-				
-				estruturaDeWebsite = new EstruturaDeWebsite();
-				
-				categoriaDAO = new CategoriaDAO(conexao);
-				categoria = (Categoria) categoriaDAO.buscarPorId(Long.parseLong(idCategoria));
-				
-				estruturaDeWebsite.setCategoria(categoria);
-				estruturaDeWebsite.setNome(nome);
-				estruturaDeWebsite.setDescricao(descricao);
-				estruturaDeWebsite.setDataDeCriacao(dataDeCriacao);
-				
-				estruturaDeWebsiteDAO = new EstruturaDeWebsiteDAO(conexao);
-				estruturaDeWebsiteDAO.adicionar(estruturaDeWebsite);
-				
-				estruturasDeWebsites = estruturaDeWebsiteDAO.listarEstruturasDeWebsitesDaInstituicao(funcionario.getInstituicao().getId());
-				
-				req.setAttribute("estruturasDeWebsites", estruturasDeWebsites);
-				req.setAttribute("successMessage", "Estrutura de Website cadastrada com sucesso.");
-				req.getRequestDispatcher("lista-de-estruturas-de-websites.jsp").forward(req, res);
-				
-				break;
+			req.setAttribute("categorias", categorias);
+			req.getRequestDispatcher("cadastro-estrutura-de-website.jsp").forward(req, res);
 			
-			case "visualizar":
-				
-				id = req.getParameter("id");
-				
-				estruturaDeWebsiteDAO = new EstruturaDeWebsiteDAO(conexao);
-				estruturaDeWebsite = (EstruturaDeWebsite) estruturaDeWebsiteDAO.buscarPorId(Long.parseLong(id));
-				
-				categoriaDAO = new CategoriaDAO(conexao);
-				categorias = categoriaDAO.listarCategoriasDaInstituicao(funcionario.getInstituicao().getId());
-					
-				req.setAttribute("categorias", categorias);
-				req.setAttribute("estruturaDeWebsite", estruturaDeWebsite);
-				req.getRequestDispatcher("cadastro-estrutura-de-website.jsp").forward(req, res);
-				
-				break;
+			break;
 			
-			case "editar":
-				
-				id = req.getParameter("id");
-				idCategoria = req.getParameter("idCategoria");
-				nome = req.getParameter("nome");
-				descricao = req.getParameter("descricao");
-				dataDeModificacao = new Date();
-				
-				estruturaDeWebsite = new EstruturaDeWebsite();
-				
-				categoriaDAO = new CategoriaDAO(conexao);
-				categoria = (Categoria) categoriaDAO.buscarPorId(Long.parseLong(idCategoria));
-				
-				estruturaDeWebsite.setId(Long.parseLong(id));
-				estruturaDeWebsite.setCategoria(categoria);
-				estruturaDeWebsite.setNome(nome);
-				estruturaDeWebsite.setDescricao(descricao);
-				estruturaDeWebsite.setDataDeModificacao(dataDeModificacao);
-				
-				estruturaDeWebsiteDAO = new EstruturaDeWebsiteDAO(conexao);
-				estruturaDeWebsiteDAO.editar(estruturaDeWebsite);
-				
-				categoriaDAO = new CategoriaDAO(conexao);
-				categorias = categoriaDAO.listarCategoriasDaInstituicao(funcionario.getInstituicao().getId());
-								
-				req.setAttribute("estruturaDeWebsite", estruturaDeWebsite);
-				req.setAttribute("categorias", categorias);
-				req.setAttribute("successMessage", "Cadastro atualizado.");
-				req.getRequestDispatcher("cadastro-estrutura-de-website.jsp").forward(req, res);
-								
-				break;
+		case "cadastrar":
 			
-			case "excluir":
-				
-				id = req.getParameter("id");
-				
-				estruturaDeWebsiteDAO = new EstruturaDeWebsiteDAO(conexao);
-				estruturaDeWebsiteDAO.excluir(Long.parseLong(id));
-				estruturasDeWebsites = estruturaDeWebsiteDAO.listarEstruturasDeWebsitesDaInstituicao(funcionario.getInstituicao().getId());
-				
-				req.setAttribute("estruturasDeWebsites", estruturasDeWebsites);
-				req.setAttribute("successMessage", "Estrutura de website excluída com sucesso.");
-				req.getRequestDispatcher("lista-de-estruturas-de-websites.jsp").forward(req, res);
-				
-				break;
-				
-			case "listarEstruturasDeWebsitesDaCategoria":
-				
-				idCategoria = req.getParameter("id");
-				
-				estruturaDeWebsiteDAO = new EstruturaDeWebsiteDAO(conexao);
-				estruturasDeWebsites = estruturaDeWebsiteDAO.listarEstruturasDeWebsitesDaCategoria(Long.parseLong(idCategoria));
-				
-				req.setAttribute("estruturasDeWebsites", estruturasDeWebsites);
-				req.getRequestDispatcher("lista-de-estruturas-de-websites.jsp").forward(req, res);
-				
-				break;
-				
-			}
+			idCategoria = req.getParameter("idCategoria");
+			nome = req.getParameter("nome");
+			descricao = req.getParameter("descricao");
+			dataDeCriacao = new Date();
 			
-		} catch (NullPointerException e) {
+			estruturaDeWebsite = new EstruturaDeWebsite();
+			
+			categoriaDAO = new CategoriaDAO(conexao);
+			categoria = (Categoria) categoriaDAO.buscarPorId(Long.parseLong(idCategoria));
+			
+			estruturaDeWebsite.setCategoria(categoria);
+			estruturaDeWebsite.setNome(nome);
+			estruturaDeWebsite.setDescricao(descricao);
+			estruturaDeWebsite.setDataDeCriacao(dataDeCriacao);
+			
+			estruturaDeWebsiteDAO = new EstruturaDeWebsiteDAO(conexao);
+			estruturaDeWebsiteDAO.adicionar(estruturaDeWebsite);
+			
+			estruturasDeWebsites = estruturaDeWebsiteDAO.listarEstruturasDeWebsitesDaInstituicao(funcionario.getInstituicao().getId());
+			
+			req.setAttribute("estruturasDeWebsites", estruturasDeWebsites);
+			req.setAttribute("successMessage", "Estrutura de Website cadastrada com sucesso.");
+			req.getRequestDispatcher("lista-de-estruturas-de-websites.jsp").forward(req, res);
+			
+			break;
+		
+		case "visualizar":
+			
+			id = req.getParameter("id");
+			
+			estruturaDeWebsiteDAO = new EstruturaDeWebsiteDAO(conexao);
+			estruturaDeWebsite = (EstruturaDeWebsite) estruturaDeWebsiteDAO.buscarPorId(Long.parseLong(id));
+			
+			categoriaDAO = new CategoriaDAO(conexao);
+			categorias = categoriaDAO.listarCategoriasDaInstituicao(funcionario.getInstituicao().getId());
+				
+			req.setAttribute("categorias", categorias);
+			req.setAttribute("estruturaDeWebsite", estruturaDeWebsite);
+			req.getRequestDispatcher("cadastro-estrutura-de-website.jsp").forward(req, res);
+			
+			break;
+		
+		case "editar":
+			
+			id = req.getParameter("id");
+			idCategoria = req.getParameter("idCategoria");
+			nome = req.getParameter("nome");
+			descricao = req.getParameter("descricao");
+			dataDeModificacao = new Date();
+			
+			estruturaDeWebsite = new EstruturaDeWebsite();
+			
+			categoriaDAO = new CategoriaDAO(conexao);
+			categoria = (Categoria) categoriaDAO.buscarPorId(Long.parseLong(idCategoria));
+			
+			estruturaDeWebsite.setId(Long.parseLong(id));
+			estruturaDeWebsite.setCategoria(categoria);
+			estruturaDeWebsite.setNome(nome);
+			estruturaDeWebsite.setDescricao(descricao);
+			estruturaDeWebsite.setDataDeModificacao(dataDeModificacao);
+			
+			estruturaDeWebsiteDAO = new EstruturaDeWebsiteDAO(conexao);
+			estruturaDeWebsiteDAO.editar(estruturaDeWebsite);
+			
+			categoriaDAO = new CategoriaDAO(conexao);
+			categorias = categoriaDAO.listarCategoriasDaInstituicao(funcionario.getInstituicao().getId());
+							
+			req.setAttribute("estruturaDeWebsite", estruturaDeWebsite);
+			req.setAttribute("categorias", categorias);
+			req.setAttribute("successMessage", "Cadastro atualizado.");
+			req.getRequestDispatcher("cadastro-estrutura-de-website.jsp").forward(req, res);
+							
+			break;
+		
+		case "excluir":
+			
+			id = req.getParameter("id");
+			
+			estruturaDeWebsiteDAO = new EstruturaDeWebsiteDAO(conexao);
+			estruturaDeWebsiteDAO.excluir(Long.parseLong(id));
+			estruturasDeWebsites = estruturaDeWebsiteDAO.listarEstruturasDeWebsitesDaInstituicao(funcionario.getInstituicao().getId());
+			
+			req.setAttribute("estruturasDeWebsites", estruturasDeWebsites);
+			req.setAttribute("successMessage", "Estrutura de website excluída com sucesso.");
+			req.getRequestDispatcher("lista-de-estruturas-de-websites.jsp").forward(req, res);
+			
+			break;
+			
+		case "listar":
 			
 			estruturaDeWebsiteDAO = new EstruturaDeWebsiteDAO(conexao);
 			estruturasDeWebsites = estruturaDeWebsiteDAO.listarEstruturasDeWebsitesDaInstituicao(funcionario.getInstituicao().getId());
 			
 			req.setAttribute("estruturasDeWebsites", estruturasDeWebsites);
 			req.getRequestDispatcher("lista-de-estruturas-de-websites.jsp").forward(req, res);
-						
-		} catch (SQLException e) {
 			
-			e.printStackTrace();
+			break;
+			
+		case "listarEstruturasDeWebsitesDaCategoria":
+			
+			idCategoria = req.getParameter("id");
+			
+			estruturaDeWebsiteDAO = new EstruturaDeWebsiteDAO(conexao);
+			estruturasDeWebsites = estruturaDeWebsiteDAO.listarEstruturasDeWebsitesDaCategoria(Long.parseLong(idCategoria));
+			
+			req.setAttribute("estruturasDeWebsites", estruturasDeWebsites);
+			req.getRequestDispatcher("lista-de-estruturas-de-websites.jsp").forward(req, res);
+			
+			break;
 			
 		}
 		

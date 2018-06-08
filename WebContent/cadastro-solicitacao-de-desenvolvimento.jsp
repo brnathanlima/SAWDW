@@ -22,7 +22,7 @@
 									class="pe-7s-folder"></i>
 									<p>Categorias de Websites</p>
 							</a></li>
-							<li><a href="EstruturaDeWebsiteController"> <i
+							<li><a href="estruturaDeWebsites?acao=listar"> <i
 									class="pe-7s-browser"></i>
 									<p>Estruturas de Websites</p>
 							</a></li>

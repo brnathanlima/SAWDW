@@ -28,7 +28,7 @@
 		                    </a>
 		                </li>
 		                <li class="active">
-		                    <a href="EstruturaDeWebsiteController">
+		                    <a href="estruturaDeWebsites?acao=listar">
 		                    	<i class="pe-7s-browser"></i>
 		                        <p>Estruturas de Websites</p>
 		                    </a>
@@ -99,7 +99,7 @@
                                 <h4 class="title">ESTRUTURAS DE WEBSITES
                                 <c:choose>
                                 	<c:when test="${tipoDeUsuario == 'webDesigner'}">
-                                		<a href="EstruturaDeWebsiteController?acao=novoCadastro" class="btn btn-success pull-right" role="button">NOVA ESTRUTURA DE WEBSITES</a>
+                                		<a href="estruturaDeWebsites?acao=novoCadastro" class="btn btn-success pull-right" role="button">NOVA ESTRUTURA DE WEBSITES</a>
                                 	</c:when>
                                 </c:choose>
                                 </h4>
@@ -149,19 +149,19 @@
 												<td class="td-actions">
 													<c:choose>
                                 						<c:when test="${tipoDeUsuario == 'webDesigner'}">
-                                							<a href="EstruturaDeWebsiteController?acao=visualizar&id=${estruturaDeWebsite.id}">
+                                							<a href="estruturaDeWebsites?acao=visualizar&id=${estruturaDeWebsite.id}">
 		                                                    <button type="button" rel="tooltip" title="Editar" class="btn btn-info btn-simple btn-sm">
 		                                                        <i class="fa fa-edit"></i>
 		                                                    </button>
 		                                                    </a>
-		                                                    <a href="EstruturaDeWebsiteController?acao=excluir&id=${estruturaDeWebsite.id}">
+		                                                    <a href="estruturaDeWebsites?acao=excluir&id=${estruturaDeWebsite.id}">
 		                                                    <button type="button" rel="tooltip" title="Excluir" class="btn btn-danger btn-simple btn-sm">
 		                                                        <i class="fa fa-times"></i>
 		                                                    </button>
 		                                                    </a>
                                 						</c:when>
                                 						<c:otherwise>
-                                							<a href="EstruturaDeWebsiteController?acao=visualizar&id=${estruturaDeWebsite.id}">
+                                							<a href="estruturaDeWebsites?acao=visualizar&id=${estruturaDeWebsite.id}">
 			                                                   <button type="button" rel="tooltip" title="Visualizar" class="btn btn-info btn-simple btn-sm">
 			                                                       <i class="fa fa-eye"></i>
 			                                                   </button>

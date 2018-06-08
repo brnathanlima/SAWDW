@@ -27,7 +27,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="EstruturaDeWebsiteController">
+                    <a href="estruturaDeWebsites?acao=listar">
                     	<i class="pe-7s-browser"></i>
                         <p>Estruturas de Websites</p>
                     </a>
@@ -92,7 +92,7 @@
 												<td style="text-align: center;">
 												<c:choose>
 													<c:when test="${not empty categoria.estruturasDeWebsitesDaCategoria}">
-														<a href="EstruturaDeWebsiteController?acao=listarEstruturasDeWebsitesDaCategoria&id=${categoria.id}">
+														<a href="estruturaDeWebsites?acao=listarEstruturasDeWebsitesDaCategoria&id=${categoria.id}">
 															<span class="label label-success">${fn:length(categoria.estruturasDeWebsitesDaCategoria)}</span>
 														</a>
 													</c:when>

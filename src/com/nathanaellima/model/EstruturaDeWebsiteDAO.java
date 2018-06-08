@@ -27,7 +27,7 @@ public class EstruturaDeWebsiteDAO extends GenericoDAO {
 		
 	}
 	
-	public void adicionar(EstruturaDeWebsite estruturaDeWebsite) throws SQLException {
+	public void adicionar(EstruturaDeWebsite estruturaDeWebsite) {
 		
 		String insertSQL = "INSERT INTO estruturas_de_websites (id_categoria, nome, descricao, data_de_criacao) VALUES (?, ?, ?, ?)";
 		
@@ -36,7 +36,7 @@ public class EstruturaDeWebsiteDAO extends GenericoDAO {
 		
 	}
 	
-	public void editar(EstruturaDeWebsite estruturaDeWebsite) throws SQLException {
+	public void editar(EstruturaDeWebsite estruturaDeWebsite) {
 		
 		String updateSQL = "UPDATE estruturas_de_websites SET id_categoria=?, nome=?, descricao=?, data_de_modificacao=? WHERE id=?";
 		
@@ -45,7 +45,7 @@ public class EstruturaDeWebsiteDAO extends GenericoDAO {
 		
 	}
 	
-	public void excluir(long id)  throws SQLException {
+	public void excluir(long id)  {
 		
 		String deleteSQL = "DELETE FROM estruturas_de_websites WHERE id=?";
 		super.deletar(deleteSQL, id);
@@ -58,40 +58,15 @@ public class EstruturaDeWebsiteDAO extends GenericoDAO {
 			
 			estruturasDeWebsites = new ArrayList<EstruturaDeWebsite>();
 			
-			String busca = "SELECT e.* FROM estruturas_de_websites AS e INNER JOIN  categorias_de_websites as c ON e.id_categoria = c.id WHERE "
+			String busca = "SELECT e.id FROM estruturas_de_websites AS e INNER JOIN  categorias_de_websites as c ON e.id_categoria = c.id WHERE "
 					+ "c.id_instituicao=?";
 			
 			PreparedStatement stmt = this.connection.prepareStatement(busca);
 			stmt.setLong(1, idInstituicao);
 			ResultSet rs = stmt.executeQuery();
 			
-			if (rs != null) {
-				
-				while (rs.next()) {
-					
-					estruturaDeWebsite = new EstruturaDeWebsite();
-					
-					categoriaDAO = new CategoriaDAO(connection);
-					categoria = (Categoria) categoriaDAO.buscarPorId(rs.getLong("id_categoria"));
-					
-					estruturaDeWebsite.setId(rs.getLong("id"));
-					estruturaDeWebsite.setCategoria(categoria);
-					estruturaDeWebsite.setNome(rs.getString("nome"));
-					estruturaDeWebsite.setDescricao(rs.getString("descricao"));
-					estruturaDeWebsite.setDataDeCriacao(rs.getDate("data_de_criacao"));
-					estruturaDeWebsite.setDataDeModificacao(rs.getDate("data_de_modificacao"));
-					
-					SolicitacaoDeDesenvolvimentoDAO solicitacoDeDesenvolvimentoDAO = new SolicitacaoDeDesenvolvimentoDAO(connection);
-					estruturaDeWebsite.setSolicitacoesDeDesenvolvimentoDaEstrutura(
-							solicitacoDeDesenvolvimentoDAO.listarSolicitacoesDeDesenvolvimentoDaEstruturaDeWebsite(rs.getLong("id")));
-					
-					estruturasDeWebsites.add(estruturaDeWebsite);
-					
-				}
-				
-			}
+			obterEstruturasDaLista(rs);
 			
-			rs.close();
 			stmt.close();
 			
 			return estruturasDeWebsites;
@@ -110,39 +85,14 @@ public class EstruturaDeWebsiteDAO extends GenericoDAO {
 			
 			estruturasDeWebsites = new ArrayList<EstruturaDeWebsite>();
 			
-			String busca = "SELECT e.* FROM estruturas_de_websites AS e INNER JOIN categorias_de_websites AS c ON e.id_categoria = c.id WHERE c.id=?";
+			String busca = "SELECT e.id FROM estruturas_de_websites AS e INNER JOIN categorias_de_websites AS c ON e.id_categoria = c.id WHERE c.id=?";
 			
 			PreparedStatement stmt = this.connection.prepareStatement(busca);
 			stmt.setLong(1, idCategoria);
 			ResultSet rs = stmt.executeQuery();
 			
-			if (rs != null) {
-				
-				while (rs.next()) {
-					
-					estruturaDeWebsite = new EstruturaDeWebsite();
-					
-					categoriaDAO = new CategoriaDAO(connection);
-					categoria = (Categoria) categoriaDAO.buscarPorId(rs.getLong("id_categoria"));
-					
-					estruturaDeWebsite.setId(rs.getLong("id"));
-					estruturaDeWebsite.setCategoria(categoria);
-					estruturaDeWebsite.setNome(rs.getString("nome"));
-					estruturaDeWebsite.setDescricao(rs.getString("descricao"));
-					estruturaDeWebsite.setDataDeCriacao(rs.getDate("data_de_criacao"));
-					estruturaDeWebsite.setDataDeModificacao(rs.getDate("data_de_modificacao"));
-					
-					SolicitacaoDeDesenvolvimentoDAO solicitacoDeDesenvolvimentoDAO = new SolicitacaoDeDesenvolvimentoDAO(connection);
-					estruturaDeWebsite.setSolicitacoesDeDesenvolvimentoDaEstrutura(
-							solicitacoDeDesenvolvimentoDAO.listarSolicitacoesDeDesenvolvimentoDaEstruturaDeWebsite(rs.getLong("id")));
-					
-					estruturasDeWebsites.add(estruturaDeWebsite);
-					
-				}
-				
-			}
-			
-			rs.close();
+			obterEstruturasDaLista(rs);
+
 			stmt.close();
 			
 			return estruturasDeWebsites;
@@ -155,32 +105,22 @@ public class EstruturaDeWebsiteDAO extends GenericoDAO {
 		
 	}
 	
-	public List<EstruturaDeWebsite> listarEstruturasDeWebsitesDaSolicitacao(long id) {
+	public List<EstruturaDeWebsite> listarEstruturasDeWebsitesDaSolicitacao(long idSolicitacao) {
 		
 		try {
 			
 			estruturasDeWebsites = new ArrayList<EstruturaDeWebsite>();
 			
-			String buscaEstruturas = "SELECT e.* FROM estruturas_de_websites AS e "
+			String buscaEstruturas = "SELECT e.id FROM estruturas_de_websites AS e "
 					+ "INNER JOIN estruturas_de_websites_das_solicitacoes AS es ON e.id = es.id_estrutura_de_website "
 					+ "INNER JOIN solicitacoes_de_desenvolvimento AS s ON s.id = es.id_solicitacao_de_desenvolvimento "
 					+ "WHERE s.id=?";
 			
 			PreparedStatement pstmt = connection.prepareStatement(buscaEstruturas);
-			pstmt.setLong(1, id);
+			pstmt.setLong(1, idSolicitacao);
 			ResultSet rs = pstmt.executeQuery();
 			
-			if (rs != null) {
-				
-				while(rs.next()) {
-					
-					estruturaDeWebsite = buscarPorId(rs.getLong("id"));
-					
-					estruturasDeWebsites.add(estruturaDeWebsite);
-					
-				}
-				
-			}
+			obterEstruturasDaLista(rs);
 			
 			return estruturasDeWebsites;
 			
@@ -230,6 +170,26 @@ public class EstruturaDeWebsiteDAO extends GenericoDAO {
 			throw new RuntimeException(e);
 			
 		}
+	}
+	
+	private void obterEstruturasDaLista(ResultSet rs) throws SQLException {
+		
+		estruturasDeWebsites = new ArrayList<EstruturaDeWebsite>();
+		
+		if (rs != null) {
+			
+			while(rs.next()) {
+				
+				estruturaDeWebsite = buscarPorId(rs.getLong("id"));
+				
+				estruturasDeWebsites.add(estruturaDeWebsite);
+				
+			}
+			
+		}
+		
+		rs.close();
+		
 	}
 
 }

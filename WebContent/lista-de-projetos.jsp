@@ -27,8 +27,8 @@
 			                    </a>
 			                </li>
 			                <li class="active">
-			                    <a href="ProjetoController">
-			                    	<i class="pe-7s-browser"></i>
+			                    <a href="projeto?acao=listar">
+			                    	<i class="pe-7s-network"></i>
 			                        <p>Projetos</p>
 			                    </a>
 			                </li>
@@ -97,7 +97,7 @@
                                 <h4 class="title">PROJETOS
                                 <c:choose>
                                 	<c:when test="${tipoDeUsuario == 'gerente' && usuario.departamento == 'TI'}">
-                                	<a href="ProjetoController?acao=novoCadastro" class="btn btn-success pull-right" role="button">NOVO PROJETO</a>
+                                	<a href="projeto?acao=novoCadastro" class="btn btn-success pull-right" role="button">NOVO PROJETO</a>
                                 	</c:when>
                                 </c:choose>
                                 </h4>
@@ -116,7 +116,7 @@
 	                                    	<th>Título</th>
 											<th>Status</th>
 											<th>Data de Criação</th>
-											<th>Ações</th>
+											<th style="text-align: center;">Ações</th>
                                     	</tr>
                                     </thead>
                                     <tbody>
@@ -127,13 +127,13 @@
 												<td><fmt:formatDate value="${projeto.dataDeCriacao}" pattern="dd/MM/yyyy"/></td>
 												<c:choose>
 													<c:when test="${tipoDeUsuario == 'gerente' && usuario.departamento == 'TI' && projeto.status == 'Novo'}">
-														<td class="td-actions">
-															<a href="ProjetoController?acao=visualizar&id=${projeto.id}">
+														<td style="text-align: center;" class="td-actions">
+															<a href="projeto?acao=visualizar&id=${projeto.id}">
 			                                                   <button type="button" rel="tooltip" title="Editar" class="btn btn-info btn-simple btn-sm">
 			                                                       <i class="fa fa-edit"></i>
 			                                                   </button>
 			                                                   </a>
-			                                                   <a href="ProjetoController?acao=excluir&id=${projeto.id}">
+			                                                   <a href="projeto?acao=excluir&id=${projeto.id}">
 			                                                   <button type="button" rel="tooltip" title="Excluir" class="btn btn-danger btn-simple btn-sm">
 			                                                       <i class="fa fa-times"></i>
 			                                                   </button>
@@ -141,8 +141,8 @@
 			                                               </td>
 													</c:when>
 													<c:otherwise>
-														<td class="td-actions">
-															<a href="ProjetoController?acao=visualizar&id=${projeto.id}">
+														<td style="text-align: center;" class="td-actions">
+															<a href="projeto?acao=visualizar&id=${projeto.id}">
 			                                                   <button type="button" rel="tooltip" title="Visualizar" class="btn btn-info btn-simple btn-sm">
 			                                                       <i class="fa fa-eye"></i>
 			                                                   </button>

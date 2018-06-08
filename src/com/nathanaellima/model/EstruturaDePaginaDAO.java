@@ -23,7 +23,7 @@ public class EstruturaDePaginaDAO extends GenericoDAO {
 		
 	}
 	
-	public void adicionar(EstruturaDePagina estruturaDePagina) throws SQLException {
+	public void adicionar(EstruturaDePagina estruturaDePagina) {
 		
 		String insertSQL = "INSERT INTO estruturas_de_paginas (id_estrutura_de_website	, titulo, conteudo, data_de_criacao) VALUES (?, ?, ?, ?)";
 		
@@ -32,7 +32,7 @@ public class EstruturaDePaginaDAO extends GenericoDAO {
 		
 	}
 	
-	public void editar(EstruturaDePagina estruturaDePagina) throws SQLException {
+	public void editar(EstruturaDePagina estruturaDePagina) {
 		
 		String updateSQL = "UPDATE estruturas_de_paginas SET titulo=?, conteudo=?, data_de_modificacao=? WHERE id=?";
 		
@@ -41,7 +41,7 @@ public class EstruturaDePaginaDAO extends GenericoDAO {
 		
 	}
 	
-	public void excluir(long id) throws SQLException {
+	public void excluir(long id) {
 		
 		String deleteSQL = "DELETE FROM estruturas_de_paginas WHERE id=?";
 		
@@ -87,6 +87,36 @@ public class EstruturaDePaginaDAO extends GenericoDAO {
 		} catch (SQLException e) {
 			
 			throw new RuntimeException(e);
+			
+		}
+		
+	}
+	
+	@SuppressWarnings("finally")
+	public long buscarIdDaEstruturaDeWebsite(long idEstruturaDePagina) {
+		
+		long idEstruturaDeWebsite = 0;
+		String busca = "SELECT id_estrutura_de_website FROM estruturas_de_paginas WHERE id=?";
+		
+		try {
+			
+			PreparedStatement stmt = connection.prepareStatement(busca);
+			stmt.setLong(1, idEstruturaDePagina);
+			ResultSet rs = stmt.executeQuery();
+			
+			if(rs != null && rs.next()) {
+				
+				idEstruturaDeWebsite = rs.getLong("id_estrutura_de_website");
+				
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			
+		} finally {
+			
+			return idEstruturaDeWebsite;
 			
 		}
 		

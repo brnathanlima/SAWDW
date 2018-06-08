@@ -2,7 +2,6 @@ package com.nathanaellima.controller;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -16,7 +15,7 @@ import com.nathanaellima.model.EstruturaDeWebsiteDAO;
 import com.nathanaellima.modelo.EstruturaDePagina;
 import com.nathanaellima.modelo.EstruturaDeWebsite;
 
-@WebServlet("/EstruturaDePaginaController")
+@WebServlet(name="EstruturaDePaginaController", urlPatterns= {"/estruturaDePaginas"})
 public class EstruturaDePaginaController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -39,111 +38,100 @@ public class EstruturaDePaginaController extends HttpServlet {
 		Date dataDeModificacao = null;
 		
 		String acao = req.getParameter("acao");
+			
+		switch (acao) {
 		
-		try {
+		case "novoCadastro":
 			
-			switch (acao) {
+			idEstruturaDeWebsite = req.getParameter("idEstruturaDeWebsite");
 			
-			case "novoCadastro":
-				
-				idEstruturaDeWebsite = req.getParameter("idEstruturaDeWebsite");
-				
-				req.setAttribute("idEstruturaDeWebsite", idEstruturaDeWebsite);
-				req.getRequestDispatcher("cadastro-estrutura-de-pagina.jsp").forward(req, res);
-				
-				break;
+			req.setAttribute("idEstruturaDeWebsite", idEstruturaDeWebsite);
+			req.getRequestDispatcher("cadastro-estrutura-de-pagina.jsp").forward(req, res);
 			
-			case "cadastrar":
-				
-				idEstruturaDeWebsite = req.getParameter("idEstruturaDeWebsite");
-				titulo = req.getParameter("titulo");
-				conteudo = req.getParameter("conteudo");
-				dataDeCriacao = new Date();
-				
-				estruturaDePagina = new EstruturaDePagina();
-				
-				estruturaDeWebsiteDAO = new EstruturaDeWebsiteDAO(conexao);
-				estruturaDeWebsite = estruturaDeWebsiteDAO.buscarPorId(Long.parseLong(idEstruturaDeWebsite));
-				
-				estruturaDePagina.setEstruturaDeWebsite(estruturaDeWebsite);
-				estruturaDePagina.setTitulo(titulo);
-				estruturaDePagina.setConteudo(conteudo);
-				estruturaDePagina.setDataDeCriacao(dataDeCriacao);
-				
-				estruturaDePaginaDAO = new EstruturaDePaginaDAO(conexao);
-				estruturaDePaginaDAO.adicionar(estruturaDePagina);
-				
-				estruturaDeWebsite = estruturaDeWebsiteDAO.buscarPorId(Long.parseLong(idEstruturaDeWebsite));
-				
-				req.setAttribute("estruturaDeWebsite", estruturaDeWebsite);
-				req.setAttribute("successMessage", "Página adicionada com sucesso à estrutura.");
-				req.getRequestDispatcher("cadastro-estrutura-de-website.jsp").forward(req, res);
-				
-				break;
-				
-			case "visualizar":
-				
-				id = req.getParameter("idEstruturaDePagina");
-				idEstruturaDeWebsite = req.getParameter("idEstruturaDeWebsite");
-				
-				estruturaDePaginaDAO = new EstruturaDePaginaDAO(conexao);
-				estruturaDePagina = (EstruturaDePagina) estruturaDePaginaDAO.buscarPorId(Long.parseLong(id));
-				
-				req.setAttribute("estruturaDePagina", estruturaDePagina);
-				req.setAttribute("idEstruturaDeWebsite", idEstruturaDeWebsite);
-				req.getRequestDispatcher("cadastro-estrutura-de-pagina.jsp").forward(req, res);
-				
-				break;
-				
-			case "editar":
-				
-				id = req.getParameter("id");
-				titulo = req.getParameter("titulo");
-				conteudo = req.getParameter("conteudo");
-				dataDeModificacao = new Date();
-				
-				estruturaDePagina = new EstruturaDePagina();
-				
-				estruturaDePagina.setId(Long.parseLong(id));
-				estruturaDePagina.setTitulo(titulo);
-				estruturaDePagina.setConteudo(conteudo);
-				estruturaDePagina.setDataDeModificacao(dataDeModificacao);
-				
-				estruturaDePaginaDAO = new EstruturaDePaginaDAO(conexao);
-				estruturaDePaginaDAO.editar(estruturaDePagina);
-				
-				req.setAttribute("estruturaDePagina", estruturaDePagina);
-				req.setAttribute("successMessage", "Página editada com sucesso.");
-				req.getRequestDispatcher("cadastro-estrutura-de-pagina.jsp").forward(req, res);
-				
-				break;
-				
-			case "excluir":
-				
-				id = req.getParameter("idEstruturaDePagina");
-				idEstruturaDeWebsite = req.getParameter("idEstruturaDeWebsite");
-				
-				estruturaDePaginaDAO = new EstruturaDePaginaDAO(conexao);
-				estruturaDePaginaDAO.excluir(Long.parseLong(id));
-				
-				estruturaDeWebsiteDAO = new EstruturaDeWebsiteDAO(conexao);
-				estruturaDeWebsite = estruturaDeWebsiteDAO.buscarPorId(Long.parseLong(idEstruturaDeWebsite));
-				
-				req.setAttribute("estruturaDeWebsite", estruturaDeWebsite);
-				req.setAttribute("successMessage", "Página excluída com sucesso da estrutura.");
-				req.getRequestDispatcher("cadastro-estrutura-de-website.jsp").forward(req, res);
-				
-				break;
-				
-			}
+			break;
+		
+		case "cadastrar":
 			
-		} catch (NullPointerException e) {
+			idEstruturaDeWebsite = req.getParameter("idEstruturaDeWebsite");
+			titulo = req.getParameter("titulo");
+			conteudo = req.getParameter("conteudo");
+			dataDeCriacao = new Date();
 			
-			e.printStackTrace();
+			estruturaDePagina = new EstruturaDePagina();
 			
-		} catch (SQLException e) {
+			estruturaDeWebsiteDAO = new EstruturaDeWebsiteDAO(conexao);
+			estruturaDeWebsite = estruturaDeWebsiteDAO.buscarPorId(Long.parseLong(idEstruturaDeWebsite));
 			
-			e.printStackTrace();
+			estruturaDePagina.setEstruturaDeWebsite(estruturaDeWebsite);
+			estruturaDePagina.setTitulo(titulo);
+			estruturaDePagina.setConteudo(conteudo);
+			estruturaDePagina.setDataDeCriacao(dataDeCriacao);
+			
+			estruturaDePaginaDAO = new EstruturaDePaginaDAO(conexao);
+			estruturaDePaginaDAO.adicionar(estruturaDePagina);
+			
+			estruturaDeWebsite = estruturaDeWebsiteDAO.buscarPorId(Long.parseLong(idEstruturaDeWebsite));
+			
+			req.setAttribute("estruturaDeWebsite", estruturaDeWebsite);
+			req.setAttribute("successMessage", "Página adicionada com sucesso à estrutura.");
+			req.getRequestDispatcher("cadastro-estrutura-de-website.jsp").forward(req, res);
+			
+			break;
+			
+		case "visualizar":
+			
+			id = req.getParameter("idEstruturaDePagina");
+			idEstruturaDeWebsite = req.getParameter("idEstruturaDeWebsite");
+			
+			estruturaDePaginaDAO = new EstruturaDePaginaDAO(conexao);
+			estruturaDePagina = (EstruturaDePagina) estruturaDePaginaDAO.buscarPorId(Long.parseLong(id));
+			
+			req.setAttribute("estruturaDePagina", estruturaDePagina);
+			req.setAttribute("idEstruturaDeWebsite", idEstruturaDeWebsite);
+			req.getRequestDispatcher("cadastro-estrutura-de-pagina.jsp").forward(req, res);
+			
+			break;
+			
+		case "editar":
+			
+			id = req.getParameter("id");
+			titulo = req.getParameter("titulo");
+			conteudo = req.getParameter("conteudo");
+			dataDeModificacao = new Date();
+			
+			estruturaDePagina = new EstruturaDePagina();
+			
+			estruturaDePagina.setId(Long.parseLong(id));
+			estruturaDePagina.setTitulo(titulo);
+			estruturaDePagina.setConteudo(conteudo);
+			estruturaDePagina.setDataDeModificacao(dataDeModificacao);
+			
+			estruturaDePaginaDAO = new EstruturaDePaginaDAO(conexao);
+			estruturaDePaginaDAO.editar(estruturaDePagina);
+			
+			req.setAttribute("estruturaDePagina", estruturaDePagina);
+			req.setAttribute("idEstruturaDeWebsite", estruturaDePaginaDAO.buscarIdDaEstruturaDeWebsite(estruturaDePagina.getId()));
+			req.setAttribute("successMessage", "Página editada com sucesso.");
+			req.getRequestDispatcher("cadastro-estrutura-de-pagina.jsp").forward(req, res);
+			
+			break;
+			
+		case "excluir":
+			
+			id = req.getParameter("idEstruturaDePagina");
+			idEstruturaDeWebsite = req.getParameter("idEstruturaDeWebsite");
+			
+			estruturaDePaginaDAO = new EstruturaDePaginaDAO(conexao);
+			estruturaDePaginaDAO.excluir(Long.parseLong(id));
+			
+			estruturaDeWebsiteDAO = new EstruturaDeWebsiteDAO(conexao);
+			estruturaDeWebsite = estruturaDeWebsiteDAO.buscarPorId(Long.parseLong(idEstruturaDeWebsite));
+			
+			req.setAttribute("estruturaDeWebsite", estruturaDeWebsite);
+			req.setAttribute("successMessage", "Página excluída com sucesso da estrutura.");
+			req.getRequestDispatcher("cadastro-estrutura-de-website.jsp").forward(req, res);
+			
+			break;
 			
 		}
 		

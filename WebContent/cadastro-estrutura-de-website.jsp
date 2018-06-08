@@ -60,7 +60,7 @@
 		                    </a>
 		                </li>
 		            	<li class="active">
-		                    <a href="EstruturaDeWebsiteController">
+		                    <a href="estruturaDeWebsites?acao=listar">
 		                        <i class="pe-7s-browser"></i>
 		                        <p>Estruturas de Websites</p>
 		                    </a>
@@ -275,12 +275,13 @@
 				                	<div class="col-md-12">
 					                	<div class="card">
 					                		<div class="header">
-					                			<h4>PÁGINAS DA ESTRUTURA DE WEBSITE</h4>
+					                			<h4>PÁGINAS DA ESTRUTURA DE WEBSITE
 					                			<c:choose>
 		                            				<c:when test="${tipoDeUsuario == 'webDesigner'}">
-					                					<a href="EstruturaDePaginaController?acao=novoCadastro&idEstruturaDeWebsite=${estruturaDeWebsite.id}" class="btn btn-success pull-right" role="button">NOVA PÁGINA</a>
+					                					<a href="estruturaDePaginas?acao=novoCadastro&idEstruturaDeWebsite=${estruturaDeWebsite.id}" class="btn btn-success pull-right" role="button">NOVA PÁGINA</a>
 					                				</c:when>
 					                			</c:choose>
+					                			</h4>
 					                		</div>
 					                		<div class="content table-responsive table-full-width">
 					                			<c:choose>
@@ -294,29 +295,29 @@
 															<thead>
 																<tr>
 																	<th>Título</th>
-																	<th>Ações</th>
+																	<th style="text-align: center;">Ações</th>
 																</tr>
 															</thead>
 															<tbody>
 															<c:forEach var="estruturaDePagina" items="${estruturaDeWebsite.estruturasDePaginasDoWebsite}" varStatus="id">
 																<tr>
 																	<td>${estruturaDePagina.titulo}</td>
-																	<td>
+																	<td style="text-align: center;">
 																		<c:choose>
 		                            										<c:when test="${tipoDeUsuario == 'webDesigner'}">
-																				<a href="EstruturaDePaginaController?acao=visualizar&idEstruturaDePagina=${estruturaDePagina.id}&idEstruturaDeWebsite=${estruturaDeWebsite.id}">
+																				<a href="estruturaDePaginas?acao=visualizar&idEstruturaDePagina=${estruturaDePagina.id}&idEstruturaDeWebsite=${estruturaDeWebsite.id}">
 							                                                    <button type="button" rel="tooltip" title="Editar" class="btn btn-info btn-simple btn-sm">
 							                                                        <i class="fa fa-edit"></i>
 							                                                    </button>
 							                                                    </a>
-							                                                    <a href="EstruturaDePaginaController?acao=excluir&idEstruturaDePagina=${estruturaDePagina.id}&idEstruturaDeWebsite=${estruturaDeWebsite.id}">
+							                                                    <a href="estruturaDePaginas?acao=excluir&idEstruturaDePagina=${estruturaDePagina.id}&idEstruturaDeWebsite=${estruturaDeWebsite.id}">
 							                                                    <button type="button" rel="tooltip" title="Excluir" class="btn btn-danger btn-simple btn-sm">
 							                                                        <i class="fa fa-times"></i>
 							                                                    </button>
 							                                                    </a>
 							                                        		</c:when>
 							                                        		<c:otherwise>
-							                                        			<a href="EstruturaDePaginaController?acao=visualizar&idEstruturaDePagina=${estruturaDePagina.id}&idEstruturaDeWebsite=${estruturaDeWebsite.id}">
+							                                        			<a href="estruturaDePaginas?acao=visualizar&idEstruturaDePagina=${estruturaDePagina.id}&idEstruturaDeWebsite=${estruturaDeWebsite.id}">
 								                                                   <button type="button" rel="tooltip" title="Visualizar" class="btn btn-info btn-simple btn-sm">
 								                                                       <i class="fa fa-eye"></i>
 								                                                   </button>

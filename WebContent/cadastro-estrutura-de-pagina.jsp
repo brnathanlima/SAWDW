@@ -60,7 +60,7 @@
 		                    </a>
 		                </li>
 		            	<li class="active">
-		                    <a href="EstruturaDeWebsiteController">
+		                    <a href="estruturaDeWebsites?acao=listar">
 		                        <i class="pe-7s-browser"></i>
 		                        <p>Estruturas de Websites</p>
 		                    </a>
@@ -96,10 +96,13 @@
 							<c:when test="${empty estruturaDePagina.id}">
 		                        <div class="card">
 		                            <div class="header">
-		                            	<h4 class="title">CADASTRAR ESTRUTURA DE P핯INA</h4>
+		                            	<h4 class="title">
+		                            	CADASTRAR ESTRUTURA DE P핯INA
+					                	<a href="estruturaDeWebsites?acao=visualizar&id=${idEstruturaDeWebsite}" class="btn btn-default pull-right" role="button">VOLTAR</a>
+		                            	</h4>
 		                            </div>
 		                            <div class="content">
-										<form action="EstruturaDePaginaController">
+										<form action="estruturaDePaginas">
 		                                    <div class="row">
 		                                        <div class="col-md-12">
 		                                            <div class="form-group">
@@ -131,19 +134,29 @@
 							<c:otherwise>
 								<div class="card">
 		                            <div class="header">
+		                            	<h4 class="title">
 		                            	<c:choose>
 		                            		<c:when test="${tipoDeUsuario == 'webDesigner'}">
-		                            			<h4 class="title">EDITAR ESTRUTURA DE P핯INA</h4>
+		                            			EDITAR ESTRUTURA DE P핯INA
 		                            		</c:when>
 		                            		<c:otherwise>
-		                            			<h4 class="title">VISUALIZAR ESTRUTURA DE P핯INA</h4>
+		                            			VISUALIZAR ESTRUTURA DE P핯INA
 		                            		</c:otherwise>
 		                            	</c:choose>
+					                	<a href="estruturaDeWebsites?acao=visualizar&id=${idEstruturaDeWebsite}" class="btn btn-default pull-right" role="button">VOLTAR</a>
+					                	</h4>
 		                            </div>
 		                            <div class="content">
 		                            	<c:choose>
 		                            		<c:when test="${tipoDeUsuario == 'webDesigner'}">
-												<form action="EstruturaDePaginaController">
+		                            			<c:choose>
+													<c:when test="${not empty successMessage}">
+														<div class="alert alert-success" role="alert">
+															<span> <b>Sucesso - </b>${successMessage} </span>
+														</div>											
+													</c:when>
+												</c:choose>
+												<form action="estruturaDePaginas">
 				                                    <div class="row">
 				                                        <div class="col-md-12">
 				                                            <div class="form-group">

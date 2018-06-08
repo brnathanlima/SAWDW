@@ -592,7 +592,7 @@
 															<h4 class="title">AVALIAR PROJETO</h4>
 														</div>
 														<div class="content">
-															<form action="AvaliacaoDeProjetoController" method="post">
+															<form action="avaliacaoDeProjeto" method="post">
 																<div class="row">
 																	<div class="col-md-12">
 																		<div class="form-group">
@@ -637,7 +637,7 @@
 															<h4 class="title">EDITAR AVALIAÇÃO DO PROJETO</h4>
 														</div>
 														<div class="content">
-															<form action="AvaliacaoDeProjetoController" method="post">
+															<form action="avaliacaoDeProjeto" method="post">
 																<div class="row">
 																	<div class="col-md-12">
 																		<div class="form-group">
@@ -654,6 +654,20 @@
 																		</div>
 																	</div>
 																</div>
+							                                    <div class="row">
+							                                        <div class="col-md-6">
+							                                            <div class="form-group">
+							                                                <label>Data de Emissão</label>
+							                                                <input type="text" class="form-control" disabled value="<fmt:formatDate value='${projeto.avaliacaoDoProjeto.dataDeEmissao}' pattern='dd/MM/yyyy' />">
+							                                            </div>
+							                                        </div>
+							                                        <div class="col-md-6">
+							                                            <div class="form-group"> 
+							                                                <label>Data de Atualização</label>
+							                                                <input type="text" class="form-control" disabled value="<fmt:formatDate value='${projeto.avaliacaoDoProjeto.dataDeModificacao}' pattern='dd/MM/yyyy' />">
+							                                            </div>
+							                                        </div>
+							                                    </div>
 																<div class="row">
 																	<div class="col-md-12">
 																		<div class="form-group">
@@ -669,7 +683,7 @@
 																
 																<button type="submit" class="btn btn-success btn-fill pull-left">EDITAR</button>
 															</form>
-															<form action="AvaliacaoDeProjetoController" method="post">
+															<form action="avaliacaoDeProjeto" method="post">
 																<input type="hidden" name="acao" value="excluir" />
 																<input type="hidden" name="idProjeto" value="${projeto.id}" />
 																<input type="hidden" name="id" value="${projeto.avaliacaoDoProjeto.id}" />
@@ -707,6 +721,35 @@
 														<tbody>
 															<tr>
 																<td>${projeto.avaliacaoDoProjeto.nota}</td>
+															</tr>
+														</tbody>
+														<thead>
+															<tr>
+																<th>Data de Emissão</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td>${projeto.avaliacaoDoProjeto.dataDeEmissao}</td>
+															</tr>
+														</tbody>
+														<thead>
+															<tr>
+																<th>Data de Modificação</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td>
+																<c:choose>
+																	<c:when test="${not empty projeto.avaliacaoDoProjeto.dataDeModificacao}">
+																		${projeto.avaliacaoDoProjeto.dataDeModificacao}
+																	</c:when>
+																	<c:otherwise>
+																		Não houve alteração.
+																	</c:otherwise>
+																</c:choose>
+																</td>
 															</tr>
 														</tbody>
 														<thead>

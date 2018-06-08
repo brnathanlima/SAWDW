@@ -18,7 +18,7 @@ public class AvaliacaoDeProjetoDAO extends GenericoDAO {
 		this.connection = connection;
 	}
 
-	public void adicionar(AvaliacaoDeProjeto avaliacaoDeProjeto) throws SQLException {
+	public void adicionar(AvaliacaoDeProjeto avaliacaoDeProjeto) {
 		
 		String insertAvalicao = "INSERT INTO avaliacoes_de_projetos(id_projeto, titulo, nota, comentario, data_de_emissao)"
 				+ "VALUES(?, ?, ?, ?, ?)";
@@ -28,7 +28,7 @@ public class AvaliacaoDeProjetoDAO extends GenericoDAO {
 		
 	}
 	
-	public void editar(AvaliacaoDeProjeto avaliacaoDeProjeto) throws SQLException {
+	public void editar(AvaliacaoDeProjeto avaliacaoDeProjeto) {
 		
 		String updateAvaliacao = "UPDATE avaliacoes_de_projetos SET titulo=?, nota=?, comentario=?, data_de_modificacao=? WHERE id=?";
 		
@@ -37,7 +37,7 @@ public class AvaliacaoDeProjetoDAO extends GenericoDAO {
 		
 	}
 	
-	public void excluir(long id) throws SQLException {
+	public void excluir(long id) {
 		
 		String deleteAvaliacao = "DELETE FROM avaliacoes_de_projetos WHERE id=?";
 		

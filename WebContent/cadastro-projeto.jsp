@@ -3,7 +3,7 @@
 <!doctype html>
 <html lang="pt-br">
 <head>
-	<title>SAEDW - Solicitação de Desenvolvimento de Website</title>
+	<title>SAEDW - Cadastro de Projeto</title>
 	<c:import url="/common/cabecalho.jsp" />
 </head>
 <body>
@@ -48,8 +48,8 @@
 									class="pe-7s-bell"></i>
 									<p>Solicitações de Desenvolvimento</p>
 							</a></li>
-							<li class="active"><a href="ProjetoController"> <i
-									class="pe-7s-browser"></i>
+							<li class="active"><a href="projeto?acao=listar"> <i
+									class=pe-7s-network></i>
 									<p>Projetos</p>
 							</a></li>
 						</ul>
@@ -92,7 +92,10 @@
 								<c:when test="${empty solicitacoesDeDesenvolvimento}">
 									<div class="card">
 										<div class="header">
-											<h4 class="title">SOLICITAÇÕES DE DESENVOLVIMENTO</h4>
+											<h4 class="title">
+											 NOVO PROJETO
+											<a href="projeto?acao=listar" class="btn btn-default pull-right" role="button">VOLTAR</a>											
+											</h4>
 										</div>
 										<div class="content">
 											<div class="row">
@@ -113,10 +116,13 @@
 									
 									<div class="card ">
 										<div class="header">
-											<h4 class="title">PROJETO DE DESENVOLVIMENTO</h4>
+											<h4 class="title">
+											PROJETO DE DESENVOLVIMENTO
+											<a href="projeto?acao=listar" class="btn btn-default pull-right" role="button">VOLTAR</a>
+											</h4>
 										</div>
 										<div class="content">
-											<form action="ProjetoController" method="post">
+											<form action="projeto" method="post">
 											<div class="row">
 												<div class="col-md-12">
 													<div class="form-group">
@@ -207,7 +213,10 @@
 												<div class="col-md-12">
 													<div class="card ">
 														<div class="header">
-															<h4 class="title">EDITAR PROJETO DE DESENVOLVIMENTO</h4>
+															<h4 class="title">
+															EDITAR PROJETO DE DESENVOLVIMENTO
+															<a href="projeto?acao=listar" class="btn btn-default pull-right" role="button">VOLTAR</a>											
+															</h4>
 														</div>
 														<div class="content">
 															<c:choose>
@@ -217,7 +226,7 @@
 																	</div>											
 																</c:when>
 															</c:choose>
-															<form action="ProjetoController" method="post">
+															<form action="projeto" method="post">
 																<div class="row">
 																	<div class="col-md-12">
 																		<div class="form-group">
@@ -234,6 +243,20 @@
 																		</div>
 																	</div>
 																</div>
+							                                    <div class="row">
+							                                        <div class="col-md-6">
+							                                            <div class="form-group">
+							                                                <label>Data de Registro</label>
+							                                                <input type="text" class="form-control" disabled value="<fmt:formatDate value='${projeto.dataDeCriacao}' pattern='dd/MM/yyyy' />">
+							                                            </div>
+							                                        </div>
+							                                        <div class="col-md-6">
+							                                            <div class="form-group"> 
+							                                                <label>Data de Atualização de Cadastro</label>
+							                                                <input type="text" class="form-control" disabled value="<fmt:formatDate value='${projeto.dataDeModificacao}' pattern='dd/MM/yyyy' />">
+							                                            </div>
+							                                        </div>
+							                                    </div>
 																<div class="row">
 																	<div class="col-md-12">
 																		<div class="form-group">
@@ -303,7 +326,7 @@
 															<h4 class="title">FINALIZAR PROJETO</h4>
 														</div>
 														<div class="content">
-															<form action="ProjetoController" method="post">
+															<form action="projeto" method="post">
 																<div class="row">
 																	<div class="col-md-12">
 																		<div class="form-group">
@@ -331,7 +354,10 @@
 										<c:otherwise>
 											<div class="card ">
 												<div class="header">
-													<h4 class="title">PROJETO DE DESENVOLVIMENTO</h4>
+													<h4 class="title">
+													PROJETO DE DESENVOLVIMENTO
+													<a href="projeto?acao=listar" class="btn btn-default pull-right" role="button">VOLTAR</a>
+													</h4>
 												</div>
 												<div class="content">
 													<table class="table table-bordered table-hover">
@@ -411,7 +437,10 @@
 								<c:when test="${projeto.status != 'Novo'}">
 									<div class="card ">
 										<div class="header">
-											<h4 class="title">PROJETO DE DESENVOLVIMENTO</h4>
+											<h4 class="title">
+											PROJETO DE DESENVOLVIMENTO
+											<a href="projeto?acao=listar" class="btn btn-default pull-right" role="button">VOLTAR</a>
+											</h4>
 										</div>
 										<div class="content">
 											<c:choose>
@@ -504,7 +533,7 @@
 															<h4 class="title">EDITAR RESULTADOS DO PROJETO</h4>
 														</div>
 														<div class="content">
-															<form action="ProjetoController" method="post">
+															<form action="projeto" method="post">
 																<div class="row">
 																	<div class="col-md-12">
 																		<div class="form-group">
@@ -519,7 +548,7 @@
 																
 																<button type="submit" class="btn btn-success btn-fill pull-left">EDITAR</button>
 															</form>
-															<form action="ProjetoController" method="post">
+															<form action="projeto" method="post">
 																<input type="hidden" name="acao" value="reabrirProjeto" /> 
 																<input type="hidden" name="id" value="${projeto.id}" />
 																

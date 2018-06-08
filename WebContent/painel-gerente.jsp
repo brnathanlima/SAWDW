@@ -25,8 +25,8 @@
 					</a>
 					</li>
 					<li>
-						<a href="ProjetoController"> 
-							<i class="pe-7s-browser"></i>
+						<a href="projeto?acao=listar"> 
+							<i class="pe-7s-network"></i>
 							<p>Projetos</p>
 						</a>
 					</li>

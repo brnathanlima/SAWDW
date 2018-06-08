@@ -135,7 +135,7 @@
 														<td>
 														<c:choose>
 															<c:when test="${not empty estruturaDeWebsite.solicitacoesDeDesenvolvimentoDaEstrutura}">
-																<a href="SolicitacaoDeDesenvolvimentoController?acao=listarSolicitacoesDeDesenvolvimentoPendentesDaEstrutura&id=${estruturaDeWebsite.id}">
+																<a href="solicitacaoDeDesenvolvimento?acao=listarSolicitacoesDeDesenvolvimentoPendentesDaEstrutura&id=${estruturaDeWebsite.id}">
 																	<span class="label label-success">${fn:length(estruturaDeWebsite.solicitacoesDeDesenvolvimentoDaEstrutura)}</span>
 																</a>
 															</c:when>

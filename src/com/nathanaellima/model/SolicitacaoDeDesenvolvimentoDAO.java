@@ -271,7 +271,7 @@ public class SolicitacaoDeDesenvolvimentoDAO extends GenericoDAO {
 		try {
 			
 			String busca = "SELECT s.* FROM solicitacoes_de_desenvolvimento AS s INNER JOIN estruturas_de_websites_das_solicitacoes AS es "
-					+ "ON s.id = es.id_solicitacao_de_desenvolvimento WHERE es.id_estrutura_de_website=? AND s.status IN('Nova')";
+					+ "ON s.id = es.id_solicitacao_de_desenvolvimento WHERE es.id_estrutura_de_website=? AND s.status = 'Nova'";
 			
 			solicitacoesDeDesenvolvimento = new ArrayList<SolicitacaoDeDesenvolvimento>();
 						

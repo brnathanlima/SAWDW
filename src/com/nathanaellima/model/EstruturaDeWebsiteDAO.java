@@ -155,8 +155,13 @@ public class EstruturaDeWebsiteDAO extends GenericoDAO {
 				estruturaDeWebsite.setDataDeCriacao(rs.getDate("data_de_criacao"));
 				estruturaDeWebsite.setDataDeModificacao(rs.getDate("data_de_modificacao"));
 				
+				SolicitacaoDeDesenvolvimentoDAO solicitacoDeDesenvolvimentoDAO = new SolicitacaoDeDesenvolvimentoDAO(connection);
+				estruturaDeWebsite.setSolicitacoesDeDesenvolvimentoDaEstrutura(
+						solicitacoDeDesenvolvimentoDAO.listarSolicitacoesDeDesenvolvimentoDaEstruturaDeWebsite(rs.getLong("id")));
+				
 				EstruturaDePaginaDAO estruturaDePaginaDAO = new EstruturaDePaginaDAO(connection);
-				estruturaDeWebsite.setEstruturasDePaginasDoWebsite(estruturaDePaginaDAO.listarEstruturasDePaginasDoWebsite(rs.getLong("id")));
+				estruturaDeWebsite.setEstruturasDePaginasDoWebsite(
+						estruturaDePaginaDAO.listarEstruturasDePaginasDoWebsite(rs.getLong("id")));
 				
 			}
 			

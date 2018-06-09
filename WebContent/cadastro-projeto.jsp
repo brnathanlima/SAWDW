@@ -862,38 +862,22 @@
 				
 			</div>
 			<!-- Fim do conteúdo da Página -->
-			
-			<!-- Início do rodapé -->
-			<footer class="footer">
-				<div class="container-fluid">
-					<p class="copyright pull-right">
-						&copy;
-						<script>
-							document.write(new Date().getFullYear())
-						</script>
-						<a href="https://www.nathanaellima.com">Nathanael Lima</a>
-					</p>
-				</div>
-			</footer>
-			<!-- Fim do rodapé -->
-
+	
+			<!--  Two-side Multi Select Plugin    -->
+		    <script src="assets/js/multiselect.js"></script>
+		    <script type="text/javascript">
+			    jQuery(document).ready(function($) {
+			        $('.js-multiselect').multiselect({
+			            right: '#solicitacoesDeDesenvolvimentoIncluidas',
+			            rightAll: '#incluirTodas',
+			            rightSelected: '#incluirUma',
+			            leftSelected: '#excluirUma',
+			            leftAll: '#excluirTodas'
+			        });
+			    });
+			</script>
+<c:import url="common/rodape.jsp" />
 		</div>
 	</div>
-	
-	<c:import url="/common/rodape.jsp" />
-	
-	<!--  Two-side Multi Select Plugin    -->
-    <script src="assets/js/multiselect.js"></script>
-    <script type="text/javascript">
-	    jQuery(document).ready(function($) {
-	        $('.js-multiselect').multiselect({
-	            right: '#solicitacoesDeDesenvolvimentoIncluidas',
-	            rightAll: '#incluirTodas',
-	            rightSelected: '#incluirUma',
-	            leftSelected: '#excluirUma',
-	            leftAll: '#excluirTodas'
-	        });
-	    });
-	</script>
 </body>
 </html>

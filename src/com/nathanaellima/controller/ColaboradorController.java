@@ -152,6 +152,7 @@ public class ColaboradorController extends HttpServlet {
 			
 			colaboradorDAO = new ColaboradorDAO(conexao);
 			colaboradorDAO.editar(colaborador);
+			colaborador = (Colaborador) colaboradorDAO.buscarPorId(Long.parseLong(id));
 			
 			req.setAttribute("colaborador", colaborador);
 			req.setAttribute("successMessage", "Cadastro atualizado.");

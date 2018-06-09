@@ -108,6 +108,7 @@ public class EstruturaDePaginaController extends HttpServlet {
 			
 			estruturaDePaginaDAO = new EstruturaDePaginaDAO(conexao);
 			estruturaDePaginaDAO.editar(estruturaDePagina);
+			estruturaDePagina = (EstruturaDePagina) estruturaDePaginaDAO.buscarPorId(Long.parseLong(id));
 			
 			req.setAttribute("estruturaDePagina", estruturaDePagina);
 			req.setAttribute("idEstruturaDeWebsite", estruturaDePaginaDAO.buscarIdDaEstruturaDeWebsite(estruturaDePagina.getId()));

@@ -147,6 +147,7 @@ public class GerenteController extends HttpServlet {
 			
 			gerenteDAO = new GerenteDAO(conexao);
 			gerenteDAO.editar(gerente);
+			gerente = (Gerente) gerenteDAO.buscarPorId(Long.parseLong(id));
 			
 			req.setAttribute("gerente", gerente);
 			req.setAttribute("successMessage", "Cadastro atualizado.");

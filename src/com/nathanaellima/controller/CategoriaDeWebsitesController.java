@@ -105,6 +105,7 @@ public class CategoriaDeWebsitesController extends HttpServlet {
 			categoria.setDataDeModificacao(dataDeModificacao);
 			
 			categoriaDAO.editar(categoria);
+			categoria = (Categoria) categoriaDAO.buscarPorId(Long.parseLong(id));
 			
 			req.setAttribute("categoria", categoria);
 			req.setAttribute("successMessage", "Cadastro atualizado.");

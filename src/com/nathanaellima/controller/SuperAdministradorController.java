@@ -118,6 +118,7 @@ public class SuperAdministradorController extends HttpServlet {
 			superAdministradorDAO = new SuperAdministradorDAO(conexao);
 
 			superAdministradorDAO.editar(superAdministrador);
+			superAdministrador = (SuperAdministrador) superAdministradorDAO.buscarPorId(Long.parseLong(id));
 			
 			req.setAttribute("superAdministrador", superAdministrador);
 			req.setAttribute("successMessage", "Cadastro atualizado.");

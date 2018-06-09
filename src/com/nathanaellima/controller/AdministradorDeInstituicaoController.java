@@ -155,6 +155,7 @@ public class AdministradorDeInstituicaoController extends HttpServlet {
 			
 			administradorDeInstituicaoDAO = new AdministradorDeInstituicaoDAO(conexao);
 			administradorDeInstituicaoDAO.editar(administradorDeInstituicao);
+			administradorDeInstituicao = (AdministradorDeInstituicao) administradorDeInstituicaoDAO.buscarPorId(Long.parseLong(id));
 			
 			instituicaoDAO = new InstituicaoDAO(conexao);
 			instituicoes = instituicaoDAO.listar();

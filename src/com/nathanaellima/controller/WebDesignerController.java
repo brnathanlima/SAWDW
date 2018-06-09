@@ -147,6 +147,7 @@ public class WebDesignerController extends HttpServlet {
 			
 			webDesignerDAO = new WebDesignerDAO(conexao);
 			webDesignerDAO.editar(webDesigner);
+			webDesigner = (WebDesigner) webDesignerDAO.buscarPorId(Long.parseLong(id));
 			
 			req.setAttribute("webDesigner", webDesigner);
 			req.setAttribute("successMessage", "Cadastro atualizado.");

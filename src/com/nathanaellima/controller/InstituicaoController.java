@@ -126,6 +126,7 @@ public class InstituicaoController extends HttpServlet {
 			instituicaoDAO = new InstituicaoDAO(conexao);
 
 			instituicaoDAO.editar(instituicao);
+			instituicao = (Instituicao) instituicaoDAO.buscarPorId(id);
 			
 			req.setAttribute("instituicao", instituicao);
 			req.setAttribute("successMessage", "Cadastro atualizado.");

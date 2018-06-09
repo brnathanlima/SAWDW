@@ -228,7 +228,14 @@
 						                                        <div class="col-md-6">
 						                                            <div class="form-group"> 
 						                                                <label>Data de Atualização</label>
-						                                                <input type="text" class="form-control" disabled value="<fmt:formatDate value='${solicitacaoDeDesenvolvimento.dataDeModificacao}' pattern='dd/MM/yyyy' />">
+						                                                 <c:choose>
+						                                                	<c:when test="${not empty solicitacaoDeDesenvolvimento.dataDeModificacao}">
+						                                                		<input type="text" class="form-control" disabled value="<fmt:formatDate value='${solicitacaoDeDesenvolvimento.dataDeModificacao}' pattern='dd/MM/yyyy' />">
+						                                                	</c:when>
+						                                                	<c:otherwise>
+						                                               			 <input type="text" class="form-control" disabled value="Não houve modificação"/>
+						                                                	</c:otherwise>		                                                
+						                                                </c:choose>
 						                                            </div>
 						                                        </div>
 						                                    </div>
@@ -505,7 +512,14 @@
 							                                        <div class="col-md-6">
 							                                            <div class="form-group"> 
 							                                                <label>Data de Atualização</label>
-							                                                <input type="text" class="form-control" disabled value="<fmt:formatDate value='${solicitacaoDeDesenvolvimento.parecer.dataDeModificacao}' pattern='dd/MM/yyyy' />">
+							                                                <c:choose>
+							                                                	<c:when test="${not empty solicitacaoDeDesenvolvimento.parecer.dataDeModificacao}">
+							                                                		<input type="text" class="form-control" disabled value="<fmt:formatDate value='${solicitacaoDeDesenvolvimento.parecer.dataDeModificacao}' pattern='dd/MM/yyyy' />">
+							                                                	</c:when>
+							                                                	<c:otherwise>
+							                                               			 <input type="text" class="form-control" disabled value="Não houve modificação"/>
+							                                                	</c:otherwise>		                                                
+							                                                </c:choose>
 							                                            </div>
 							                                        </div>
 							                                    </div>
@@ -765,7 +779,14 @@
 					                                        <div class="col-md-6">
 					                                            <div class="form-group"> 
 					                                                <label>Data de Atualização</label>
-					                                                <input type="text" class="form-control" disabled value="<fmt:formatDate value='${solicitacaoDeDesenvolvimento.avaliacaoDaSolicitacao.dataDeModificacao}' pattern='dd/MM/yyyy' />">
+					                                                <c:choose>
+					                                                	<c:when test="${not empty solicitacaoDeDesenvolvimento.avaliacaoDaSolicitacao.dataDeModificacao}">
+					                                                		<input type="text" class="form-control" disabled value="<fmt:formatDate value='${solicitacaoDeDesenvolvimento.avaliacaoDaSolicitacao.dataDeModificacao}' pattern='dd/MM/yyyy' />">
+					                                                	</c:when>
+					                                                	<c:otherwise>
+					                                               			 <input type="text" class="form-control" disabled value="Não houve modificação"/>
+					                                                	</c:otherwise>		                                                
+					                                                </c:choose>
 					                                            </div>
 					                                        </div>
 					                                    </div>

@@ -165,7 +165,27 @@
 				                                            </div>
 				                                        </div>
 				                                    </div>
-				                                    
+				                                    <div class="row">
+				                                        <div class="col-md-6">
+				                                            <div class="form-group">
+				                                                <label>Data de Registro</label>
+				                                                <input type="text" class="form-control" disabled value="<fmt:formatDate value='${estruturaDePagina.dataDeCriacao}' pattern='dd/MM/yyyy' />">
+				                                            </div>
+				                                        </div>
+				                                        <div class="col-md-6">
+				                                            <div class="form-group"> 
+				                                                <label>Data de Atualização</label>
+				                                                <c:choose>
+				                                                	<c:when test="${not empty estruturaDePagina.dataDeModificacao}">
+				                                                		<input type="text" class="form-control" disabled value="<fmt:formatDate value='${estruturaDePagina.dataDeModificacao}' pattern='dd/MM/yyyy' />">
+				                                                	</c:when>
+				                                                	<c:otherwise>
+				                                               			 <input type="text" class="form-control" disabled value="Não houve modificação"/>
+				                                                	</c:otherwise>		                                                
+				                                                </c:choose>
+				                                            </div>
+				                                        </div>
+				                                    </div>
 				                                    <div class="row">
 				                                        <div class="col-md-12">
 				                                            <div class="form-group">

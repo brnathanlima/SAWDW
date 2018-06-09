@@ -253,7 +253,14 @@
 							                                        <div class="col-md-6">
 							                                            <div class="form-group"> 
 							                                                <label>Data de Atualização de Cadastro</label>
-							                                                <input type="text" class="form-control" disabled value="<fmt:formatDate value='${projeto.dataDeModificacao}' pattern='dd/MM/yyyy' />">
+							                                                <c:choose>
+							                                                	<c:when test="${not empty projeto.dataDeModificacao}">
+							                                                		<input type="text" class="form-control" disabled value="<fmt:formatDate value='${projeto.dataDeModificacao}' pattern='dd/MM/yyyy' />">
+							                                                	</c:when>
+							                                                	<c:otherwise>
+							                                               			 <input type="text" class="form-control" disabled value="Não houve modificação"/>
+							                                                	</c:otherwise>		                                                
+							                                                </c:choose>
 							                                            </div>
 							                                        </div>
 							                                    </div>
@@ -373,6 +380,35 @@
 														</tbody>
 														<thead>
 															<tr>
+																<th>Data de Criação</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td><fmt:formatDate value='${projeto.dataDeCriacao}' pattern='dd/MM/yyyy' /></td>
+															</tr>
+														</tbody>
+														<thead>
+															<tr>
+																<th>Data de Modificação</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td>
+																<c:choose>
+																	<c:when test="${not empty projeto.dataDeModificacao}">
+																		<fmt:formatDate value='${projeto.dataDeModificacao}' pattern='dd/MM/yyyy' />
+																	</c:when>
+																	<c:otherwise>
+																		Não houve alteração.
+																	</c:otherwise>
+																</c:choose>
+																</td>
+															</tr>
+														</tbody>
+														<thead>
+															<tr>
 																<th>Status</th>
 															</tr>
 														</thead>
@@ -473,12 +509,31 @@
 												</tbody>
 												<thead>
 													<tr>
-														<th>Data de Conclusão</th>
+														<th>Data de Criação</th>
 													</tr>
 												</thead>
 												<tbody>
 													<tr>
-														<td><fmt:formatDate value="${projeto.dataDeConclusao}" pattern="dd/MM/yyyy" /></td>
+														<td><fmt:formatDate value='${projeto.dataDeCriacao}' pattern='dd/MM/yyyy' /></td>
+													</tr>
+												</tbody>
+												<thead>
+													<tr>
+														<th>Data de Modificação</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>
+														<c:choose>
+															<c:when test="${not empty projeto.dataDeModificacao}">
+																<fmt:formatDate value='${projeto.dataDeModificacao}' pattern='dd/MM/yyyy' />
+															</c:when>
+															<c:otherwise>
+																Não houve alteração.
+															</c:otherwise>
+														</c:choose>
+														</td>
 													</tr>
 												</tbody>
 												<c:choose>
@@ -535,6 +590,14 @@
 														<div class="content">
 															<form action="projeto" method="post">
 																<div class="row">
+							                                        <div class="col-md-12">
+							                                            <div class="form-group">
+							                                                <label>Data de Conclusão do Projeto</label>
+							                                                <input type="text" class="form-control" disabled value="<fmt:formatDate value='${projeto.dataDeConclusao}' pattern='dd/MM/yyyy' />">
+							                                            </div>
+							                                        </div>
+							                                    </div>
+																<div class="row">
 																	<div class="col-md-12">
 																		<div class="form-group">
 																			<label>Resumo</label>
@@ -567,6 +630,16 @@
 												</div>
 												<div class="content">
 													<table class="table table-bordered table-hover">
+														<thead>
+															<tr>
+																<th>Data de Conclusão</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td><fmt:formatDate value='${projeto.dataDeConclusao}' pattern='dd/MM/yyyy' /></td>
+															</tr>
+														</tbody>
 														<thead>
 															<tr>
 																<th>Resumo</th>
@@ -664,7 +737,14 @@
 							                                        <div class="col-md-6">
 							                                            <div class="form-group"> 
 							                                                <label>Data de Atualização</label>
-							                                                <input type="text" class="form-control" disabled value="<fmt:formatDate value='${projeto.avaliacaoDoProjeto.dataDeModificacao}' pattern='dd/MM/yyyy' />">
+							                                                <c:choose>
+							                                                	<c:when test="${not empty projeto.avaliacaoDoProjeto.dataDeModificacao}">
+							                                                		<input type="text" class="form-control" disabled value="<fmt:formatDate value='${projeto.avaliacaoDoProjeto.dataDeModificacao}' pattern='dd/MM/yyyy' />">
+							                                                	</c:when>
+							                                                	<c:otherwise>
+							                                               			 <input type="text" class="form-control" disabled value="Não houve modificação"/>
+							                                                	</c:otherwise>		                                                
+							                                                </c:choose>
 							                                            </div>
 							                                        </div>
 							                                    </div>
@@ -730,7 +810,7 @@
 														</thead>
 														<tbody>
 															<tr>
-																<td>${projeto.avaliacaoDoProjeto.dataDeEmissao}</td>
+																<td><fmt:formatDate value='${projeto.avaliacaoDoProjeto.dataDeEmissao}' pattern='dd/MM/yyyy' /></td>
 															</tr>
 														</tbody>
 														<thead>
@@ -743,7 +823,7 @@
 																<td>
 																<c:choose>
 																	<c:when test="${not empty projeto.avaliacaoDoProjeto.dataDeModificacao}">
-																		${projeto.avaliacaoDoProjeto.dataDeModificacao}
+																		<fmt:formatDate value='${projeto.avaliacaoDoProjeto.dataDeModificacao}' pattern='dd/MM/yyyy' />
 																	</c:when>
 																	<c:otherwise>
 																		Não houve alteração.

@@ -251,9 +251,16 @@
 		                                            </div>
 		                                        </div>
 		                                        <div class="col-md-6">
-		                                            <div class="form-group"> 
+		                                            <div class="form-group">
 		                                                <label>Data de Atualização de Cadastro</label>
-		                                                <input type="text" class="form-control" disabled value="<fmt:formatDate value='${colaborador.dataDeModificacao}' pattern='dd/MM/yyyy' />">
+		                                                 <c:choose>
+		                                                	<c:when test="${not empty colaborador.dataDeModificacao}">
+		                                                		<input type="text" class="form-control" disabled value="<fmt:formatDate value='${colaborador.dataDeModificacao}' pattern='dd/MM/yyyy' />">
+		                                                	</c:when>
+		                                                	<c:otherwise>
+		                                               			 <input type="text" class="form-control" disabled value="Não houve modificação"/>
+		                                                	</c:otherwise>		                                                
+		                                                </c:choose>
 		                                            </div>
 		                                        </div>
 		                                    </div>

@@ -65,6 +65,12 @@
 			                        <p>Solicitacoes de Desenvolvimento</p>
 			                    </a>
 			                </li>
+			                <li>
+								<a href="projeto?acao=listar"> 
+									<i class="pe-7s-network"></i>
+									<p>Projetos</p>
+								</a>
+							</li>
 			            </ul>
 			    	</div>
 			    </div>

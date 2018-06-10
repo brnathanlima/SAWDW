@@ -30,6 +30,12 @@
 									class="pe-7s-bell"></i>
 									<p>Solicitacoes de Desenvolvimento</p>
 							</a></li>
+							<li class="active">
+								<a href="projeto?acao=listar"> 
+									<i class="pe-7s-network"></i>
+									<p>Projetos</p>
+								</a>
+							</li>
 						</ul>
 					</div>
 				</div>
@@ -776,7 +782,8 @@
 												</div>
 											</div>						
 										</c:when>
-										<c:when test="${not empty projeto.avaliacaoDoProjeto && tipoDeUsuario == 'gerente' && usuario.departamento == 'TI'}">
+										<c:when test="${not empty projeto.avaliacaoDoProjeto && (tipoDeUsuario == 'gerente' && usuario.departamento == 'TI'
+										|| tipoDeUsuario == 'webDesigner')}">
 											<div class="card ">
 												<div class="header">
 													<h4 class="title">AVALIAÇÃO DO PROJETO</h4>

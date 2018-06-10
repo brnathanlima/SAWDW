@@ -56,6 +56,12 @@ public class ColaboradorController extends HttpServlet {
 			
 		switch(acao) {
 		
+		case "visualizarPainel":
+			
+			req.getRequestDispatcher("painel-colaborador.jsp").forward(req, res);
+			
+			break;
+		
 		case "novoCadastro":
 			
 			req.getRequestDispatcher("cadastro-colaborador.jsp").forward(req, res);

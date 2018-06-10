@@ -52,6 +52,12 @@ public class AdministradorDeInstituicaoController extends HttpServlet {
 			
 		switch(acao) {
 		
+		case "visualizarPainel":
+			
+			req.getRequestDispatcher("painel-administrador-de-instituicao.jsp").forward(req, res);
+			
+			break;
+		
 		case "novoCadastro":
 			
 			instituicaoDAO = new InstituicaoDAO(conexao);

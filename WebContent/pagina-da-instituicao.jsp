@@ -14,7 +14,7 @@
 				<div class="sidebar" data-color="blue">
 			    	<div class="sidebar-wrapper">
 			            <div class="logo">
-			                <a href="http://localhost:8080/SAEDW/painel-administrador-de-instituicao.jsp" class="simple-text">
+			                <a href="administradorDeInstituicao?acao=visualizarPainel" class="simple-text">
 			                    SAEDW
 			                </a>
 			            </div>
@@ -52,7 +52,7 @@
 				<div class="sidebar" data-color="azure">
 			    	<div class="sidebar-wrapper">
 			            <div class="logo">
-			                <a href="http://localhost:8080/SAEDW/painel-colaborador.jsp" class="simple-text">
+			                <a href="colaborador?acao=visualizarPainel" class="simple-text">
 			                    SAEDW
 			                </a>
 			            </div>

@@ -55,6 +55,12 @@ public class WebDesignerController extends HttpServlet {
 			
 		switch(acao) {
 		
+		case "visualizarPainel":
+			
+			req.getRequestDispatcher("painel-web-designer.jsp").forward(req, res);
+			
+			break;
+		
 		case "novoCadastro":
 			
 			req.getRequestDispatcher("cadastro-web-designer.jsp").forward(req, res);

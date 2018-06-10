@@ -13,7 +13,7 @@
 				<div class="sidebar" data-color="red">	    
 			    	<div class="sidebar-wrapper">
 			            <div class="logo">
-			                <a href="http://localhost:8080/SAEDW/painel-web-designer.jsp" class="simple-text">
+			                <a href="webDesigner?acao=visualizarPainel" class="simple-text">
 			                    SAEDW
 			                </a>
 			            </div>			
@@ -44,18 +44,12 @@
 				<div class="sidebar" data-color="azure">	    
 			    	<div class="sidebar-wrapper">
 			            <div class="logo">
-			                <a href="http://localhost:8080/SAEDW/painel-colaborador.jsp" class="simple-text">
+			                <a href="colaborador?acao=visualizarPainel" class="simple-text">
 			                    SAEDW
 			                </a>
 			            </div>
 			
 			            <ul class="nav">
-			            	<li>
-			                    <a href="pagina-da-instituicao.jsp">
-			                        <i class="pe-7s-culture"></i>
-			                        <p>${usuario.instituicao.nomeFantasia}</p>
-			                    </a>
-			                </li>
 			            	<li class="active">
 			                    <a href="estruturaDeWebsites?acao=listar">
 			                        <i class="pe-7s-browser"></i>

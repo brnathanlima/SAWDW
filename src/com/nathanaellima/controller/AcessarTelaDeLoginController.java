@@ -7,25 +7,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-@WebServlet(name="LogoutController", urlPatterns= {"logout"})
-public class LogoutController extends HttpServlet {
+@WebServlet(name="AcessarTelaDeLoginController", urlPatterns= {"/acessar"})
+public class AcessarTelaDeLoginController extends HttpServlet {
 	
-	private static final long serialVersionUID = 1L;
+private static final long serialVersionUID = 1L;
 	
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//invalidate the session if exists
-		HttpSession session = request.getSession(false);
-		
-		if (session != null) {
-			
-			session.invalidate();
-			
-		}
-		
-		response.sendRedirect("acessar");
+		request.getRequestDispatcher("login.jsp").forward(request, response);
 		
 	}
 

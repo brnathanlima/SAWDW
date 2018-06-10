@@ -13,18 +13,12 @@
 	    
 	    	<div class="sidebar-wrapper">
 	            <div class="logo">
-	                <a href="http://localhost:8080/SAEDW/painel-administrador-de-instituicao.jsp" class="simple-text">
+	                <a href="administradorDeInstituicao?acao=visualizarPainel" class="simple-text">
 	                    SAEDW
 	                </a>
 	            </div>
 	
 	            <ul class="nav">
-	            	<li>
-	                    <a href="pagina-da-instituicao.jsp">
-	                        <i class="pe-7s-culture"></i>
-	                        <p>${usuario.instituicao.nomeFantasia}</p>
-	                    </a>
-	                </li>
 	                <li class="active">
 	                    <a href="colaborador?acao=listar">
 	                   		<i class="pe-7s-user"></i>

@@ -12,7 +12,7 @@
 	    <div class="sidebar" data-color="green">
 	    	<div class="sidebar-wrapper">
 	            <div class="logo">
-	                <a href="http://localhost:8080/SAEDW/painel-super-administrador.jsp" class="simple-text">
+	                <a href="superAdministrador?acao=visualizarPainel" class="simple-text">
 	                    SAEDW
 	                </a>
 	            </div>

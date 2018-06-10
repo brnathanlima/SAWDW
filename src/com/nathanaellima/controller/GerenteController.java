@@ -55,6 +55,12 @@ public class GerenteController extends HttpServlet {
 			
 		switch(acao) {
 		
+		case "visualizarPainel":
+			
+			req.getRequestDispatcher("painel-gerente.jsp").forward(req, res);
+			
+			break;
+		
 		case "novoCadastro":
 			
 			req.getRequestDispatcher("cadastro-gerente.jsp").forward(req, res);

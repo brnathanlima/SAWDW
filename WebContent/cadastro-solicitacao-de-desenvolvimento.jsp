@@ -14,7 +14,7 @@
 
 					<div class="sidebar-wrapper">
 						<div class="logo">
-							<a href="http://localhost:8080/SAEDW/painel-web-designer.jsp" class="simple-text"> SAEDW </a>
+							<a href="webDesigner?acao=visualizarPainel" class="simple-text"> SAEDW </a>
 						</div>
 
 						<ul class="nav">
@@ -39,7 +39,7 @@
 
 					<div class="sidebar-wrapper">
 						<div class="logo">
-							<a href="http://localhost:8080/SAEDW/painel-gerente.jsp" class="simple-text"> SAEDW </a>
+							<a href="gerente?acao=visualizarPainel" class="simple-text"> SAEDW </a>
 						</div>
 
 						<ul class="nav">

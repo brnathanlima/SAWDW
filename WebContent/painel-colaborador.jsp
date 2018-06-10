@@ -20,12 +20,6 @@
 	
 	            <ul class="nav">
 	            	<li>
-	                    <a href="pagina-da-instituicao.jsp">
-	                        <i class="pe-7s-culture"></i>
-	                        <p>${usuario.instituicao.nomeFantasia}</p>
-	                    </a>
-	                </li>
-	            	<li>
 	                    <a href="estruturaDeWebsites?acao=listar">
 	                        <i class="pe-7s-browser"></i>
 	                        <p>Estruturas de Websites</p>

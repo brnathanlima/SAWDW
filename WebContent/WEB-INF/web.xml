@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
-  <display-name>SAEDW</display-name>
+  <display-name>saedw</display-name>
   <welcome-file-list>
     <welcome-file>login.jsp</welcome-file>
   </welcome-file-list>
@@ -16,7 +16,6 @@
     <param-name>dbURL</param-name>
     <param-value>jdbc:mysql://localhost:3306/db_saedw</param-value>
   </context-param>
-  
   <filter>
     <filter-name>FiltroDeAutenticacao</filter-name>
     <filter-class>com.nathanaellima.controller.filter.FiltroDeAutenticacao</filter-class>
@@ -25,22 +24,16 @@
     <filter-name>FiltroDeAutenticacao</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
-  
   <filter>
-
-	<filter-name>EncodingFilter</filter-name>
-	<filter-class>com.nathanaellima.controller.filter.EncodingFilter</filter-class>
-
-	<init-param>
-		<param-name>encoding</param-name>
-		<param-value>ISO-8859-1</param-value>
-	</init-param>
-
-	</filter>
-
-	<filter-mapping>
-		<filter-name>EncodingFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-  
+    <filter-name>EncodingFilter</filter-name>
+    <filter-class>com.nathanaellima.controller.filter.EncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>ISO-8859-1</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>EncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
 </web-app>

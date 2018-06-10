@@ -32,9 +32,51 @@ public class FiltroDeAutenticacao implements Filter {
 		
 		HttpSession session = req.getSession(false);
 		
-		if (session == null && !(uri.endsWith("jsp") || uri.endsWith("LoginController"))) {
+		if (uri.endsWith("jsp")) {
 			
-			res.sendRedirect("login.jsp");
+			if(session != null && session.getAttribute("tipoDeUsuario") != null) {
+				
+				String tipoDeUsuario = (String) session.getAttribute("tipoDeUsuario");
+				
+				switch(tipoDeUsuario) {
+				
+				case "superAdministrador":
+					
+					res.sendRedirect("superAdministrador?acao=visualizarPainel");
+					
+					break;
+					
+				case "administradorDeInstituicao":
+					
+					res.sendRedirect("administradorDeInstituicao?acao=visualizarPainel");
+					
+					break;
+					
+				case "Colaborador":
+					
+					res.sendRedirect("colaborador?acao=visualizarPainel");
+					
+					break;
+					
+				case "webDesigner":
+					
+					res.sendRedirect("webDesigner?acao=visualizarPainel");
+					
+					break;
+					
+				case "gerente":
+					
+					res.sendRedirect("gerente?acao=visualizarPainel");
+					
+					break;
+				
+				}
+				
+			} else {
+				
+				res.sendRedirect("acessar");
+				
+			}
 			
 		} else {
 			

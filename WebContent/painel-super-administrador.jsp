@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div class="wrapper">
-	    <div class="sidebar" data-color="green" data-image="assets/img/sidebar-2.jpg">    
+	    <div class="sidebar" data-color="green">    
 	    	<div class="sidebar-wrapper">
 	            <div class="logo">
 	                <a href="#" class="simple-text">

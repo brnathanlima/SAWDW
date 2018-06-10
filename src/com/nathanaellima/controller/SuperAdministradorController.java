@@ -43,6 +43,12 @@ public class SuperAdministradorController extends HttpServlet {
 			
 		switch(acao) {
 		
+		case "visualizarPainel":
+			
+			req.getRequestDispatcher("painel-super-administrador.jsp").forward(req, res);
+			
+			break;
+		
 		case "novoCadastro":
 			
 			req.getRequestDispatcher("cadastro-super-administrador.jsp").forward(req, res);

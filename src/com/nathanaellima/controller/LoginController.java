@@ -63,7 +63,7 @@ public class LoginController extends HttpServlet {
 			
 			session = request.getSession();
 			session.setAttribute("errorMessage", errorMessage);
-			response.sendRedirect("login.jsp");
+			response.sendRedirect("acessar");
 			
 		} else {
 			
@@ -82,12 +82,12 @@ public class LoginController extends HttpServlet {
 				if (superAdministrador != null) {
 					
 					session.setAttribute("usuario", superAdministrador);
-					response.sendRedirect("painel-super-administrador.jsp");
+					response.sendRedirect("superAdministrador?acao=visualizarPainel");
 					
 				} else {
 					
 					session.setAttribute("errorMessage", "Nome de usuário ou senha inválidos");
-					response.sendRedirect("login.jsp");
+					response.sendRedirect("acessar");
 					
 				}
 				
@@ -102,12 +102,12 @@ public class LoginController extends HttpServlet {
 				if (administradorDeInstituicao != null) {
 					
 					session.setAttribute("usuario", administradorDeInstituicao);
-					response.sendRedirect("painel-administrador-de-instituicao.jsp");
+					response.sendRedirect("administradorDeInstituicao?acao=visualizarPainel");
 					
 				} else {
 					
 					session.setAttribute("errorMessage", "Nome de usuário ou senha inválidos");
-					response.sendRedirect("login.jsp");
+					response.sendRedirect("acessar");
 					
 				}
 				
@@ -121,12 +121,12 @@ public class LoginController extends HttpServlet {
 				if (colaborador != null) {
 					
 					session.setAttribute("usuario", colaborador);
-					response.sendRedirect("painel-colaborador.jsp");
+					response.sendRedirect("colaborador?acao=visualizarPainel");
 					
 				} else {
 					
 					session.setAttribute("errorMessage", "Nome de usuário ou senha inválidos");
-					response.sendRedirect("login.jsp");
+					response.sendRedirect("acessar");
 					
 				}
 				
@@ -140,12 +140,12 @@ public class LoginController extends HttpServlet {
 				if (webDesigner != null) {
 					
 					session.setAttribute("usuario", webDesigner);
-					response.sendRedirect("painel-web-designer.jsp");
+					response.sendRedirect("webDesigner?acao=visualizarPainel");
 					
 				} else {
 					
 					session.setAttribute("errorMessage", "Nome de usuário ou senha inválidos");
-					response.sendRedirect("login.jsp");
+					response.sendRedirect("acessar");
 					
 				}
 				
@@ -159,12 +159,12 @@ public class LoginController extends HttpServlet {
 				if (gerente != null) {
 					
 					session.setAttribute("usuario", gerente);
-					response.sendRedirect("painel-gerente.jsp");
+					response.sendRedirect("gerente?acao=visualizarPainel");
 					
 				} else {
 					
 					session.setAttribute("errorMessage", "Nome de usuário ou senha inválidos");
-					response.sendRedirect("login.jsp");
+					response.sendRedirect("acessar");
 					
 				}
 				

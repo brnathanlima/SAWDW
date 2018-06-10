@@ -5,6 +5,37 @@
 <head>
 	<title>SAEDW - Cadastrar Estrutura de Página</title>
 	<c:import url="/common/cabecalho.jsp" />
+	<script src="assets/js/tinymce/tinymce.min.js"></script>
+	<script type="text/javascript">
+		tinymce.init({
+			selector: '#conteudo',
+			plugins: 'code, advlist, image, media, emoticons, link, anchor paste, table, autolink, autoresize,'
+			+ ' autosave, codesample, contextmenu, fullscreen, hr, insertdatetime, lists, preview, template',
+			toolbar: 'fullscreen, preview, code, codesample, copy, paste, restoredraft, table, image, media, emoticons, link,'
+			+ 'anchor, hr, insertdatetime, numlist bullist, template',
+			advlist_bullet_styles: 'squar disc circle',
+			advlist_number_styles: 'lower-alpha,lower-roman,upper-alpha,upper-roman',
+			codesample_dialog_width: '400',
+			codesample_dialog_height: '400',
+			codesample_languages: [
+			        {text: 'HTML/XML', value: 'markup'},
+			        {text: 'JavaScript', value: 'javascript'},
+			        {text: 'CSS', value: 'css'},
+			        {text: 'PHP', value: 'php'},
+			        {text: 'Ruby', value: 'ruby'},
+			        {text: 'Python', value: 'python'},
+			        {text: 'Java', value: 'java'},
+			        {text: 'C', value: 'c'},
+			        {text: 'C#', value: 'csharp'},
+			        {text: 'C++', value: 'cpp'}
+			],
+			content_css: ['//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+					'//www.tinymce.com/css/codepen.min.css'
+			],
+			contextmenu: "link image inserttable | cell row column deletetable",
+			insertdatetime_formats: ["%H:%M:%S", "%d-%m-%Y", "%I:%M:%S %p", "%D"]
+		});
+  	</script>
 </head>
 <body>
 	<div class="wrapper">
@@ -108,7 +139,7 @@
 			                                        <div class="col-md-12">
 			                                            <div class="form-group">
 			                                                <label>Conteúdo</label>
-			                                                <textarea rows="10" name="conteudo" class="form-control"></textarea>
+			                                                <textarea rows="20" id="conteudo" name="conteudo" class="form-control"></textarea>
 			                                            </div>
 			                                        </div>
 			                                    </div>
@@ -132,7 +163,7 @@
 			                            			EDITAR ESTRUTURA DE PÁGINA
 			                            		</c:when>
 			                            		<c:otherwise>
-			                            			VISUALIZAR ESTRUTURA DE PÁGINA
+			                            			${estruturaDePagina.titulo}
 			                            		</c:otherwise>
 			                            	</c:choose>
 						                	<a href="estruturaDeWebsites?acao=visualizar&id=${idEstruturaDeWebsite}" class="btn btn-default pull-right" role="button">VOLTAR</a>
@@ -182,7 +213,7 @@
 					                                        <div class="col-md-12">
 					                                            <div class="form-group">
 					                                                <label>Conteúdo</label>
-					                                                <textarea rows="10" name="conteudo" class="form-control">${estruturaDePagina.conteudo}</textarea>
+					                                                <textarea rows="20" id="conteudo" name="conteudo" class="form-control">${estruturaDePagina.conteudo}</textarea>
 					                                            </div>
 					                                        </div>
 					                                    </div>
@@ -196,28 +227,7 @@
 					                                </form>
 												</c:when>
 												<c:otherwise>
-													<table class="table table-bordered table-hover">
-														<thead>
-															<tr>
-																<th>Título da Página</th>
-															</tr>
-														</thead>
-														<tbody>
-															<tr>
-																<td>${estruturaDePagina.titulo}</td>
-															</tr>
-														</tbody>
-														<thead>
-															<tr>
-																<th>Conteúdo</th>
-															</tr>
-														</thead>
-														<tbody>
-															<tr>
-																<td>${estruturaDePagina.conteudo}</td>
-															</tr>
-														</tbody>
-													</table>
+													${estruturaDePagina.conteudo}
 												</c:otherwise>
 			                            	</c:choose>
 			                            </div>

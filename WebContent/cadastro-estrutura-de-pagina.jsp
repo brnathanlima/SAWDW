@@ -9,10 +9,12 @@
 	<script type="text/javascript">
 		tinymce.init({
 			selector: '#conteudo',
-			plugins: 'code, advlist, image, media, emoticons, link, anchor paste, table, autolink, autoresize,'
-			+ ' autosave, codesample, contextmenu, fullscreen, hr, insertdatetime, lists, preview, template',
-			toolbar: 'fullscreen, preview, code, codesample, copy, paste, restoredraft, table, image, media, emoticons, link,'
-			+ 'anchor, hr, insertdatetime, numlist bullist, template',
+			 plugins: [
+					'advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker',
+					'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
+					'save table contextmenu directionality emoticons template paste textcolor autoresize'
+			],
+			toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons',
 			advlist_bullet_styles: 'squar disc circle',
 			advlist_number_styles: 'lower-alpha,lower-roman,upper-alpha,upper-roman',
 			codesample_dialog_width: '400',

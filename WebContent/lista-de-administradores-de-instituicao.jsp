@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div class="wrapper">
-	    <div class="sidebar" data-color="green">
+	    <div class="sidebar" data-color="green" data-image="assets/img/sidebar-4.jpg">
 	
 	    	<div class="sidebar-wrapper">
 	            <div class="logo">
@@ -43,6 +43,14 @@
 	
 	    <div class="main-panel">
 			<nav class="navbar navbar-default navbar-fixed">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse">
+					        <span class="sr-only">Toggle navigation</span>
+					        <span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
 	            <div class="container-fluid">
 	                <div class="collapse navbar-collapse">
 	                    <ul class="nav navbar-nav navbar-right">
@@ -65,7 +73,7 @@
 	                        <div class="card">
 	                            <div class="header">
 	                                <h4 class="title">ADMINISTRADORES DE INSTITUIÇÃO
-	                                <a href="administradorDeInstituicao?acao=novoCadastro" class="btn btn-success pull-right" role="button">NOVO ADMINISTRADOR DE INSTITUIÇÃO</a>
+	                                <a href="administradorDeInstituicao?acao=novoCadastro" class="btn btn-success pull-right" role="button">CRIAR NOVO</a>
 	                            	</h4>
 	                            </div>
 	                            <div class="content table-responsive table-full-width">

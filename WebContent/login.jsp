@@ -8,11 +8,10 @@
 	<link rel="icon" type="image/png" href="assets/img/favicon.ico">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	
-	<link href="assets/css/login.css" rel="stylesheet"/>
-	
 	<title>SAEDW - Login</title>
 	
 	<c:import url="/common/cabecalho.jsp" />
+	<link href="assets/css/login.css" rel="stylesheet"/>
 </head>
 <body>
 	<div class="container">
@@ -59,7 +58,7 @@
 									<div class="form-group">
 										<div class="row">
 											<div class="col-sm-6 col-sm-offset-3">
-												<input type="submit" tabindex="4" class="form-control btn btn-login" value="Entrar">
+												<input type="submit" tabindex="4" class="btn btn-success btn-fill form-control" value="LOGIN">
 											</div>
 										</div>
 									</div>

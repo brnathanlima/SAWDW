@@ -11,7 +11,7 @@
 	<div class="wrapper">
 		<c:choose>
 			<c:when test="${tipoDeUsuario == 'webDesigner'}">
-				<div class="sidebar" data-color="red">
+				<div class="sidebar" data-color="red" data-image="assets/img/sidebar-4.jpg">
 	    
 			    	<div class="sidebar-wrapper">
 			            <div class="logo">
@@ -50,7 +50,7 @@
 			    </div>
 			</c:when>
 			<c:when test="${tipoDeUsuario == 'colaborador'}">
-				<div class="sidebar" data-color="azure">
+				<div class="sidebar" data-color="black" data-image="assets/img/sidebar-4.jpg">
 	    
 			    	<div class="sidebar-wrapper">
 			            <div class="logo">
@@ -75,6 +75,14 @@
 	
 	    <div class="main-panel">
 			<nav class="navbar navbar-default navbar-fixed">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse">
+					        <span class="sr-only">Toggle navigation</span>
+					        <span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
 	            <div class="container-fluid">
 	                <div class="collapse navbar-collapse">
 	                    <ul class="nav navbar-nav navbar-right">

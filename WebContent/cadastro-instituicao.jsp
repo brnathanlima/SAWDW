@@ -39,7 +39,7 @@
 	    	</div>
 	    </div>
 	    <div class="main-panel">
-			<nav class="navbar navbar-default navbar-fixed">
+			<nav class="navbar navbar-default">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle" data-toggle="collapse">
 					        <span class="sr-only">Toggle navigation</span>
@@ -82,64 +82,66 @@
 	                            <div class="content">
 	                            	<c:choose>
 										<c:when test="${empty instituicao.id}">
-											<form action="instituicao" method="post">
+											<form action="instituicao" method="post" data-toggle="validator" role="form">
 			                                    <div class="row">
 			                                        <div class="col-md-6">
-			                                            <div class="form-group">
-			                                                <label>Nome Fantasia</label>
-			                                                <input type="text" name="nomeFantasia" class="form-control">
+			                                            <div class="form-group has-feedback">
+			                                                <label class="control-label" for="nomeFantasia">Nome Fantasia</label>
+			                                                <input type="text" id="nomeFantasia" name="nomeFantasia" class="form-control" required />
 			                                            </div>
 			                                        </div>
 			                                        <div class="col-md-6">
-			                                            <div class="form-group">
-			                                                <label>Nome Empresarial</label>
-			                                                <input type="text" name="nomeEmpresarial" class="form-control">
+			                                            <div class="form-group has-feedback">
+			                                                <label class="control-label" for="nomeEmpresarial">Nome Empresarial</label>
+			                                                <input type="text" id="nomeEmpresarial" name="nomeEmpresarial" class="form-control" required>
 			                                            </div>
 			                                        </div>
 			                                    </div>
 			                                    <div class="row">
 			                                        <div class="col-md-12">
-			                                            <div class="form-group">
-			                                                <label>CNPJ</label>
-			                                                <input type="text" name="cnpj" class="form-control">
+			                                            <div class="form-group has-feedback">
+			                                                <label class="control-label" for="cnpj">CNPJ</label>
+			                                                <input type="text" id="cnpj" name="cnpj" class="form-control" data-mask="00.000.000/0000.00" data-mask-reverse="true"
+			                                                pattern="[0-9]{2}.[0-9]{3}.[0-9]{3}\/[0-9]{4}.[0-9]{2}$" required>
 			                                            </div>
 			                                        </div>
 			                                    </div>
 			                                    <div class="row">
 			                                        <div class="col-md-12">
-			                                            <div class="form-group">
-			                                                <label>Setor de Atuação</label>
-			                                                <input type="text" name="setorDeAtuacao" class="form-control">
+			                                            <div class="form-group has-feedback">
+			                                                <label class="control-label" for="setorDeAtuacao">Setor de Atuação</label>
+			                                                <input type="text" id="setorDeAtuacao" name="setorDeAtuacao" class="form-control" required>
 			                                            </div>
 			                                        </div>
 			                                    </div>
 			                                    <div class="row">
 			                                        <div class="col-md-12">
-			                                            <div class="form-group">
-			                                                <label>Endereço</label>
-			                                                <input type="text" name="endereco" class="form-control">
+			                                            <div class="form-group has-feedback">
+			                                                <label class="control-label" for="endereco">Endereço</label>
+			                                                <input type="text" id="endereco" name="endereco" class="form-control" required>
 			                                            </div>
 			                                        </div>
 			                                    </div>
 			                                    <div class="row">
 			                                        <div class="col-md-6">
-			                                            <div class="form-group">
-			                                                <label>Cidade</label>
-			                                                <input type="text" name="cidade" class="form-control">
+			                                            <div class="form-group has-feedback">
+			                                                <label class="control-label" for="cidade">Cidade</label>
+			                                                <input type="text" id="cidade" name="cidade" class="form-control" required>
 			                                            </div>
 			                                        </div>
 			                                        <div class="col-md-6">
-			                                            <div class="form-group">
-			                                                <label>Estado</label>
-			                                                <input type="text" name="estado" class="form-control">
+			                                            <div class="form-group has-feedback">
+			                                                <label class="control-label" for="estado">Estado</label>
+			                                                <input type="text" id="estado" name="estado" class="form-control" required>
 			                                            </div>
 			                                        </div>
 			                                    </div>
 			                                    <div class="row">
 			                                        <div class="col-md-12">
-			                                            <div class="form-group">
-			                                                <label>Telefone</label>
-			                                                <input type="text" name="telefone" class="form-control">
+			                                            <div class="form-group has-feedback">
+			                                                <label class="control-label" for="telefone">Telefone</label>
+			                                                <input type="text" id="telefone" name="telefone" class="form-control telefone" 
+			                                                pattern="\([0-9]{2}\) [0-9]{4,5}-[0-9]{4}$" data-mask-reverse="true" required>
 			                                            </div>
 			                                        </div>
 			                                    </div>
@@ -159,64 +161,66 @@
 													</div>											
 												</c:when>
 											</c:choose>
-											<form action="instituicao" method="post">
+											<form action="instituicao" method="post" data-toggle="validator" role="form">
 			                                    <div class="row">
 			                                        <div class="col-md-6">
-			                                            <div class="form-group">
-			                                                <label>Nome Fantasia</label>
-			                                                <input type="text" class="form-control" name="nomeFantasia" value="${instituicao.nomeFantasia}">
+			                                            <div class="form-group has-feedback">
+			                                                <label class="control-label" for="nomeFantasia">Nome Fantasia</label>
+			                                                <input type="text" id="nomeFantasia" name="nomeFantasia" class="form-control" value="${instituicao.nomeFantasia}" required />
 			                                            </div>
 			                                        </div>
 			                                        <div class="col-md-6">
-			                                            <div class="form-group">
-			                                                <label>Nome Empresarial</label>
-			                                                <input type="text" class="form-control" name="nomeEmpresarial" value="${instituicao.nomeEmpresarial}">
+			                                            <div class="form-group has-feedback">
+			                                                <label class="control-label" for="nomeEmpresarial">Nome Empresarial</label>
+			                                                <input type="text" id="nomeEmpresarial" name="nomeEmpresarial" class="form-control" value="${instituicao.nomeEmpresarial}" required>
 			                                            </div>
 			                                        </div>
 			                                    </div>
 			                                    <div class="row">
 			                                        <div class="col-md-12">
-			                                            <div class="form-group">
-			                                                <label>CNPJ</label>
-			                                                <input type="text" class="form-control" name="cnpj" value="${instituicao.cnpj}">
+			                                            <div class="form-group has-feedback">
+			                                                <label class="control-label" for="cnpj">CNPJ</label>
+			                                                <input type="text" id="cnpj" name="cnpj" class="form-control" data-mask="00.000.000/0000.00" data-mask-reverse="true"
+			                                                pattern="[0-9]{2}.[0-9]{3}.[0-9]{3}\/[0-9]{4}.[0-9]{2}$" value="${instituicao.cnpj}" required>
 			                                            </div>
 			                                        </div>
 			                                    </div>
 			                                    <div class="row">
 			                                        <div class="col-md-12">
-			                                            <div class="form-group">
-			                                                <label>Setor de Atuação</label>
-			                                                <input type="text" class="form-control" name="setorDeAtuacao" value="${instituicao.setorDeAtuacao}">
+			                                            <div class="form-group has-feedback">
+			                                                <label class="control-label" for="setorDeAtuacao">Setor de Atuação</label>
+			                                                <input type="text" id="setorDeAtuacao" name="setorDeAtuacao" class="form-control" value="${instituicao.setorDeAtuacao}" required>
 			                                            </div>
 			                                        </div>
 			                                    </div>
 			                                    <div class="row">
 			                                        <div class="col-md-12">
-			                                            <div class="form-group">
-			                                                <label>Endereço</label>
-			                                                <input type="text" class="form-control" name="endereco" value="${instituicao.endereco}">
+			                                            <div class="form-group has-feedback">
+			                                                <label class="control-label" for="endereco">Endereço</label>
+			                                                <input type="text" id="endereco" name="endereco" class="form-control" value="${instituicao.endereco}" required>
 			                                            </div>
 			                                        </div>
 			                                    </div>
 			                                    <div class="row">
 			                                        <div class="col-md-6">
-			                                            <div class="form-group">
-			                                                <label>Cidade</label>
-			                                                <input type="text" class="form-control" name="cidade" value="${instituicao.cidade}">
+			                                            <div class="form-group has-feedback">
+			                                                <label class="control-label" for="cidade">Cidade</label>
+			                                                <input type="text" id="cidade" name="cidade" class="form-control" value="${instituicao.cidade}" required>
 			                                            </div>
 			                                        </div>
 			                                        <div class="col-md-6">
-			                                            <div class="form-group">
-			                                                <label>Estado</label>
-			                                                <input type="text" class="form-control" name="estado" value="${instituicao.estado}">
+			                                            <div class="form-group has-feedback">
+			                                                <label class="control-label" for="estado">Estado</label>
+			                                                <input type="text" id="estado" name="estado" class="form-control" value="${instituicao.estado}" required>
 			                                            </div>
 			                                        </div>
 			                                    </div>
 			                                    <div class="row">
 			                                        <div class="col-md-12">
-			                                            <div class="form-group">
-			                                                <label>Telefone</label>
-			                                                <input type="text" class="form-control" name="telefone" value="${instituicao.telefone}">
+			                                            <div class="form-group has-feedback">
+			                                                <label class="control-label" for="telefone">Telefone</label>
+			                                                <input type="text" id="telefone" name="telefone" class="form-control telefone" 
+			                                                pattern="\([0-9]{2}\) [0-9]{4,5}-[0-9]{4}$" data-mask-reverse="true" value="${instituicao.telefone}" required>
 			                                            </div>
 			                                        </div>
 			                                    </div>
@@ -258,6 +262,20 @@
 	            </div>
 	        </div>
 <c:import url="common/rodape.jsp" />
+			<script src="assets/js/validator.min.js"></script>
+			<script src="assets/js/jquery.mask.min.js"></script>
+			<script>
+				var comportamentoTelefone = function (val) {
+				  	return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+				},
+				telOpcoes = {
+				  	onKeyPress: function(val, e, field, options) {
+				      	field.mask(comportamentoTelefone.apply({}, arguments), options);
+				    },
+				};
+
+				$('.telefone').mask(comportamentoTelefone, telOpcoes);
+			</script>
 		</div>
 	</div>
 </body>

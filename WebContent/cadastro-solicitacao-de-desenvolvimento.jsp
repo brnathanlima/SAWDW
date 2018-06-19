@@ -113,61 +113,63 @@
 												</h4>
 											</div>				
 											<div class="content">
-												<form action="solicitacaoDeDesenvolvimento" method="post">
+												<form action="solicitacaoDeDesenvolvimento" method="post" data-toggle="validator" role="form">
 													<div class="row">
 														<div class="col-md-12">
-															<div class="form-group">
-																<label>Título</label> <input type="text" name="titulo" class="form-control">
+															<div class="form-group has-feedback">
+																<label class="control-label" for="titulo">Título</label> 
+																<input type="text" id="titulo" name="titulo" class="form-control" required>
 															</div>
 														</div>
 													</div>
 													<div class="row">
 														<div class="col-md-12">
-															<div class="form-group">
-																<label>Justificativa</label>
-																<textarea rows="5" name="justificativa" class="form-control"></textarea>
+															<div class="form-group has-feedback">
+																<label class="control-label" for="justificativa">Justificativa</label>
+																<textarea rows="5" id="justificativa" name="justificativa" class="form-control" required></textarea>
 															</div>
 														</div>
 													</div>
 													<div class="row">
-														<div class="col-md-12">
+														<div class="col-md-5">
 															<div class="form-group">
-																<div class="row">
-																	<div class="col-md-5">
-																		<label>Estruturas de Websites Disponíveis</label>
-																		<select name="estruturasDeWebsitesDaInstituicao" class="js-multiselect form-control" size="9" multiple="multiple">
-																			<c:forEach var="estruturaDeWebsite" items="${estruturasDeWebsites}" varStatus="id">
-																				<option value="${estruturaDeWebsite.id}">${estruturaDeWebsite.nome}</option>
-																			</c:forEach>
-																		</select>
-																	</div>
-																	<div class="col-md-2">
-																		<br />
-																		<button type="button" id="incluirTodas"
-																			class="btn btn-block">
-																			<i class="fa fa-angle-double-right"></i>
-																		</button>
-																		<button type="button" id="incluirUma"
-																			class="btn btn-block">
-																			<i class="fa fa-angle-right"></i>
-																		</button>
-																		<button type="button" id="excluirUma"
-																			class="btn btn-block">
-																			<i class="fa fa-angle-left"></i>
-																		</button>
-																		<button type="button" id="excluirTodas"
-																			class="btn btn-block">
-																			<i class="fa fa-angle-double-left"></i>
-																		</button>
-																	</div>
-																	<div class="col-md-5">
-																		<label>Estruturas de Websites a Serem Solicitadas</label>
-																		<select name="estruturasDeWebsitesSolicitadas" id="estruturasDeWebsitesSolicitadas" class="form-control" size="9" multiple="multiple">
-																		</select>
-																	</div>
-																</div>
+																<label for="estruturasDeWebsitesDaInstituicao">Estruturas de Websites Disponíveis</label>
+																<select id="estruturasDeWebsitesDaInstituicao" name="estruturasDeWebsitesDaInstituicao" 
+																class="js-multiselect form-control" size="9" multiple="multiple">
+																	<c:forEach var="estruturaDeWebsite" items="${estruturasDeWebsites}" varStatus="id">
+																		<option value="${estruturaDeWebsite.id}">${estruturaDeWebsite.nome}</option>
+																	</c:forEach>
+																</select>
 															</div>
 														</div>
+														<div class="col-md-2">
+															<br />
+															<button type="button" id="incluirTodas"
+																class="btn btn-block">
+																<i class="fa fa-angle-double-right"></i>
+															</button>
+															<button type="button" id="incluirUma"
+																class="btn btn-block">
+																<i class="fa fa-angle-right"></i>
+															</button>
+															<button type="button" id="excluirUma"
+																class="btn btn-block">
+																<i class="fa fa-angle-left"></i>
+															</button>
+															<button type="button" id="excluirTodas"
+																class="btn btn-block">
+																<i class="fa fa-angle-double-left"></i>
+															</button>
+														</div>
+														<div class="col-md-5">
+															<div class="form-group">
+																<label for="estruturasDeWebsitesSolicitadas">Estruturas de Websites a Serem Solicitadas</label>
+																<select name="estruturasDeWebsitesSolicitadas" id="estruturasDeWebsitesSolicitadas" 
+																class="form-control" size="9" multiple="multiple">
+																</select>
+															</div>
+														</div>
+																
 													</div>
 													
 													<input type="hidden" name="acao" value="cadastrar" />
@@ -205,7 +207,7 @@
 													</h4>
 												</div>
 												<%-- Início do formulário de edição de Solicitação de desenvolvimento --%>
-												<form action="solicitacaoDeDesenvolvimento" method="post">
+												<form action="solicitacaoDeDesenvolvimento" method="post" data-toggle="validator" role="form">
 													<div class="content">
 														<c:choose>
 															<c:when test="${ not empty successMessage }">
@@ -216,10 +218,10 @@
 														</c:choose>
 														<div class="row">
 															<div class="col-md-12">
-																<div class="form-group">
-																	<label>Título</label> 
+																<div class="form-group has-feedback">
+																	<label class="control-label" for="titulo">Título</label> 
 																	<input type="text" value="${solicitacaoDeDesenvolvimento.titulo}" 
-																	name="titulo" class="form-control">
+																	id="titulo" name="titulo" class="form-control" required>
 																</div>
 															</div>
 														</div>
@@ -255,9 +257,9 @@
 						                                    </div>
 														<div class="row">
 															<div class="col-md-12">
-																<div class="form-group">
-																	<label>Justificativa</label>
-																	<textarea rows="5" name="justificativa"class="form-control">${solicitacaoDeDesenvolvimento.justificativa}</textarea>
+																<div class="form-group has-feedback">
+																	<label class="control-label" for="justificativa">Justificativa</label>
+																	<textarea rows="5" id="justificativa" name="justificativa"class="form-control" required>${solicitacaoDeDesenvolvimento.justificativa}</textarea>
 																</div>
 															</div>
 														</div>
@@ -431,7 +433,7 @@
 									
 										<%-- Testa se o usuário é Web-designer --%>
 										<c:when test="${tipoDeUsuario == 'webDesigner'}">
-											<form action="parecer" method="post">
+											<form action="parecer" method="post" data-toggle="validator" role="form">
 												<div class="card ">
 													<div class="header">
 														<h4 class="title">PARECER TÉCNICO</h4>
@@ -439,17 +441,17 @@
 													<div class="content">
 														<div class="row">
 															<div class="col-md-12">
-																<div class="form-group">
-																	<label>Recomendação</label> 
-																	<input type="text" name="recomendacao" class="form-control">
+																<div class="form-group has-feedback">
+																	<label class="control-label" for="recomendacao">Recomendação</label> 
+																	<input type="text" id="recomendacao" name="recomendacao" class="form-control" required>
 																</div>
 															</div>
 														</div>
 														<div class="row">
 															<div class="col-md-12">
-																<div class="form-group">
-																	<label>Justificativa</label>
-																	<textarea rows="5" name="justificativa" class="form-control"></textarea>
+																<div class="form-group has-feedback">
+																	<label class="control-label" for="justificativa">Justificativa</label>
+																	<textarea rows="5" id="justificativa" name="justificativa" class="form-control" required></textarea>
 																</div>
 															</div>
 														</div>
@@ -507,12 +509,12 @@
 															<h4 class="title">PARECER TÉCNICO</h4>
 														</div>
 														<div class="content">
-															<form action="parecer" method="post">
+															<form action="parecer" method="post" data-toggle="validator" role="form">
 																<div class="row">
 																	<div class="col-md-12">
-																		<div class="form-group">
-																			<label>Recomendação</label> 
-																			<input type="text" name="recomendacao" value="${solicitacaoDeDesenvolvimento.parecer.recomendacao}" class="form-control">
+																		<div class="form-group has-feedback">
+																			<label class="control-label" for="recomendacao">Recomendação</label> 
+																			<input type="text" id="recomendacao" name="recomendacao" value="${solicitacaoDeDesenvolvimento.parecer.recomendacao}" class="form-control" required>
 																		</div>
 																	</div>
 																</div>
@@ -539,9 +541,9 @@
 							                                    </div>
 																<div class="row">
 																	<div class="col-md-12">
-																		<div class="form-group">
-																			<label>Justificativa</label>
-																			<textarea rows="5" name="justificativa" class="form-control">${solicitacaoDeDesenvolvimento.parecer.justificativa}</textarea>
+																		<div class="form-group has-feedback">
+																			<label class="control-label" for="justificativa">Justificativa</label>
+																			<textarea rows="5" id="jusfificativa" name="justificativa" class="form-control" required>${solicitacaoDeDesenvolvimento.parecer.justificativa}</textarea>
 																		</div>
 																	</div>
 																</div>
@@ -713,20 +715,22 @@
 													<h4 class="title">AVALIAÇÃO DA SOLICITAÇÃO</h4>
 												</div>
 												<div class="content">
-													<form action="avaliacaoDeSolicitacaoDeDesenvolvimento" method="post">
+													<form action="avaliacaoDeSolicitacaoDeDesenvolvimento" method="post" data-toggle="validator" role="form">
 														<div class="row">
 															<div class="col-md-12">
-																<label>Avaliação</label><br />
-																<input type="radio" name="avaliacao" value="Aceita" /> Aceita <br />
-																<input type="radio" name="avaliacao" value="Rejeitada" /> Rejeitada <br />
+																<div class="form-group has-feedback">
+																	<label class="control-label" for="avaliacao">Avaliação</label><br />
+																	<input type="radio" id="avaliacao" name="avaliacao" value="Aceita" required /> Aceita <br />
+																	<input type="radio" id="avaliacao" name="avaliacao" value="Rejeitada" required /> Rejeitada <br />
+																</div>
 															</div>
 														</div>
 														<div class="row">
 															<div class="col-md-12">
-																<div class="form-group">
-																	<label>Justificativa</label>
-																	<textarea rows="5" name="justificativa"
-																		class="form-control"></textarea>
+																<div class="form-group has-feedback">
+																	<label class="control-label" for="justificativa">Justificativa</label>
+																	<textarea rows="5" id="justificativa" name="justificativa"
+																		class="form-control" required></textarea>
 																</div>
 															</div>
 														</div>
@@ -748,38 +752,28 @@
 													<h4 class="title">AVALIAÇÃO DA SOLICITAÇÃO</h4>
 												</div>
 												<div class="content">
-													<form action="avaliacaoDeSolicitacaoDeDesenvolvimento" method="post">
+													<form action="avaliacaoDeSolicitacaoDeDesenvolvimento" method="post" data-toggle="validator" role="form">
 														<c:choose>
 															<c:when test="${solicitacaoDeDesenvolvimento.avaliacaoDaSolicitacao.avaliacao == 'Aceita'}">
-																<div class="form-check form-check-radio">
-																	<label class="form-check-label">
-																		<input type="radio" class="form-check-input" name="avaliacao" value="Aceita" checked /> 
-																		<span class="form-check-sign"></span>
-																		Aceita
-																	</label>
-																</div>
-																<div class="form-check form-check-radio">
-																	<label class="form-check-label">
-																		<input type="radio" class="form-check-input" name="avaliacao" value="Rejeitada" />
-																		<span class="form-check-sign"></span>
-																		Rejeitada
-																	</label>
+																<div class="row">
+																	<div class="col-md-12">
+																		<div class="form-group has-feedback">
+																			<label class="control-label" for="avaliacao">Avaliação</label> <br />
+																			<input type="radio" id="avaliacao" name="avaliacao" value="Aceita" checked required/> Aprovar <br />	
+																			<input type="radio" id="avaliacao" name="avaliacao" value="Rejeitada" required /> Reprovar <br />
+																		</div>
+																	</div>
 																</div>
 															</c:when>
 															<c:otherwise>
-																<div class="form-check form-check-radio disabled">
-																	<label class="form-check-label">
-																		<input type="radio" class="form-check-input" name="avaliacao" value="Aceita" />
-																		<span class="form-check-sign"></span>
-																		Aceita
-																	</label>
-																</div>
-																<div class="form-check form-check-radio disabled">
-																	<label class="form-check-label">
-																		<input type="radio" class="form-check-input" name="avaliacao" value="Rejeitada" checked />
-																		<span class="form-check-sign"></span>
-																		Rejeitada
-																	</label>
+																<div class="row">
+																	<div class="col-md-12">
+																		<div class="form-group has-feedback">
+																			<label class="control-label" for="avaliacao">Avaliação</label> <br />
+																			<input type="radio" id="avaliacao" name="avaliacao" value="Aceita" required /> Aprovar <br />	
+																			<input type="radio" id="avaliacao"	 name="avaliacao" value="Rejeitada" checked required /> Reprovar <br />
+																		</div>
+																	</div>
 																</div>
 															</c:otherwise>
 														</c:choose>
@@ -806,10 +800,10 @@
 					                                    </div>
 														<div class="row">
 															<div class="col-md-12">
-																<div class="form-group">
-																	<label>Justificativa</label>
-																	<textarea rows="5" name="justificativa"
-																		class="form-control">${solicitacaoDeDesenvolvimento.avaliacaoDaSolicitacao.justificativa}</textarea>
+																<div class="form-group has-feedback">
+																	<label class="control-label" for="justificativa">Justificativa</label>
+																	<textarea rows="5" id="justificativa" name="justificativa"
+																		class="form-control" required>${solicitacaoDeDesenvolvimento.avaliacaoDaSolicitacao.justificativa}</textarea>
 																</div>
 															</div>
 														</div>
@@ -981,9 +975,12 @@
 				
 			</div>
 			<!-- Fim do conteúdo da Página -->
-	
+			
+<c:import url="common/rodape.jsp" />
+			<script src="assets/js/validator.min.js"></script>
+			<script src="assets/js/jquery.mask.min.js"></script>
 			<!--  Two-side Multi Select Plugin    -->
-		    <script src="assets/js/multiselect.js"></script>
+		    <script src="assets/js/	multiselect.js"></script>
 		    <script type="text/javascript">
 			    jQuery(document).ready(function($) {
 			        $('.js-multiselect').multiselect({
@@ -991,11 +988,10 @@
 			            rightAll: '#incluirTodas',
 			            rightSelected: '#incluirUma',
 			            leftSelected: '#excluirUma',
-			            leftAll: '#excluirTodas'
+			            leftAll: '#excluirTodas',
 			        });
 			    });
 			</script>
-<c:import url="common/rodape.jsp" />
 		</div>
 	</div>
 </body>

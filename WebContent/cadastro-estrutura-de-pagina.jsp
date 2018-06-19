@@ -136,15 +136,15 @@
 			                            	</h4>
 			                            </div>
 			                            <div class="content">
-											<form action="estruturaDePaginas">
+											<form action="estruturaDePaginas" method="post" data-toggle="validator" role="form">
 			                                    <div class="row">
 			                                        <div class="col-md-12">
-			                                            <div class="form-group">
-			                                                <label>Título</label>
-			                                                <input type="text" name="titulo" class="form-control">
+			                                            <div class="form-group has-feedback">
+			                                                <label class="control-label" for="titulo">Título</label>
+			                                                <input type="text" id="titulo" name="titulo" class="form-control" required>
 			                                            </div>
 			                                        </div>
-			                                    </div>			                                    
+			                                    </div>                                    
 			                                    <div class="row">
 			                                        <div class="col-md-12">
 			                                            <div class="form-group">
@@ -189,12 +189,12 @@
 															</div>											
 														</c:when>
 													</c:choose>
-													<form action="estruturaDePaginas">
+													<form action="estruturaDePaginas" method="post" data-toggle="validator" role="form">
 					                                    <div class="row">
 					                                        <div class="col-md-12">
-					                                            <div class="form-group">
-					                                                <label>Título</label>
-					                                                <input type="text" name="titulo" value="${estruturaDePagina.titulo}" class="form-control">
+					                                            <div class="form-group has-feedback">
+					                                                <label class="control-label" for="titulo">Título</label>
+					                                                <input type="text" id="titulo" name="titulo" value="${estruturaDePagina.titulo}" class="form-control" required>
 					                                            </div>
 					                                        </div>
 					                                    </div>
@@ -249,6 +249,8 @@
 				</div>
 	        </div>
 <c:import url="common/rodape.jsp" />
+			<script src="assets/js/validator.min.js"></script>
+			<script src="assets/js/jquery.mask.min.js"></script>
 		</div>
 	</div>
 </body>

@@ -88,20 +88,20 @@
 	                            <div class="content">
 	                            	<c:choose>
 										<c:when test="${empty categoria.id}">
-											<form action="categoriaDeWebsites" method="post">
+											<form action="categoriaDeWebsites" method="post" data-toggle="validator" role="form">
 			                                    <div class="row">
 			                                        <div class="col-md-12">
-			                                            <div class="form-group">
-			                                                <label>Nome</label>
-			                                                <input type="text" name="nome" class="form-control">
+			                                            <div class="form-group has-feedback">
+			                                                <label class="control-label" for="nome">Nome</label>
+			                                                <input type="text" id="nome" name="nome" class="form-control" required>
 			                                            </div>
 			                                        </div>
 			                                    </div>			                                    
 			                                    <div class="row">
 			                                        <div class="col-md-12">
-			                                            <div class="form-group">
-			                                                <label>Descrição</label>
-			                                                <textarea rows="5" name="descricao" class="form-control"></textarea>
+			                                            <div class="form-group has-feedback">
+			                                                <label class="control-label" for="descricao">Descrição</label>
+			                                                <textarea rows="5" id="descricao" name="descricao" class="form-control" required></textarea>
 			                                            </div>
 			                                        </div>
 			                                    </div>
@@ -121,18 +121,18 @@
 													</div>											
 												</c:when>
 											</c:choose>
-											<form action="categoriaDeWebsites" method="post">
+											<form action="categoriaDeWebsites" method="post" data-toggle="validator" role="form">
 			                                    <div class="row">
 			                                        <div class="col-md-12">
-			                                            <div class="form-group">
-			                                                <label>Nome</label>
-			                                                <input type="text" name="nome" value="${categoria.nome}" class="form-control">
+			                                            <div class="form-group has-feedback">
+			                                                <label class="control-label" for="nome">Nome</label>
+			                                                <input type="text" id="nome" name="nome" value="${categoria.nome}" class="form-control" required>
 			                                            </div>
 			                                        </div>
 			                                    </div>
 			                                    <div class="row">
 			                                        <div class="col-md-6">
-			                                            <div class="form-group">
+			                                            <div class="form-group has-feedback">
 			                                                <label>Data de Cadastro</label>
 			                                                <input type="text" class="form-control" disabled value="<fmt:formatDate value='${categoria.dataDeCriacao}' pattern='dd/MM/yyyy' />">
 			                                            </div>
@@ -153,9 +153,9 @@
 			                                    </div>
 			                                    <div class="row">
 			                                        <div class="col-md-12">
-			                                            <div class="form-group">
-			                                                <label>Descrição</label>
-			                                                <textarea rows="5" name="descricao" class="form-control">${categoria.descricao}</textarea>
+			                                            <div class="form-group has-feedback">
+			                                                <label class="control-label" for="descricao">Descrição</label>
+			                                                <textarea rows="5" id="descricao" name="descricao" class="form-control" required	>${categoria.descricao}</textarea>
 			                                            </div>
 			                                        </div>
 			                                    </div>
@@ -176,6 +176,27 @@
 	            </div>
 	        </div>
 <c:import url="common/rodape.jsp" />
+			<script src="assets/js/validator.min.js"></script>
+			<script src="assets/js/jquery.mask.min.js"></script>
+			<script>
+				var comportamentoTelefone = function (val) {
+				  	return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+				},
+				telOpcoes = {
+				  	onKeyPress: function(val, e, field, options) {
+				      	field.mask(comportamentoTelefone.apply({}, arguments), options);
+				    },
+				};
+
+				$('.telefone').mask(comportamentoTelefone, telOpcoes);
+				
+				var senha = document.getElementById('senha');
+				
+				senha.addEventListener('invalid', function () {
+					this.setCustomValidity(this.value.length < 6 ? 'Por favor, complete a senha.' : '');
+				}, false);
+
+			</script>
 		</div>
 	</div>
 </body>

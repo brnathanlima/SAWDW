@@ -104,21 +104,21 @@
 			                                </h4>
 			                            </div>
 			                            <div class="content">
-											<form action="estruturaDeWebsites">
+											<form action="estruturaDeWebsites" method="post" data-toggle="validator" role="form">
 			                                    <div class="row">
 			                                        <div class="col-md-12">
-			                                            <div class="form-group">
-			                                                <label>Nome</label>
-			                                                <input type="text" name="nome" class="form-control">
+			                                            <div class="form-group has-feedback">
+			                                                <label class="control-label" for="nome">Nome</label>
+			                                                <input type="text" id="nome" name="nome" class="form-control" required>
 			                                            </div>
 			                                        </div>
 			                                    </div>
 			                                    <div class="row">
 									            	<div class="col-md-12">
-									            		<div class="form-group">
-											               	<label>Categoria</label>
-								                        	<select name="idCategoria" class="form-control">
-																<option>Selecione</option>
+									            		<div class="form-group has-feedback">
+											               	<label class="control-label" for="idCategoria">Categoria</label>
+								                        	<select id="idCategoria" name="idCategoria" class="form-control" required>
+																<option value="">Selecione</option>
 																<c:forEach var="categoria" items="${categorias}">
 																	<option value="${categoria.id}">${categoria.nome}</option>
 																</c:forEach>
@@ -128,9 +128,9 @@
 												</div>	
 			                                    <div class="row">
 			                                        <div class="col-md-12">
-			                                            <div class="form-group">
-			                                                <label>Descrição</label>
-			                                                <textarea rows="5" name="descricao" class="form-control"></textarea>
+			                                            <div class="form-group has-feedback">
+			                                                <label class="control-label" for="descricao">Descrição</label>
+			                                                <textarea rows="5" id="descricao" name="descricao" class="form-control" required></textarea>
 			                                            </div>
 			                                        </div>
 			                                    </div>
@@ -172,20 +172,20 @@
 															</div>											
 														</c:when>
 													</c:choose>
-					                            	<form action="estruturaDeWebsites">
+					                            	<form action="estruturaDeWebsites" method="post" data-toggle="validator" role="form">
 					                                    <div class="row">
 					                                        <div class="col-md-12">
-					                                            <div class="form-group">
-					                                                <label>Nome</label>
-					                                                <input type="text" name="nome" value="${estruturaDeWebsite.nome}" class="form-control">
+					                                            <div class="form-group has-feedback">
+					                                                <label class="control-label" for="nome">Nome</label>
+					                                                <input type="text" id="nome" name="nome" value="${estruturaDeWebsite.nome}" class="form-control" required>
 					                                            </div>
 					                                        </div>
 					                                    </div>
 					                                    <div class="row">
 					                                        <div class="col-md-12">
-					                                        	<div class="form-group">
-						                                        	<label>Categoria</label>
-								                                    <select name="idCategoria" class="form-control">
+					                                        	<div class="form-group has-feedback">
+						                                        	<label class="control-label" for="idCategoria">Categoria</label>
+								                                    <select id="idCategoria" name="idCategoria" class="form-control" required>
 																		<option>Selecione</option>
 																		<c:forEach var="categoria" items="${categorias}">
 																			<c:choose>
@@ -224,9 +224,9 @@
 					                                    </div>
 					                                    <div class="row">
 					                                        <div class="col-md-12">
-					                                            <div class="form-group">
-					                                                <label>Descrição</label>
-					                                                <textarea rows="5" name="descricao" class="form-control">${estruturaDeWebsite.descricao}</textarea>
+					                                            <div class="form-group has-feedback">
+					                                                <label class="control-label" for="descricao">Descrição</label>
+					                                                <textarea rows="5" id="descricao" name="descricao" class="form-control" required>${estruturaDeWebsite.descricao}</textarea>
 					                                            </div>
 					                                        </div>
 					                                    </div>
@@ -295,8 +295,8 @@
 						                		<div class="content table-responsive table-full-width">
 						                			<c:choose>
 							              				<c:when test="${empty estruturaDeWebsite.estruturasDePaginasDoWebsite}">
-							              					<div class="alert alert-info" role="alert">
-																<span>Ainda não há páginas cadastras nesta estrutura de website.</span>
+							              					<div class="alert alert-warning" role="alert">
+																<span>Ainda não há páginas cadastras relacionadas à esta estrutura de website.</span>
 															</div>
 							              				</c:when>
 							              				<c:otherwise>
@@ -351,6 +351,8 @@
 				</div>
 	        </div>
 <c:import url="common/rodape.jsp" />
+			<script src="assets/js/validator.min.js"></script>
+			<script src="assets/js/jquery.mask.min.js"></script>
 		</div>
 	</div>
 </body>

@@ -82,79 +82,93 @@
 	                            <div class="content">
 	                            	<c:choose>
 										<c:when test="${empty administradorDeInstituicao.id}">
-											<form action="administradorDeInstituicao" method="post">
+											<form action="administradorDeInstituicao" method="post" data-toggle="validator" role="form">
 												<div class="row">
 			                                        <div class="col-md-12">
-			                                            <div class="form-group">
-			                                                <label>Matricula</label>
-			                                                <input type="text" name="matricula" class="form-control">
+			                                            <div class="form-group has-feedback">
+			                                                <label class="control-label" for="matricula">Matricula</label>
+			                                                <input type="number" id="matricula" name="matricula" class="form-control" 
+			                                               	pattern="[0-9]+$" required>
 			                                            </div>
 			                                        </div>
 			                                    </div>
 			                                    <div class="row">
 			                                        <div class="col-md-6">
-			                                            <div class="form-group">
-			                                                <label>Nome</label>
-			                                                <input type="text" name="nome" class="form-control">
+			                                            <div class="form-group has-feedback">
+			                                                <label class="control-label" for="nome">Nome</label>
+			                                                <input type="text" id="nome" name="nome" class="form-control" required>
 			                                            </div>
 			                                        </div>
 			                                        <div class="col-md-6">
-			                                            <div class="form-group">
-			                                                <label>Sobrnome</label>
-			                                                <input type="text" name="sobrenome" class="form-control">
-			                                            </div>
-			                                        </div>
-			                                    </div>
-			                                    
-			                                    <div class="row">
-			                                        <div class="col-md-6">
-			                                            <div class="form-group">
-			                                                <label>E-mail</label>
-			                                                <input type="text" name="email" class="form-control">
-			                                            </div>
-			                                        </div>
-			                                        <div class="col-md-6">
-			                                            <div class="form-group">
-			                                                <label>Telefone</label>
-			                                                <input type="text" name="telefone" class="form-control">
-			                                            </div>
-			                                        </div>
-			                                    </div>
-			                                    <div class="row">
-			                                        <div class="col-md-6">
-			                                            <div class="form-group">
-			                                                <label>Setor</label>
-			                                                <input type="text" name="setor" class="form-control">
-			                                            </div>
-			                                        </div>
-			                                        <div class="col-md-6">
-			                                            <div class="form-group">
-			                                                <label>Cargo</label>
-			                                                <input type="text" name="cargo" class="form-control">
+			                                            <div class="form-group has-feedback">
+			                                                <label class="control-label" for="sobrenome">Sobrnome</label>
+			                                                <input type="text" id="sobrenome" name="sobrenome" class="form-control" required>
 			                                            </div>
 			                                        </div>
 			                                    </div>
 			                                    
 			                                    <div class="row">
 			                                        <div class="col-md-6">
-			                                            <div class="form-group">
-			                                                <label>Nome de Usuário</label>
-			                                                <input type="text" name="nomeDeUsuario" class="form-control">
+			                                            <div class="form-group has-feedback">
+			                                                <label class="control-label" for="email">E-mail</label>
+			                                                <input type="email" id="email" name="email" class="form-control" required>
 			                                            </div>
 			                                        </div>
 			                                        <div class="col-md-6">
-			                                            <div class="form-group">
-			                                                <label>Senha</label>
-			                                                <input type="password" name="senha" class="form-control">
+			                                            <div class="form-group has-feedback">
+			                                                <label class="control-label" for="telefone">Telefone</label>
+			                                                <input type="text" id="telefone" name="telefone" class="form-control telefone" 
+			                                                pattern="\([0-9]{2}\) [0-9]{4,5}-[0-9]{4}$" data-mask-reverse="true" required>
+			                                            </div>
+			                                        </div>
+			                                    </div>
+			                                    <div class="row">
+			                                        <div class="col-md-6">
+			                                            <div class="form-group has-feedback">
+			                                                <label class="control-label" for="setor">Setor</label>
+			                                                <input type="text" id="setor" name="setor" class="form-control" required>
+			                                            </div>
+			                                        </div>
+			                                        <div class="col-md-6">
+			                                            <div class="form-group has-feedback">
+			                                                <label class="control-label" for="cargo">Cargo</label>
+			                                                <input type="text" id="cargo"  name="cargo" class="form-control" required>
+			                                            </div>
+			                                        </div>
+			                                    </div>
+			                                    
+			                                    <div class="row">
+			                                        <div class="col-md-4">
+			                                            <div class="form-group has-feedback">
+			                                                <label class="control-label" for="nomeDeUsuario">Nome de Usuário</label>
+			                                                <input type="text" id="nomeDeUsuario" name="nomeDeUsuario" 
+			                                                class="form-control" pattern="[a-z,0-9]+$" required>
+			                                                <span class="help-block">Apenas letras e números.</span>
+			                                            </div>
+			                                        </div>
+			                                        <div class="col-md-4">
+			                                            <div class="form-group has-feedback">
+			                                                <label class="control-label" for="senha">Senha</label>
+			                                                <input type="password" id="senha" name="senha" class="form-control" data-min-length="6" 
+			                                                minlength="6" required />
+			                                                <span class="help-block">No mínimo 6 dígitos.</span>
+			                                            </div>
+			                                        </div>
+			                                        <div class="col-md-4">
+			                                            <div class="form-group has-feedback">
+			                                                <label class="control-label" for="confirmarSenha">Confirmar a senha</label>
+			                                                <input type="password" id="confirmarSenha" name="confirmarSenha" class="form-control"  
+			                                                data-match="#senha" data-match-error="Atenção! As senhas não estão iguais." required />
 			                                            </div>
 			                                        </div>
 			                                    </div>
 			                                    
 			                                    <div class="row">
 			                                        <div class="col-md-12">
-			                                            <div class="form-group">
-			                                                <label>Instituição a que Pertence</label>
-			                                                <select name="idInstituicao" class="form-control">
+			                                            <div class="form-group has-feedback">
+			                                                <label class="control-label" for="idInstituicao">Instituição a que Pertence</label>
+			                                                <select id="idInstituicao"  name="idInstituicao" class="form-control" required>
+			                                                	<option value="">Selecione</option>
 			                                                	<c:forEach var="instituicao" items="${instituicoes}">
 																	<option value="${instituicao.id}">${instituicao.nomeFantasia}</option>
 																</c:forEach>
@@ -177,69 +191,87 @@
 													</div>											
 												</c:when>
 											</c:choose>
-											<form action="administradorDeInstituicao" method="post">
+											<form action="administradorDeInstituicao" method="post" data-toggle="validator" role="form">
 												<div class="row">
 			                                        <div class="col-md-12">
-			                                            <div class="form-group">
-			                                                <label>Matricula</label>
-			                                                <input type="text" name="matricula" value="${administradorDeInstituicao.matricula}" class="form-control">
+			                                            <div class="form-group has-feedback">
+			                                                <label class="control-label" for="matricula">Matricula</label>
+			                                                <input type="number" id="matricula" name="matricula" value="${administradorDeInstituicao.matricula}" 
+			                                                pattern="[0-9]+$"  class="form-control" required>
 			                                            </div>
 			                                        </div>
 			                                    </div>
 			                                    <div class="row">
 			                                        <div class="col-md-6">
-			                                            <div class="form-group">
-			                                                <label>Nome</label>
-			                                                <input type="text" name="nome" value="${administradorDeInstituicao.nome}" class="form-control">
+			                                            <div class="form-group has-feedback">
+			                                                <label class="control-label" for="nome">Nome</label>
+			                                                <input type="text" id="nome" name="nome" value="${administradorDeInstituicao.nome}" 
+			                                                class="form-control" required>
 			                                            </div>
 			                                        </div>
 			                                        <div class="col-md-6">
-			                                            <div class="form-group">
-			                                                <label>Sobrnome</label>
-			                                                <input type="text" name="sobrenome" value="${administradorDeInstituicao.sobrenome}" class="form-control">
+			                                            <div class="form-group has-feedback">
+			                                                <label class="control-label" for="sobrenome">Sobrnome</label>
+			                                                <input type="text" id="sobrenome" name="sobrenome" value="${administradorDeInstituicao.sobrenome}" 
+			                                                class="form-control" required>
 			                                            </div>
 			                                        </div>
 			                                    </div>			                                    
 			                                    <div class="row">
 			                                        <div class="col-md-6">
-			                                            <div class="form-group">
-			                                                <label>E-mail</label>
-			                                                <input type="text" name="email" value="${administradorDeInstituicao.email}" class="form-control">
+			                                            <div class="form-group has-feedback">
+			                                                <label class="control-label" for="email">E-mail</label>
+			                                                <input type="text" id="email" name="email" value="${administradorDeInstituicao.email}" 
+			                                                class="form-control" required>
 			                                            </div>
 			                                        </div>
 			                                        <div class="col-md-6">
-			                                            <div class="form-group">
-			                                                <label>Telefone</label>
-			                                                <input type="text" name="telefone" value="${administradorDeInstituicao.telefone}" class="form-control">
+			                                            <div class="form-group has-feedback">
+			                                                <label class="control-label" for="telefone">Telefone</label>
+			                                                <input type="text" id="telefone" name="telefone" value="${administradorDeInstituicao.telefone}" 
+			                                                class="form-control telefone" pattern="\([0-9]{2}\) [0-9]{4,5}-[0-9]{4}$" data-mask-reverse="true" required>
 			                                            </div>
 			                                        </div>
 			                                    </div>
 			                                    <div class="row">
 			                                        <div class="col-md-6">
-			                                            <div class="form-group">
-			                                                <label>Setor</label>
-			                                                <input type="text" name=setor value="${administradorDeInstituicao.setor}" class="form-control">
+			                                            <div class="form-group has-feedback">
+			                                                <label class="control-label" for="setor">Setor</label>
+			                                                <input type="text" id="setor" name="setor" value="${administradorDeInstituicao.setor}" 
+			                                                class="form-control" required>
 			                                            </div>
 			                                        </div>
 			                                        <div class="col-md-6">
-			                                            <div class="form-group">
-			                                                <label>Cargo</label>
-			                                                <input type="text" name="cargo" value="${administradorDeInstituicao.cargo}" class="form-control">
+			                                            <div class="form-group has-feedback">
+			                                                <label class="control-label" for="cargo">Cargo</label>
+			                                                <input type="text" id="cargo" name="cargo" value="${administradorDeInstituicao.cargo}" 
+			                                                class="form-control" required>
 			                                            </div>
 			                                        </div>
 			                                    </div>			                                    
 			                                    <div class="row">
-			                                        <div class="col-md-6">
-			                                            <div class="form-group">
-			                                                <label>Nome de Usuário</label>
-			                                                <input type="text" name="nomeDeUsuario" value="${administradorDeInstituicao.nomeDeUsuario}" class="form-control">
+			                                        <div class="col-md-4">
+			                                            <div class="form-group has-feedback">
+			                                                <label class="control-label" for="nomeDeUsuario">Nome de Usuário</label>
+			                                                <input type="text" id="nomeDeUsuario" name="nomeDeUsuario" value="${administradorDeInstituicao.nomeDeUsuario}" 
+			                                                class="form-control" pattern="[a-z,0-9]+$" required>
+			                                                <span class="help-block">Apenas letras e números.</span>
 			                                            </div>
 			                                        </div>
-			                                        <div class="col-md-6">
-			                                            <div class="form-group">
-			                                                <label>Senha</label>
-			                                                <input type="password" name="senha" value="${administradorDeInstituicao.senha}"class="form-control">
-			                                            </div>
+			                                        <div class="col-md-4">
+			                                            <div class="form-group has-feedback">
+			                                                <label class="control-label" for="senha">Senha</label>
+			                                                <input type="password" id="senha" name="senha" value="${administradorDeInstituicao.senha}"
+			                                                class="form-control" required>
+			                                                <span class="help-block">No mínimo 6 dígitos.</span>
+			                                        	</div>
+			                                        </div>
+			                                        <div class="col-md-4">
+				                                    	<div class="form-group has-feedback">
+				                                    	    <label class="control-label" for="confirmarSenha">Confirmar a senha</label>
+				                                            <input type="password" id="confirmarSenha" name="confirmarSenha"  value="${administradorDeInstituicao.senha}" 
+				                                            class="form-control" data-match="#senha" data-match-error="Atenção! As senhas não estão iguais." required />
+				                                        </div>
 			                                        </div>
 			                                    </div>			                                    
 			                                    <div class="row">
@@ -265,9 +297,9 @@
 			                                    </div>			                                    
 			                                    <div class="row">
 			                                        <div class="col-md-12">
-			                                        	<div class="form-group">
-				                                        	<label>Instituição a que pertence</label>
-						                                    <select name="idInstituicao" class="form-control">
+			                                        	<div class="form-group has-feedback">
+				                                        	<label class="control-label" for="idInstituicao">Instituição a que pertence</label>
+						                                    <select id="idInstituicao" name="idInstituicao" class="form-control" required>
 																<c:forEach var="instituicao" items="${instituicoes}">
 																	<c:choose>
 																		<c:when test="${instituicao.id == administradorDeInstituicao.instituicao.id}">
@@ -300,6 +332,27 @@
 	            </div>
 	        </div>
 <c:import url="common/rodape.jsp" />
+			<script src="assets/js/validator.min.js"></script>
+			<script src="assets/js/jquery.mask.min.js"></script>
+			<script>
+				var comportamentoTelefone = function (val) {
+				  	return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+				},
+				telOpcoes = {
+				  	onKeyPress: function(val, e, field, options) {
+				      	field.mask(comportamentoTelefone.apply({}, arguments), options);
+				    },
+				};
+
+				$('.telefone').mask(comportamentoTelefone, telOpcoes);
+				
+				var senha = document.getElementById('senha');
+				
+				senha.addEventListener('invalid', function () {
+					this.setCustomValidity(this.value.length < 6 ? 'Por favor, complete a senha.' : '');
+				}, false);
+
+			</script>
 		</div>
 	</div>
 </body>

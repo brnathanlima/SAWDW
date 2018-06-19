@@ -136,19 +136,20 @@
 											</h4>
 										</div>
 										<div class="content">
-											<form action="projeto" method="post">
+											<form action="projeto" method="post"  data-toggle="validator" role="form">
 											<div class="row">
 												<div class="col-md-12">
-													<div class="form-group">
-														<label>Título</label> <input type="text" name="titulo" class="form-control">
+													<div class="form-group has-feedback">
+														<label class="control-label" for="titulo">Título</label> 
+														<input type="text" id="titulo" name="titulo" class="form-control" required>
 													</div>
 												</div>
 											</div>
 											<div class="row">
 												<div class="col-md-12">
-													<div class="form-group">
-														<label>Descrição</label>
-														<textarea rows="5" name="descricao" class="form-control"></textarea>
+													<div class="form-group has-feedback">
+														<label class="control-label" for="descricao">Descrição</label>
+														<textarea rows="5" id="descricao" name="descricao" class="form-control" required></textarea>
 													</div>
 												</div>
 											</div>
@@ -240,12 +241,12 @@
 																	</div>											
 																</c:when>
 															</c:choose>
-															<form action="projeto" method="post">
+															<form action="projeto" method="post" data-toggle="validator" role="form">
 																<div class="row">
 																	<div class="col-md-12">
-																		<div class="form-group">
-																			<label>Título</label> 
-																			<input type="text" name="titulo" class="form-control" value="${projeto.titulo}">
+																		<div class="form-group has-feedback">
+																			<label class="control-label" for="titulo">Título</label> 
+																			<input type="text" id="titulo" name="titulo" class="form-control" value="${projeto.titulo}" required>
 																		</div>
 																	</div>
 																</div>
@@ -280,9 +281,9 @@
 							                                    </div>
 																<div class="row">
 																	<div class="col-md-12">
-																		<div class="form-group">
-																			<label>Descrição</label>
-																			<textarea rows="5" name="descricao" class="form-control">${projeto.descricao}</textarea>
+																		<div class="form-group has-feedback">
+																			<label class="control-label" for="descricao">Descrição</label>
+																			<textarea rows="5" id="descricao" name="descricao" class="form-control" required>${projeto.descricao}</textarea>
 																		</div>
 																	</div>
 																</div>
@@ -347,12 +348,12 @@
 															<h4 class="title">FINALIZAR PROJETO</h4>
 														</div>
 														<div class="content">
-															<form action="projeto" method="post">
+															<form action="projeto" method="post" data-toggle="validator" role="form">
 																<div class="row">
 																	<div class="col-md-12">
-																		<div class="form-group">
-																			<label>Resumo</label>
-																			<textarea rows="5" name="resumo" class="form-control"></textarea>
+																		<div class="form-group has-feedback">
+																			<label class="control-label" for="resumo">Resumo</label>
+																			<textarea rows="5" id="resumo" name="resumo" class="form-control" required></textarea>
 																		</div>
 																	</div>
 																</div>
@@ -602,20 +603,20 @@
 															<h4 class="title">EDITAR RESULTADOS DO PROJETO</h4>
 														</div>
 														<div class="content">
-															<form action="projeto" method="post">
+															<form action="projeto" method="post" data-toggle="validator" role="form">
 																<div class="row">
 							                                        <div class="col-md-12">
 							                                            <div class="form-group">
-							                                                <label>Data de Conclusão do Projeto</label>
+							                                                <label >Data de Conclusão do Projeto</label>
 							                                                <input type="text" class="form-control" disabled value="<fmt:formatDate value='${projeto.dataDeConclusao}' pattern='dd/MM/yyyy' />">
 							                                            </div>
 							                                        </div>
 							                                    </div>
 																<div class="row">
 																	<div class="col-md-12">
-																		<div class="form-group">
-																			<label>Resumo</label>
-																			<textarea rows="5" name="resumo" class="form-control">${projeto.resumo}</textarea>
+																		<div class="form-group has-feedback">
+																			<label class="control-label" for="resumo">Resumo</label>
+																			<textarea rows="5" id="resumo" name="resumo" class="form-control" required>${projeto.resumo}</textarea>
 																		</div>
 																	</div>
 																</div>
@@ -679,28 +680,28 @@
 															<h4 class="title">AVALIAR PROJETO</h4>
 														</div>
 														<div class="content">
-															<form action="avaliacaoDeProjeto" method="post">
+															<form action="avaliacaoDeProjeto" method="post" data-toggle="validator" role="form">
 																<div class="row">
 																	<div class="col-md-12">
-																		<div class="form-group">
-																			<label>Título da Avaliação</label>
-																			<input type="text" name="titulo" class="form-control" />
+																		<div class="form-group has-feedback">
+																			<label class="control-label" for="titulo">Título da Avaliação</label>
+																			<input type="text" id="titulo" name="titulo" class="form-control" required />
 																		</div>
 																	</div>
 																</div>
 																<div class="row">
 																	<div class="col-md-12">
-																		<div class="form-group">
-																			<label>Que nota você dá ao Projeto?</label>
-																			<input type="number" min="0" max="10" name="nota" class="form-control" placeholder="0 - 10" />
+																		<div class="form-group has-feedback">
+																			<label class="control-label" for="nota">Que nota você dá ao Projeto?</label>
+																			<input type="number" min="0" max="10" id="nota" name="nota" class="form-control" placeholder="0 - 10" required/>
 																		</div>
 																	</div>
 																</div>
 																<div class="row">
 																	<div class="col-md-12">
-																		<div class="form-group">
-																			<label>Deixe o seu Comentário</label>
-																			<textarea rows="5" name="comentario" class="form-control"></textarea>
+																		<div class="form-group has-feedback">
+																			<label class="control-label" for="comentario">Deixe o seu Comentário</label>
+																			<textarea rows="5" id="comentario" name="comentario" class="form-control" required></textarea>
 																		</div>
 																	</div>
 																</div>
@@ -724,27 +725,27 @@
 															<h4 class="title">EDITAR AVALIAÇÃO DO PROJETO</h4>
 														</div>
 														<div class="content">
-															<form action="avaliacaoDeProjeto" method="post">
+															<form action="avaliacaoDeProjeto" method="post" data-toggle="validator" role="form">
 																<div class="row">
 																	<div class="col-md-12">
-																		<div class="form-group">
-																			<label>Título da Avaliação</label>
-																			<input type="text" name="titulo" class="form-control" value="${projeto.avaliacaoDoProjeto.titulo}"/>
+																		<div class="form-group has-feedback">
+																			<label class="control-label" for="titulo">Título da Avaliação</label>
+																			<input type="text" id="titulo" name="titulo" class="form-control" value="${projeto.avaliacaoDoProjeto.titulo}" required/>
 																		</div>
 																	</div>
 																</div>
 																<div class="row">
 																	<div class="col-md-12">
-																		<div class="form-group">
-																			<label>Que nota você dá ao Projeto?</label>
-																			<input type="number" min="0" max="10" name="nota" class="form-control" value="${projeto.avaliacaoDoProjeto.nota}"/>
+																		<div class="form-group has-feedback">
+																			<label class="control-label" for="nota">Que nota você dá ao Projeto?</label>
+																			<input type="number" min="0" max="10" id="nota" name="nota" class="form-control" value="${projeto.avaliacaoDoProjeto.nota}" required/>
 																		</div>
 																	</div>
 																</div>
 							                                    <div class="row">
 							                                        <div class="col-md-6">
 							                                            <div class="form-group">
-							                                                <label>Data de Emissão</label>
+							                                                <label">Data de Emissão</label>
 							                                                <input type="text" class="form-control" disabled value="<fmt:formatDate value='${projeto.avaliacaoDoProjeto.dataDeEmissao}' pattern='dd/MM/yyyy' />">
 							                                            </div>
 							                                        </div>
@@ -764,9 +765,9 @@
 							                                    </div>
 																<div class="row">
 																	<div class="col-md-12">
-																		<div class="form-group">
-																			<label>Deixe o seu Comentário</label>
-																			<textarea rows="5" name="comentario" class="form-control">${projeto.avaliacaoDoProjeto.comentario}</textarea>
+																		<div class="form-group has-feedback">
+																			<label class="control-label" for="comentario">Deixe o seu Comentário</label>
+																			<textarea rows="5" id="comentario" name="comentario" class="form-control" required>${projeto.avaliacaoDoProjeto.comentario}</textarea>
 																		</div>
 																	</div>
 																</div>
@@ -878,7 +879,11 @@
 			</div>
 			<!-- Fim do conteúdo da Página -->
 	
+			
+<c:import url="common/rodape.jsp" />
+			<script src="assets/js/validator.min.js"></script>
 			<!--  Two-side Multi Select Plugin    -->
+			
 		    <script src="assets/js/multiselect.js"></script>
 		    <script type="text/javascript">
 			    jQuery(document).ready(function($) {
@@ -891,7 +896,6 @@
 			        });
 			    });
 			</script>
-<c:import url="common/rodape.jsp" />
 		</div>
 	</div>
 </body>

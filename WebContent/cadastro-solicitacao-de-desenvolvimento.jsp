@@ -5,6 +5,7 @@
 <head>
 	<title>SAEDW - Solicitação de Desenvolvimento de Website</title>
 	<c:import url="/common/cabecalho.jsp" />
+	<link href="assets/sass/selectr.scss" />
 </head>
 <body>
 	<div class="wrapper">
@@ -131,45 +132,16 @@
 														</div>
 													</div>
 													<div class="row">
-														<div class="col-md-5">
-															<div class="form-group">
-																<label for="estruturasDeWebsitesDaInstituicao">Estruturas de Websites Disponíveis</label>
-																<select id="estruturasDeWebsitesDaInstituicao" name="estruturasDeWebsitesDaInstituicao" 
-																class="js-multiselect form-control" size="9" multiple="multiple">
+														<div class="col-md-12">
+															<div class="form-group has-feedback">
+																<label class="control-label" for="estruturasDeWebsitesSolicitadas">Selecione a(s) estrutura(s) de website(s)</label><br />
+																<select id="estruturasDeWebsitesSolicitadas" name="estruturasDeWebsitesSolicitadas" multiple required>
 																	<c:forEach var="estruturaDeWebsite" items="${estruturasDeWebsites}" varStatus="id">
 																		<option value="${estruturaDeWebsite.id}">${estruturaDeWebsite.nome}</option>
 																	</c:forEach>
 																</select>
 															</div>
 														</div>
-														<div class="col-md-2">
-															<br />
-															<button type="button" id="incluirTodas"
-																class="btn btn-block">
-																<i class="fa fa-angle-double-right"></i>
-															</button>
-															<button type="button" id="incluirUma"
-																class="btn btn-block">
-																<i class="fa fa-angle-right"></i>
-															</button>
-															<button type="button" id="excluirUma"
-																class="btn btn-block">
-																<i class="fa fa-angle-left"></i>
-															</button>
-															<button type="button" id="excluirTodas"
-																class="btn btn-block">
-																<i class="fa fa-angle-double-left"></i>
-															</button>
-														</div>
-														<div class="col-md-5">
-															<div class="form-group">
-																<label for="estruturasDeWebsitesSolicitadas">Estruturas de Websites a Serem Solicitadas</label>
-																<select name="estruturasDeWebsitesSolicitadas" id="estruturasDeWebsitesSolicitadas" 
-																class="form-control" size="9" multiple="multiple">
-																</select>
-															</div>
-														</div>
-																
 													</div>
 													
 													<input type="hidden" name="acao" value="cadastrar" />
@@ -265,44 +237,22 @@
 														</div>
 														<div class="row">
 															<div class="col-md-12">
-																<div class="form-group">
-																	<div class="row">
-																		<div class="col-md-5">
-																			<label>Estruturas de Websites Disponíveis</label>
-																			<select name="estruturasDeWebsitesDaInstituicao" class="js-multiselect form-control" size="9" multiple="multiple">
-																				<c:forEach var="estruturaDeWebsite" items="${estruturasDeWebsites}">
-																					<option value="${estruturaDeWebsite.id}">${estruturaDeWebsite.nome}</option>
+																<div class="form-group has-feedback">
+																	<label class="control-label" for="estruturasDeWebsitesSolicitadas">Selecione a(s) estrutura(s) de website(s)</label>
+																	<select id="estruturasDeWebsitesSolicitadas" name="estruturasDeWebsitesSolicitadas" multiple required>
+																		<c:forEach var="estruturaDeWebsite" items="${estruturasDeWebsites}">
+																			<option value="${estruturaDeWebsite.id}"	
+																				<c:forEach var="estruturaDeWebsiteSelecionada" items="${solicitacaoDeDesenvolvimento.estruturasDeWebsitesSolicitadas}">
+																					
+																					<c:choose>
+																						<c:when test="${estruturaDeWebsite.id == estruturaDeWebsiteSelecionada.id}">
+																							selected
+																						</c:when>
+																					</c:choose>
 																				</c:forEach>
-																			</select>
-																		</div>
-																		<div class="col-md-2">
-																			<br />
-																			<button type="button" id="incluirTodas"
-																				class="btn btn-block">
-																				<i class="fa fa-angle-double-right"></i>
-																			</button>
-																			<button type="button" id="incluirUma"
-																				class="btn btn-block">
-																				<i class="fa fa-angle-right"></i>
-																			</button>
-																			<button type="button" id="excluirUma"
-																				class="btn btn-block">
-																				<i class="fa fa-angle-left"></i>
-																			</button>
-																			<button type="button" id="excluirTodas"
-																				class="btn btn-block">
-																				<i class="fa fa-angle-double-left"></i>
-																			</button>
-																		</div>
-																		<div class="col-md-5">
-																			<label>Estruturas de Websites Solicitadas</label>
-																			<select name="estruturasDeWebsitesSolicitadas" id="estruturasDeWebsitesSolicitadas" class="form-control" size="9" multiple="multiple">
-																				<c:forEach var="estruturaDeWebsiteSolicitada" items="${solicitacaoDeDesenvolvimento.estruturasDeWebsitesSolicitadas}">
-																					<option value="${estruturaDeWebsiteSolicitada.id}">${estruturaDeWebsiteSolicitada.nome}</option>
-																				</c:forEach>
-																			</select>
-																		</div>
-																	</div>
+																			>${estruturaDeWebsite.nome}</option>
+																		</c:forEach>
+																	</select>
 																</div>
 															</div>
 														</div>
@@ -978,18 +928,18 @@
 			
 <c:import url="common/rodape.jsp" />
 			<script src="assets/js/validator.min.js"></script>
-			<script src="assets/js/jquery.mask.min.js"></script>
-			<!--  Two-side Multi Select Plugin    -->
-		    <script src="assets/js/	multiselect.js"></script>
+			<script src="assets/js/selectr.js"></script>
 		    <script type="text/javascript">
-			    jQuery(document).ready(function($) {
-			        $('.js-multiselect').multiselect({
-			            right: '#estruturasDeWebsitesSolicitadas',
-			            rightAll: '#incluirTodas',
-			            rightSelected: '#incluirUma',
-			            leftSelected: '#excluirUma',
-			            leftAll: '#excluirTodas',
-			        });
+			    
+			    $('select').selectr({
+			    	title: '',
+			    	placeholder: 'BUSCAR',
+			    	resetText: 'LIMPAR SELEÇÃO',
+			    	noMatchingOptionsText: 'Nenhuma estrutura de website encontrada.',
+			    	width: '100%',
+			    	maxListHeight: '250px',
+			    	tooltipBreakpoint: 25,
+			    	maxSelection: NaN 
 			    });
 			</script>
 		</div>

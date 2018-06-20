@@ -50,7 +50,6 @@ public class ProjetoController extends HttpServlet {
 		String descricao = null;
 		String resumo = null;
 		String[] solicitacoesDeDesenvolvimentoIncluidas = null;
-		String[] solicitacoesDeDesenvolvimentoAprovadas = null;
 		Date dataDeInicio = null;
 		Date dataDeModificacao = null;
 		Date dataDeConclusao = null;
@@ -134,7 +133,7 @@ public class ProjetoController extends HttpServlet {
 			
 			solicitacaoDeDesenvolvimentoDAO = new SolicitacaoDeDesenvolvimentoDAO(connection);
 			solicitacoesDeDesenvolvimento = 
-					solicitacaoDeDesenvolvimentoDAO.listarSolicitacoesDeDesenvolvimentoAprovadasDaInstituicao(funcionario.getInstituicao().getId());
+					solicitacaoDeDesenvolvimentoDAO.listarSolicitacoesDeDesenvolvimentoParaEdicaoDeProjeto(funcionario.getInstituicao().getId(), projeto.getId());
 			
 			req.setAttribute("projeto", projeto);
 			req.setAttribute("solicitacoesDeDesenvolvimento", solicitacoesDeDesenvolvimento);
@@ -148,29 +147,21 @@ public class ProjetoController extends HttpServlet {
 			titulo = req.getParameter("titulo");
 			descricao = req.getParameter("descricao");
 			solicitacoesDeDesenvolvimentoIncluidas = req.getParameterValues("solicitacoesDeDesenvolvimentoIncluidas");
-			solicitacoesDeDesenvolvimentoAprovadas = req.getParameterValues("solicitacoesDeDesenvolvimentoAprovadas");
 			dataDeModificacao = new Date();
 			
 			solicitacaoDeDesenvolvimentoDAO = new SolicitacaoDeDesenvolvimentoDAO(connection);
+			solicitacoesDeDesenvolvimento = new ArrayList<SolicitacaoDeDesenvolvimento>();
 			
-			if(solicitacoesDeDesenvolvimentoAprovadas != null) {
+			solicitacoesDeDesenvolvimento = 
+					solicitacaoDeDesenvolvimentoDAO.listarSolicitacoesDeDesenvolvimentoDoProjeto(Long.parseLong(id));
+			
+			for(int i = 0; i < solicitacoesDeDesenvolvimento.size(); i++) {
 				
-				solicitacoesDeDesenvolvimento = new ArrayList<SolicitacaoDeDesenvolvimento>();
-				
-				for(int i = 0; i < solicitacoesDeDesenvolvimentoAprovadas.length; i++) {
-					
-					solicitacaoDeDesenvolvimento = (SolicitacaoDeDesenvolvimento)
-							solicitacaoDeDesenvolvimentoDAO.buscarPorId(Long.parseLong(solicitacoesDeDesenvolvimentoAprovadas[i]));
-					
-					solicitacoesDeDesenvolvimento.add(solicitacaoDeDesenvolvimento);
-					
-					solicitacaoDeDesenvolvimentoDAO.mudarStatus("Aceita", solicitacaoDeDesenvolvimento.getId());
-					
-				}
+				solicitacaoDeDesenvolvimentoDAO.mudarStatus("Aceita", solicitacoesDeDesenvolvimento.get(i).getId());
 				
 			}
 			
-			solicitacoesDeDesenvolvimento = new ArrayList<SolicitacaoDeDesenvolvimento>();
+			solicitacoesDeDesenvolvimento.clear();
 			
 			for(int i = 0; i < solicitacoesDeDesenvolvimentoIncluidas.length; i++) {
 				
@@ -199,7 +190,7 @@ public class ProjetoController extends HttpServlet {
 			
 			solicitacaoDeDesenvolvimentoDAO = new SolicitacaoDeDesenvolvimentoDAO(connection);
 			solicitacoesDeDesenvolvimento = 
-					solicitacaoDeDesenvolvimentoDAO.listarSolicitacoesDeDesenvolvimentoAprovadasDaInstituicao(gerente.getInstituicao().getId());
+					solicitacaoDeDesenvolvimentoDAO.listarSolicitacoesDeDesenvolvimentoParaEdicaoDeProjeto(gerente.getInstituicao().getId(), projeto.getId());
 			
 			req.setAttribute("projeto", projeto);
 			req.setAttribute("solicitacoesDeDesenvolvimento", solicitacoesDeDesenvolvimento);

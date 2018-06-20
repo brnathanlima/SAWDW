@@ -155,41 +155,14 @@
 											</div>
 											<div class="row">
 												<div class="col-md-12">
-													<div class="form-group">
-														<div class="row">
-															<div class="col-md-5">
-																<label>Solicitações de Websites Disponíveis</label>
-																<select name="solicitacoesDeDesenvolvimentoAprovadas" class="js-multiselect form-control" size="9" multiple="multiple">
-																	<c:forEach var="solicitacaoDeDesenvolvimento" items="${solicitacoesDeDesenvolvimento}" varStatus="id">
-																		<option value="${solicitacaoDeDesenvolvimento.id}">${solicitacaoDeDesenvolvimento.titulo}</option>
-																	</c:forEach>
-																</select>
-															</div>
-															<div class="col-md-2">
-																<br />
-																<button type="button" id="incluirTodas"
-																	class="btn btn-block">
-																	<i class="fa fa-angle-double-right"></i>
-																</button>
-																<button type="button" id="incluirUma"
-																	class="btn btn-block">
-																	<i class="fa fa-angle-right"></i>
-																</button>
-																<button type="button" id="excluirUma"
-																	class="btn btn-block">
-																	<i class="fa fa-angle-left"></i>
-																</button>
-																<button type="button" id="excluirTodas"
-																	class="btn btn-block">
-																	<i class="fa fa-angle-double-left"></i>
-																</button>
-															</div>
-															<div class="col-md-5">
-																<label>Solicitações de Desenvolvimento Aprovadas a Serem Incluídas</label>
-																<select name="solicitacoesDeDesenvolvimentoIncluidas" id="solicitacoesDeDesenvolvimentoIncluidas" class="form-control" size="9" multiple="multiple">
-																</select>
-															</div>
-														</div>
+													<div class="form-group has-feedback">
+														<label class="control-label" for="solicitacoesDeDesenvolvimentoIncluidas">Solicitações de Desenvolvimento Aprovadas a Serem Incluídas</label>
+														<select name="solicitacoesDeDesenvolvimentoIncluidas" id="solicitacoesDeDesenvolvimentoIncluidas" 
+														class="form-control" multiple="multiple" required>
+															<c:forEach var="solicitacaoDeDesenvolvimento" items="${solicitacoesDeDesenvolvimento}" varStatus="id">
+																<option value="${solicitacaoDeDesenvolvimento.id}">${solicitacaoDeDesenvolvimento.titulo}</option>
+															</c:forEach>
+														</select>
 													</div>
 												</div>
 											</div>
@@ -241,7 +214,7 @@
 																	</div>											
 																</c:when>
 															</c:choose>
-															<form action="projeto" method="post" data-toggle="validator" role="form">
+															<form action="projeto" data-toggle="validator" role="form">
 																<div class="row">
 																	<div class="col-md-12">
 																		<div class="form-group has-feedback">
@@ -289,44 +262,21 @@
 																</div>
 																<div class="row">
 																	<div class="col-md-12">
-																		<div class="form-group">
-																			<div class="row">
-																				<div class="col-md-5">
-																					<label>Solicitações de Websites Disponíveis</label>
-																					<select name="solicitacoesDeDesenvolvimentoAprovadas" class="js-multiselect form-control" size="9" multiple="multiple">
-																						<c:forEach var="solicitacaoDeDesenvolvimento" items="${solicitacoesDeDesenvolvimento}" varStatus="id">
-																							<option value="${solicitacaoDeDesenvolvimento.id}">${solicitacaoDeDesenvolvimento.titulo}</option>
-																						</c:forEach>
-																					</select>
-																				</div>
-																				<div class="col-md-2">
-																					<br />
-																					<button type="button" id="incluirTodas"
-																						class="btn btn-block">
-																						<i class="fa fa-angle-double-right"></i>
-																					</button>
-																					<button type="button" id="incluirUma"
-																						class="btn btn-block">
-																						<i class="fa fa-angle-right"></i>
-																					</button>
-																					<button type="button" id="excluirUma"
-																						class="btn btn-block">
-																						<i class="fa fa-angle-left"></i>
-																					</button>
-																					<button type="button" id="excluirTodas"
-																						class="btn btn-block">
-																						<i class="fa fa-angle-double-left"></i>
-																					</button>
-																				</div>
-																				<div class="col-md-5">
-																					<label>Solicitações de Desenvolvimento Incluídas no Projeto</label>
-																					<select name="solicitacoesDeDesenvolvimentoIncluidas" id="solicitacoesDeDesenvolvimentoIncluidas" class="form-control" size="9" multiple="multiple">
-																						<c:forEach var="solicitacoesDeDesenvolvimentoIncluidas" items="${projeto.solicitacoesDeDesenvolvimentoDoProjeto}">
-																							<option value="${solicitacoesDeDesenvolvimentoIncluidas.id}">${solicitacoesDeDesenvolvimentoIncluidas.titulo}</option>
-																						</c:forEach>
-																					</select>
-																				</div>
-																			</div>
+																		<div class="form-group has-feedback">
+																			<label class="control-label" for="solicitacoesDeDesenvolvimentoIncluidas">Solicitações de Websites Disponíveis</label>
+																			<select id="solicitacoesDeDesenvolvimentoIncluidas" name="solicitacoesDeDesenvolvimentoIncluidas" multiple="multiple" required>
+																				<c:forEach var="solicitacaoDeDesenvolvimento" items="${solicitacoesDeDesenvolvimento}">
+																					<option value="${solicitacaoDeDesenvolvimento.id}"
+																					<c:forEach var="solicitacaoDeDesenvolvimentoIncluida" items="${projeto.solicitacoesDeDesenvolvimentoDoProjeto}">
+																						<c:choose>
+																							<c:when test="${solicitacaoDeDesenvolvimento.id == solicitacaoDeDesenvolvimentoIncluida.id}">
+																								selected
+																							</c:when>
+																						</c:choose>
+																					</c:forEach>
+																					>${solicitacaoDeDesenvolvimento.titulo}</option>
+																				</c:forEach>
+																			</select>
 																		</div>
 																	</div>
 																</div>
@@ -882,18 +832,18 @@
 			
 <c:import url="common/rodape.jsp" />
 			<script src="assets/js/validator.min.js"></script>
-			<!--  Two-side Multi Select Plugin    -->
-			
-		    <script src="assets/js/multiselect.js"></script>
+			<script src="assets/js/selectr.js"></script>
 		    <script type="text/javascript">
-			    jQuery(document).ready(function($) {
-			        $('.js-multiselect').multiselect({
-			            right: '#solicitacoesDeDesenvolvimentoIncluidas',
-			            rightAll: '#incluirTodas',
-			            rightSelected: '#incluirUma',
-			            leftSelected: '#excluirUma',
-			            leftAll: '#excluirTodas'
-			        });
+			    
+			    $('select').selectr({
+			    	title: '',
+			    	placeholder: 'BUSCAR',
+			    	noMatchingOptionsText: 'Nenhuma solicitação encontrada.',
+			    	resetText: 'LIMPAR SELEÇÃO',
+			    	width: '100%',
+			    	maxListHeight: '250px',
+			    	tooltipBreakpoint: 25,
+			    	maxSelection: NaN 
 			    });
 			</script>
 		</div>

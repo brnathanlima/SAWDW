@@ -320,6 +320,35 @@ public class SolicitacaoDeDesenvolvimentoDAO extends GenericoDAO {
 		
 	}
 	
+	public List<SolicitacaoDeDesenvolvimento> listarSolicitacoesDeDesenvolvimentoParaEdicaoDeProjeto(long idInstituicao, long idProjeto) {
+		
+		try {
+			
+			solicitacoesDeDesenvolvimento = new ArrayList<SolicitacaoDeDesenvolvimento>();
+			
+			PreparedStatement pstmt = this.connection.prepareStatement("SELECT * FROM solicitacoes_de_desenvolvimento AS s LEFT JOIN solicitacoes_de_desenvolvimento_do_projeto AS sp \n" + 
+					"ON s.id = sp.id_solicitacao_de_desenvolvimento LEFT JOIN projetos AS p ON sp.id_projeto = p.id INNER JOIN clientes AS c\n" + 
+					"ON s.id_solicitante = c.id INNER JOIN instituicoes AS i ON c.id_instituicao = i.id WHERE i.id=? AND \n" + 
+					"(s.status='Aceita') OR (s.status='Incluída em Projeto' AND p.id=?)");
+			
+			pstmt.setLong(1, idInstituicao);
+			pstmt.setLong(2, idProjeto);
+			ResultSet rs = pstmt.executeQuery();
+			
+			obterEstruturasDaLista(rs);
+			
+			pstmt.close();
+			
+			return solicitacoesDeDesenvolvimento;
+			
+		} catch(SQLException e) {
+			
+			throw new RuntimeException(e);
+			
+		}
+		
+	}
+	
 	public List<SolicitacaoDeDesenvolvimento> listarSolicitacoesDeDesenvolvimentoDoProjeto(long idProjeto) {
 		
 		try {
